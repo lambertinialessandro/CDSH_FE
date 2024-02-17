@@ -68,20 +68,14 @@ export default function Home() {
           autoPlay
           loop
           muted
-          className="absolute top-0 b-auto left-0 w-full h-full object-cover"
-          /* padding-top: 70px;
-
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-          */
-          style={{ paddingTop: '70px' }}
+          className="absolute top-0 b-auto left-0 w-full h-full"
+          style={{ paddingTop: '70px', objectFit: 'cover' }}
           src={require('../assets/img/CDSH - Trailer Final Performance 2015 - ANDERERSEITS - 3th year.mp4')}
         ></video>
       </section>
 
       <section
-        className="mt-48 md:mt-40 pb-40 relative"
+        className="pt-12 md:pt-40 pb-40 relative"
         style={{ background: theme.palette.background.light_2 }}
       >
         {/* <div
@@ -138,37 +132,127 @@ export default function Home() {
 
             <div className="w-full md:w-6/12 px-4">
               <div className="flex flex-wrap px-4">
-                <Typography variant="h2" style={{ color: 'rgb(186 186 186)' }}>
+                <Typography
+                  variant="h2"
+                  style={{ color: 'rgb(186 186 186)', paddingBottom: '16px' }}
+                >
                   WAS GIBTS NEUES?
                 </Typography>
+
                 <div className="w-full md:w-6/12 px-4">
                   <div className="relative flex flex-col mt-4">
-                    <div className="px-4 py-5 flex-auto">
-                      <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-white">
-                        <i className="fas fa-sitemap"></i>
-                      </div>
+                    <img
+                      alt="..."
+                      src={require('../assets/img/Flyer-WIP24-JOY-vorne-270x270.jpg')}
+                      style={{ position: 'absolute', top: '-20px', left: '-20px' }}
+                    />
+                    <Box
+                      sx={{
+                        background: 'rgba( 0, 0, 0, 0.4 )',
+                        boxShadow: '0 8px 32px 0 rgba( 0, 0, 0, 0.4 )',
+                        backdropFilter: 'blur( 10px )',
+                        borderRadius: '10px',
+                        border: '1px solid rgba( 119, 119, 119, 0.20 )',
+                        transition: '0.2s all',
+                        '& .myText': {
+                          //opacity: '0',
+                          height: '0',
+                          scale: '0',
+                        },
+                        '& .myImage': {
+                          display: 'block',
+                        },
+                        '&:hover': {
+                          '& .myText': {
+                            //opacity: '1',
+                            height: 'auto',
+                            scale: '1',
+                          },
+                          '& .myImage': {
+                            display: 'none',
+                          },
+                          zIndex: '2',
+                          position: 'relative',
+                          scale: '1.5',
+                          width: '350px',
+                        },
+                      }}
+                      className="w-full px-4 py-5"
+                    >
                       <Typography variant="h6" style={{ color: 'rgb(186 186 186)' }}>
                         Work in Progress 2024 : JOY
                       </Typography>
                       <Typography
                         variant="p"
                         style={{ color: 'rgb(186 186 186)', fontSize: '20px' }}
-                        className="truncate"
+                        className="myText truncate"
                       >
                         Jedes Jahr finden unsere „Work in Progress“-Vorstellungen und unsere
                         Abschlussvorstellungen unter einem anderen Motto statt. Raul Valdez,
                         künstlerischer Leiter der CDSH - Contemporary Dance ...
                       </Typography>
-                    </div>
+                    </Box>
+                  </div>
+                </div>
+                <div className="w-full md:w-6/12 px-4">
+                  <div className="relative flex flex-col mt-4">
+                    <img
+                      alt="..."
+                      src={require('../assets/img/Flyer-AP23-vorne_web-270x270.jpg')}
+                      style={{ position: 'absolute', top: '-20px', left: '-20px' }}
+                    />
+                    <Box
+                      sx={{
+                        background: 'rgba( 0, 0, 0, 0.4 )',
+                        boxShadow: '0 8px 32px 0 rgba( 0, 0, 0, 0.4 )',
+                        backdropFilter: 'blur( 10px )',
+                        borderRadius: '10px',
+                        border: '1px solid rgba( 119, 119, 119, 0.20 )',
+                        transition: '0.2s all',
+                        '& .myText': {
+                          //opacity: '0',
+                          height: '0',
+                          scale: '0',
+                        },
+                        '& .myImage': {
+                          display: 'block',
+                        },
+                        '&:hover': {
+                          '& .myText': {
+                            //opacity: '1',
+                            height: 'auto',
+                            scale: '1',
+                          },
+                          '& .myImage': {
+                            display: 'none',
+                          },
+                          zIndex: '2',
+                          position: 'relative',
+                          scale: '1.5',
+                          width: '350px',
+                        },
+                      }}
+                      className="w-full px-4 py-5"
+                    >
+                      <Typography variant="h6" style={{ color: 'rgb(186 186 186)' }}>
+                        Abschlussprojekt 2023: KONTINUUM
+                      </Typography>
+                      <Typography
+                        variant="p"
+                        style={{ color: 'rgb(186 186 186)', fontSize: '20px' }}
+                        className="myText truncate"
+                      >
+                        Jedes Jahr findet das Abschlussprojekt, die finale Prüfungsleistung unserer
+                        Absolvent*innen, unter einem anderen Thema statt. Raul Valdez,
+                        künstlerischer Leiter der CDSH – Contemporary Dance S ...
+                      </Typography>
+                    </Box>
                   </div>
                 </div>
 
                 <div className="w-full md:w-6/12 px-4">
                   <div className="relative flex flex-col min-w-0 mt-4">
                     <div className="px-4 py-5 flex-auto">
-                      <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-white">
-                        <i className="fas fa-newspaper"></i>
-                      </div>
                       <Typography variant="h6" style={{ color: 'rgb(186 186 186)' }}>
                         Abschlussprojekt 2023: KONTINUUM
                       </Typography>
