@@ -9,7 +9,6 @@ import IndexDropdown from '../Dropdowns/IndexDropdown';
 
 export default function Navbar(props) {
   const theme = useTheme();
-  console.log('theme', theme);
   const [navbarOpen, setNavbarOpen] = React.useState(false);
 
   const socials = [
@@ -110,8 +109,9 @@ export default function Navbar(props) {
                   fontWeight: '700',
                   fontSize: '24px',
                   lineHeight: '32px',
+                  marginRight: '14px',
                 }}
-                className="leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+                className="leading-relaxed inline-block py-2 whitespace-nowrap uppercase"
               >
                 CDSH
               </Typography>

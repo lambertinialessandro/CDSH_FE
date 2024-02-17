@@ -1,31 +1,56 @@
 import { Link } from 'react-router-dom';
 import { Box, Typography, useTheme } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 export default function Home() {
+  const { t } = useTranslation('common');
+  const button = t('common');
+  console.log('button', button);
+
   const theme = useTheme();
 
   return (
     <Box sx={{ background: theme.palette.background.light_1 }}>
       <section className="header relative pt-16 items-center flex h-screen max-h-860-px">
-        <div className="container mx-auto items-center flex flex-wrap">
-          <div className="w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
-            <div className="pt-32 sm:pt-0">
-              <Typography className="font-semibold text-4xl text-blueGray-600">
-                Welcome to the CDSH!
-              </Typography>
-              <Typography className="mt-4 text-lg leading-relaxed text-blueGray-500">
-                The CDSH - CONTEMPORARY DANCE SCHOOL HAMBURG is an officially recognised school for
-                contemporary dance. It is the only school of its kind in northern Germany. The three
-                years professional dance training focus on contemporary and modern dance techniques,
-                improvisation, composition and on classical ballet. An experienced team of
-                international dancers and instructors will help you achieve your goals and give you
-                the skills needed for your professional career as a dancer and/ or performer.
-              </Typography>
-              {/* <div className="mt-12">
+        <Box className="z-2 container items-center flex flex-wrap" style={{ marginLeft: '100px' }}>
+          <Box
+            sx={{
+              background: 'rgba( 0, 0, 0, 0.4 )',
+              boxShadow: '0 8px 32px 0 rgba( 0, 0, 0, 0.4 )',
+              backdropFilter: 'blur( 10px )',
+              borderRadius: '10px',
+              border: '1px solid rgba( 119, 119, 119, 0.20 )',
+              padding: '25px',
+            }}
+            className="w-full md:w-8/12 lg:w-6/12 xl:w-8/12"
+          >
+            <Typography
+              className="font-semibold"
+              style={{
+                fontSize: '32px',
+                color: 'rgb(186 186 186)',
+                textShadow: '0 0 4px black',
+                marginBottom: '10px',
+              }}
+            >
+              Welcome to the CDSH!
+            </Typography>
+            <Typography
+              className="mt-4 leading-relaxed"
+              style={{ fontSize: '24px', color: 'rgb(186 186 186)', textShadow: '0 0 4px black' }}
+            >
+              The CDSH - CONTEMPORARY DANCE SCHOOL HAMBURG is an officially recognised school for
+              contemporary dance. It is the only school of its kind in northern Germany. The three
+              years professional dance training focus on contemporary and modern dance techniques,
+              improvisation, composition and on classical ballet. An experienced team of
+              international dancers and instructors will help you achieve your goals and give you
+              the skills needed for your professional career as a dancer and/ or performer.
+            </Typography>
+            {/* <div className="mt-12">
                 <a
                   href="https://www.creative-tim.com/learning-lab/tailwind/react/overview/notus?ref=nr-index"
                   target="_blank"
-                  className="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-lightBlue-500 active:bg-lightBlue-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
+                  className="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-sky-500 active:bg-sky-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
                 >
                   Get started
                 </a>
@@ -37,27 +62,34 @@ export default function Home() {
                   Github Star
                 </a>
               </div> */}
-            </div>
-          </div>
-        </div>
+          </Box>
+        </Box>
+        <video
+          autoPlay
+          loop
+          muted
+          className="absolute top-0 b-auto left-0 w-full h-full object-cover"
+          /* padding-top: 70px;
 
-        <img
-          className="absolute top-0 b-auto right-0 pt-16 sm:w-6/12 -mt-48 sm:mt-0 w-10/12 max-h-860px"
-          src={require('../assets/img/pattern_react.png')}
-          alt="..."
-        />
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+          */
+          style={{ paddingTop: '70px' }}
+          src={require('../assets/img/CDSH - Trailer Final Performance 2015 - ANDERERSEITS - 3th year.mp4')}
+        ></video>
       </section>
 
       <section
         className="mt-48 md:mt-40 pb-40 relative"
         style={{ background: theme.palette.background.light_2 }}
       >
-        <div
+        {/* <div
           className="-mt-20 top-0 bottom-auto left-0 right-0 w-full absolute h-20"
           style={{ transform: 'translateZ(0)' }}
         >
           <svg
-            className="absolute bottom-0 overflow-hidden"
+            className="absolute -bottom-1 overflow-hidden"
             xmlns="http://www.w3.org/2000/svg"
             preserveAspectRatio="none"
             version="1.1"
@@ -71,14 +103,14 @@ export default function Home() {
               points="2560 0 2560 100 0 100"
             ></polygon>
           </svg>
-        </div>
+        </div> */}
         <div className="container mx-auto">
           <div className="flex flex-wrap items-center">
-            <div className="w-10/12 md:w-6/12 lg:w-4/12 px-12 md:px-4 mr-auto ml-auto -mt-32">
-              <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg bg-lightBlue-500">
+            <div className="w-10/12 md:w-6/12 lg:w-5/12 px-12 md:px-4 mr-auto ml-auto -mt-32">
+              <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg bg-sky-500">
                 <img
                   alt="..."
-                  src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80"
+                  src={require('../assets/img/cdsh-willkommen-1.jpg')}
                   className="w-full align-middle rounded-t-lg"
                 />
                 <blockquote className="relative p-8 mb-4">
@@ -90,68 +122,65 @@ export default function Home() {
                   >
                     <polygon
                       points="-30,95 583,95 583,65"
-                      className="text-lightBlue-500 fill-current"
+                      className="text-sky-500 fill-current"
                     ></polygon>
                   </svg>
-                  <h4 className="text-xl font-bold text-white">Great for your awesome project</h4>
+                  <h4 className="text-xl font-bold text-white">The staff</h4>
+                  <p className="text-md font-light mt-2 text-white">JAVIER BÁEZ, school director</p>
                   <p className="text-md font-light mt-2 text-white">
-                    Putting together a page has never been easier than matching together pre-made
-                    components. From landing pages presentation to login areas, you can easily
-                    customise and built your pages.
+                    SINA RUNDEL, communication manager and student support
+                    <p className="text-md font-light mt-2 text-white"></p>
+                    RAUL VALDEZ, artistic director
                   </p>
                 </blockquote>
               </div>
             </div>
 
             <div className="w-full md:w-6/12 px-4">
-              <div className="flex flex-wrap">
+              <div className="flex flex-wrap px-4">
+                <Typography variant="h2" style={{ color: 'rgb(186 186 186)' }}>
+                  WAS GIBTS NEUES?
+                </Typography>
                 <div className="w-full md:w-6/12 px-4">
                   <div className="relative flex flex-col mt-4">
                     <div className="px-4 py-5 flex-auto">
                       <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-white">
                         <i className="fas fa-sitemap"></i>
                       </div>
-                      <h6 className="text-xl mb-1 font-semibold">CSS Components</h6>
-                      <p className="mb-4 text-blueGray-500">
-                        Notus React comes with a huge number of Fully Coded CSS components.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="relative flex flex-col min-w-0">
-                    <div className="px-4 py-5 flex-auto">
-                      <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-white">
-                        <i className="fas fa-drafting-compass"></i>
-                      </div>
-                      <h6 className="text-xl mb-1 font-semibold">JavaScript Components</h6>
-                      <p className="mb-4 text-blueGray-500">
-                        We also feature many dynamic components for React, NextJS, Vue and Angular.
-                      </p>
+                      <Typography variant="h6" style={{ color: 'rgb(186 186 186)' }}>
+                        Work in Progress 2024 : JOY
+                      </Typography>
+                      <Typography
+                        variant="p"
+                        style={{ color: 'rgb(186 186 186)', fontSize: '20px' }}
+                        className="truncate"
+                      >
+                        Jedes Jahr finden unsere „Work in Progress“-Vorstellungen und unsere
+                        Abschlussvorstellungen unter einem anderen Motto statt. Raul Valdez,
+                        künstlerischer Leiter der CDSH - Contemporary Dance ...
+                      </Typography>
                     </div>
                   </div>
                 </div>
+
                 <div className="w-full md:w-6/12 px-4">
                   <div className="relative flex flex-col min-w-0 mt-4">
                     <div className="px-4 py-5 flex-auto">
                       <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-white">
                         <i className="fas fa-newspaper"></i>
                       </div>
-                      <h6 className="text-xl mb-1 font-semibold">Pages</h6>
-                      <p className="mb-4 text-blueGray-500">
-                        This extension also comes with 3 sample pages. They are fully coded so you
-                        can start working instantly.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="relative flex flex-col min-w-0">
-                    <div className="px-4 py-5 flex-auto">
-                      <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-white">
-                        <i className="fas fa-file-alt"></i>
-                      </div>
-                      <h6 className="text-xl mb-1 font-semibold">Documentation</h6>
-                      <p className="mb-4 text-blueGray-500">
-                        Built by developers for developers. You will love how easy is to to work
-                        with Notus React.
-                      </p>
+                      <Typography variant="h6" style={{ color: 'rgb(186 186 186)' }}>
+                        Abschlussprojekt 2023: KONTINUUM
+                      </Typography>
+                      <Typography
+                        variant="p"
+                        style={{ color: 'rgb(186 186 186)', fontSize: '20px' }}
+                        className="truncate"
+                      >
+                        Jedes Jahr findet das Abschlussprojekt, die finale Prüfungsleistung unserer
+                        Absolvent*innen, unter einem anderen Thema statt. Raul Valdez,
+                        künstlerischer Leiter der CDSH - Contemporary Dance S ...
+                      </Typography>
                     </div>
                   </div>
                 </div>
@@ -263,7 +292,7 @@ export default function Home() {
                     href="https://www.creative-tim.com/learning-lab/tailwind/react/alerts/notus?ref=vtw-index"
                     target="_blank"
                   >
-                    <div className="bg-lightBlue-500 shadow-lg rounded-lg text-center p-8 mt-8">
+                    <div className="bg-sky-500 shadow-lg rounded-lg text-center p-8 mt-8">
                       <img
                         alt="..."
                         className="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
@@ -562,7 +591,7 @@ export default function Home() {
           style={{ transform: 'translateZ(0)' }}
         >
           <svg
-            className="absolute bottom-0 overflow-hidden"
+            className="absolute -bottom-1 overflow-hidden"
             xmlns="http://www.w3.org/2000/svg"
             preserveAspectRatio="none"
             version="1.1"
@@ -596,7 +625,7 @@ export default function Home() {
                 <a
                   href="https://www.creative-tim.com/learning-lab/tailwind/react/overview/notus?ref=nr-index"
                   target="_blank"
-                  className="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-2 bg-lightBlue-500 active:bg-lightBlue-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
+                  className="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-2 bg-sky-500 active:bg-sky-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
                 >
                   Get started
                 </a>
