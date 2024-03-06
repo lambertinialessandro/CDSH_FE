@@ -1,4 +1,4 @@
-import { useTheme } from '@mui/material';
+import { Typography, useTheme } from '@mui/material';
 import React from 'react';
 
 export default function Footer() {
@@ -31,116 +31,118 @@ export default function Footer() {
             ></polygon>
           </svg>
         </div>
+
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap text-center lg:text-left">
             <div className="w-full lg:w-6/12 px-4">
-              <h4 className="text-3xl font-semibold">Let's keep in touch!</h4>
-              <h5 className="text-lg mt-0 mb-2 text-blueGray-600">
-                Find us on any of these platforms, we respond 1-2 business days.
-              </h5>
+              <Typography variant="h4" className="text-3xl font-semibold">
+                Let's keep in touch!
+              </Typography>
               <div className="mt-6 lg:mb-0 mb-6">
                 <button
-                  className="bg-white text-sky-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+                  className="bg-white text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
                 >
-                  <i className="fab fa-twitter"></i>
+                  <i className="fab fa-instagram-square"></i>
                 </button>
                 <button
-                  className="bg-white text-sky-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+                  className="bg-white text-sky-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
                 >
                   <i className="fab fa-facebook-square"></i>
                 </button>
                 <button
-                  className="bg-white text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+                  className="bg-white text-blueGray-800 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
                 >
-                  <i className="fab fa-dribbble"></i>
+                  <i className="fab fa-x-twitter"></i>
+                </button>
+                <button
+                  className="bg-white text-red-500 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+                  type="button"
+                >
+                  <i className="fab fa-youtube"></i>
                 </button>
                 <button
                   className="bg-white text-blueGray-800 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
                 >
-                  <i className="fab fa-github"></i>
+                  <i className="fab fa-vimeo"></i>
                 </button>
               </div>
             </div>
             <div className="w-full lg:w-6/12 px-4">
               <div className="flex flex-wrap items-top mb-6">
-                <div className="w-full lg:w-4/12 px-4 ml-auto">
-                  <span className="block uppercase text-blueGray-500 text-sm font-semibold mb-2">
-                    Useful Links
-                  </span>
+                <div className="w-full lg:w-6/12 px-4 ml-auto">
+                  <Typography
+                    variant="h6"
+                    className="block uppercase text-blueGray-500 text-sm font-semibold mb-2"
+                  >
+                    KONTAKT
+                  </Typography>
                   <ul className="list-unstyled">
                     <li>
-                      <a
-                        className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                        href="https://www.creative-tim.com/presentation?ref=nr-footer"
+                      <Typography
+                        variant="p"
+                        className="text-blueGray-600 font-semibold block pb-2 text-sm"
                       >
-                        About Us
-                      </a>
+                        CDSH - Contemporary Dance School Hamburg GmbH
+                      </Typography>
                     </li>
                     <li>
-                      <a
-                        className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                        href="https://blog.creative-tim.com?ref=nr-footer"
+                      <Typography
+                        variant="p"
+                        className="text-blueGray-600 font-semibold block pb-2 text-sm"
                       >
-                        Blog
-                      </a>
+                        Stresemannstraße 374 b in der »Alten Dosenfabrik«
+                      </Typography>
                     </li>
                     <li>
-                      <a
-                        className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                        href="https://www.github.com/creativetimofficial?ref=nr-footer"
+                      <Typography
+                        variant="p"
+                        className="text-blueGray-600 font-semibold block pb-2 text-sm"
                       >
-                        Github
-                      </a>
+                        22761 Hamburg
+                      </Typography>
                     </li>
                     <li>
-                      <a
-                        className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                        href="https://www.creative-tim.com/bootstrap-themes/free?ref=nr-footer"
+                      <Typography
+                        variant="p"
+                        className="text-blueGray-600 font-semibold block pb-2 text-sm"
                       >
-                        Free Products
-                      </a>
+                        Tel. +49 (0)40 41924560
+                      </Typography>
+                      <Typography
+                        variant="p"
+                        className="text-blueGray-600 font-semibold block pb-2 text-sm"
+                      >
+                        info@cdsh.de
+                      </Typography>
                     </li>
                   </ul>
                 </div>
                 <div className="w-full lg:w-4/12 px-4">
-                  <span className="block uppercase text-blueGray-500 text-sm font-semibold mb-2">
-                    Other Resources
-                  </span>
+                  <Typography
+                    variant="h6"
+                    className="block uppercase text-blueGray-500 text-sm font-semibold mb-2"
+                  >
+                    Other Links
+                  </Typography>
                   <ul className="list-unstyled">
                     <li>
                       <a
                         className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                        href="https://github.com/creativetimofficial/notus-react/blob/main/LICENSE.md?ref=nr-footer"
+                        href="/"
                       >
-                        MIT License
+                        Impressum
                       </a>
                     </li>
                     <li>
                       <a
                         className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                        href="https://creative-tim.com/terms?ref=nr-footer"
+                        href="/"
                       >
-                        Terms & Conditions
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                        href="https://creative-tim.com/privacy?ref=nr-footer"
-                      >
-                        Privacy Policy
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                        href="https://creative-tim.com/contact-us?ref=nr-footer"
-                      >
-                        Contact Us
+                        Datenschutz
                       </a>
                     </li>
                   </ul>
@@ -152,12 +154,12 @@ export default function Footer() {
           <div className="flex flex-wrap items-center md:justify-between justify-center">
             <div className="w-full md:w-4/12 px-4 mx-auto text-center">
               <div className="text-sm text-blueGray-500 font-semibold py-1">
-                Copyright © {new Date().getFullYear()} Notus React by{' '}
+                Copyright © {new Date().getFullYear()} by{' '}
                 <a
                   href="https://www.creative-tim.com?ref=nr-footer"
                   className="text-blueGray-500 hover:text-blueGray-800"
                 >
-                  Creative Tim
+                  CDSH
                 </a>
                 .
               </div>

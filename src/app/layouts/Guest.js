@@ -10,24 +10,29 @@ import IndexNavbar from '../components/Navbars/IndexNavbar.js';
 import Home from '../views/Home.js';
 import Landing from '../views/Landing.js';
 import Profile from '../views/Profile.js';
+import FurtherTraining from 'app/views/FurtherTraining.js';
+import { Box } from '@mui/material';
 
 export default function Guest() {
   return (
     <>
-      <div className="relative w-full h-full min-h-screen">
+      <Box className="relative w-full h-full min-h-screen">
         <IndexNavbar fixed />
         <main>
-          <div className=" w-full  h-full">
+          <Box className="w-full h-full">
             <Switch>
               <Route path="/landing" exact component={Landing} />
               <Route path="/profile" exact component={Profile} />
               <Route path="/home" exact component={Home} />
+
+              <Route path="/FurtherTraining" exact component={FurtherTraining} />
+
               <Redirect from="*" to="/home" />
             </Switch>
             <Footer />
-          </div>
+          </Box>
         </main>
-      </div>
+      </Box>
     </>
   );
 }
