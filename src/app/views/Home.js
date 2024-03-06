@@ -3,15 +3,14 @@ import { Box, Typography, useTheme } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 export default function Home() {
+  const theme = useTheme();
   const { t } = useTranslation('common');
   const button = t('common');
   console.log('button', button);
 
-  const theme = useTheme();
-
   return (
     <Box sx={{ background: theme.palette.background.light_1 }}>
-      <section className="header relative pt-16 items-center flex h-screen max-h-860-px">
+      <section className="header relative items-center flex h-screen max-h-860-px">
         <Box className="z-2 container items-center flex flex-wrap" style={{ marginLeft: '100px' }}>
           <Box
             sx={{
@@ -69,7 +68,7 @@ export default function Home() {
           loop
           muted
           className="absolute top-0 b-auto left-0 w-full h-full"
-          style={{ paddingTop: '70px', objectFit: 'cover' }}
+          style={{ objectFit: 'cover' }}
           src={require('../assets/img/CDSH - Trailer Final Performance 2015 - ANDERERSEITS - 3th year.mp4')}
         ></video>
       </section>

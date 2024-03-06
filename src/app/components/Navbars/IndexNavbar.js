@@ -5,23 +5,31 @@ import { Link } from 'react-router-dom';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import { Box, Icon, Typography, useTheme } from '@mui/material';
 import Dropdown from '../Dropdowns/Dropdown';
-import IndexDropdown from '../Dropdowns/IndexDropdown';
+import DropdownOpened from '../Dropdowns/DropdownOpened';
 
 export default function Navbar(props) {
   const theme = useTheme();
   const [navbarOpen, setNavbarOpen] = React.useState(false);
 
   const socials = [
-    { name: 'instagram', icon: 'fa-instagram', path: '' },
-    { name: 'facebook', icon: 'fa-facebook', path: '' },
-    { name: 'twitter', icon: 'fa-x-twitter', path: '' },
-    { name: 'youtube', icon: 'fa-youtube', path: '' },
-    { name: 'vimeo', icon: 'fa-vimeo', path: '' },
+    { name: 'instagram', icon: 'fa-instagram', path: 'https://www.instagram.com/_cdsh_/' },
+    {
+      name: 'facebook',
+      icon: 'fa-facebook',
+      path: 'https://www.facebook.com/cdsh.contemporarydanceschoolhamburg/',
+    },
+    { name: 'twitter', icon: 'fa-x-twitter', path: 'https://twitter.com/CDSH_tweet' },
+    {
+      name: 'youtube',
+      icon: 'fa-youtube',
+      path: 'https://www.youtube.com/@cdsh-contemporarydancescho3235',
+    },
+    { name: 'vimeo', icon: 'fa-vimeo', path: 'https://vimeo.com/cdsh' },
   ];
   const pages = [
     {
       name: 'WILLKOMMEN',
-      path: '',
+      path: '/home',
       children: [],
     },
     {
@@ -70,7 +78,7 @@ export default function Navbar(props) {
     },
     {
       name: 'FORTBILDUNG',
-      path: '',
+      path: '/FurtherTraining',
       children: [],
     },
     {
@@ -98,9 +106,9 @@ export default function Navbar(props) {
         style={{
           background: theme.palette.background.default,
         }}
-        className={`top-0 fixed z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg shadow`}
+        className="top-0 fixed z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg shadow"
       >
-        <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
+        <div className="container px-4 mx-auto flex flex-wrap items-center justify-between h-full">
           <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
             <Link to="/">
               <Typography
@@ -126,10 +134,9 @@ export default function Navbar(props) {
           </div>
           <Box
             color="background.default"
-            className={
-              'lg:flex flex-grow items-center lg:bg-opacity-0 lg:shadow-none' +
-              (navbarOpen ? ' block' : ' hidden')
-            }
+            className={`lg:flex flex-grow items-center lg:bg-opacity-0 lg:shadow-none ${
+              navbarOpen ? 'block' : 'hidden'
+            }`}
             id="example-navbar-warning"
           >
             <ul className="flex flex-row list-none mr-auto">
@@ -139,8 +146,7 @@ export default function Navbar(props) {
                   <li className="flex items-center" key={name}>
                     <a
                       className="px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-                      href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdemos.creative-tim.com%2Fnotus-react%2F%23%2F"
-                      target={path}
+                      href={path}
                     >
                       <Icon
                         sx={{
@@ -169,24 +175,15 @@ export default function Navbar(props) {
               {pages.map((page) => {
                 return (
                   <li className="flex items-center" key={page.name}>
-                    <Dropdown {...page} />
+                    {!navbarOpen ? <Dropdown {...page} /> : <DropdownOpened {...page} />}
                   </li>
                 );
               })}
-              {/* {buttons.map((button) => {
-                const { name, ...buttonProps } = button;
-                return (
-                  <li className="flex items-center" key={name}>
-                    <Button component="label" {...buttonProps}>
-                      {name}
-                    </Button>
-                  </li>
-                );
-              })} */}
             </ul>
           </Box>
         </div>
       </nav>
+      <div style={{ paddingTop: '72px', width: '100%' }}></div>
     </>
   );
 }

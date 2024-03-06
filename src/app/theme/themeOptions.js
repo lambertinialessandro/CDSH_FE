@@ -7,6 +7,7 @@ export const themeOptions = {
       light_1: '#333333',
       light_2: '#232323',
       paper: '#333333',
+      transparent: '#00000000',
     },
     text: {
       primary: 'rgba(255,255,255,0.8)',
