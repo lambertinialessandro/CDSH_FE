@@ -3,81 +3,80 @@ import createReducer from './rootReducer';
 import axios from 'axios';
 
 if (process.env.NODE_ENV === 'development' && module.hot) {
-  module.hot.accept('./rootReducer', () => {
-    const newRootReducer = require('./rootReducer').default;
-    store.replaceReducer(newRootReducer.createReducer());
-  });
+	module.hot.accept('./rootReducer', () => {
+		const newRootReducer = require('./rootReducer').default;
+		store.replaceReducer(newRootReducer.createReducer());
+	});
 }
 
 const handleApiCall = ({ getState, dispatch }) => {
-  return (next) => (action) => {
-    const state = getState();
+	return next => action => {
+		const state = getState();
 
-    const { requestId } = action.meta ?? {};
-    if (requestId) {
-      const headers = {
-        ...axios.defaults.headers,
-        'X-Request-ID': requestId,
-        'Accept-Language': state.i18n.language,
-      };
+		const { requestId } = action.meta ?? {};
+		if (requestId) {
+			const headers = {
+				...axios.defaults.headers,
+				'X-Request-ID': requestId,
+				'Accept-Language': state.i18n.language
+			};
 
-      axios.defaults.headers = headers;
-    }
+			axios.defaults.headers = headers;
+		}
 
-    try {
-      const { payload, error, meta } = action;
-      if (meta?.requestStatus === 'pending' && meta.withLoading) {
-        // dispatch(setLoading(true));
-      }
+		try {
+			const { /* payload, */ error, meta } = action;
+			if (meta?.requestStatus === 'pending' && meta.withLoading) {
+				// dispatch(setLoading(true));
+			}
 
-      if (meta?.requestStatus === 'rejected' && error.message !== 'Aborted') {
-        const message = payload ?? error.message;
-        // if (meta.showError) dispatch(showMessage({ message, variant: 'error' }));
+			if (meta?.requestStatus === 'rejected' && error.message !== 'Aborted') {
+				/* const message = payload ?? error.message; */
+				// if (meta.showError) dispatch(showMessage({ message, variant: 'error' }));
+				// (meta.withLoading || !payload) && dispatch(setLoading(false));
+			}
 
-        // (meta.withLoading || !payload) && dispatch(setLoading(false));
-      }
+			if (meta?.requestStatus === 'fulfilled') {
+				// meta.withLoading && dispatch(setLoading(false));
+				// meta.message && dispatch(showMessage({ message: meta.message, variant: meta.type || 'success' }));
+			}
 
-      if (meta?.requestStatus === 'fulfilled') {
-        // meta.withLoading && dispatch(setLoading(false));
-        // meta.message && dispatch(showMessage({ message: meta.message, variant: meta.type || 'success' }));
-      }
-
-      return next(action);
-    } catch (err) {
-      console.error(`err`, err);
-      throw err;
-    }
-  };
+			return next(action);
+		} catch (err) {
+			console.error(`err`, err);
+			throw err;
+		}
+	};
 };
 
 const middlewares = [handleApiCall];
 
 if (process.env.NODE_ENV === 'development') {
-  const { createLogger } = require(`redux-logger`);
-  const logger = createLogger({ collapsed: (getState, action, logEntry) => !logEntry.error });
+	const { createLogger } = require(`redux-logger`);
+	const logger = createLogger({ collapsed: (getState, action, logEntry) => !logEntry.error });
 
-  middlewares.push(logger);
+	middlewares.push(logger);
 }
 
 const store = configureStore({
-  reducer: createReducer(),
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      immutableCheck: false,
-      serializableCheck: false,
-    }).concat(middlewares),
-  devTools: process.env.NODE_ENV === 'development',
+	reducer: createReducer(),
+	middleware: getDefaultMiddleware =>
+		getDefaultMiddleware({
+			immutableCheck: false,
+			serializableCheck: false
+		}).concat(middlewares),
+	devTools: process.env.NODE_ENV === 'development'
 });
 
 store.asyncReducers = {};
 
 export const injectReducer = (key, reducer) => {
-  if (store.asyncReducers[key]) {
-    return false;
-  }
-  store.asyncReducers[key] = reducer;
-  store.replaceReducer(createReducer(store.asyncReducers));
-  return store;
+	if (store.asyncReducers[key]) {
+		return false;
+	}
+	store.asyncReducers[key] = reducer;
+	store.replaceReducer(createReducer(store.asyncReducers));
+	return store;
 };
 
 export default store;

@@ -1,34 +1,35 @@
 const { Icon, Link } = require('@mui/material');
 
 function ExternalLink(props) {
-  const { path, icon } = props;
+	const { path, icon, fontSize = '16px' } = props;
 
-  return (
-    <Link
-      className="px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-      sx={{
-        textDecoration: 'none',
-        ':hover': {
-          scale: '1.2',
-        },
-      }}
-      target="_blank"
-      rel="noreferrer"
-      href={path}
-    >
-      <Icon
-        sx={{
-          color: 'text.secondary',
-          fontSize: '18px',
-          transition: 'all 0.2s',
-          ':hover': {
-            color: 'text.primary',
-          },
-        }}
-        className={`fab ${icon}`}
-      />
-    </Link>
-  );
+	return (
+		<Link
+			className="px-2 py-2 lg:py-2 flex items-center text-xs uppercase font-bold"
+			sx={{
+				textDecoration: 'none',
+				':hover': {
+					scale: '1.2'
+				}
+			}}
+			target="_blank"
+			rel="noreferrer"
+			href={path}
+		>
+			<Icon
+				sx={{
+					color: 'text.secondary',
+					fontSize,
+					transition: 'all 0.2s',
+					overflow: 'visible',
+					':hover': {
+						color: 'text.primary'
+					}
+				}}
+				className={`fab ${icon}`}
+			/>
+		</Link>
+	);
 }
 
 export default ExternalLink;

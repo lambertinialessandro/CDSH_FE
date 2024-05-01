@@ -1,49 +1,60 @@
 import { ThemeProvider } from '@mui/material';
-import { useSelector } from 'react-redux';
+/* import { useSelector } from 'react-redux'; */
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Admin from './layouts/Admin.js';
-import Auth from './layouts/Auth.js';
-import Guest from './layouts/Guest.js';
-import { selectCurrLangDir } from './store/i18nSlice';
+/* import Admin from './navigation/Admin.js';
+import Auth from './navigation/Auth.js';
+import { selectCurrLangDir } from './store/i18nSlice'; */
 import theme from './theme/themeOptions';
 import withAppProviders from './withAppProviders';
-import { useDispatch } from 'react-redux';
+/* import { useDispatch } from 'react-redux'; */
 
-import Wireframe from './layouts/Wireframe.js';
+import { DateTime } from 'luxon';
+import Guest from './navigation/Guest.js';
+import Wireframe from './navigation/Wireframe.js';
+import Landing from './views/Landing';
+
+import Home from 'app/wireframe/pages/home/Home';
+import { Redirect } from 'react-router';
 
 function App() {
-  const dispatch = useDispatch();
-  const langDirection = useSelector(selectCurrLangDir);
+	/* const dispatch = useDispatch();
+  const langDirection = useSelector(selectCurrLangDir); */
 
-  let msg = "%c 💚 I'm happy that you are curious 💚";
-  let styles = [
-    'font-size: 12px',
-    'color: #fffce1',
-    'font-family: monospace',
-    'background: #0e100f',
-    'display: inline-block',
-    'padding: 1rem 3rem',
-    'border: 1px solid #fffce1',
-    'border-radius: 4px;',
-  ].join(';');
-  console.log(msg, styles);
+	// https://patorjk.com/software/taag/#p=display&h=0&f=Tmplr&t=CDSH%0A | tmplr | Spliff
+	const presentation = [
+		'┏┓┳┓┏┓┓┏',
+		'┃ ┃┃┗┓┣┫',
+		'┗┛┻┛┗┛┛┗',
+		'The CDSH - CONTEMPORARY DANCE SCHOOL HAMBURG',
+		DateTime.now().setLocale('en-gb').toLocaleString(DateTime.DATETIME_SHORT)
+	].join('\n');
+	console.log(presentation);
 
-  return (
-    <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        <Switch>
-          {/* <Route path="/admin" component={Admin} />
+	return (
+		<ThemeProvider theme={theme}>
+			<BrowserRouter>
+				<Switch>
+					{/* <Route path="/admin" component={Admin} />
           <Route path="/auth" component={Auth} /> */}
 
-          {/* <Route path="/landing" component={Landing} /> */}
+					{/* <Route path="/landing" component={Landing} />
 
-          {/* <Route path="/*" component={Guest} /> */}
+					<Route path="/guest" component={Guest} /> */}
 
-          <Route path="/*" component={Wireframe} />
-        </Switch>
-      </BrowserRouter>
-    </ThemeProvider>
-  );
+					<Route path="/*" component={Wireframe} />
+
+					{/* <Route component={Home} />
+					<Route path="" component={Home} />
+					<Route path="*" component={Home} />
+					<Route path="/" component={Home} /> */}
+					{/* <Route path="/*" component={Home} /> */}
+					<Route path="*">
+						<Redirect to="home" />
+					</Route>
+				</Switch>
+			</BrowserRouter>
+		</ThemeProvider>
+	);
 }
 
 export default withAppProviders(App)();
