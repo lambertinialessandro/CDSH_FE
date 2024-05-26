@@ -1,31 +1,16 @@
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
 	common: {
-		button: {
-			myProfile: 'Il mio Profilo',
-			logout: 'Disconnetti',
-			login: 'Accedi',
-			register: 'Registrati'
-		},
+		button: {},
 		error: {},
-		message: {
-			fontSize: 'Grandezza Carattere',
-			fullScreenToggle: 'Attiva/disattiva schermo intero',
-			light: 'Chiaro',
-			dark: 'Scuro',
-			madeWith: 'Fatto con il',
-			by: 'da'
-		},
+		message: {},
 		title: {},
-		role: {
-			admin: 'admin',
-			tenant: 'tenant',
-			staff: 'staff',
-			customer: 'cliente',
-			guest: 'ospite'
-		},
+		role: {},
 		language: {
-			ita: 'IT',
-			eng: 'EN'
+			en: 'EN',
+			de: 'DE',
+			es: 'ES',
+			it: 'IT'
 		}
 	}
 };

@@ -5,31 +5,28 @@ import { defaultNS, ns, supportedLngs, fallbackLng, resources } from './translat
 import 'intl-pluralrules';
 
 const options = {
-  order: ['querystring', 'navigator'],
-  lookupQuerystring: 'lng',
+	order: ['querystring', 'navigator'],
+	lookupQuerystring: 'lng'
 };
 
-i18n
-  .use(LanguageDetector)
-  .use(initReactI18next) // passes i18n down to react-i18next
-  .init({
-    ns,
-    defaultNS,
-    detection: options,
-    supportedLngs,
-    fallbackLng,
-    load: 'languageOnly',
-    nonExplicitSupportedLngs: true,
-    resources,
-    interpolation: {
-      escapeValue: false, // not needed for react as it escapes by default
-    },
+i18n.use(LanguageDetector)
+	.use(initReactI18next) // passes i18n down to react-i18next
+	.init({
+		ns,
+		defaultNS,
+		detection: options,
+		supportedLngs,
+		fallbackLng,
+		load: 'languageOnly',
+		nonExplicitSupportedLngs: true,
+		resources,
+		interpolation: {
+			escapeValue: false // not needed for react as it escapes by default
+		},
 
-    keySeparator: '.',
-    nsSeparator: ':',
-    returnObjects: true,
-  });
-
-console.log('i18n', i18n);
+		keySeparator: '.',
+		nsSeparator: ':',
+		returnObjects: true
+	});
 
 export default i18n;
