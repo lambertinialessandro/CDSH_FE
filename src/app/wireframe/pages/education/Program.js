@@ -18,7 +18,6 @@ function Program(props) {
 				className="max-w-1200"
 			>
 				<TitleLined title="Program" />
-
 				<Typography
 					variant="p"
 					className="mt-4 leading-relaxed"

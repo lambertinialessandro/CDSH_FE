@@ -25,13 +25,12 @@ function App() {
 				<Switch>
 					{/* <Route path="/admin" component={Admin} />
           <Route path="/auth" component={Auth} /> */}
-
+					{/* <Route path="/landing" component={Landing} />
 					{/* <Route path="/landing" component={Landing} />
 
 					<Route path="/guest" component={Guest} /> */}
-
+					<Route path="/guest" component={Guest} /> */}
 					<Route path="/*" component={Wireframe} />
-
 					{/* <Route component={Home} />
 					<Route path="" component={Home} />
 					<Route path="*" component={Home} />
@@ -39,7 +38,6 @@ function App() {
 					{/* <Route path="/*" component={Home} /> */}
 					<Route path="*" component={Home} />
 					<Route path="/*" component={Home} />
-
 					<Route path="/">
 						<Redirect to="/home" />
 					</Route>

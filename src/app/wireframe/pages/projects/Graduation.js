@@ -103,6 +103,7 @@ function Graduation(props) {
 		],
 		[]
 	);
+
 	const graduationUrlPos = graduations.findIndex(item => item.title === graduationTitle);
 	const [selectedGraduation, setSelectedGraduation] = useState(graduations[0]);
 

@@ -18,7 +18,6 @@ function PostGraduation(props) {
 				className="max-w-1200"
 			>
 				<TitleLined title="Post Graduation" />
-
 				<Typography
 					className="mt-4 leading-relaxed"
 					style={{ fontSize: '24px', color: 'rgb(186 186 186)', textShadow: '0 0 4px black' }}

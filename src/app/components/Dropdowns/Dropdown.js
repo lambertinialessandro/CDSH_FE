@@ -20,6 +20,18 @@ function Dropdown(props) {
 	const handleMouseLeave = () => {
 		setDropdownVisible(false);
 	};
+	const btnDropdownRef = createRef();
+	const popOverDropdownRef = createRef();
+	const [isDropdownVisible, setDropdownVisible] = useState(false);
+	const handleMouseEnter = () => {
+		createPopper(btnDropdownRef.current, popOverDropdownRef.current, {
+			placement: 'bottom-start'
+		});
+		setDropdownVisible(true);
+	};
+	const handleMouseLeave = () => {
+		setDropdownVisible(false);
+	};
 
 	return (
 		<div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>

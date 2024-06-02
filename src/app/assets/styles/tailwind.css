@@ -19,6 +19,21 @@
 	background: '#000000';
 }
 
+::-webkit-scrollbar {
+	width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: '#ffffff';
+	border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: '#000000';
+}
+
 /*
 Document
 ========
