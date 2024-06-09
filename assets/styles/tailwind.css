@@ -4,19 +4,35 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
 	width: 7px;
 }
 
-/* Track */
+/* Track * /
 ::-webkit-scrollbar-track {
-	background: '#ffffff';
+	background: #ffffff;
 	border-radius: 10px;
 }
 
-/* Handle */
+/* Handle * /
 ::-webkit-scrollbar-thumb {
-	background: '#000000';
+	background: #000000;
+}
+*/
+
+::-webkit-scrollbar {
+	width: 7px !important;
+	background: #1e1e1e !important;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #3d6ff3 !important;
+	border-radius: 10px !important;
+}
+
+::-webkit-scrollbar-track {
+	background: #1e1e1e !important;
+	margin: 5px 0px !important;
 }
 
 /*
