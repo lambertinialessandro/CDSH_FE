@@ -1,8 +1,14 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import main from './mainSlice';
-import eventSlice from './eventStore';
+import event from './eventSlice';
+import cdsh from './mainSlice';
 import staff from './staffSlice';
+import user from './userSlice';
 
-const appReducers = combineReducers({ main, eventSlice, staff });
+const slpReducers = combineReducers({
+  event,
+  cdsh,
+  staff,
+  user,
+});
 
-export default appReducers;
+export default slpReducers;

@@ -1,36 +1,27 @@
-import { createSlice, createSelector } from '@reduxjs/toolkit';
-import i18n from 'i18n';
-// import { setDefaultSettings } from './fuse/settingsSlice';
+import { createSlice } from '@reduxjs/toolkit';
+import i18next from 'i18n';
 
-export const changeLanguage = languageId => (dispatch, getState) => {
-	/* const { direction } = getState().fuse.settings.defaults;
+export const changeLanguage = (languageId) => (dispatch, getState) => {
+  return i18next.changeLanguage(languageId).then(() => {
+    dispatch(i18nSlice.actions.languageChanged(languageId));
+  });
+};
 
-	const newLangDirection = i18n.dir(languageId);
+export const selectCurrLanguage = (state) => state.i18n.language;
 
-	/* If necessary, change theme direction * /
-	if (newLangDirection !== direction) {
-		// dispatch(setDefaultSettings({ direction: newLangDirection }));
-	} */
-
-	return i18n.changeLanguage(languageId).then(() => {
-		dispatch(i18nSlice.actions.languageChanged(languageId));
-	});
+const initialState = {
+  language: localStorage.getItem('language') ?? 'en', // ?? i18next.resolvedLanguage ?? 'en',
 };
 
 const i18nSlice = createSlice({
-	name: 'i18n',
-	initialState: {
-		language: i18n.resolvedLanguage
-	},
-	reducers: {
-		languageChanged: (state, action) => {
-			state.language = action.payload;
-		}
-	}
-});
-
-export const selectCurrLangDir = createSelector([({ i18n: i18nState }) => i18nState.language], language => {
-	return i18n.dir(language);
+  name: 'i18n',
+  initialState,
+  reducers: {
+    languageChanged: (state, { payload }) => {
+      state.language = payload;
+      localStorage.setItem('language', payload);
+    },
+  },
 });
 
 export default i18nSlice.reducer;

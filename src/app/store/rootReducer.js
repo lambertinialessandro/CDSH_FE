@@ -9,13 +9,6 @@ const createReducer = (asyncReducers) => (state, action) => {
     ...asyncReducers,
   });
 
-  /*
-	Reset the redux store when user logged out
-	 */
-  if (action.type === 'auth/user/userLoggedOut') {
-    return combinedReducer(undefined, action);
-  }
-
   return combinedReducer(state, action);
 };
 
