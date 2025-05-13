@@ -8,54 +8,54 @@ function Carousel(props) {
 
   const items = [
     {
-      img: './assets/images/gallery/cdsh-galley-1-1.jpg',
+      img: `${process.env.PUBLIC_URL}/assets/images/gallery/cdsh-galley-1-1.jpg`,
       title: 'Work in Progress 2025: meeting point',
       description:
         'Jedes Jahr finden unsere Work in Progress Vorstellungen und unsere Abschlussvorstellungen unter einem anderen Motto statt.',
     },
     {
-      img: './assets/images/gallery/cdsh-galley-2-1.jpg',
+      img: `${process.env.PUBLIC_URL}/assets/images/gallery/cdsh-galley-2-1.jpg`,
       title: 'Abschlussprojekt 2024: joy',
       description:
         'Jedes Jahr findet ddas Abshlussprojekt, die finale Prüfungsleistung unserer Absolvent*innen, unter einem anderen Thema statt',
     },
     {
-      img: './assets/images/gallery/cdsh-galley-3-1.jpg',
+      img: `${process.env.PUBLIC_URL}/assets/images/gallery/cdsh-galley-3-1.jpg`,
       title: 'Title',
       description: 'Description',
     },
     {
-      img: './assets/images/gallery/cdsh-galley-4-1.jpg',
+      img: `${process.env.PUBLIC_URL}/assets/images/gallery/cdsh-galley-4-1.jpg`,
       title: 'Title',
       description: 'Description',
     },
     {
-      img: './assets/images/gallery/cdsh-galley-5-1.jpg',
+      img: `${process.env.PUBLIC_URL}/assets/images/gallery/cdsh-galley-5-1.jpg`,
       title: 'Title',
       description: 'Description',
     },
     {
-      img: './assets/images/gallery/cdsh-galley-6-1.jpg',
+      img: `${process.env.PUBLIC_URL}/assets/images/gallery/cdsh-galley-6-1.jpg`,
       title: 'Title',
       description: 'Description',
     },
     {
-      img: './assets/images/gallery/cdsh-galley-7-1.jpg',
+      img: `${process.env.PUBLIC_URL}/assets/images/gallery/cdsh-galley-7-1.jpg`,
       title: 'Title',
       description: 'Description',
     },
     {
-      img: './assets/images/gallery/cdsh-galley-8-1.jpg',
+      img: `${process.env.PUBLIC_URL}/assets/images/gallery/cdsh-galley-8-1.jpg`,
       title: 'Title',
       description: 'Description',
     },
     {
-      img: './assets/images/gallery/cdsh-galley-9-1.jpg',
+      img: `${process.env.PUBLIC_URL}/assets/images/gallery/cdsh-galley-9-1.jpg`,
       title: 'Title',
       description: 'Description',
     },
     {
-      img: './assets/images/gallery/cdsh-galley-1-1.jpg',
+      img: `${process.env.PUBLIC_URL}/assets/images/gallery/cdsh-galley-1-1.jpg`,
       title: 'Title',
       description: 'Description',
     },
