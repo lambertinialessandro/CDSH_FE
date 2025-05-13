@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "https://lambertinialessandro.github.io/CDSH_FE/static/css/main.3d1d68ed.css",
-    "main.js": "https://lambertinialessandro.github.io/CDSH_FE/static/js/main.662a787d.js",
+    "main.js": "https://lambertinialessandro.github.io/CDSH_FE/static/js/main.f5ff2ef2.js",
     "static/media/fa-solid-900.ttf": "https://lambertinialessandro.github.io/CDSH_FE/static/media/fa-solid-900.bacd5de623fb563b961a.ttf",
     "static/media/fa-brands-400.ttf": "https://lambertinialessandro.github.io/CDSH_FE/static/media/fa-brands-400.60127e352b7a11f7f1bc.ttf",
     "static/media/fa-solid-900.woff2": "https://lambertinialessandro.github.io/CDSH_FE/static/media/fa-solid-900.4d986b00ff9ca3828fbd.woff2",
@@ -14,6 +14,6 @@
   },
   "entrypoints": [
     "static/css/main.3d1d68ed.css",
-    "static/js/main.662a787d.js"
+    "static/js/main.f5ff2ef2.js"
   ]
 }
