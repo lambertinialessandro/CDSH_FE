@@ -7,7 +7,7 @@
 		"@babel/plugin-proposal-private-property-in-object": "^7.21.11",
 		"@emotion/react": "^11.11.4",
 		"@emotion/styled": "^11.11.5",
-		"@fortawesome/fontawesome-free": "^6.5.2",
+		"@fortawesome/fontawesome-free": "^6.7.2",
 		"@hookform/resolvers": "^3.4.2",
 		"@mui/icons-material": "^5.15.18",
 		"@mui/material": "^5.15.18",
@@ -19,6 +19,7 @@
 		"craco": "^0.0.3",
 		"cross-env": "^7.0.3",
 		"framer-motion": "^11.2.6",
+		"gh-pages": "^6.3.0",
 		"history": "^5.3.0",
 		"i18next": "^23.11.5",
 		"i18next-browser-languagedetector": "^8.0.0",
@@ -36,6 +37,7 @@
 		"react-router-dom": "^6.23.1",
 		"react-scripts": "5.0.1",
 		"redux-logger": "^3.0.6",
+		"serve": "^14.2.4",
 		"web-vitals": "^2.1.4",
 		"yup": "^1.4.0"
 	},
@@ -43,6 +45,7 @@
 		"start": "cross-env NODE_ENV=development craco start",
 		"prod": "serve -s build",
 		"build": "cross-env NODE_ENV=production GENERATE_SOURCEMAP=false craco build",
+		"deploy": "gh-pages -d build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject"
 	},

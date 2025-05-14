@@ -38,7 +38,7 @@ function Home() {
         </Typography>
         <Box className="w-full border-y border-black flex">
           <Box className="w-[50%] py-[54px] flex flex-col justify-between items-start">
-            <Typography className="pr-[45px]" sx={{ color: '#000000', fontSize: '30px', fontWeight: '400' }}>
+            <Typography className="pr-[45px]" sx={{ color: '#000000', fontSize: '30px', fontWeight: '400', lineHeight: "normal" }}>
               Die CDSH - CONTEMPORARY DANCE SCHOOL ist eine staatlich anerkannte Berufsfachschule für zeitgenössischen
               Bühnentanz. Der Schwerpunkt der dreijährigen Ausbildung liegt auf zeitgenössischem und modernem
               Klassischem Ballett.
@@ -91,7 +91,7 @@ function Home() {
         </LoopBanner>
       </Box>
 
-      <Box component="section" className="py-[120px] flex flex-col justify-center items-center">
+      <Box component="section" className="py-[120px] flex flex-col justify-center items-center text-center">
         <Typography sx={{ color: '#000000', fontSize: '80px', fontWeight: '400' }}>
           Du möchtest uns kennenlernen?
         </Typography>

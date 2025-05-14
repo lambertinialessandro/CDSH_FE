@@ -38,7 +38,7 @@ function TopNavbar(props) {
             >
               Ticketshop
             </AncorLink>
-            {isMenuOpen ? (
+            {/* {isMenuOpen ? (
               <Typography
                 component="a"
                 onClick={() => {
@@ -52,7 +52,7 @@ function TopNavbar(props) {
               >
                 ╳
               </Typography>
-            ) : (
+            ) : ( */}
               <AncorLink
                 onClick={() => {
                   setMenuOpen(true);
@@ -66,14 +66,17 @@ function TopNavbar(props) {
               >
                 Menü
               </AncorLink>
-            )}
+            {/* )} */}
           </Box>
         </Box>
       </Box>
-      {isMenuOpen && (
+      
         <Box
           className="h-screen fixed top-0 right-0 z-20 flex flex-col justify-between items-start pt-0 p-[45px]"
-          sx={{ background: '#eae7f8', minWidth: 'min-content', width: '100%', maxWidth: 'min(850px, 33%)' }}
+          sx={{ background: '#eae7f8', minWidth: 'min-content', width: '100%', maxWidth: 'min(850px, 33%)', 
+            transition: 'transform 0.35s cubic-bezier(0.15, 0.3, 0.25, 1) 0s',
+          transform: `translate(${isMenuOpen ? 0 : 100}%, 0)`
+           }}
         >
           <Box className="w-full h-[90px] flex justify-end items-center">
             <Box className="flex gap-[26px]">
@@ -143,7 +146,7 @@ function TopNavbar(props) {
             <Typography sx={{ color: '#000000', fontSize: '15px', fontWeight: '400' }}>Mail: info@cdsh.de</Typography>
           </Box>
         </Box>
-      )}
+      
     </>
   );
 }

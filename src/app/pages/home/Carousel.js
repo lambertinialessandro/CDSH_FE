@@ -109,8 +109,8 @@ function Carousel(props) {
           return (
             <Box key={idx} className="w-[321px] flex flex-col justify-start items-start">
               <Box component="img" className="w-full h-[195px]" src={item.img} />
-              <Typography className="text-[30px]">{item.title}</Typography>
-              <Typography className="text-[15px]">{item.description}</Typography>
+              <Typography className="text-[30px] py-[16px]" sx={{lineHeight: "normal"}}>{item.title}</Typography>
+              <Typography className="text-[15px]" sx={{lineHeight: "normal"}}>{item.description}</Typography>
             </Box>
           );
         })}
