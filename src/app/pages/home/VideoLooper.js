@@ -43,7 +43,7 @@ function VideoLooper(props){
       autoPlay
       loop
       muted
-      src={'./assets/images/CDSH - Trailer Final Performance cutted.mp4'}
+      src={`${process.env.PUBLIC_URL}/assets/images/CDSH - Trailer Final Performance cutted.mp4`}
       className="w-full h-full absolute top-0 b-auto left-0"
       sx={{ objectFit: 'cover', zIndex: '1' }}
     ></Box>

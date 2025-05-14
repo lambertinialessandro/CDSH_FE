@@ -1,5 +1,5 @@
 {
-	"homepage": "https://lambertinialessandro.github.io/CDSH_FE/",
+	"homepage": "https://lambertinialessandro.github.io/CDSH_FE",
 	"name": "CDSH",
 	"version": "0.1.0",
 	"private": true,
@@ -43,7 +43,7 @@
 	},
 	"scripts": {
 		"start": "cross-env NODE_ENV=development craco start",
-		"prod": "serve -s build",
+		"prod": "cross-env NODE_ENV=development serve -s build",
 		"build": "cross-env NODE_ENV=production GENERATE_SOURCEMAP=false craco build",
 		"deploy": "gh-pages -d build",
 		"test": "react-scripts test",

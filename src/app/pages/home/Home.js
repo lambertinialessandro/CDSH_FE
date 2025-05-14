@@ -48,7 +48,7 @@ function Home() {
             </AncorLink>
           </Box>
           <Box className="w-[50%] h-[460px] border-l border-black">
-            <Box component="img" className="w-full h-full align-middle object-cover" src="./assets/images/cdsh-willkommen-1.jpg" />
+            <Box component="img" className="w-full h-full align-middle object-cover" src={`${process.env.PUBLIC_URL}/assets/images/cdsh-willkommen-1.jpg`} />
           </Box>
         </Box>
       </Box>

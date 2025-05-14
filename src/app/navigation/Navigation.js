@@ -14,14 +14,13 @@ function Navigation() {
   return (
     <>
       <Routes>
-        <Route path={`${process.env.PUBLIC_URL}/*`} element={
+        <Route path={`*`} element={
           <LandingLayout>
           {/* <Routes>
             </Routes> */}
             <Home />
             </LandingLayout>
         } />
-        <Route path="*" element={<Navigate to={process.env.PUBLIC_URL} />} />
       </Routes>
     </>
   );

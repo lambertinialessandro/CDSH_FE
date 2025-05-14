@@ -15,7 +15,7 @@ function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-          <BrowserRouter> {/*  basename="/CDSH_FE"> */}
+          <BrowserRouter basename="/CDSH_FE">
             <Navigation />
           </BrowserRouter>
       </ThemeProvider>
