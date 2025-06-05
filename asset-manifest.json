@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "https://lambertinialessandro.github.io/CDSH_FE/static/css/main.635d5beb.css",
-    "main.js": "https://lambertinialessandro.github.io/CDSH_FE/static/js/main.e7542abd.js",
+    "main.css": "https://lambertinialessandro.github.io/CDSH_FE/static/css/main.cce9feb0.css",
+    "main.js": "https://lambertinialessandro.github.io/CDSH_FE/static/js/main.472507b0.js",
     "static/media/fa-solid-900.ttf": "https://lambertinialessandro.github.io/CDSH_FE/static/media/fa-solid-900.bacd5de623fb563b961a.ttf",
     "static/media/fa-brands-400.ttf": "https://lambertinialessandro.github.io/CDSH_FE/static/media/fa-brands-400.60127e352b7a11f7f1bc.ttf",
     "static/media/fa-solid-900.woff2": "https://lambertinialessandro.github.io/CDSH_FE/static/media/fa-solid-900.4d986b00ff9ca3828fbd.woff2",
@@ -13,7 +13,7 @@
     "index.html": "https://lambertinialessandro.github.io/CDSH_FE/index.html"
   },
   "entrypoints": [
-    "static/css/main.635d5beb.css",
-    "static/js/main.e7542abd.js"
+    "static/css/main.cce9feb0.css",
+    "static/js/main.472507b0.js"
   ]
 }
