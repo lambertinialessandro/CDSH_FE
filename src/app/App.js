@@ -15,7 +15,7 @@ function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-          <BrowserRouter basename="/CDSH_FE">
+          <BrowserRouter basename={process.env.REACT_APP_BASE_URL}>
             <Navigation />
           </BrowserRouter>
       </ThemeProvider>

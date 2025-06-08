@@ -10,16 +10,18 @@ function TopNavbar(props) {
   const { title } = t(ns_navigation);
   const theme = useTheme();
 
-  const [isMenuOpen, setMenuOpen] = useState(false);
+  const [isMenuOpen, setMenuOpen] = useState(true);
 
   return (
     <>
       <Box component="nav" className="w-full h-[90px] bg-transparent absolute z-10" sx={{ color: '#ffffff' }}>
         <Box className="w-full h-full px-[45px] flex justify-between items-center">
-          <Typography sx={{ fontSize: '36px' }}>CDSH</Typography>
+          <Typography component="a" href="/" sx={{ fontSize: '36px' }}>
+            CDSH
+          </Typography>
           <Box className="flex gap-[26px]">
             <AncorLink
-              href="#"
+              href={`${process.env.PUBLIC_URL}`}
               extraSx={{
                 fontSize: '15px',
                 fontWeight: '400',
@@ -29,7 +31,7 @@ function TopNavbar(props) {
               English Version
             </AncorLink>
             <AncorLink
-              href="#"
+              href={`${process.env.PUBLIC_URL}`}
               extraSx={{
                 fontSize: '15px',
                 fontWeight: '400',
@@ -53,100 +55,112 @@ function TopNavbar(props) {
                 ╳
               </Typography>
             ) : ( */}
-              <AncorLink
-                onClick={() => {
-                  setMenuOpen(true);
-                }}
-                extraSx={{
-                  color: '#ffffff',
-                  fontSize: '15px',
-                  fontWeight: '400',
-                }}
-                color="#ffffff"
-              >
-                Menü
-              </AncorLink>
+            <AncorLink
+              onClick={() => {
+                setMenuOpen(true);
+              }}
+              extraSx={{
+                color: '#ffffff',
+                fontSize: '15px',
+                fontWeight: '400',
+              }}
+              color="#ffffff"
+            >
+              Menü
+            </AncorLink>
             {/* )} */}
           </Box>
         </Box>
       </Box>
-      
-        <Box
-          className="h-screen fixed top-0 right-0 z-20 flex flex-col justify-between items-start pt-0 p-[45px]"
-          sx={{ background: '#eae7f8', minWidth: 'min-content', width: '100%', maxWidth: 'min(850px, 33%)', 
-            transition: 'transform 0.35s cubic-bezier(0.15, 0.3, 0.25, 1) 0s',
-          transform: `translate(${isMenuOpen ? 0 : 100}%, 0)`
-           }}
-        >
-          <Box className="w-full h-[90px] flex justify-end items-center">
-            <Box className="flex gap-[26px]">
-              <AncorLink
-                href="#"
-                extraSx={{
-                  fontSize: '15px',
-                  fontWeight: '400',
-                }}
-                color="#000000"
-              >
-                English Version
-              </AncorLink>
-              <AncorLink
-                href="#"
-                extraSx={{
-                  fontSize: '15px',
-                  fontWeight: '400',
-                }}
-                color="#000000"
-              >
-                Ticketshop
-              </AncorLink>
 
-              <Typography
-                component="a"
-                onClick={() => {
-                  setMenuOpen(false);
-                }}
-                sx={{
-                  color: '#000000',
-                  fontSize: '15px',
-                  fontWeight: '400',
-                  cursor: 'pointer',
-                }}
-              >
-                ╳
-              </Typography>
-            </Box>
-          </Box>
+      <Box
+        className="h-screen fixed top-0 right-0 z-20 flex flex-col justify-between items-start pt-0 p-[45px]"
+        sx={{
+          background: '#eae7f8',
+          minWidth: 'min-content',
+          width: '100%',
+          maxWidth: 'min(850px, 33%)',
+          transition: 'transform 0.35s cubic-bezier(0.15, 0.3, 0.25, 1) 0s',
+          transform: `translate(${isMenuOpen ? 0 : 100}%, 0)`,
+        }}
+      >
+        <Box className="w-full h-[90px] flex justify-end items-center">
+          <Box className="flex gap-[26px]">
+            <AncorLink
+              href={`${process.env.PUBLIC_URL}`}
+              extraSx={{
+                fontSize: '15px',
+                fontWeight: '400',
+              }}
+              color="#000000"
+            >
+              English Version
+            </AncorLink>
+            <AncorLink
+              href={`${process.env.PUBLIC_URL}`}
+              extraSx={{
+                fontSize: '15px',
+                fontWeight: '400',
+              }}
+              color="#000000"
+            >
+              Ticketshop
+            </AncorLink>
 
-          <Box className="h-full flex flex-col justify-start items-baseline gap-6">
-            <BigLink href="#">Über uns</BigLink>
-            <BigLink href="#">Team</BigLink>
-            <BigLink href="#">Studierende</BigLink>
-            <BigLink href="#">Ausbildung</BigLink>
-            <Box>
-              <BigLink href="#">Auditions</BigLink>
-            </Box>
-            <BigLink href="#">Fortbildung</BigLink>
-            <BigLink href="#">Aktuelles</BigLink>
-          </Box>
-
-          <Box className="flex flex-col">
             <Typography
+              component="a"
+              onClick={() => {
+                setMenuOpen(false);
+              }}
               sx={{
                 color: '#000000',
                 fontSize: '15px',
                 fontWeight: '400',
+                cursor: 'pointer',
               }}
             >
-              Kontact
+              ╳
             </Typography>
-            <Typography sx={{ color: '#000000', fontSize: '15px', fontWeight: '400' }}>
-              Telefon: +49 (0)40 41924560
-            </Typography>
-            <Typography sx={{ color: '#000000', fontSize: '15px', fontWeight: '400' }}>Mail: info@cdsh.de</Typography>
           </Box>
         </Box>
-      
+
+        <Box className="h-full flex flex-col justify-start items-baseline gap-6">
+          <BigLink href={`${process.env.PUBLIC_URL}/about_us`}>Über uns</BigLink>
+          <BigLink href={`${process.env.PUBLIC_URL}/team`}>Team</BigLink>
+          <BigLink href={`${process.env.PUBLIC_URL}/students`}>Studierende</BigLink>
+          <BigLink href={`${process.env.PUBLIC_URL}`}>Ausbildung</BigLink>
+          <Box className="flex items-end gap-[6px]">
+            <BigLink href={`${process.env.PUBLIC_URL}`}>Auditions</BigLink>
+            <Box className="h-fit mb-[12px] p-[2px] border border-black rounded-full flex justify-between items-center gap-[12px]" sx={{ background: '#ffffff' }}>
+              <Box/>
+              <Typography sx={{
+                      fontSize: '15px',
+                      fontWeight: '400',
+                      lineHeight: "normal"
+                    }}>OPEN</Typography>
+              <Box className="rounded-full p-[12px]" sx={{ background: '#8f20ff' }} />
+            </Box>
+          </Box>
+          <BigLink href={`${process.env.PUBLIC_URL}`}>Fortbildung</BigLink>
+          <BigLink href={`${process.env.PUBLIC_URL}`}>Aktuelles</BigLink>
+        </Box>
+
+        <Box className="flex flex-col">
+          <Typography
+            sx={{
+              color: '#000000',
+              fontSize: '15px',
+              fontWeight: '400',
+            }}
+          >
+            Kontact
+          </Typography>
+          <Typography sx={{ color: '#000000', fontSize: '15px', fontWeight: '400' }}>
+            Telefon: +49 (0)40 41924560
+          </Typography>
+          <Typography sx={{ color: '#000000', fontSize: '15px', fontWeight: '400' }}>Mail: info@cdsh.de</Typography>
+        </Box>
+      </Box>
     </>
   );
 }

@@ -26,7 +26,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: purple !important;
+  background: #8f20ff !important;
   border-radius: 10px !important;
 }
 

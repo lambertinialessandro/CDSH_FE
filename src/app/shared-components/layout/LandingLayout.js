@@ -12,7 +12,7 @@ function LandingLayout(props) {
       <Banner />
       <TopNavbar fixed />
       <main>
-        <Box className="w-full min-h-screen bg-gray-50" sx={{ paddingBottom: '40px' }}>
+        <Box className="w-full min-h-screen bg-gray-50">
           {children}
         </Box>
       </main>

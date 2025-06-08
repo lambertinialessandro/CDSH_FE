@@ -36,19 +36,28 @@ function Home() {
         <Typography className="mb-[110px]" sx={{ color: '#000000', fontSize: '80px', fontWeight: '400' }}>
           Über uns
         </Typography>
-        <Box className="w-full border-y border-black flex">
-          <Box className="w-[50%] py-[54px] flex flex-col justify-between items-start">
-            <Typography className="pr-[45px]" sx={{ color: '#000000', fontSize: '30px', fontWeight: '400', lineHeight: "normal" }}>
-              Die CDSH - CONTEMPORARY DANCE SCHOOL ist eine staatlich anerkannte Berufsfachschule für zeitgenössischen
-              Bühnentanz. Der Schwerpunkt der dreijährigen Ausbildung liegt auf zeitgenössischem und modernem
-              Klassischem Ballett.
-            </Typography>
-            <AncorLink>
-              Mehr erfahren <ArrowForward />
-            </AncorLink>
-          </Box>
-          <Box className="w-[50%] h-[460px] border-l border-black">
-            <Box component="img" className="w-full h-full align-middle object-cover" src={`${process.env.PUBLIC_URL}/assets/images/cdsh-willkommen-1.jpg`} />
+        <Box className="w-full flex justify-center">
+          <Box className="max-w-[1250px] border-y border-black flex">
+            <Box className="w-[50%] py-[54px] flex flex-col justify-between items-start">
+              <Typography
+                className="pr-[45px]"
+                sx={{ color: '#000000', fontSize: '30px', fontWeight: '400', lineHeight: 'normal' }}
+              >
+                Die CDSH - CONTEMPORARY DANCE SCHOOL ist eine staatlich anerkannte Berufsfachschule für zeitgenössischen
+                Bühnentanz. Der Schwerpunkt der dreijährigen Ausbildung liegt auf zeitgenössischem und modernem
+                Klassischem Ballett.
+              </Typography>
+              <AncorLink>
+                Mehr erfahren <ArrowForward />
+              </AncorLink>
+            </Box>
+            <Box className="w-[50%] h-[460px] border-l border-black">
+              <Box
+                component="img"
+                className="w-full h-full align-middle object-cover"
+                src={`${process.env.PUBLIC_URL}/assets/images/cdsh-willkommen-1.jpg`}
+              />
+            </Box>
           </Box>
         </Box>
       </Box>
@@ -58,7 +67,7 @@ function Home() {
         className="flex justify-start items-center w-full h-[127px] overflow-hidden"
         sx={{ background: '#8f20ff' }}
       >
-        <LoopBanner>
+        <LoopBanner stoppable>
           <Typography
             className="min-w-max flex items-center"
             sx={{
@@ -92,7 +101,9 @@ function Home() {
       </Box>
 
       <Box component="section" className="py-[120px] flex flex-col justify-center items-center text-center">
-        <Typography sx={{ color: '#000000', fontSize: '80px', fontWeight: '400' }}>
+        <Typography
+          sx={{ color: '#000000', fontSize: '80px', fontWeight: '400', lineHeight: '1', marginBottom: '32px' }}
+        >
           Du möchtest uns kennenlernen?
         </Typography>
         <Typography

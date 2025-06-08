@@ -1,7 +1,7 @@
 import AncorLink from './AncorLink';
 
 function BigLink(props) {
-  const { href, children, extraSx = {}, lineHeight = 5, color = '#000000', ...othProps } = props;
+  const { children, extraSx = {}, lineHeight = 5, color = '#000000', ...othProps } = props;
 
   return (
     <AncorLink

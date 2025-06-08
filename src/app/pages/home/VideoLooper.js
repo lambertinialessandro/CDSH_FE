@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 function VideoLooper(props){
 
     const isBannerOpen = useSelector(selectIsBannerOpen);
-    console.log(isBannerOpen)
 
     return <Box
     component="section"
@@ -17,7 +16,7 @@ function VideoLooper(props){
       className="h-full flex justify-start items-end pl-[45px] pb-[24px]"
       sx={{ marginLeft: '100px', zIndex: '2' }}
     >
-      <Box className="w-full" sx={{ color: '#ffffff', fontSize: '58px', fontWeight: '400' }}>
+      <Box className="w-full" sx={{ color: '#ffffff', fontSize: '58px', fontWeight: '400', lineHeight: "1", marginBottom: "32px" }}>
         <Typography
           sx={{
             color: '#ffffff',

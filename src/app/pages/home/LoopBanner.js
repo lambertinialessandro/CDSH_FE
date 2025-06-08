@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
 
 function LoopBanner(props) {
-  const { children } = props;
+  const { stoppable, children } = props;
 
   return (
     <Box
@@ -9,16 +9,18 @@ function LoopBanner(props) {
       sx={{
         animation: 'scroll 15s linear infinite',
 
-        '&:hover': {
+        '&:hover': stoppable && {
           animationPlayState: 'paused',
         },
 
         '@keyframes scroll': {
           '0%': { transform: 'translateX(0%)' },
-          '100%': { transform: 'translateX(-50%)' },
+          '100%': { transform: 'translateX(-25%)' },
         },
       }}
     >
+      {children}
+      {children}
       {children}
       {children}
     </Box>
