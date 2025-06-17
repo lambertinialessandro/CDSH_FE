@@ -1,34 +1,34 @@
 import { Box, Typography } from '@mui/material';
 import { selectIsBannerOpen } from 'app/store/app/mainSlice';
 import { useSelector } from 'react-redux';
+import TeamSelector from './TeamSelector';
 
 function Team() {
   const isBannerOpen = useSelector(selectIsBannerOpen);
 
   const teamMembers = [
     {
-      img: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto 2025-02-18 um 17.26.20 2.png`,
-      name: 'JAVIER BÁEZ',
+      src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto 2025-02-18 um 17.26.20 2.png`,
+      name: 'Javier Báez',
       roles: ['Schulleitung'],
       href: `${process.env.PUBLIC_URL}/`,
     },
     {
-      img: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto 2025-02-18 um 17.26.20 3.png`,
-      name: 'RAUL VALDEZ',
+      src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto 2025-02-18 um 17.26.20 3.png`,
+      name: 'Raul Valdez',
       roles: ['Künstlerische Leitung'],
       href: `${process.env.PUBLIC_URL}/`,
     },
     {
-      img: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto 2025-02-18 um 17.26.20 4.png`,
-      name: 'SINA RUNDEL',
+      src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto 2025-02-18 um 17.26.20 4.png`,
+      name: 'Sina Rundel',
       roles: ['Kommunikation und', 'Schüler*innenbetreuung', 'Tanzgeschichte'],
       href: `${process.env.PUBLIC_URL}/`,
     },
     {
-      img: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto 2025-02-18 um 17.26.20 5.png`,
-      name: 'MARTIN STÖCKLE',
+      src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto 2025-02-18 um 17.26.20 5.png`,
+      name: 'Martin Stöckle',
       roles: ['Kaufmännischer Berater'],
-      href: `${process.env.PUBLIC_URL}/`,
     },
   ];
 
@@ -70,7 +70,7 @@ function Team() {
         ></Box>
       </Box>
 
-      <Box component="section" className="relative">
+      {/* <Box component="section" className="relative">
         <Box className="absolute w-full h-[65%]" sx={{ background: '#eae7f8', zIndex: '1' }}></Box>
 
         <Box
@@ -103,21 +103,22 @@ function Team() {
                 <Box className="relative mb-[12px]">
                   <Box
                     component="img"
-                    src={member.img}
+                    src={member.src}
                     className="flex-1 w-[250px] border border-black"
                     sx={{ objectFit: 'cover', aspectRatio: 0.75 }}
                   ></Box>
-                  <Box
+                  {href && <Box
                     component="a"
                     href={member.href}
                     className="absolute border border-black rounded-full bottom-0 right-0 px-[16px] py-[2px] m-[6px]"
                     sx={{ background: '#ffffff' }}
                   >
                     VITA
-                  </Box>
+                  </Box>}
                 </Box>
 
                 <Typography
+                className="uppercase"
                   sx={{
                     fontSize: '15px',
                     fontWeight: '400',
@@ -205,9 +206,9 @@ function Team() {
           sie dir neben fachlichen und technischen Kompetenzen praxisnah und erfahrungsbasiert ein sehr konkretes Bild
           der realen Arbeitspraxis vermitteln.
         </Typography>
-      </Box>
+      </Box> */}
 
-      {/*  */}
+      <TeamSelector />
 
       <Box component="section" className="py-[120px] flex flex-col justify-center items-center text-center">
         <Typography

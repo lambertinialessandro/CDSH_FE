@@ -10,11 +10,19 @@ function TopNavbar(props) {
   const { title } = t(ns_navigation);
   const theme = useTheme();
 
-  const [isMenuOpen, setMenuOpen] = useState(true);
+  const [isMenuOpen, setMenuOpen] = useState(false);
+
+/*
+  backdrop-blur-md
+  background: linear-gradient(180deg, #8f20ff, #ffffff00);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6); */
 
   return (
     <>
-      <Box component="nav" className="w-full h-[90px] bg-transparent absolute z-10" sx={{ color: '#ffffff' }}>
+      <Box component="nav" className="w-full h-[90px] absolute z-10" sx={{ 
+        color: '#ffffff',
+        textShadow: "0 1px 3px rgba(0, 0, 0, 0.6)",
+         }}>
         <Box className="w-full h-full px-[45px] flex justify-between items-center">
           <Typography component="a" href="/" sx={{ fontSize: '36px' }}>
             CDSH
@@ -72,6 +80,7 @@ function TopNavbar(props) {
           </Box>
         </Box>
       </Box>
+      
 
       <Box
         className="h-screen fixed top-0 right-0 z-20 flex flex-col justify-between items-start pt-0 p-[45px]"
@@ -146,6 +155,7 @@ function TopNavbar(props) {
         </Box>
 
         <Box className="flex flex-col">
+          <BigLink href={`${process.env.PUBLIC_URL}/test`}>Test</BigLink>
           <Typography
             sx={{
               color: '#000000',
