@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/CDSH_FE/static/css/main.0fe7e912.css",
+    "main.css": "/CDSH_FE/static/css/main.2e7dc5cb.css",
     "main.js": "/CDSH_FE/static/js/main.586cf105.js",
     "static/media/fa-solid-900.ttf": "/CDSH_FE/static/media/fa-solid-900.2582b0e4bcf85eceead0.ttf",
     "static/media/fa-brands-400.ttf": "/CDSH_FE/static/media/fa-brands-400.1815e00441357e01619e.ttf",
@@ -13,7 +13,7 @@
     "index.html": "/CDSH_FE/index.html"
   },
   "entrypoints": [
-    "static/css/main.0fe7e912.css",
+    "static/css/main.2e7dc5cb.css",
     "static/js/main.586cf105.js"
   ]
 }
