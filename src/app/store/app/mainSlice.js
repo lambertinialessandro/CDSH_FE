@@ -6,7 +6,7 @@ export const selectCurrTheme = (state) => state.app.cdsh.currTheme;
 export const selectIsBannerOpen = (state) => state.app.cdsh.isBannerOpen;
 
 const initialState = {
-  currTheme: localStorage.getItem('theme') ?? 'default',
+  currTheme: 'default',  // localStorage.getItem('theme') ?? 'default',
   isBannerOpen: false
 };
 

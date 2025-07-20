@@ -1,7 +1,7 @@
 import { Box, Typography, useTheme } from '@mui/material';
 import { useLocation, useParams } from 'react-router';
 
-function TeamMember() {
+function StudentGroup() {
   const theme = useTheme();
 
   const { memberUrlName } = useParams();
@@ -59,8 +59,6 @@ function TeamMember() {
           >
             {selectedMember.name}
           </Typography>
-          <Typography>{selectedMember.subjects}</Typography>
-          <Typography>{selectedMember.fachs}</Typography>
         </Box>
         <Box
           component="img"
@@ -104,4 +102,4 @@ function TeamMember() {
   );
 }
 
-export default TeamMember;
+export default StudentGroup;

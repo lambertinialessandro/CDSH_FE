@@ -1,29 +1,25 @@
 import { Box, Typography } from '@mui/material';
-import { selectIsBannerOpen } from 'app/store/app/mainSlice';
-import { useSelector } from 'react-redux';
 import TeamSelector from './TeamSelector';
 
 function Team() {
-  const isBannerOpen = useSelector(selectIsBannerOpen);
-
   const teamMembers = [
     {
       src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto 2025-02-18 um 17.26.20 2.png`,
       name: 'Javier Báez',
       roles: ['Schulleitung'],
-      href: `${process.env.PUBLIC_URL}/`,
+      href: `${process.env.PUBLIC_URL}/team/javier_báez`,
     },
     {
       src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto 2025-02-18 um 17.26.20 3.png`,
       name: 'Raul Valdez',
       roles: ['Künstlerische Leitung'],
-      href: `${process.env.PUBLIC_URL}/`,
+      href: `${process.env.PUBLIC_URL}/team/raul_valdez`,
     },
     {
       src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto 2025-02-18 um 17.26.20 4.png`,
       name: 'Sina Rundel',
       roles: ['Kommunikation und', 'Schüler*innenbetreuung', 'Tanzgeschichte'],
-      href: `${process.env.PUBLIC_URL}/`,
+      href: `${process.env.PUBLIC_URL}/team/sina_rundel`,
     },
     {
       src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto 2025-02-18 um 17.26.20 5.png`,
@@ -37,7 +33,7 @@ function Team() {
       <Box
         component="section"
         className="header relative flex items-center max-h-860-px"
-        sx={{ height: `calc(100vh - ${isBannerOpen ? '45px' : '0px'})` }}
+        sx={{ height: `100vh` }}
       >
         <Box
           className="flex-1 w-[50%] h-full flex flex-col justify-between items-start px-[56px] pb-[46px]"
@@ -70,32 +66,34 @@ function Team() {
         ></Box>
       </Box>
 
-      {/* <Box component="section" className="relative">
+      <Box component="section" className="relative">
         <Box className="absolute w-full h-[65%]" sx={{ background: '#eae7f8', zIndex: '1' }}></Box>
 
         <Box
-          className="py-[110px] px-[48px] mb-[110px] flex flex-col justify-start items-center gap-[48px] relative"
-          sx={{ zIndex: '20' }}
+          className="py-[110px] px-[48px] mb-[110px] flex flex-col justify-start items-center gap-[48px] relative z-[10]"
         >
-          <Typography
-            sx={{
-              fontSize: '80px',
-              fontWeight: '400',
-            }}
-          >
-            Leitungsteam
-          </Typography>
-          <Typography
-            sx={{
-              fontSize: '30px',
-              fontWeight: '400',
-            }}
-          >
-            Als Leitungsteam der CDSH können Javier Báez, Raul Valdez und Sina Rundel auf ihre langjährige künstlerische
-            und pädagogische Erfahrung zurückgreifen, um in ihrem Ausbildungsprogramm eine qualitativ hochwertige, den
-            realen Anforderungen gerecht werdende Vorbereitung auf den Beruf zeitgenössische*r Bühnentänzer*in zu
-            garantieren.
-          </Typography>
+          <Box className="max-w-[1280px]">
+            <Typography
+              className="text-center"
+              sx={{
+                fontSize: '80px',
+                fontWeight: '400',
+              }}
+            >
+              Leitungsteam
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: '30px',
+                fontWeight: '400',
+              }}
+            >
+              Als Leitungsteam der CDSH können Javier Báez, Raul Valdez und Sina Rundel auf ihre langjährige
+              künstlerische und pädagogische Erfahrung zurückgreifen, um in ihrem Ausbildungsprogramm eine qualitativ
+              hochwertige, den realen Anforderungen gerecht werdende Vorbereitung auf den Beruf zeitgenössische*r
+              Bühnentänzer*in zu garantieren.
+            </Typography>
+          </Box>
 
           <Box className="w-full flex justify-center items-start gap-[24px]">
             {teamMembers.map((member, idx) => (
@@ -107,18 +105,20 @@ function Team() {
                     className="flex-1 w-[250px] border border-black"
                     sx={{ objectFit: 'cover', aspectRatio: 0.75 }}
                   ></Box>
-                  {href && <Box
-                    component="a"
-                    href={member.href}
-                    className="absolute border border-black rounded-full bottom-0 right-0 px-[16px] py-[2px] m-[6px]"
-                    sx={{ background: '#ffffff' }}
-                  >
-                    VITA
-                  </Box>}
+                  {member.href && (
+                    <Box
+                      component="a"
+                      href={member.href}
+                      className="absolute border border-black rounded-full bottom-0 right-0 px-[16px] py-[2px] m-[16px]"
+                      sx={{ background: '#ffffff' }}
+                    >
+                      VITA
+                    </Box>
+                  )}
                 </Box>
 
                 <Typography
-                className="uppercase"
+                  className="uppercase"
                   sx={{
                     fontSize: '15px',
                     fontWeight: '400',
@@ -206,7 +206,14 @@ function Team() {
           sie dir neben fachlichen und technischen Kompetenzen praxisnah und erfahrungsbasiert ein sehr konkretes Bild
           der realen Arbeitspraxis vermitteln.
         </Typography>
-      </Box> */}
+      </Box>
+
+      <Typography
+        className="max-w-[740px] min-w-[50%] text-center"
+        sx={{ color: '#000000', fontSize: '30px', fontWeight: '400' }}
+      >
+        //TODO: DEVELOPER NOTE: ANIMATION WIP
+      </Typography>
 
       <TeamSelector />
 

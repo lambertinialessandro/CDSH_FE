@@ -142,7 +142,6 @@ function Carousel(props) {
           >
             {items.map((item, idx) => {
               return (
-                <>
                   <Box
                     key={idx}
                     className="flex flex-col justify-start items-start"
@@ -156,25 +155,6 @@ function Carousel(props) {
                       {item.description}
                     </Typography>
                   </Box>
-                  {/* <Box
-                key={idx}
-                className="flex flex-col justify-start items-start"
-                sx={{ width: `${ITEM_WIDTH}px`, flexShrink: 0 }}
-              >
-                  <Box
-                    component="img"
-                    className="w-full h-[195px] object-cover"
-                    src={item.img}
-                    alt={item.title || `Item ${idx}`}
-                  />
-                  <Typography className="text-[30px] py-[16px]" sx={{ lineHeight: 'normal' }}>
-                    {item.title}
-                  </Typography>
-                  <Typography className="text-[15px]" sx={{ lineHeight: 1.25 }}>
-                    {item.description}
-                  </Typography>
-                </Box> */}
-                </>
               );
             })}
           </Box>

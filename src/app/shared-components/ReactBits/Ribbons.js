@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { Renderer, Transform, Vec3, Color, Polyline } from 'ogl';
-
-import './Ribbons.css';
+import { Box } from '@mui/material';
 
 const Ribbons = ({
   colors = ['#FC8EAC'],
@@ -121,7 +120,7 @@ const Ribbons = ({
       const friction = baseFriction + (Math.random() - 0.5) * 0.05;
       const thickness = baseThickness + (Math.random() - 0.5) * 3;
       const mouseOffset = new Vec3(
-        (index - center) * offsetFactorX + (Math.random() - 0.5) * 0.005,
+        (index - center) * offsetFactorX + (Math.random() - 0.5) * offsetFactorX, //  (Math.random() - 0.5) * offsetFactorX,
         (Math.random() - 0.5) * offsetFactorY,
         0
       );
@@ -175,9 +174,9 @@ const Ribbons = ({
       const height = container.clientHeight;
       mouse.set((x / width) * 2 - 1, (y / height) * -2 + 1, 0);
     }
-    container.addEventListener('mousemove', updateMouse);
-    container.addEventListener('touchstart', updateMouse);
-    container.addEventListener('touchmove', updateMouse);
+    window.addEventListener('mousemove', updateMouse);
+    window.addEventListener('touchstart', updateMouse);
+    window.addEventListener('touchmove', updateMouse);
 
     const tmp = new Vec3();
     let frameId;
@@ -185,7 +184,7 @@ const Ribbons = ({
     function update() {
       frameId = requestAnimationFrame(update);
       const currentTime = performance.now();
-      const dt = currentTime - lastTime;
+      const dt = Math.min(currentTime - lastTime, 15);
       lastTime = currentTime;
 
       lines.forEach(line => {
@@ -217,9 +216,9 @@ const Ribbons = ({
 
     return () => {
       window.removeEventListener('resize', resize);
-      container.removeEventListener('mousemove', updateMouse);
-      container.removeEventListener('touchstart', updateMouse);
-      container.removeEventListener('touchmove', updateMouse);
+      window.removeEventListener('mousemove', updateMouse);
+      window.removeEventListener('touchstart', updateMouse);
+      window.removeEventListener('touchmove', updateMouse);
       cancelAnimationFrame(frameId);
       if (gl.canvas && gl.canvas.parentNode === container) {
         container.removeChild(gl.canvas);
@@ -242,9 +241,10 @@ const Ribbons = ({
   ]);
 
   return (
-    <div
+    <Box
       ref={containerRef}
-      className="ribbons-container"
+      className="w-full h-full absolute"
+      sx={{zIndex: 0}}
     />
   );
 };

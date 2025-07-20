@@ -4,57 +4,48 @@ import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
-function TeamSelector(props) {
+function StudentSelector(props) {
   // const {} = props;
 
   const MotionBox = motion(Box);
 
-  const members = [
+  const students = [
     {
-      id: 'ursina_tossi',
-      href: `/team/ursina_tossi`,
-      name: 'Ursina Tossi',
-      src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto ursina_tossi.png`,
-      subjects: [''],
+      id: 'yugen',
+      href: `/students/yugen`,
+      name: 'Yugen',
+      src: `${process.env.PUBLIC_URL}/assets/images/students/Bildschirmfoto 2025-02-18 um 17.05.47.png`,
+      year: { start: 2024, end: 2027 },
     },
     {
-        id: 'phillip_benjamin_jenkins',
-      href: `/team/phillip_benjamin_jenkins`,
-      name: 'Phillip Benjamin Jenkins',
-      src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto phillip_benjamin_jenkins.png`,
-      subjects: ['Hauptfächer'],
+      id: 'ikigai',
+      href: `/students/ikigai`,
+      name: 'Ikigai',
+      src: `${process.env.PUBLIC_URL}/assets/images/students/Bildschirmfoto 2025-02-18 um 17.06.05.png`,
+      year: { start: 2023, end: 2026 },
     },
     {
-        id: 'angela_guerreiro',
-      href: `/team/angela_guerreiro`,
-      name: 'Angela Guerreiro',
-      src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto angela_guerreiro.png`,
-      subjects: ['Neben- und Theoriefächer'],
-    },
-    {
-        id: 'filip_van_huffel',
-      href: `/team/filip_van_huffel`,
-      name: 'Filip van Huffel',
-      src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto filip_van_huffel.png`,
-      subjects: ['Gastdozent*innen 2025'],
+      id: 'ho_omau',
+      href: `/students/ho_omau`,
+      name: 'Ho’omau',
+      src: `${process.env.PUBLIC_URL}/assets/images/students/Bildschirmfoto 2025-02-18 um 17.06.12.png`,
+      year: { start: 2022, end: 2025 },
     },
   ];
 
-  // ordered from the newest to the older
+  const today = new Date();
+  const month = today.getMonth() + 1; // getMonth() is 0-indexed
+  const year = today.getFullYear();
+  const currentYear = month < 9 ? year - 1 : year;
 
   const [tabSelected, setTabSelected] = useState(0);
-  const TAB_OPTIONS = [
-    { name: 'Hauptfächer' },
-    { name: 'Neben- und Theoriefächer' },
-    { name: 'Choreograph*innen 2025' },
-    { name: 'Kein Filter' },
-  ];
-  const filteredMembers =
-    TAB_OPTIONS[tabSelected].name === 'Kein Filter'
-      ? members
-      : members?.filter(({ subjects }) => subjects.some((s1) => s1 === TAB_OPTIONS[tabSelected].name));
+  const TAB_OPTIONS = [{ name: 'Aktuelle Klassen' }, { name: 'Ehemalige Klassen' }];
+  const filteredStudents =
+    tabSelected === 0
+      ? students?.filter(({ year }) => year.end >= currentYear)
+      : students?.filter(({ year }) => year.end < currentYear);
 
-  if (__.isEmpty(members)) {
+  if (__.isEmpty(students)) {
     return <Typography>Empty</Typography>;
   }
 
@@ -110,9 +101,9 @@ function TeamSelector(props) {
 
       <Box className="w-full flex flex-wrap justify-center items-start gap-[24px]">
         <AnimatePresence>
-          {filteredMembers.map((member, idx) => (
+          {filteredStudents.map((student, idx) => (
             <MotionBox
-              key={idx}
+              key={student.id || idx}
               className="flex flex-col justify-center items-start"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -122,14 +113,14 @@ function TeamSelector(props) {
               <Box className="relative mb-[12px]">
                 <Box
                   component="img"
-                  src={member.src}
-                  className="flex-1 w-[290px] h-[400px] border border-black"
-                  sx={{ objectFit: 'cover' }}
+                  src={student.src}
+                  className="flex-1 w-[250px] border border-black"
+                  sx={{ objectFit: 'cover', aspectRatio: 0.75 }}
                 />
                 <Box
                   component={Link}
-                  to={member.href}
-                  className="absolute border border-black rounded-full bottom-0 right-0 px-[16px] py-[2px] m-[16px]"
+                  to={student.href}
+                  className="absolute border border-black rounded-full bottom-0 right-0 px-[16px] py-[2px] m-[6px]"
                   sx={{ background: '#ffffff' }}
                 >
                   VITA
@@ -144,7 +135,7 @@ function TeamSelector(props) {
                   lineHeight: 'normal',
                 }}
               >
-                {member.name}
+                {student.name}
               </Typography>
             </MotionBox>
           ))}
@@ -154,4 +145,4 @@ function TeamSelector(props) {
   );
 }
 
-export default TeamSelector;
+export default StudentSelector;

@@ -1,12 +1,13 @@
 import { Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 
-function AncorLink(props) {
+function AnchorLink(props) {
   const { href, children, extraSx = {}, lineHeight = 1, color = '#000000', ...othProps } = props;
 
   return (
     <Typography
-      component="a"
-      href={href}
+      component={Link}
+      to={href}
       sx={{
         lineHeight: '1',
         alignContent: 'center',
@@ -36,4 +37,4 @@ function AncorLink(props) {
   );
 }
 
-export default AncorLink;
+export default AnchorLink;

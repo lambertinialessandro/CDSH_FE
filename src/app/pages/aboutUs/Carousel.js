@@ -1,6 +1,6 @@
 import { ArrowBack, ArrowForward } from '@mui/icons-material';
 import { Box, IconButton, Typography } from '@mui/material';
-import AncorLink from 'app/shared-components/link/AncorLink';
+import AnchorLink from 'app/shared-components/link/AnchorLink';
 import { useState } from 'react';
 
 function Carousel(props) {

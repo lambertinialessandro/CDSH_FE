@@ -1,29 +1,33 @@
 import { Box, Button, IconButton, Typography, useTheme } from '@mui/material';
 import { color } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import AncorLink from '../link/AncorLink';
+import AnchorLink from '../link/AnchorLink';
 import { ArrowForward, Close, Height, KeyboardArrowRight } from '@mui/icons-material';
 import { useDispatch } from 'react-redux';
 import { setIsBannerOpen } from 'app/store/app/mainSlice';
 
 function Banner(props) {
+  const { fixed } = props;
   const theme = useTheme();
   const dispatch = useDispatch();
 
   const [isClosed, setIsClosed] = useState(false);
 
   useEffect(() => {
-    dispatch(setIsBannerOpen(true))
-  }, [])
+    dispatch(setIsBannerOpen(true));
+  }, []);
 
   return (
     <>
       {!isClosed && (
         <Box
+          className="w-full h-[45px] z-[50]"
           sx={{
-            background: '#8f20ff',
+            background: theme.palette.primary.main,
+            ...(fixed && {
+              position: 'fixed',
+            }),
           }}
-          className="h-[45px]"
         >
           <Box className="w-full h-full flex justify-between items-center px-[15px]">
             <Box></Box>
@@ -31,37 +35,37 @@ function Banner(props) {
               <Typography
                 sx={{
                   height: 'min-content',
-                  color: '#ffffff',
+                  color: '#000000',
                   fontSize: '15px',
                   fontWeight: '400',
                 }}
               >
                 Die Audition Termine 2025 sind jetzt online.
               </Typography>
-              <AncorLink
+              <AnchorLink
                 href="#"
                 extraSx={{
                   height: 'min-content',
                   lineHeight: '1.5',
-                  color: '#ffffff',
+                  color: '#000000',
                   fontSize: '15px',
                   fontWeight: '400',
                 }}
-                color="#ffffff"
+                color="#000000"
               >
                 Jetzt anmelden <ArrowForward />
-              </AncorLink>
+              </AnchorLink>
             </Box>
             <IconButton
               sx={{
-                color: '#ffffff',
+                color: '#000000',
                 lineHeight: '1',
                 fontSize: '15px',
                 fontWeight: '400',
                 cursor: 'pointer',
               }}
               onClick={() => {
-                dispatch(setIsBannerOpen(false))
+                dispatch(setIsBannerOpen(false));
                 setIsClosed(true);
               }}
             >

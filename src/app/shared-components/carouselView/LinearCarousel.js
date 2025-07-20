@@ -34,7 +34,6 @@ function LinearCarousel(props) {
 				sx={{
 					zIndex: 1,
 					borderRadius: '50%',
-					/* background: 'radial-gradient(#5594db, #5594db 45%, transparent 100%)', */
 					aspectRatio: 1,
 					color: theme.palette.text.primary,
 					background: 'transparent',
@@ -69,7 +68,6 @@ function LinearCarousel(props) {
 				sx={{
 					zIndex: 1,
 					borderRadius: '50%',
-					/* background: 'radial-gradient(#5594db, #5594db 45%, transparent 100%)', */
 					aspectRatio: 1,
 					color: theme.palette.text.primary,
 					background: 'transparent',

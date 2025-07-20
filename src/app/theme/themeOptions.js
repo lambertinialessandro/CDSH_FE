@@ -11,14 +11,17 @@ const colorVariantCoeff = 0.16;
 const disabledCoeff = 0.8;
 
 export function generateThemeOptions(props) {
-  const primary = "#8f20ff"
-  const secondary = "#eae7f8"
+  const primary = "#C8FF75"
+  const secondary = "#D8D0FF"
   const info = "#ffffff"
   const success = "#ffffff"
   const warning = "#ffffff"
   const error = "#ffffff"
 
+  console.log("generateThemeOptions")
+
   return {
+    default: {
     palette: {
       //mode: 'light',
       common: {},
@@ -94,25 +97,7 @@ export function generateThemeOptions(props) {
         contrastText: getContrastTextColor(error),
       },
     },
-    components: {
-      MuiAppBar: {
-        defaultProps: {
-          enableColorOnDark: true,
-        },
-        styleOverrides: {
-          root: {
-            backgroundImage: 'none',
-          },
-        },
-      },
-      MuiButton: {
-        styleOverrides: {
-          root: {
-            textTransform: 'none',
-          },
-        },
-      },
-    },
+  }
   };
 }
 

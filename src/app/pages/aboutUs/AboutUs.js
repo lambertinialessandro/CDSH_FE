@@ -1,11 +1,21 @@
-import { Box, Typography } from '@mui/material';
-import { selectIsBannerOpen } from 'app/store/app/mainSlice';
-import { useSelector } from 'react-redux';
-import LoopBanner from '../home/LoopBanner';
-import Carousel from './Carousel';
+import { Box, Typography, useTheme } from '@mui/material';
+import LoopBanner from '../../shared-components/banner/LoopBanner';
+import Carousel from 'app/shared-components/carousel/Carousel';
+
+const items = [
+  {
+    src: `${process.env.PUBLIC_URL}/assets/images/aboutUs/Bildschirmfoto 2025-02-21 um 17.23.58.png`,
+  },
+  {
+    src: `${process.env.PUBLIC_URL}/assets/images/aboutUs/Bildschirmfoto 2025-02-21 um 17.24.14.png`,
+  },
+  {
+    src: `${process.env.PUBLIC_URL}/assets/images/aboutUs/Bildschirmfoto 2025-02-21 um 17.23.58.png`,
+  },
+];
 
 function AboutUs() {
-  const isBannerOpen = useSelector(selectIsBannerOpen);
+  const theme = useTheme();
 
   const logoRows = [
     ['Logo Platzhalter', 'Logo Platzhalter', 'Logo Platzhalter', 'Logo Platzhalter'],
@@ -17,7 +27,7 @@ function AboutUs() {
       <Box
         component="section"
         className="header relative flex items-center max-h-860-px"
-        sx={{ height: `calc(100vh - ${isBannerOpen ? '45px' : '0px'})` }}
+        sx={{ height: `100vh` }}
       >
         <Box
           className="flex-1 w-[50%] h-full flex flex-col justify-between items-start px-[56px] pb-[46px]"
@@ -53,9 +63,10 @@ function AboutUs() {
       <Box
         component="section"
         className="py-[110px] px-[48px] flex justify-center items-start gap-[48px]"
-        sx={{ background: '#eae7f8' }}
+        sx={{ background: theme.palette.secondary.main }}
       >
         <Typography
+          className="flex-1"
           sx={{
             fontSize: '30px',
             fontWeight: '400',
@@ -68,6 +79,7 @@ function AboutUs() {
           Tanzausbildung, bringt dich in Kontakt mit Künstler*innen aus der Szene und
         </Typography>
         <Typography
+          className="flex-1"
           sx={{
             fontSize: '30px',
             fontWeight: '400',
@@ -206,16 +218,16 @@ function AboutUs() {
       <Box
         component="section"
         className="py-[110px] px-[75px] flex flex-col justify-center items-center"
-        sx={{ background: '#8f20ff' }}
+        sx={{ background: theme.palette.primary.main }}
       >
-        <Typography className="mb-[110px]" sx={{ color: '#ffffff', fontSize: '80px', fontWeight: '400' }}>
+        <Typography className="mb-[110px]" sx={{ color: '#000000', fontSize: '80px', fontWeight: '400' }}>
           Künstlerisches Konzept
         </Typography>
         <Box className="max-w-[1250px] flex justify-center items-start gap-[110px]">
           <Box className="w-[50%] flex flex-col justify-start items-start">
             <Typography
               sx={{
-                color: '#ffffff',
+                color: '#000000',
                 fontSize: '30px',
                 fontWeight: '400',
               }}
@@ -229,7 +241,7 @@ function AboutUs() {
             <br />
             <Typography
               sx={{
-                color: '#ffffff',
+                color: '#000000',
                 fontSize: '30px',
                 fontWeight: '400',
               }}
@@ -251,7 +263,7 @@ function AboutUs() {
 
             <Typography
               sx={{
-                color: '#ffffff',
+                color: '#000000',
                 fontSize: '15px',
                 fontWeight: '400',
               }}
@@ -260,7 +272,7 @@ function AboutUs() {
             </Typography>
             <Typography
               sx={{
-                color: '#ffffff',
+                color: '#000000',
                 fontSize: '15px',
                 fontWeight: '400',
               }}
@@ -275,7 +287,7 @@ function AboutUs() {
         <Typography className="mb-[110px]" sx={{ color: '#000000', fontSize: '80px', fontWeight: '400' }}>
           Räumlichkeiten
         </Typography>
-        <Carousel />
+        <Carousel items={items} gap={32} itemWidth={700} itemHeight={470} />
       </Box>
 
       <Box component="section" className="py-[120px] flex flex-col justify-center items-center text-center">

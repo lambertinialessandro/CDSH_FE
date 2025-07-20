@@ -1,16 +1,12 @@
 import { Box, Typography } from "@mui/material";
-import { selectIsBannerOpen } from "app/store/app/mainSlice";
-import { useSelector } from "react-redux";
 
 
 function VideoLooper(props){
 
-    const isBannerOpen = useSelector(selectIsBannerOpen);
-
     return <Box
     component="section"
     className="header relative flex items-center max-h-860-px"
-    sx={{ height: `calc(100vh - ${isBannerOpen ? "45px" : "0px"})` }}
+    sx={{ height: `100vh` }}
   >
     <Box
       className="h-full flex justify-start items-end pl-[45px] pb-[24px]"
@@ -40,6 +36,7 @@ function VideoLooper(props){
     <Box
       component="video"
       autoPlay
+      disablePictureInPicture
       loop
       muted
       src={`${process.env.PUBLIC_URL}/assets/images/CDSH - Trailer Final Performance cutted.mp4`}

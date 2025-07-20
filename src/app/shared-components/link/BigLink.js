@@ -1,17 +1,17 @@
-import AncorLink from './AncorLink';
+import AnchorLink from './AnchorLink';
 
 function BigLink(props) {
-  const { children, extraSx = {}, lineHeight = 5, color = '#000000', ...othProps } = props;
+  const { children, extraSx = {}, fontSize="60px", lineHeight = 5, color = '#000000', ...othProps } = props;
 
   return (
-    <AncorLink
-      extraSx={{ ...extraSx, color: color, fontSize: '80px', fontWeight: '400' }}
+    <AnchorLink
+      extraSx={{ ...extraSx, color: color, fontSize: fontSize, fontWeight: '400' }}
       lineHeight={lineHeight}
       color={color}
       {...othProps}
     >
       {children}
-    </AncorLink>
+    </AnchorLink>
   );
 }
 
