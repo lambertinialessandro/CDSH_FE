@@ -1,5 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import TeamSelector from './TeamSelector';
+import { Link } from 'react-router-dom';
 
 function Team() {
   const teamMembers = [
@@ -107,8 +108,8 @@ function Team() {
                   ></Box>
                   {member.href && (
                     <Box
-                      component="a"
-                      href={member.href}
+                      component={Link}
+                      to={member.href}
                       className="absolute border border-black rounded-full bottom-0 right-0 px-[16px] py-[2px] m-[16px]"
                       sx={{ background: '#ffffff' }}
                     >
@@ -207,13 +208,6 @@ function Team() {
           der realen Arbeitspraxis vermitteln.
         </Typography>
       </Box>
-
-      <Typography
-        className="max-w-[740px] min-w-[50%] text-center"
-        sx={{ color: '#000000', fontSize: '30px', fontWeight: '400' }}
-      >
-        //TODO: DEVELOPER NOTE: ANIMATION WIP
-      </Typography>
 
       <TeamSelector />
 

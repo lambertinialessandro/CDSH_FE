@@ -105,7 +105,7 @@ function Carousel(props) {
             sx={{
               color: 'black',
               '&:hover': {
-                color: 'white',
+                color: 'gray',
                 backgroundColor: 'transparent',
               },
             }}
@@ -119,7 +119,7 @@ function Carousel(props) {
             sx={{
               color: 'black',
               '&:hover': {
-                color: 'white',
+                color: 'gray',
                 backgroundColor: 'transparent',
               },
             }}

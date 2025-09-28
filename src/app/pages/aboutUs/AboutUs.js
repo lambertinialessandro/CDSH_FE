@@ -1,34 +1,15 @@
 import { Box, Typography, useTheme } from '@mui/material';
-import LoopBanner from '../../shared-components/banner/LoopBanner';
-import Carousel from 'app/shared-components/carousel/Carousel';
-
-const items = [
-  {
-    src: `${process.env.PUBLIC_URL}/assets/images/aboutUs/Bildschirmfoto 2025-02-21 um 17.23.58.png`,
-  },
-  {
-    src: `${process.env.PUBLIC_URL}/assets/images/aboutUs/Bildschirmfoto 2025-02-21 um 17.24.14.png`,
-  },
-  {
-    src: `${process.env.PUBLIC_URL}/assets/images/aboutUs/Bildschirmfoto 2025-02-21 um 17.23.58.png`,
-  },
-];
+import LoopBanner from 'app/shared-components/banner/LoopBanner';
+import KooperationenLogos from './KooperationenLogos';
+import RaumlichkeitenSection from './RaumlichkeitenSection';
+import SplitSection from './SplitSection';
 
 function AboutUs() {
   const theme = useTheme();
 
-  const logoRows = [
-    ['Logo Platzhalter', 'Logo Platzhalter', 'Logo Platzhalter', 'Logo Platzhalter'],
-    ['Logo Platzhalter', 'Logo Platzhalter', 'Logo Platzhalter'],
-  ];
-
   return (
     <>
-      <Box
-        component="section"
-        className="header relative flex items-center max-h-860-px"
-        sx={{ height: `100vh` }}
-      >
+      <Box component="section" className="header relative flex items-center max-h-860-px" sx={{ height: `100vh` }}>
         <Box
           className="flex-1 w-[50%] h-full flex flex-col justify-between items-start px-[56px] pb-[46px]"
           sx={{ zIndex: '2' }}
@@ -111,92 +92,38 @@ function AboutUs() {
       </Box>
 
       <Box component="section" className="px-[45px] flex flex-col justify-center items-start">
-        <Box className="w-full flex justify-center">
-          <Box className="max-w-[1250px] border-y border-black flex">
-            <Box className="w-[50%] py-[32px] pr-[45px] flex flex-col justify-between items-start">
-              <Typography sx={{ color: '#000000', fontSize: '80px', fontWeight: '400', lineHeight: 'normal' }}>
-                Talent, Technik & Tanzsprache
-              </Typography>
-              <Typography sx={{ color: '#000000', fontSize: '30px', fontWeight: '400', lineHeight: 'normal' }}>
-                Wir fördern die Findung der individuellen künsterischen Persönlichkeit. Die Basis dessen bildet eine
-                fundierte Ausbildung im Bereich etablierter Tanzstile.
-              </Typography>
-            </Box>
-            <Box className="w-[50%] h-[460px] border-l border-black">
-              <Box
-                component="img"
-                className="w-full h-full align-middle object-cover"
-                src={`${process.env.PUBLIC_URL}/assets/images/aboutUs/Bildschirmfoto 2025-02-18 um 17.05.47.png`}
-              />
-            </Box>
-          </Box>
-        </Box>
-        <Box className="w-full flex justify-center">
-          <Box className="max-w-[1250px] border-y border-black flex">
-            <Box className="w-[50%] h-[460px]">
-              <Box
-                component="img"
-                className="w-full h-full align-middle object-cover"
-                src={`${process.env.PUBLIC_URL}/assets/images/aboutUs/Bildschirmfoto 2025-02-18 um 17.06.05.png`}
-              />
-            </Box>
-            <Box className="w-[50%] py-[32px] pl-[45px] flex flex-col justify-between items-start border-l border-black">
-              <Typography sx={{ color: '#000000', fontSize: '80px', fontWeight: '400', lineHeight: 'normal' }}>
-                Förderung & Kooperation
-              </Typography>
-              <Typography sx={{ color: '#000000', fontSize: '30px', fontWeight: '400', lineHeight: 'normal' }}>
-                Wir vermitteln auch nach dem Abschluss Jobs und stellen Proberäume kostenfrei bereit. Außerdem
-                profitiert ihr während der Ausbildung von unserem Netzwerk internationaler Mentor*innen.
-              </Typography>
-            </Box>
-          </Box>
-        </Box>
-        <Box className="w-full flex justify-center">
-          <Box className="max-w-[1250px] border-y border-black flex">
-            <Box className="w-[50%] py-[32px] pr-[45px] flex flex-col justify-between items-start">
-              <Typography sx={{ color: '#000000', fontSize: '80px', fontWeight: '400', lineHeight: 'normal' }}>
-                Choreografie & Praxis
-              </Typography>
-              <Typography sx={{ color: '#000000', fontSize: '30px', fontWeight: '400', lineHeight: 'normal' }}>
-                Wir erarbeiten zielgerichtete Choreografien und sammeln bereits während der Ausbildung viele Erfahrungen
-                auf lokalen Bühnen und Events.
-              </Typography>
-            </Box>
-            <Box className="w-[50%] h-[460px] border-l border-black">
-              <Box
-                component="img"
-                className="w-full h-full align-middle object-cover"
-                src={`${process.env.PUBLIC_URL}/assets/images/aboutUs/Bildschirmfoto 2025-02-18 um 17.06.12.png`}
-              />
-            </Box>
-          </Box>
-        </Box>
+        <SplitSection
+          title="Talent, Technik & Tanzsprache"
+          text="Wir fördern die Findung der individuellen künsterischen Persönlichkeit. Die Basis dessen bildet eine
+                fundierte Ausbildung im Bereich etablierter Tanzstile."
+          img={{
+            src: `${process.env.PUBLIC_URL}/assets/images/aboutUs/Bildschirmfoto 2025-02-18 um 17.05.47.png`,
+            alt: 'Tänzer:innen beim Training',
+          }}
+        />
+        <SplitSection
+          title="Förderung & Kooperation"
+          text="Wir vermitteln auch nach dem Abschluss Jobs und stellen Proberäume kostenfrei bereit. Außerdem
+                profitiert ihr während der Ausbildung von unserem Netzwerk internationaler Mentor*innen."
+          img={{
+            src: `${process.env.PUBLIC_URL}/assets/images/aboutUs/Bildschirmfoto 2025-02-18 um 17.06.05.png`,
+            alt: 'Kooperationsprojekt',
+          }}
+          reverse
+        />
+        <SplitSection
+          title="Choreografie & Praxis"
+          text="Wir erarbeiten zielgerichtete Choreografien und sammeln bereits während der Ausbildung viele Erfahrungen
+                auf lokalen Bühnen und Events."
+          img={{
+            src: `${process.env.PUBLIC_URL}/assets/images/aboutUs/Bildschirmfoto 2025-02-18 um 17.06.12.png`,
+            alt: 'Bühnenauftritt',
+          }}
+          bottom
+        />
       </Box>
 
-      <Box component="section" className="py-[110px] px-[45px] flex flex-col justify-center items-center">
-        <Typography className="mb-[110px]" sx={{ color: '#000000', fontSize: '80px', fontWeight: '400' }}>
-          Kooperationen
-        </Typography>
-        <Box className="flex flex-col justify-center items-center gap-[36px]">
-          {logoRows.map((row, idx) => (
-            <Box key={{ idx }} className="flex gap-[24px]">
-              {row.map((text, idx) => (
-                <Box key={{ idx }} className="rounded-full px-[24px] py-[12px]" sx={{ background: '#000000' }}>
-                  <Typography
-                    sx={{
-                      color: '#ffffff',
-                      fontSize: '30px',
-                      fontWeight: '400',
-                    }}
-                  >
-                    {text}
-                  </Typography>
-                </Box>
-              ))}
-            </Box>
-          ))}
-        </Box>
-      </Box>
+      <KooperationenLogos />
 
       <Box component="section" className="flex justify-start items-center w-full my-[110px] h-[127px] overflow-hidden">
         <LoopBanner>
@@ -283,12 +210,7 @@ function AboutUs() {
         </Box>
       </Box>
 
-      <Box component="section" className="py-[110px] px-[45px] flex flex-col justify-center items-start">
-        <Typography className="mb-[110px]" sx={{ color: '#000000', fontSize: '80px', fontWeight: '400' }}>
-          Räumlichkeiten
-        </Typography>
-        <Carousel items={items} gap={32} itemWidth={700} itemHeight={470} />
-      </Box>
+      <RaumlichkeitenSection />
 
       <Box component="section" className="py-[120px] flex flex-col justify-center items-center text-center">
         <Typography

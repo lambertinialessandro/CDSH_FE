@@ -1,68 +1,140 @@
 import { Box, Typography, useTheme } from '@mui/material';
 import { useLocation, useParams } from 'react-router';
+import { Link } from 'react-router-dom';
+import SplitSection from './SplitSection';
+import BigLink from 'app/shared-components/link/BigLink';
+
+const students = [
+  {
+    id: 'yugen',
+    href: `${process.env.PUBLIC_URL}/students/yugen`,
+    name: 'Yugen',
+    links: [
+      {
+        name: 'Soloprojekt',
+        title: 'Titel hier einfügen',
+        href: `${process.env.PUBLIC_URL}/projects/on_the_trail`,
+        src: `${process.env.PUBLIC_URL}/assets/images/students/project1.png`,
+      },
+      {
+        name: 'Abschlussprojekt',
+        title: 'Titel hier einfügen',
+        href: `${process.env.PUBLIC_URL}/projects/`,
+        src: `${process.env.PUBLIC_URL}/assets/images/students/project2.png`,
+      },
+    ],
+    src: `${process.env.PUBLIC_URL}/assets/images/students/Bildschirmfoto 2025-02-18 um 17.05.47.png`,
+    year: { start: 2024, end: 2027 },
+    descriptionLeft:
+      '“Ikigai” is a Japanese concept that means your reason for being or your purpose in life. It is unique to every person, it allows you to express yourself freely and truthfully, according to your own rules or values.',
+    descriptionRight:
+      'As a group we are connected through the search for our own ikigai, exploring our unique traits, our role in the world (community) and discovering what we want to say as artists.',
+    students:
+      'Alva Nilsson, Ana Chuntisvili, Ana Paula Salcido Roa, Aurora Pollini, Camila Milton Frattari, Eleonora Poles, Emma Steenblock, Fabio Camoirano, Giulia del Grosso, Ida Zimmermann, Irene Lanzanò, Karenina Lizama Leirana, Leonie Klamer, Martina Vincenza Ventura, Melina Papadopoulu, Milla Matthews, Orla Maria Losardo, Peter Mani, Simone Schachtschneider, Tara Thormann, Vignesh Kumar, Yana Delibashev, Yareli Alejandra Alvarado Macario',
+  },
+  {
+    id: 'ikigai',
+    href: `${process.env.PUBLIC_URL}/students/ikigai`,
+    name: 'Ikigai',
+    links: [
+      {
+        name: 'Soloprojekt',
+        title: 'Titel hier einfügen',
+        href: `${process.env.PUBLIC_URL}/projects/`,
+        src: `${process.env.PUBLIC_URL}/assets/images/students/project1.png`,
+      },
+      {
+        name: 'Abschlussprojekt',
+        title: 'Titel hier einfügen',
+        href: `${process.env.PUBLIC_URL}/projects/`,
+        src: `${process.env.PUBLIC_URL}/assets/images/students/project2.png`,
+      },
+    ],
+    src: `${process.env.PUBLIC_URL}/assets/images/students/Bildschirmfoto 2025-02-18 um 17.06.05.png`,
+    year: { start: 2023, end: 2026 },
+    descriptionLeft:
+      '“Ikigai” is a Japanese concept that means your reason for being or your purpose in life. It is unique to every person, it allows you to express yourself freely and truthfully, according to your own rules or values.',
+    descriptionRight:
+      'As a group we are connected through the search for our own ikigai, exploring our unique traits, our role in the world (community) and discovering what we want to say as artists.',
+    students:
+      'Alva Nilsson, Ana Chuntisvili, Ana Paula Salcido Roa, Aurora Pollini, Camila Milton Frattari, Eleonora Poles, Emma Steenblock, Fabio Camoirano, Giulia del Grosso, Ida Zimmermann, Irene Lanzanò, Karenina Lizama Leirana, Leonie Klamer, Martina Vincenza Ventura, Melina Papadopoulu, Milla Matthews, Orla Maria Losardo, Peter Mani, Simone Schachtschneider, Tara Thormann, Vignesh Kumar, Yana Delibashev, Yareli Alejandra Alvarado Macario',
+  },
+  {
+    id: 'ho_omau',
+    href: `${process.env.PUBLIC_URL}/students/ho_omau`,
+    name: "Ho'omau",
+    links: [
+      {
+        name: 'Soloprojekt',
+        title: 'Titel hier einfügen',
+        href: `${process.env.PUBLIC_URL}/projects/`,
+        src: `${process.env.PUBLIC_URL}/assets/images/projects/`,
+      },
+      {
+        name: 'Abschlussprojekt',
+        title: 'Titel hier einfügen',
+        href: `${process.env.PUBLIC_URL}/projects/`,
+        src: `${process.env.PUBLIC_URL}/assets/images/projects/`,
+      },
+    ],
+    src: `${process.env.PUBLIC_URL}/assets/images/students/Bildschirmfoto 2025-02-18 um 17.06.12.png`,
+    year: { start: 2022, end: 2025 },
+    descriptionLeft:
+      '“Ikigai” is a Japanese concept that means your reason for being or your purpose in life. It is unique to every person, it allows you to express yourself freely and truthfully, according to your own rules or values.',
+    descriptionRight:
+      'As a group we are connected through the search for our own ikigai, exploring our unique traits, our role in the world (community) and discovering what we want to say as artists.',
+    students:
+      'Alva Nilsson, Ana Chuntisvili, Ana Paula Salcido Roa, Aurora Pollini, Camila Milton Frattari, Eleonora Poles, Emma Steenblock, Fabio Camoirano, Giulia del Grosso, Ida Zimmermann, Irene Lanzanò, Karenina Lizama Leirana, Leonie Klamer, Martina Vincenza Ventura, Melina Papadopoulu, Milla Matthews, Orla Maria Losardo, Peter Mani, Simone Schachtschneider, Tara Thormann, Vignesh Kumar, Yana Delibashev, Yareli Alejandra Alvarado Macario',
+  },
+];
 
 function StudentGroup() {
   const theme = useTheme();
 
-  const { memberUrlName } = useParams();
-
-  const members = [
-    {
-      id: 'ursina_tossi',
-      href: `${process.env.PUBLIC_URL}/team/ursina_tossi`,
-      name: 'Ursina Tossi',
-      src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto ursina_tossi.png`,
-      subjects: [''],
-    },
-    {
-        id: 'phillip_benjamin_jenkins',
-      href: `${process.env.PUBLIC_URL}/team/phillip_benjamin_jenkins`,
-      name: 'Phillip Benjamin Jenkins',
-      src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto phillip_benjamin_jenkins.png`,
-      subjects: ['Hauptfächer'],
-    },
-    {
-        id: 'angela_guerreiro',
-      href: `${process.env.PUBLIC_URL}/team/angela_guerreiro`,
-      name: 'Angela Guerreiro',
-      src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto angela_guerreiro.png`,
-      subjects: ['Neben- und Theoriefächer'],
-    },
-    {
-        id: 'filip_van_huffel',
-      href: `${process.env.PUBLIC_URL}/team/filip_van_huffel`,
-      name: 'Filip van Huffel',
-      src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto filip_van_huffel.png`,
-      subjects: ['Gastdozent*innen 2025'],
-    },
-  ];
-  const selectedMember = members.find((m)=> m.id === memberUrlName)
+  const { studentUrlName } = useParams();
+  const selectedStudent = students.find((m) => m.id === studentUrlName);
 
   return (
     <>
-      <Box
-        component="section"
-        className="header relative flex items-center max-h-860-px"
-        sx={{ height: `100vh` }}
-      >
+      <Box component="section" className="header relative flex items-center max-h-860-px" sx={{ height: `100vh` }}>
         <Box
           className="flex-1 w-[50%] h-full flex flex-col justify-between items-start px-[56px] pb-[46px]"
           sx={{ zIndex: '2' }}
         >
-          <Typography></Typography>
-          <Typography
-          className="capitalize"
-            sx={{
-              fontSize: '80px',
-              fontWeight: '400',
-            }}
-          >
-            {selectedMember.name}
-          </Typography>
+          <p></p>
+          <p></p>
+          <Box>
+            <Typography
+              className="capitalize"
+              sx={{
+                fontSize: '80px',
+                fontWeight: '400',
+              }}
+            >
+              {selectedStudent.name}
+            </Typography>
+            <Box className="flex flex-col justify-start items-start gap-[4px] mt-[48px]">
+              {selectedStudent.links.map((link, idx) => (
+                <Link key={idx} to={link.href} className="">
+                  {link.name}
+                </Link>
+              ))}
+            </Box>
+          </Box>
+          <Box>
+            <Typography>
+              {selectedStudent.year.start} - {selectedStudent.year.end}
+            </Typography>
+            <Box className="flex flex-col items-start gap-[8px] mt-[48px]">
+              <button onClick={() => {}} className="bg-white border border-black rounded-full px-[16px] py-[2px]">
+                zurück
+              </button>
+            </Box>
+          </Box>
         </Box>
         <Box
           component="img"
-          src={selectedMember.src}
+          src={selectedStudent.src}
           className="flex-1 w-[50%] h-full"
           sx={{ objectFit: 'cover' }}
         ></Box>
@@ -75,27 +147,57 @@ function StudentGroup() {
       >
         <Typography
           sx={{
+            flex: '1',
             fontSize: '30px',
             fontWeight: '400',
           }}
         >
-          Die Contemporary Dance School Hamburg bietet dir zeitgenössischen Tanz auf hohem Niveau und die Entwicklung
-          deiner künstlerischen Persönlichkeit im Austausch mit erfahrenen Mentor*innen aus aller Welt. Das tägliche
-          Training bereitet dich auf die Anforderungen deiner Karriere im Bühnentanz vor. Als staatlich anerkannte
-          Berufsfachschule für zeitgenössischen Bühnentanz bietet dir die CDSH eine dreijährige praxisnahe
-          Tanzausbildung, bringt dich in Kontakt mit Künstler*innen aus der Szene und
+          {selectedStudent.descriptionLeft}
         </Typography>
         <Typography
           sx={{
+            flex: '1',
             fontSize: '30px',
             fontWeight: '400',
           }}
         >
-          kooperiert mit vielen relevanten Bereichen der tänzerischen Bildung. Ein wirksames Unterrichtsprogramm hilft
-          dir, dich technisch, künstlerisch und kreativ weiterzuentwickeln. Durch choreografische Projektarbeit bekommst
-          du ein Gefühl für die professionelle Arbeit und sammelst Bühnenerfahrung durch regelmäßige Auftritte im
-          Theater. Ein erfahrenes Team aus Künstler*innen und Pädagog*innen unterstützt dich bei deiner Entwicklung in
-          der tänzerischen Ausbildung.
+          {selectedStudent.descriptionRight}
+        </Typography>
+      </Box>
+
+      <Box component="section" className="mt-[140px] px-[45px] flex flex-col justify-center items-start">
+        {selectedStudent.links.map((link, idx) => {
+          const isOdd = idx % 2 === 1;
+          return (
+            <SplitSection
+              key={idx}
+              title={
+                <BigLink to={link.href} color={isOdd ? '#ffffff' : '#000000'}>
+                  {link.name}
+                </BigLink>
+              }
+              text={link.title}
+              img={{ src: link.src, alt: link.name }}
+              reverse={isOdd}
+              bgColor={isOdd && '#8F20FF'}
+              color={isOdd && '#ffffff'}
+              bottom={idx === selectedStudent.links.length - 1}
+            />
+          );
+        })}
+      </Box>
+
+      <Box component="section" className="py-[120px] flex flex-col justify-center items-center text-center">
+        <Typography
+          sx={{ color: '#000000', fontSize: '80px', fontWeight: '400', lineHeight: '1', marginBottom: '32px' }}
+        >
+          Die Studierenden
+        </Typography>
+        <Typography
+          className="max-w-[740px] min-w-[50%] text-center"
+          sx={{ color: '#000000', fontSize: '30px', fontWeight: '400' }}
+        >
+          {selectedStudent.students}
         </Typography>
       </Box>
     </>

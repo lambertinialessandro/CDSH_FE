@@ -2,6 +2,7 @@ import AboutUs from 'app/pages/aboutUs/AboutUs';
 import Auditions from 'app/pages/auditions/Auditions';
 import Ausbildung from 'app/pages/ausbildung/Ausbildung';
 import Home from 'app/pages/home/Home';
+import Project from 'app/pages/projects/Project';
 import StudentGroup from 'app/pages/students/StudentGroup';
 import Students from 'app/pages/students/Students';
 import Team from 'app/pages/team/Team';
@@ -58,6 +59,8 @@ function Navigation() {
 
           <Route path={'/students'} element={<Students />} />
           <Route path={'/students/:studentUrlName'} element={<StudentGroup />} />
+
+          <Route path={'/projects/:projectUrlId'} element={<Project />} />
 
           <Route path={'/ausbildung'} element={<Ausbildung />} />
 

@@ -1,6 +1,6 @@
 import { Box, Divider, Tab, Tabs, Typography } from '@mui/material';
 import __ from 'lodash';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
@@ -12,28 +12,28 @@ function TeamSelector(props) {
   const members = [
     {
       id: 'ursina_tossi',
-      href: `/team/ursina_tossi`,
+      href: `${process.env.PUBLIC_URL}/team/ursina_tossi`,
       name: 'Ursina Tossi',
       src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto ursina_tossi.png`,
       subjects: [''],
     },
     {
-        id: 'phillip_benjamin_jenkins',
-      href: `/team/phillip_benjamin_jenkins`,
+      id: 'phillip_benjamin_jenkins',
+      href: `${process.env.PUBLIC_URL}/team/phillip_benjamin_jenkins`,
       name: 'Phillip Benjamin Jenkins',
       src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto phillip_benjamin_jenkins.png`,
       subjects: ['Hauptfächer'],
     },
     {
-        id: 'angela_guerreiro',
-      href: `/team/angela_guerreiro`,
+      id: 'angela_guerreiro',
+      href: `${process.env.PUBLIC_URL}/team/angela_guerreiro`,
       name: 'Angela Guerreiro',
       src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto angela_guerreiro.png`,
       subjects: ['Neben- und Theoriefächer'],
     },
     {
-        id: 'filip_van_huffel',
-      href: `/team/filip_van_huffel`,
+      id: 'filip_van_huffel',
+      href: `${process.env.PUBLIC_URL}/team/filip_van_huffel`,
       name: 'Filip van Huffel',
       src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto filip_van_huffel.png`,
       subjects: ['Gastdozent*innen 2025'],
@@ -42,17 +42,19 @@ function TeamSelector(props) {
 
   // ordered from the newest to the older
 
-  const [tabSelected, setTabSelected] = useState(0);
+  const [tabSelected, setTabSelected] = useState(3);
   const TAB_OPTIONS = [
     { name: 'Hauptfächer' },
     { name: 'Neben- und Theoriefächer' },
     { name: 'Choreograph*innen 2025' },
     { name: 'Kein Filter' },
   ];
-  const filteredMembers =
-    TAB_OPTIONS[tabSelected].name === 'Kein Filter'
-      ? members
-      : members?.filter(({ subjects }) => subjects.some((s1) => s1 === TAB_OPTIONS[tabSelected].name));
+  const filteredMembers = useMemo(() => {
+    if (TAB_OPTIONS[tabSelected].name === 'Kein Filter') {
+      return members;
+    }
+    return members.filter(({ subjects }) => subjects.some((s1) => s1 === TAB_OPTIONS[tabSelected].name));
+  }, [tabSelected]);
 
   if (__.isEmpty(members)) {
     return <Typography>Empty</Typography>;
@@ -109,10 +111,11 @@ function TeamSelector(props) {
       </Box>
 
       <Box className="w-full flex flex-wrap justify-center items-start gap-[24px]">
-        <AnimatePresence>
+        <AnimatePresence mode="popLayout" initial={false}>
           {filteredMembers.map((member, idx) => (
             <MotionBox
-              key={idx}
+              key={member.id}
+              layout
               className="flex flex-col justify-center items-start"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}

@@ -3,35 +3,43 @@ import __ from 'lodash';
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import SplitSection from './SplitSection';
+import AnchorLink from 'app/shared-components/link/AnchorLink';
+import BigLink from 'app/shared-components/link/BigLink';
+
+const students = [
+  {
+    id: 'class_2025',
+    href: `${process.env.PUBLIC_URL}/students/yugen`,
+    name: 'Class 2026',
+    src: `${process.env.PUBLIC_URL}/assets/images/students/Bildschirmfoto 2025-02-18 um 17.05.47.png`,
+    year: { start: 2025, end: 2028 },
+  },
+  {
+    id: 'yugen',
+    href: `${process.env.PUBLIC_URL}/students/yugen`,
+    name: 'Yugen',
+    src: `${process.env.PUBLIC_URL}/assets/images/students/Bildschirmfoto 2025-02-18 um 17.05.47.png`,
+    year: { start: 2024, end: 2027 },
+  },
+  {
+    id: 'ikigai',
+    href: `${process.env.PUBLIC_URL}/students/ikigai`,
+    name: 'Ikigai',
+    src: `${process.env.PUBLIC_URL}/assets/images/students/Bildschirmfoto 2025-02-18 um 17.06.05.png`,
+    year: { start: 2023, end: 2026 },
+  },
+  {
+    id: 'ho_omau',
+    href: `${process.env.PUBLIC_URL}/students/ho_omau`,
+    name: 'Ho’omau',
+    src: `${process.env.PUBLIC_URL}/assets/images/students/Bildschirmfoto 2025-02-18 um 17.06.12.png`,
+    year: { start: 2022, end: 2025 },
+  },
+];
 
 function StudentSelector(props) {
   // const {} = props;
-
-  const MotionBox = motion(Box);
-
-  const students = [
-    {
-      id: 'yugen',
-      href: `/students/yugen`,
-      name: 'Yugen',
-      src: `${process.env.PUBLIC_URL}/assets/images/students/Bildschirmfoto 2025-02-18 um 17.05.47.png`,
-      year: { start: 2024, end: 2027 },
-    },
-    {
-      id: 'ikigai',
-      href: `/students/ikigai`,
-      name: 'Ikigai',
-      src: `${process.env.PUBLIC_URL}/assets/images/students/Bildschirmfoto 2025-02-18 um 17.06.05.png`,
-      year: { start: 2023, end: 2026 },
-    },
-    {
-      id: 'ho_omau',
-      href: `/students/ho_omau`,
-      name: 'Ho’omau',
-      src: `${process.env.PUBLIC_URL}/assets/images/students/Bildschirmfoto 2025-02-18 um 17.06.12.png`,
-      year: { start: 2022, end: 2025 },
-    },
-  ];
 
   const today = new Date();
   const month = today.getMonth() + 1; // getMonth() is 0-indexed
@@ -42,8 +50,8 @@ function StudentSelector(props) {
   const TAB_OPTIONS = [{ name: 'Aktuelle Klassen' }, { name: 'Ehemalige Klassen' }];
   const filteredStudents =
     tabSelected === 0
-      ? students?.filter(({ year }) => year.end >= currentYear)
-      : students?.filter(({ year }) => year.end < currentYear);
+      ? students?.filter(({ year }) => year.end > currentYear)
+      : students?.filter(({ year }) => year.end <= currentYear);
 
   if (__.isEmpty(students)) {
     return <Typography>Empty</Typography>;
@@ -99,46 +107,37 @@ function StudentSelector(props) {
         </Tabs>
       </Box>
 
-      <Box className="w-full flex flex-wrap justify-center items-start gap-[24px]">
-        <AnimatePresence>
-          {filteredStudents.map((student, idx) => (
-            <MotionBox
-              key={student.id || idx}
-              className="flex flex-col justify-center items-start"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.3 } }}
-              transition={{ duration: 0.3 }}
-            >
-              <Box className="relative mb-[12px]">
-                <Box
-                  component="img"
-                  src={student.src}
-                  className="flex-1 w-[250px] border border-black"
-                  sx={{ objectFit: 'cover', aspectRatio: 0.75 }}
-                />
-                <Box
-                  component={Link}
-                  to={student.href}
-                  className="absolute border border-black rounded-full bottom-0 right-0 px-[16px] py-[2px] m-[6px]"
-                  sx={{ background: '#ffffff' }}
-                >
-                  VITA
-                </Box>
-              </Box>
+      <Box className="w-full flex flex-col justify-start items-center">
+        <AnimatePresence mode="popLayout">
+          {filteredStudents.map((student, idx) => {
+            const isOdd = idx % 2 === 1;
 
-              <Typography
-                className="uppercase"
-                sx={{
-                  fontSize: '15px',
-                  fontWeight: '400',
-                  lineHeight: 'normal',
-                }}
+            return (
+              <motion.div
+                key={student.id || idx}
+                className="w-full flex flex-col justify-center items-start"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.3 } }}
+                transition={{ duration: 0.3 }}
               >
-                {student.name}
-              </Typography>
-            </MotionBox>
-          ))}
+                <SplitSection
+                  key={idx}
+                  title={
+                    <BigLink to={student.href} color={isOdd ? '#ffffff' : '#000000'}>
+                      {student.name}
+                    </BigLink>
+                  }
+                  text={`${student.year.start} - ${student.year.end}`}
+                  img={{ src: student.src, alt: student.name }}
+                  reverse={isOdd}
+                  bgColor={isOdd && '#8F20FF'}
+                  color={isOdd && '#ffffff'}
+                  bottom={idx === filteredStudents.length - 1}
+                />
+              </motion.div>
+            );
+          })}
         </AnimatePresence>
       </Box>
     </>

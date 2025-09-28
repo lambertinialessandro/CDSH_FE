@@ -3,11 +3,11 @@ import { styled, useTheme } from '@mui/material/styles';
 
 const StyledTextField = styled(TextField)(({ theme }) => ({
   '& .MuiOutlinedInput-root': {
-    borderRadius: 50,
-    paddingRight: 22,
+    borderRadius: 25,
+    padding: 32,
     fontSize: '30px',
     '& fieldset': {
-      borderColor: '#666',
+      borderColor: '#aaa',
     },
     '&:hover fieldset': {
       borderColor: '#666',
@@ -24,7 +24,7 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
   },
 }));
 
-function CustomTextField(props) {
+function CustomMultilineTextField(props) {
   const { input, field, error, readOnly } = props;
   const { label, placeholder, maxLength, required, size, hasEndDot = true, ...othProps } = input;
   //const labelId = `${field.name}-label`;
@@ -36,6 +36,7 @@ function CustomTextField(props) {
       <StyledTextField
         label={label}
         placeholder={placeholder}
+        multiline
         fullWidth
         InputProps={{
           maxLength: maxLength,
@@ -45,8 +46,8 @@ function CustomTextField(props) {
             <InputAdornment position="end">
               <span
                 style={{
-                  width: 18,
-                  height: 18,
+                  width: 13,
+                  height: 13,
                   borderRadius: '50%',
                   backgroundColor: theme.palette.primary.main,
                   display: 'inline-block',
@@ -61,4 +62,4 @@ function CustomTextField(props) {
   );
 }
 
-export default CustomTextField;
+export default CustomMultilineTextField;

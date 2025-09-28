@@ -1,88 +1,18 @@
 import { ArrowForward } from '@mui/icons-material';
 import { Box, Typography, useTheme } from '@mui/material';
+import LoopBanner from 'app/shared-components/banner/LoopBanner';
 import useParallaxY from 'app/shared-components/hooks/useParallaxY';
 import AnchorLink from 'app/shared-components/link/AnchorLink';
 import BigLink from 'app/shared-components/link/BigLink';
 import { motion } from 'framer-motion';
 import { useRef } from 'react';
-import LoopBanner from '../../shared-components/banner/LoopBanner';
+import AktuellesSection from './AktuellesSection';
 import VideoLooper from './VideoLooper';
-import Carousel from 'app/shared-components/carousel/Carousel';
-
-const items = [
-  {
-    src: `${process.env.PUBLIC_URL}/assets/images/gallery/cdsh-galley-01.jpg`,
-    title: 'Work in Progress 2025: meeting point',
-    description:
-      'Jedes Jahr finden unsere Work in Progress Vorstellungen und unsere Abschlussvorstellungen unter einem anderen Motto statt.',
-  },
-  {
-    src: `${process.env.PUBLIC_URL}/assets/images/gallery/cdsh-galley-02.jpg`,
-    title: 'Abschlussprojekt 2024 : joy',
-    description:
-      'Jedes Jahr findet das Abschlussprojekt, die finale Prüfungsleistung unserer Absolvent*innen, unter einem anderen Thema statt.',
-  },
-  {
-    src: `${process.env.PUBLIC_URL}/assets/images/gallery/cdsh-galley-03.jpg`,
-    title: 'What does Looking taste like?',
-    description:
-      'Die zentrale Prüfungsleistung im zweiten Ausbildungsjahr der CDSH besteht in der Realisierung einer eigenen Kurzproduktion.',
-  },
-  {
-    src: `${process.env.PUBLIC_URL}/assets/images/gallery/cdsh-galley-04.jpg`,
-    title: 'Abschlussprojekt 2023: KONTINUUM',
-    description:
-      'Jedes Jahr findet das Abschlussprojekt, die finale Prüfungsleistung unserer Absolvent*innen, unter einem anderen Thema statt.',
-  },
-  {
-    src: `${process.env.PUBLIC_URL}/assets/images/gallery/cdsh-galley-05.jpg`,
-    title: 'Title',
-    description: 'Description',
-  },
-  {
-    src: `${process.env.PUBLIC_URL}/assets/images/gallery/cdsh-galley-06.jpg`,
-    title: 'Title',
-    description: 'Description',
-  },
-  {
-    src: `${process.env.PUBLIC_URL}/assets/images/gallery/cdsh-galley-07.jpg`,
-    title: 'Title',
-    description: 'Description',
-  },
-  {
-    src: `${process.env.PUBLIC_URL}/assets/images/gallery/cdsh-galley-08.jpg`,
-    title: 'Title',
-    description: 'Description',
-  },
-  {
-    src: `${process.env.PUBLIC_URL}/assets/images/gallery/cdsh-galley-09.jpg`,
-    title: 'Title',
-    description: 'Description',
-  },
-  {
-    src: `${process.env.PUBLIC_URL}/assets/images/gallery/cdsh-galley-10.jpg`,
-    title: 'Title',
-    description: 'Description',
-  },
-];
-
-function Addon({ item }) {
-  return (
-    <>
-      <Typography className="text-[30px] py-[16px]" sx={{ lineHeight: 'normal' }}>
-        {item.title}
-      </Typography>
-      <Typography className="text-[15px]" sx={{ lineHeight: 1.25 }}>
-        {item.description}
-      </Typography>
-    </>
-  );
-}
 
 function ImageAnimation(props) {
   const {} = props;
-  const imgRef = useRef(null); // Create a new ref for each image
-  const y = useParallaxY(imgRef, 460 * 0.05); // Adjust distance as needed
+  const imgRef = useRef(null);
+  const y = useParallaxY(imgRef, 460 * 0.05);
 
   return (
     <motion.div ref={imgRef} className="w-full h-[460px] overflow-hidden">
@@ -115,16 +45,7 @@ function Home() {
         </Typography>
       </Box>
 
-      <Box
-        component="section"
-        className="py-[110px] flex flex-col justify-center items-center"
-        sx={{ background: theme.palette.secondary.main }}
-      >
-        <Typography className="mb-[110px]" sx={{ color: '#000000', fontSize: '80px', fontWeight: '400' }}>
-          Aktuelles
-        </Typography>
-        <Carousel items={items} gap={32} itemWidth={321} itemHeight={195} Addon={Addon} />
-      </Box>
+      <AktuellesSection />
 
       <Box component="section" className="py-[110px] px-[45px] flex flex-col justify-center items-start">
         <Typography className="mb-[110px]" sx={{ color: '#000000', fontSize: '80px', fontWeight: '400' }}>
