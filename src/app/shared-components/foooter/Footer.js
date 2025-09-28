@@ -1,235 +1,178 @@
-import { Box, Link, Typography, useTheme } from '@mui/material';
-import { useMemo } from 'react';
-import ExternalLink from '../button/ExternalLink';
+import { Box, Typography, useTheme } from '@mui/material';
 import AnchorLink from '../link/AnchorLink';
 
-function Footer(props) {
-  const { fixed } = props;
+function Footer() {
   const theme = useTheme();
 
   return (
-    <>
+    <Box
+      component="footer"
+      sx={{
+        background: theme.palette.secondary.main,
+        px: { xs: '36px', md: '45px' },
+        pt: { xs: '45px', md: '54px' },
+        pb: { xs: '36px', md: '24px' },
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: { xs: "74px", md: "24px" },
+      }}
+    >
+      {/* Top section: address + nav links */}
       <Box
-        component="footer"
-        className="px-[45px] pt-[54px] pb-[24px] flex flex-col justify-between items-center"
-        sx={{ background: theme.palette.secondary.main }}
+        className="w-full"
+        sx={{
+          display: 'flex',
+          flexDirection: { xs: 'column', md: 'row' },
+          justifyContent: 'space-between',
+          alignItems: 'flex-start',
+          pr: { xs: '0px', md: "54px"},
+          gap: { xs: "42px", md: 0 },
+        }}
       >
-        <Box className="w-full flex justify-between pb-[24px] pr-[54px]">
-          <Box className="flex flex-col justify-start items-start gap-[4px]">
-            <Typography
-              sx={{
-                fontSize: '15px',
-                fontWeight: '400',
-                lineHeight: 'normal',
-                height: '15px',
-              }}
-            >
-              CDSH - Contemporary
-            </Typography>
-            <Typography
-              sx={{
-                fontSize: '15px',
-                fontWeight: '400',
-                lineHeight: 'normal',
-                height: '15px',
-              }}
-            >
-              Dance School Hamburg Gmbh
-            </Typography>
-            <Typography
-              sx={{
-                fontSize: '15px',
-                fontWeight: '400',
-                lineHeight: 'normal',
-                height: '15px',
-              }}
-            >
-              Stresemannstraße 374 b
-            </Typography>
-            <Typography
-              sx={{
-                fontSize: '15px',
-                fontWeight: '400',
-                lineHeight: 'normal',
-                height: '15px',
-              }}
-            >
-              22761 Hamburg
-            </Typography>
-          </Box>
-          <Box className="flex flex-col justify-start items-start gap-[4px]">
-            <AnchorLink
-              href="#"
-              extraSx={{
-                fontSize: '15px',
-                fontWeight: '400',
-              }}
-              color="#000000"
-            >
-              Über uns
-            </AnchorLink>
-            <AnchorLink
-              href="#"
-              extraSx={{
-                fontSize: '15px',
-                fontWeight: '400',
-              }}
-              color="#000000"
-            >
-              Kontact
-            </AnchorLink>
-            <AnchorLink
-              href="#"
-              extraSx={{
-                fontSize: '15px',
-                fontWeight: '400',
-              }}
-              color="#000000"
-            >
-              Auditions
-            </AnchorLink>
-            <AnchorLink
-              href="#"
-              extraSx={{
-                fontSize: '15px',
-                fontWeight: '400',
-              }}
-              color="#000000"
-            >
-              FAQ
-            </AnchorLink>
-          </Box>
-          <Box className="flex flex-col justify-start items-start gap-[4px]">
-            <AnchorLink
-              href="#"
-              extraSx={{
-                fontSize: '15px',
-                fontWeight: '400',
-              }}
-              color="#000000"
-            >
-              Datenschutzerklärung
-            </AnchorLink>
-            <AnchorLink
-              href="#"
-              extraSx={{
-                fontSize: '15px',
-                fontWeight: '400',
-              }}
-              color="#000000"
-            >
-              Impressum
-            </AnchorLink>
-            <AnchorLink
-              href="#"
-              extraSx={{
-                fontSize: '15px',
-                fontWeight: '400',
-              }}
-              color="#000000"
-            >
-              AGB
-            </AnchorLink>
-            <AnchorLink
-              href="#"
-              extraSx={{
-                fontSize: '15px',
-                fontWeight: '400',
-              }}
-              color="#000000"
-            >
-              Cookie-Einstellungen
-            </AnchorLink>
-          </Box>
-          <Box className="flex flex-col justify-start items-start gap-[4px]">
-            <Typography
-              sx={{
-                fontSize: '15px',
-                fontWeight: '400',
-                lineHeight: 'normal',
-                height: '15px',
-              }}
-            >
-              Telefon: +49 (0)40 41924560
-            </Typography>
-            <Typography
-              sx={{
-                fontSize: '15px',
-                fontWeight: '400',
-                lineHeight: 'normal',
-                height: '15px',
-              }}
-            >
-              Mail: info@cdsh.de
-            </Typography>
-          </Box>
-          <Box></Box>
+        {/* Address */}
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '8px', textWrap: "nowrap" }}>
+          {['CDSH - Contemporary', 'Dance School Hamburg GmbH', 'Stresemannstraße 374 b', '22761 Hamburg'].map(
+            (line, i) => (
+              <Typography
+                key={i}
+                sx={{
+                  fontSize: { xs: '14px', md: '15px' },
+                  fontWeight: 400,
+                  lineHeight: 1.4,
+                }}
+              >
+                {line}
+              </Typography>
+            )
+          )}
         </Box>
-        <Box className="w-full flex justify-between items-start">
-          <Box className="flex gap-[45px]">
+
+        {/* Nav Links */}
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '8px', textWrap: "nowrap" }}>
+          {['Über uns', 'Kontakt', 'Auditions', 'FAQ'].map((label, i) => (
             <AnchorLink
+              key={i}
               href="#"
               extraSx={{
-                fontSize: '10px',
-                fontWeight: '400',
+                fontSize: { xs: '14px', md: '15px' },
+                fontWeight: 400,
               }}
-              color="#000000"
+              color="#000"
             >
-              Instagram
+              {label}
             </AnchorLink>
+          ))}
+        </Box>
+
+        {/* Legal Links */}
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '8px', textWrap: "nowrap" }}>
+          {['Datenschutzerklärung', 'Impressum', 'AGB', 'Cookie-Einstellungen'].map((label, i) => (
             <AnchorLink
+              key={i}
               href="#"
               extraSx={{
-                fontSize: '10px',
-                fontWeight: '400',
+                fontSize: { xs: '14px', md: '15px' },
+                fontWeight: 400,
               }}
-              color="#000000"
+              color="#000"
             >
-              Vimeo
+              {label}
             </AnchorLink>
+          ))}
+        </Box>
+
+        {/* Contact */}
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: "8px", textWrap: "nowrap" }}>
+          {['Telefon: +49 (0)40 41924560', 'Mail: info@cdsh.de'].map((label, i) => (
             <AnchorLink
-              href="#"
+              key={i}
               extraSx={{
-                fontSize: '10px',
-                fontWeight: '400',
+                fontSize: { xs: '14px', md: '15px' },
+                fontWeight: 400,
               }}
-              color="#000000"
+              color="#000"
             >
-              Facebook
+              {label}
             </AnchorLink>
-          </Box>
-          <Box className="h-full flex flex-col justify-end items-end min-w-fit">
-            <Typography
-              sx={{
-                fontSize: '10px',
-                fontWeight: '400',
-                lineHeight: 'normal',
-              }}
-            >
-              Designed by GREAT AT STUDIO
-            </Typography>
-            <Typography
-              sx={{
-                fontSize: '10px',
-                fontWeight: '400',
-                lineHeight: 'normal',
-              }}
-            >
-              Developed by Lambertini Alessandro
-            </Typography>
-            <Typography
-              sx={{
-                fontSize: '10px',
-                fontWeight: '400',
-                lineHeight: 'normal',
-              }}
-            >
-              and Landini Denise
-            </Typography>
-          </Box>
+          ))}
         </Box>
       </Box>
-    </>
+
+      {/* Bottom section: socials + credits */}
+      <Box
+        className="w-full"
+        sx={{
+          display: 'flex',
+          flexDirection: { xs: 'column', md: 'row' },
+          justifyContent: 'space-between',
+          alignItems: { xs: 'center', md: 'center' },
+          gap: { xs: '48px', md: 0 },
+        }}
+      >
+        {/* Socials */}
+        <Box
+          sx={{
+            display: 'flex',
+            width: { xs: '100%', md: 'fit-content' },
+            justifyContent: { xs: 'space-between', md: 'start' },
+            gap: { xs: 0, md: '45px' },
+          }}
+        >
+          {[
+            { label: 'Instagram', link: '#' },
+            { label: 'Vimeo', link: '#' },
+            { label: 'Facebook', link: '#' },
+          ].map(({ label, link }, i) => (
+            <AnchorLink
+              key={i}
+              href={link}
+              extraSx={{
+                fontSize: { xs: '12px', md: '14px' },
+                fontWeight: 400,
+              }}
+              color="#000"
+            >
+              {label}
+            </AnchorLink>
+          ))}
+        </Box>
+
+        {/* Credits */}
+        <Box sx={{ display: { xs: 'none', md: 'flex' }, flexDirection: 'column', alignItems: 'flex-end' }}>
+          {['Designed by GREAT AT STUDIO', 'Developed by Lambertini Alessandro', 'and Landini Denise'].map(
+            (line, i) => (
+              <Typography
+                key={i}
+                sx={{
+                  fontSize: '12px',
+                  fontWeight: 400,
+                  lineHeight: 1.4,
+                }}
+              >
+                {line}
+              </Typography>
+            )
+          )}
+        </Box>
+        <Box
+          sx={{ display: { xs: 'flex', md: 'none' }, width: '100%', flexDirection: 'column', alignItems: 'flex-start' }}
+        >
+          {['Designed by GREAT AT STUDIO', 'Developed by Lambertini Alessandro and Landini Denise'].map((line, i) => (
+            <Typography
+              key={i}
+              sx={{
+                fontSize: '10px',
+                fontWeight: 400,
+                lineHeight: 1.4,
+              }}
+            >
+              {line}
+            </Typography>
+          ))}
+        </Box>
+      </Box>
+    </Box>
   );
 }
 

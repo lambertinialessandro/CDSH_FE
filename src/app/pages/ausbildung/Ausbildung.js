@@ -169,7 +169,7 @@ function Ausbildung() {
                 whiteSpace: 'nowrap',
               }}
               fontSize="80px"
-              lineHeight="5"
+              lineHeight="5px"
               color="#000000"
             >
               JETZT ANMELDEN <ArrowForward fontSize={'80px'} />

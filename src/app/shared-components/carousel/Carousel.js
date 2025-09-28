@@ -5,18 +5,21 @@ import { motion } from 'framer-motion';
 import { Fragment, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 
-function ImageAnimation(props) {
-  const { item, height } = props;
-  const imgRef = useRef(null); // Create a new ref for each image
-  const y = useParallaxY(imgRef, height * 0.05); // Adjust distance as needed
+function ImageAnimation({ item, height }) {
+  const imgRef = useRef(null);
+  const y = useParallaxY(imgRef, height * 0.05);
 
   return (
-    <motion.div ref={imgRef} className={`w-full h-[${height}px] overflow-hidden`}>
+    <motion.div
+      ref={imgRef}
+      style={{ height }}
+      className="w-full overflow-hidden border border-black"
+    >
       <motion.img
         src={item.src}
-        alt={item.title || ``}
+        alt={item.title || ''}
         className="w-full h-full object-cover"
-        style={{ y: y, willChange: 'transform' }}
+        style={{ y, willChange: 'transform' }}
         initial={{ scale: 1.05, opacity: 0 }}
         whileInView={{ scale: 1.1, opacity: 1 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -25,16 +28,17 @@ function ImageAnimation(props) {
   );
 }
 
-function Carousel(props) {
-  const {items, gap, itemWidth, itemHeight, Addon = Fragment} = props;
-
+function Carousel({ items, gap, itemWidth, itemHeight, Addon = Fragment }) {
   const containerRef = useRef(null);
   const [containerWidth, setContainerWidth] = useState(0);
   const [index, setIndex] = useState(0);
 
   const itemsPerPage = useMemo(() => {
+    // shrink item width dynamically for small screens
+    if (containerWidth < 500) return 1;
+    if (containerWidth < 900) return 2;
     return Math.floor(containerWidth / (itemWidth + gap)) || 1;
-  }, [containerWidth]);
+  }, [containerWidth, itemWidth, gap]);
 
   const maxItems = items.length;
   const maxIndex = Math.max(0, maxItems - itemsPerPage);
@@ -70,61 +74,57 @@ function Carousel(props) {
   }
 
   return (
-    <Box className="w-full flex px-[16px] sm:px-[32px] md:px-[45px]">
+    <Box className="w-full flex">
       <Box ref={containerRef} className="w-full flex flex-col overflow-hidden">
         <Box {...swipeHandlers}>
           <Box
-            className={`flex gap-[${gap}px] mb-[24px]`}
+            className="flex"
             sx={{
-              transition: 'transform 0.35s cubic-bezier(0.15, 0.3, 0.25, 1) 0s',
-              transform: `translateX(-${index * (itemWidth + gap)}px)`,
-              width: items.length * (itemWidth + gap),
+              gap: `${gap}px`,
+              mb: 3,
+              transition: 'transform 0.35s cubic-bezier(0.15, 0.3, 0.25, 1)',
+              transform: `translateX(-${index * (containerWidth / itemsPerPage)}px)`,
+              width: items.length * (containerWidth / itemsPerPage),
             }}
           >
-            {items.map((item, idx) => {
-              return (
-                <>
-                  <Box
-                    key={idx}
-                    className="flex flex-col justify-start items-start"
-                    sx={{ width: `${itemWidth}px`, flexShrink: 0 }}
-                  >
-                    <ImageAnimation item={item} height={itemHeight}/>
-                    <Addon item={item} />
-                  </Box>
-                </>
-              );
-            })}
+            {items.map((item, idx) => (
+              <Box
+                key={idx}
+                className="flex flex-col"
+                sx={{
+                  width: `${containerWidth / itemsPerPage - gap}px`,
+                  flexShrink: 0,
+                }}
+              >
+                <ImageAnimation item={item} height={itemHeight} />
+                <Addon item={item} />
+              </Box>
+            ))}
           </Box>
         </Box>
-        <Box className="w-full flex justify-between items-center">
+        {/* Controls */}
+        <Box className="w-full flex justify-between items-center mt-2">
           <IconButton
             onClick={handlePrev}
             disabled={isLeftDisabled}
-            disableRipple
+            size="small"
             sx={{
               color: 'black',
-              '&:hover': {
-                color: 'gray',
-                backgroundColor: 'transparent',
-              },
+              '&:hover': { color: 'gray', backgroundColor: 'transparent' },
             }}
           >
-            <ArrowBack />
+            <ArrowBack fontSize="inherit" />
           </IconButton>
           <IconButton
             onClick={handleNext}
             disabled={isRightDisabled}
-            disableRipple
+            size="small"
             sx={{
               color: 'black',
-              '&:hover': {
-                color: 'gray',
-                backgroundColor: 'transparent',
-              },
+              '&:hover': { color: 'gray', backgroundColor: 'transparent' },
             }}
           >
-            <ArrowForward />
+            <ArrowForward fontSize="inherit" />
           </IconButton>
         </Box>
       </Box>

@@ -9,16 +9,15 @@ import { useRef } from 'react';
 import AktuellesSection from './AktuellesSection';
 import VideoLooper from './VideoLooper';
 
-function ImageAnimation(props) {
-  const {} = props;
+function ImageAnimation() {
   const imgRef = useRef(null);
   const y = useParallaxY(imgRef, 460 * 0.05);
 
   return (
-    <motion.div ref={imgRef} className="w-full h-[460px] overflow-hidden">
+    <motion.div ref={imgRef} className="w-full h-[300px] md:h-[460px] overflow-hidden">
       <motion.img
         src={`${process.env.PUBLIC_URL}/assets/images/cdsh-willkommen-1.jpg`}
-        alt={``}
+        alt="CDSH Willkommen"
         className="w-full h-full object-cover"
         style={{ y: y, willChange: 'transform' }}
         initial={{ scale: 1.05, opacity: 0 }}
@@ -36,58 +35,81 @@ function Home() {
     <>
       <VideoLooper />
 
-      <Box component="section" className="py-[120px] flex flex-col justify-center items-center">
-        <Typography sx={{ color: '#000000', fontSize: '30px', fontWeight: '400' }}>
+      {/* Intro Section */}
+      <Box
+        component="section"
+        className="flex flex-col justify-center items-center text-center"
+        sx={{ py: { xs: 8, md: 15 }, px: { xs: 4, md: 6 } }}
+      >
+        <Typography sx={{ fontSize: { xs: '20px', md: '30px' }, fontWeight: 400, color: '#000' }}>
           Wir sind eine staatlich anerkannte
         </Typography>
-        <Typography sx={{ color: '#000000', fontSize: '30px', fontWeight: '400' }}>
+        <Typography sx={{ fontSize: { xs: '20px', md: '30px' }, fontWeight: 400, color: '#000' }}>
           Berufsfachschule für zeitgenössischen Bühnentanz
         </Typography>
       </Box>
 
+      {/* Aktuelles Section */}
       <AktuellesSection />
 
-      <Box component="section" className="py-[110px] px-[45px] flex flex-col justify-center items-start">
-        <Typography className="mb-[110px]" sx={{ color: '#000000', fontSize: '80px', fontWeight: '400' }}>
+      {/* Über uns */}
+      <Box component="section" sx={{ py: { xs: 8, md: 14 }, px: { xs: 4, md: 6 } }}>
+        <Typography
+          className="mb-[60px] md:mb-[110px]"
+          sx={{ fontSize: { xs: '40px', md: '80px' }, fontWeight: 400, color: '#000' }}
+        >
           Über uns
         </Typography>
-        <Box className="w-full flex justify-center">
-          <Box className="max-w-[1250px] border-y border-black flex">
-            <Box className="w-[50%] py-[54px] flex flex-col justify-between items-start">
+        <Box className="w-full flex flex-col md:flex-row justify-center">
+          <Box className="max-w-[1250px] w-full md:border-y border-black flex flex-col md:flex-row">
+            {/* Text */}
+            <Box className="w-full md:w-1/2 py-[32px] md:py-[54px] flex flex-col justify-between items-start">
               <Typography
-                className="pr-[45px]"
-                sx={{ color: '#000000', fontSize: '30px', fontWeight: '400', lineHeight: 'normal' }}
+                sx={{
+                  fontSize: { xs: '18px', md: '30px' },
+                  fontWeight: 400,
+                  color: '#000',
+                  lineHeight: 'normal',
+                  pr: { xs: 0, md: '45px' },
+                  mb: { xs: 3, md: 0 },
+                }}
               >
-                Die CDSH - CONTEMPORARY DANCE SCHOOL ist eine staatlich anerkannte Berufsfachschule für zeitgenössischen
-                Bühnentanz. Der Schwerpunkt der dreijährigen Ausbildung liegt auf zeitgenössischem und modernem
-                Klassischem Ballett.
+                Die CDSH - CONTEMPORARY DANCE SCHOOL ist eine staatlich anerkannte Berufsfachschule für
+                zeitgenössischen Bühnentanz. Der Schwerpunkt der dreijährigen Ausbildung liegt auf zeitgenössischem und
+                modernem Klassischem Ballett.
               </Typography>
               <AnchorLink>
                 Mehr erfahren <ArrowForward />
               </AnchorLink>
             </Box>
-            <Box className="w-[50%] h-[460px] border-l border-black">
+
+            {/* Image */}
+            <Box className="w-full md:w-1/2 border-y md:border-t-0 md:border-l border-black">
               <ImageAnimation />
             </Box>
           </Box>
         </Box>
       </Box>
 
+      {/* Banner Section */}
       <Box
         component="section"
-        className="flex justify-start items-center w-full h-[127px] overflow-hidden"
-        sx={{ background: theme.palette.primary.main }}
+        className="flex justify-start items-center w-full overflow-hidden"
+        sx={{
+          height: { xs: '80px', md: '127px' },
+          background: theme.palette.primary.main,
+        }}
       >
         <LoopBanner stoppable>
           <Typography
             className="min-w-max flex items-center"
             sx={{
+              fontSize: { xs: '28px', md: '80px' },
+              fontWeight: 400,
               color: '#000000',
-              fontSize: '80px',
-              fontWeight: '400',
               whiteSpace: 'nowrap',
               display: 'inline-block',
-              marginRight: '45px',
+              marginRight: { xs: '16px', md: '45px' },
             }}
           >
             DIE AUDITION TERMINE 2025 SIND JETZT ONLINE.
@@ -95,32 +117,42 @@ function Home() {
               extraSx={{
                 display: 'flex',
                 height: 'min-content',
-                marginLeft: '24px',
-
-                color: 'white',
-                fontSize: '80px',
-                fontWeight: '400',
+                marginLeft: { xs: '12px', md: '24px' },
+                color: '#ffffff',
+                fontSize: { xs: '28px', md: '80px' },
+                fontWeight: 400,
                 whiteSpace: 'nowrap',
               }}
-              fontSize="80px"
-              lineHeight="5"
+              fontSize="inherit"
+              lineHeight={{ xs: '1px', md: '5px' }}
               color="#000000"
             >
-              JETZT ANMELDEN <ArrowForward fontSize={'80px'} />
+              JETZT ANMELDEN <ArrowForward fontSize="inherit" />
             </BigLink>
           </Typography>
         </LoopBanner>
       </Box>
 
-      <Box component="section" className="py-[120px] flex flex-col justify-center items-center text-center">
+      {/* Kennenlernen Section */}
+      <Box
+        component="section"
+        className="flex flex-col justify-center items-center text-center"
+        sx={{ py: { xs: 8, md: 15 }, px: { xs: 4, md: 6 } }}
+      >
         <Typography
-          sx={{ color: '#000000', fontSize: '80px', fontWeight: '400', lineHeight: '1', marginBottom: '32px' }}
+          sx={{
+            fontSize: { xs: '36px', md: '80px' },
+            marginBottom: { xs: '12px', md: '32px' },
+            fontWeight: 400,
+            color: '#000000',
+            lineHeight: 1.1,
+          }}
         >
           Du möchtest uns kennenlernen?
         </Typography>
         <Typography
           className="max-w-[740px] min-w-[50%] text-center"
-          sx={{ color: '#000000', fontSize: '30px', fontWeight: '400' }}
+          sx={{ fontSize: { xs: '18px', md: '30px' }, fontWeight: 400, color: '#000000' }}
         >
           Wir dich ebenfalls. Neben den regulären Auditions sind wir bei Fragen rund um die Ausbildung per Mail oder
           telefonisch für dich da.

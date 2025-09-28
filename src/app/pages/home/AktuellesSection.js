@@ -26,59 +26,33 @@ const items = [
     description:
       'Jedes Jahr findet das Abschlussprojekt, die finale Prüfungsleistung unserer Absolvent*innen, unter einem anderen Thema statt.',
   },
-  {
-    src: `${process.env.PUBLIC_URL}/assets/images/gallery/cdsh-galley-05.jpg`,
-    title: 'Title',
-    description: 'Description',
-  },
-  {
-    src: `${process.env.PUBLIC_URL}/assets/images/gallery/cdsh-galley-06.jpg`,
-    title: 'Title',
-    description: 'Description',
-  },
-  {
-    src: `${process.env.PUBLIC_URL}/assets/images/gallery/cdsh-galley-07.jpg`,
-    title: 'Title',
-    description: 'Description',
-  },
-  {
-    src: `${process.env.PUBLIC_URL}/assets/images/gallery/cdsh-galley-08.jpg`,
-    title: 'Title',
-    description: 'Description',
-  },
-  {
-    src: `${process.env.PUBLIC_URL}/assets/images/gallery/cdsh-galley-09.jpg`,
-    title: 'Title',
-    description: 'Description',
-  },
-  {
-    src: `${process.env.PUBLIC_URL}/assets/images/gallery/cdsh-galley-10.jpg`,
-    title: 'Title',
-    description: 'Description',
-  },
+  // more images...
 ];
 
 function Addon({ item }) {
   return (
     <>
-      <Typography className="text-[30px] py-[16px] leading-[normal]">{item.title}</Typography>
-      <Typography className="text-[15px] leading-[1.25]">{item.description}</Typography>
-    </>
-  );
-}
-
-/* function Addon({ item }) {
-  return (
-    <>
-      <Typography className="text-[30px] py-[16px]" sx={{ lineHeight: 'normal' }}>
+      <Typography
+        sx={{
+          fontSize: { xs: '18px', sm: '22px', md: '30px' },
+          fontWeight: 500,
+          py: 2,
+          lineHeight: 1.2,
+        }}
+      >
         {item.title}
       </Typography>
-      <Typography className="text-[15px]" sx={{ lineHeight: 1.25 }}>
+      <Typography
+        sx={{
+          fontSize: { xs: '14px', md: '15px' },
+          lineHeight: 1.3,
+        }}
+      >
         {item.description}
       </Typography>
     </>
   );
-} */
+}
 
 function AktuellesSection() {
   const theme = useTheme();
@@ -86,13 +60,32 @@ function AktuellesSection() {
   return (
     <Box
       component="section"
-      className="py-[110px] flex flex-col justify-center items-center"
-      sx={{ background: theme.palette.secondary.main }}
+      sx={{
+        background: theme.palette.secondary.main,
+        py: { xs: 8, md: 14 },
+        px: { xs: 2, sm: 4, md: 8 },
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
     >
-      <Typography className="mb-[110px]" sx={{ color: '#000000', fontSize: '80px', fontWeight: '400' }}>
+      <Typography
+        sx={{
+          mb: { xs: 6, md: 14 },
+          fontSize: { xs: '40px', md: '80px' },
+          fontWeight: 400,
+          color: '#000',
+        }}
+      >
         Aktuelles
       </Typography>
-      <Carousel items={items} gap={32} itemWidth={321} itemHeight={195} Addon={Addon} />
+      <Carousel
+        items={items}
+        gap={16}
+        itemWidth={280} // desktop baseline
+        itemHeight={180}
+        Addon={Addon}
+      />
     </Box>
   );
 }
