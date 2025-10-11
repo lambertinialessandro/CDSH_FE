@@ -1,32 +1,57 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useMediaQuery } from '@mui/material';
 
 function KooperationenLogos() {
-  const logoRows = [
-    ['Logo Platzhalter', 'Logo Platzhalter', 'Logo Platzhalter', 'Logo Platzhalter'],
-    ['Logo Platzhalter', 'Logo Platzhalter', 'Logo Platzhalter'],
+  let logoRows = [
+    'Logo Platzhalter',
+    'Logo Platzhalter',
+    'Logo Platzhalter',
+    'Logo Platzhalter',
+    'Logo Platzhalter',
+    'Logo Platzhalter',
+    'Logo Platzhalter',
   ];
 
+  const isMobile = useMediaQuery('(max-width:900px)');
+  if (isMobile) {
+    logoRows = ['Logo Platzhalter', 'Logo Platzhalter', 'Logo Platzhalter', 'Logo Platzhalter', 'Logo Platzhalter'];
+  }
+
   return (
-    <Box component="section" className="py-[110px] px-[45px] flex flex-col justify-center items-center">
-      <Typography className="mb-[110px]" sx={{ color: '#000000', fontSize: '80px', fontWeight: '400' }}>
+    <Box
+      component="section"
+      className="px-[45px] flex flex-col justify-center items-center"
+      sx={{ py: { xs: '55px', md: '110px' } }}
+    >
+      <Typography
+        className=""
+        sx={{
+          color: '#000',
+          fontSize: { xs: '35px', md: '80px' },
+          mb: { xs: '55px', md: '110px' },
+          fontWeight: 400,
+        }}
+      >
         Kooperationen
       </Typography>
-      <Box className="flex flex-col justify-center items-center gap-[36px]">
-        {logoRows.map((row, idx) => (
-          <Box key={idx} className="flex gap-[24px]">
-            {row.map((text, idx) => (
-              <Box key={idx} className="rounded-full px-[24px] py-[12px]" sx={{ background: '#000000' }}>
-                <Typography
-                  sx={{
-                    color: '#ffffff',
-                    fontSize: '30px',
-                    fontWeight: '400',
-                  }}
-                >
-                  {text}
-                </Typography>
-              </Box>
-            ))}
+
+      {/* Wrapper */}
+      <Box className="flex flex-wrap justify-center gap-[24px] w-full max-w-[1200px]" sx={{}}>
+        {logoRows.map((text, idx) => (
+          <Box
+            key={idx}
+            className="rounded-full px-[24px] py-[12px]"
+            sx={{ background: '#000', transition: 'background 0.3s ease' }}
+          >
+            <Typography
+              sx={{
+                color: '#fff',
+                fontSize: { xs: '15px', md: '30px' },
+                fontWeight: 400,
+                whiteSpace: 'nowrap',
+              }}
+            >
+              {text}
+            </Typography>
           </Box>
         ))}
       </Box>

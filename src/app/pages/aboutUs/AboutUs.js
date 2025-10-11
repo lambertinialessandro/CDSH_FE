@@ -9,14 +9,23 @@ function AboutUs() {
 
   return (
     <>
-      <Box component="section" className="header relative flex items-center max-h-860-px" sx={{ height: `100vh` }}>
+      <Box
+        component="section"
+        className="header relative flex items-center max-h-860-px"
+        sx={{ height: { sx: '100%', md: `100vh` }, flexDirection: { xs: 'column-reverse', md: 'row' } }}
+      >
         <Box
-          className="flex-1 w-[50%] h-full flex flex-col justify-between items-start px-[56px] pb-[46px]"
-          sx={{ zIndex: '2' }}
+          className="flex-1 h-full flex flex-col justify-between items-start"
+          sx={{
+            zIndex: '2',
+            width: { xs: '100%', md: '50%' },
+            padding: { xs: '46px 56px 46px 56px', md: '0 56px 46px 56px' },
+          }}
         >
           <Typography></Typography>
           <Typography
             sx={{
+              display: { xs: 'none', md: 'block' },
               fontSize: '80px',
               fontWeight: '400',
             }}
@@ -25,7 +34,7 @@ function AboutUs() {
           </Typography>
           <Typography
             sx={{
-              fontSize: '30px',
+              fontSize: { xs: '15px', md: '30px' },
               fontWeight: '400',
             }}
           >
@@ -33,23 +42,43 @@ function AboutUs() {
             künstlerischen Bedürfnissen der Studierenden und den Anforderungen der internationalen Branche.
           </Typography>
         </Box>
-        <Box
-          component="img"
-          src={`${process.env.PUBLIC_URL}/assets/images/aboutUs/cdsh-willkommen-1 1.png`}
-          className="flex-1 w-[50%] h-full"
-          sx={{ objectFit: 'cover' }}
-        ></Box>
+        <Box className="flex-1 h-full relative" sx={{ width: { xs: '100%', md: '50%' } }}>
+          <Box
+            component="img"
+            src={`${process.env.PUBLIC_URL}/assets/images/aboutUs/cdsh-willkommen-1 1.png`}
+            className="flex-1 w-full h-full"
+            sx={{ objectFit: 'cover' }}
+          ></Box>
+          <Typography
+            sx={{
+              position: 'absolute',
+              left: '24px',
+              bottom: '12px',
+              display: { xs: 'block', md: 'none' },
+              fontSize: '50px',
+              fontWeight: '400',
+              color: 'white',
+            }}
+          >
+            Über uns
+          </Typography>
+        </Box>
       </Box>
 
       <Box
         component="section"
-        className="py-[110px] px-[48px] flex justify-center items-start gap-[48px]"
-        sx={{ background: theme.palette.secondary.main }}
+        className="px-[48px] flex justify-center items-start"
+        sx={{
+          background: theme.palette.secondary.main,
+          flexDirection: { xs: 'column', md: 'row' },
+          gap: { xs: '24px', md: '48px' },
+          py: { xs: '55px', md: '110px' },
+        }}
       >
         <Typography
           className="flex-1"
           sx={{
-            fontSize: '30px',
+            fontSize: { xs: '15px', md: '30px' },
             fontWeight: '400',
           }}
         >
@@ -62,7 +91,7 @@ function AboutUs() {
         <Typography
           className="flex-1"
           sx={{
-            fontSize: '30px',
+            fontSize: { xs: '15px', md: '30px' },
             fontWeight: '400',
           }}
         >
@@ -74,12 +103,18 @@ function AboutUs() {
         </Typography>
       </Box>
 
-      <Box component="section" className="flex justify-start items-center w-full my-[110px] h-[127px] overflow-hidden">
+      <Box
+        component="section"
+        className="flex justify-start items-center w-full h-[127px] overflow-hidden"
+        sx={{
+          my: { xs: '55px', md: '110px' },
+        }}
+      >
         <LoopBanner>
           <Typography
             className="min-w-max flex items-center"
             sx={{
-              fontSize: '80px',
+              fontSize: { xs: '35px', md: '80px' },
               fontWeight: '400',
               whiteSpace: 'nowrap',
               display: 'inline-block',
@@ -91,6 +126,7 @@ function AboutUs() {
         </LoopBanner>
       </Box>
 
+      {/* TODO: */}
       <Box component="section" className="px-[45px] flex flex-col justify-center items-start">
         <SplitSection
           title="Talent, Technik & Tanzsprache"
@@ -125,12 +161,18 @@ function AboutUs() {
 
       <KooperationenLogos />
 
-      <Box component="section" className="flex justify-start items-center w-full my-[110px] h-[127px] overflow-hidden">
+      <Box
+        component="section"
+        className="flex justify-start items-center w-full h-[127px] overflow-hidden"
+        sx={{
+          my: { xs: '55px', md: '110px' },
+        }}
+      >
         <LoopBanner>
           <Typography
             className="min-w-max flex items-center"
             sx={{
-              fontSize: '80px',
+              fontSize: { xs: '35px', md: '80px' },
               fontWeight: '400',
               whiteSpace: 'nowrap',
               display: 'inline-block',
@@ -144,18 +186,33 @@ function AboutUs() {
 
       <Box
         component="section"
-        className="py-[110px] px-[75px] flex flex-col justify-center items-center"
-        sx={{ background: theme.palette.primary.main }}
+        className="px-[75px] flex flex-col justify-center items-center"
+        sx={{ background: theme.palette.primary.main, py: { xs: '55px', md: '110px' } }}
       >
-        <Typography className="mb-[110px]" sx={{ color: '#000000', fontSize: '80px', fontWeight: '400' }}>
+        <Typography
+          className=""
+          sx={{
+            color: '#000000',
+            fontSize: { xs: '35px', md: '80px' },
+            fontWeight: '400',
+            mb: { xs: '55px', md: '110px' },
+          }}
+        >
           Künstlerisches Konzept
         </Typography>
-        <Box className="max-w-[1250px] flex justify-center items-start gap-[110px]">
-          <Box className="w-[50%] flex flex-col justify-start items-start">
+        <Box
+          className="max-w-[1250px] flex justify-center"
+          sx={{
+            flexDirection: { xs: 'column-reverse', md: 'row' },
+            alignItems: { xs: 'center', md: 'start' },
+            gap: { xs: '55px', md: '110px' },
+          }}
+        >
+          <Box className="flex flex-col justify-start items-start" sx={{ width: { xs: '100%', md: '50%' } }}>
             <Typography
               sx={{
                 color: '#000000',
-                fontSize: '30px',
+                fontSize: { xs: '15px', md: '30px' },
                 fontWeight: '400',
               }}
             >
@@ -169,7 +226,7 @@ function AboutUs() {
             <Typography
               sx={{
                 color: '#000000',
-                fontSize: '30px',
+                fontSize: { xs: '15px', md: '30px' },
                 fontWeight: '400',
               }}
             >
@@ -180,7 +237,7 @@ function AboutUs() {
               künstlerischen Persönlichkeit der Tänzer.«
             </Typography>
           </Box>
-          <Box className="w-[50%] flex flex-col justify-start items-start sticky">
+          <Box className="flex flex-col justify-start items-start sticky" sx={{ width: { xs: '100%', md: '50%' } }}>
             <Box
               component="img"
               src={`${process.env.PUBLIC_URL}/assets/images/aboutUs/Bildschirmfoto 2025-02-18 um 17.26.20 1.png`}
@@ -212,15 +269,25 @@ function AboutUs() {
 
       <RaumlichkeitenSection />
 
-      <Box component="section" className="py-[120px] flex flex-col justify-center items-center text-center">
+      <Box
+        component="section"
+        className="px-[45px] flex flex-col justify-center items-center text-center"
+        sx={{ py: { xs: '60px', md: '120px' } }}
+      >
         <Typography
-          sx={{ color: '#000000', fontSize: '80px', fontWeight: '400', lineHeight: '1', marginBottom: '32px' }}
+          sx={{
+            color: '#000000',
+            fontSize: { xs: '35px', md: '80px' },
+            fontWeight: '400',
+            lineHeight: '1',
+            marginBottom: '32px',
+          }}
         >
           Du möchtest uns kennenlernen?
         </Typography>
         <Typography
           className="max-w-[740px] min-w-[50%] text-center"
-          sx={{ color: '#000000', fontSize: '30px', fontWeight: '400' }}
+          sx={{ color: '#000000', fontSize: { xs: '15px', md: '30px' }, fontWeight: '400' }}
         >
           Wir dich ebenfalls. Neben den regulären Auditions sind wir bei Fragen rund um die Ausbildung per Mail oder
           telefonisch für dich da.

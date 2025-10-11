@@ -81,12 +81,7 @@ function Ausbildung() {
 
   return (
     <>
-
-      <Box
-        component="section"
-        className="header relative flex items-center max-h-860-px"
-        sx={{ height: `100vh` }}
-      >
+      <Box component="section" className="header relative flex items-center max-h-860-px" sx={{ height: `100vh` }}>
         <Box
           className="flex-1 w-[50%] h-full flex flex-col justify-center items-start px-[56px] pb-[46px]"
           sx={{ zIndex: '2' }}
@@ -289,6 +284,88 @@ function Ausbildung() {
           Ausbildungsjahr. Die CDSH ist BAföG-anerkannt – wir helfen dir gern bei der Vermittlung eines günstigen
           Bildungskredites, dessen Beantragung ab dem zweiten Ausbildungsjahr möglich ist.
         </Typography>
+      </Box>
+
+      <Box
+        component="section"
+        className="flex flex-col justify-center items-center"
+        sx={{ pt: { xs: '55px', md: '110px' },  pb: { xs: '55px', md: '160px' } }}
+      >
+        <Box component="section" className="w-full px-[75px]">
+          <Typography
+            className=""
+            sx={{
+              color: '#000000',
+              fontSize: { xs: '35px', md: '80px' },
+              fontWeight: '400',
+              mb: { xs: '25px', md: '55px' },
+            }}
+          >
+            Fortbildung
+          </Typography>
+        </Box>
+
+        <Box
+          component="section"
+          className="w-full px-[75px] flex flex-col justify-center items-center"
+          sx={{ background: theme.palette.primary.main, py: { xs: '55px', md: '110px' } }}
+        >
+          <Box
+            className="max-w-[1250px] flex justify-center"
+            sx={{
+              flexDirection: { xs: 'column-reverse', md: 'row' },
+              alignItems: { xs: 'center', md: 'start' },
+              gap: { xs: '55px', md: '110px' },
+            }}
+          >
+            <Box className="flex flex-col justify-start items-start" sx={{ width: { xs: '100%', md: '50%' } }}>
+              <Typography
+                sx={{
+                  color: '#000000',
+                  fontSize: { xs: '15px', md: '30px' },
+                  fontWeight: '400',
+                }}
+              >
+                Fortbildung in Residence (FIR) ist das exklusive Weiterbildungsprogramm der Contemporary Dance School
+                Hamburg – für ausgebildete Bühnentänzer*innen ohne aktuelles Engagement, die im Training bleiben oder
+                sich weiterentwickeln möchten.
+              </Typography>
+              <br />
+              <Typography
+                sx={{
+                  color: '#000000',
+                  fontSize: { xs: '15px', md: '30px' },
+                  fontWeight: '400',
+                }}
+              >
+                Zur Auswahl stehen zwei sechmonatige Blöcke: 1. Januar – 1. Juli oder 1. September – 1. März. Bis zu 12
+                Einheiten pro Woche können individuell aus dem Lehrplan gewählt werden. Zudem stehen die Studios für
+                eigene Projekte zur Verfügung, die bei »Work in Progress« oder dem Abschlussprojekt öffentlich gezeigt
+                werden können. Optional: bis zu 6 Mentoring-Sessions sowie Mitwirkung an bis zu zwei Kreationen der
+                Hauschoreograf*innen.
+              </Typography>
+              <br />
+              <Typography
+                sx={{
+                  color: '#000000',
+                  fontSize: { xs: '15px', md: '30px' },
+                  fontWeight: '400',
+                }}
+              >
+                Voraussetzung: abgeschlossene Tanzausbildung oder gleichwertige Erfahrung. Die Aufnahme erfolgt über
+                Audition (live, per Video oder während des Programms). Kosten: 300 €/Monat
+              </Typography>
+            </Box>
+            <Box className="flex flex-col justify-start items-start sticky" sx={{ width: { xs: '100%', md: '50%' } }}>
+              <Box
+                component="img"
+                src={`${process.env.PUBLIC_URL}/assets/images/ausbildung/Bildschirmfoto 2025-07-03 um 13.50.30 1.png`}
+                className="flex-1 w-[500px] mb-[24px]"
+                sx={{ objectFit: 'cover', aspectRatio: 0.75 }}
+              ></Box>
+            </Box>
+          </Box>
+        </Box>
       </Box>
 
       <Box

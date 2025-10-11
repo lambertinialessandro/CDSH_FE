@@ -1,80 +1,87 @@
-import { Box, Button, IconButton, Typography, useTheme } from '@mui/material';
-import { color } from 'framer-motion';
+import { Box, IconButton, Typography, useTheme } from '@mui/material';
+import { ArrowForward, Close } from '@mui/icons-material';
 import { useEffect, useState } from 'react';
-import AnchorLink from '../link/AnchorLink';
-import { ArrowForward, Close, Height, KeyboardArrowRight } from '@mui/icons-material';
 import { useDispatch } from 'react-redux';
+import AnchorLink from '../link/AnchorLink';
 import { setIsBannerOpen } from 'app/store/app/mainSlice';
 
-function Banner(props) {
-  const { fixed } = props;
+function Banner({ fixed }) {
   const theme = useTheme();
   const dispatch = useDispatch();
-
   const [isClosed, setIsClosed] = useState(false);
 
   useEffect(() => {
     dispatch(setIsBannerOpen(true));
-  }, []);
+  }, [dispatch]);
+
+  if (isClosed) return null;
 
   return (
-    <>
-      {!isClosed && (
-        <Box
-          className="w-full h-[45px] z-[50]"
+    <Box
+      className="w-full z-[50]"
+      sx={{
+        height: { xs: '32px', sm: '45px' },
+        background: theme.palette.primary.main,
+        ...(fixed && { position: 'fixed', top: 0, left: 0 }),
+      }}
+    >
+      <Box
+        className="w-full h-full flex justify-between items-center"
+        sx={{
+          px: { xs: 1.5, sm: 3 },
+          flexWrap: { xs: 'wrap', sm: 'nowrap' },
+        }}
+      >
+        {/* Left spacer for layout balance */}
+        <Box sx={{ display: { xs: 'none', sm: 'block' } }} />
+
+        {/* Main text + link */}
+        <Box className="flex items-center justify-center text-center" sx={{ flexGrow: 1, flexWrap: 'wrap', gap: 0.5 }}>
+          <Typography
+            sx={{
+              color: '#000',
+              fontSize: { xs: '14px', sm: '15px' },
+              fontWeight: 400,
+              whiteSpace: { sm: 'nowrap' },
+            }}
+          >
+            Die Audition Termine 2025 sind jetzt online.
+          </Typography>
+          <AnchorLink
+            href="#"
+            extraSx={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              color: '#000',
+              fontSize: { xs: '14px', sm: '15px' },
+              fontWeight: 500,
+              lineHeight: 1.5,
+              ml: { xs: 0.5, sm: 1.5 },
+            }}
+            color="#000000"
+          >
+            Jetzt anmelden <ArrowForward fontSize="small" sx={{ fontSize: { xs: '16px', sm: '24px' } }} />
+          </AnchorLink>
+        </Box>
+
+        {/* Close button */}
+        <IconButton
+          aria-label="Banner schließen"
+          onClick={() => {
+            dispatch(setIsBannerOpen(false));
+            setIsClosed(true);
+          }}
           sx={{
-            background: theme.palette.primary.main,
-            ...(fixed && {
-              position: 'fixed',
-            }),
+            color: '#000',
+            p: 0.5,
+            ml: { xs: 0, sm: 2 },
+            flexShrink: 0,
           }}
         >
-          <Box className="w-full h-full flex justify-between items-center px-[15px]">
-            <Box></Box>
-            <Box className="flex items-center">
-              <Typography
-                sx={{
-                  height: 'min-content',
-                  color: '#000000',
-                  fontSize: '15px',
-                  fontWeight: '400',
-                }}
-              >
-                Die Audition Termine 2025 sind jetzt online.
-              </Typography>
-              <AnchorLink
-                href="#"
-                extraSx={{
-                  height: 'min-content',
-                  lineHeight: '1.5',
-                  color: '#000000',
-                  fontSize: '15px',
-                  fontWeight: '400',
-                }}
-                color="#000000"
-              >
-                Jetzt anmelden <ArrowForward />
-              </AnchorLink>
-            </Box>
-            <IconButton
-              sx={{
-                color: '#000000',
-                lineHeight: '1',
-                fontSize: '15px',
-                fontWeight: '400',
-                cursor: 'pointer',
-              }}
-              onClick={() => {
-                dispatch(setIsBannerOpen(false));
-                setIsClosed(true);
-              }}
-            >
-              <Close />
-            </IconButton>
-          </Box>
-        </Box>
-      )}
-    </>
+          <Close fontSize="small" sx={{ fontSize: { xs: '16px', sm: '24px' } }} />
+        </IconButton>
+      </Box>
+    </Box>
   );
 }
 

@@ -15,8 +15,20 @@ function RaumlichkeitenSection() {
   ];
 
   return (
-    <Box component="section" className="py-[110px] px-[45px] flex flex-col justify-center items-start">
-      <Typography className="mb-[110px]" sx={{ color: '#000000', fontSize: '80px', fontWeight: '400' }}>
+    <Box
+      component="section"
+      className="px-[45px] flex flex-col justify-center items-start"
+      sx={{ py: { xs: '55px', md: '110px' } }}
+    >
+      <Typography
+        className=""
+        sx={{
+          color: '#000000',
+          fontSize: { xs: '35px', md: '80px' },
+          mb: { xs: '55px', md: '110px' },
+          fontWeight: '400',
+        }}
+      >
         Räumlichkeiten
       </Typography>
       <Carousel items={items} gap={32} itemWidth={700} itemHeight={470} />

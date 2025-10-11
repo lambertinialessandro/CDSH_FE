@@ -21,6 +21,10 @@ function SpecialGridRadioGroup(props) {
   const { options } = input;
   const theme = useTheme();
 
+  console.log("field.name", field.name)
+  console.log("field.value", field.value)
+  console.log("options", options)
+
   return (
     <FormControl className="w-full">
       <RadioGroup name={field.name} value={field.value ?? ''} onChange={(e) => field.onChange([e.target.value])}>
