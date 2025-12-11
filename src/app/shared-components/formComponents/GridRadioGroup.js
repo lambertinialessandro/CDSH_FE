@@ -34,7 +34,7 @@ function GridRadioGroup(props) {
                 onClick={() => !readOnly && field.onChange(opt.value)}
               >
                 <CustomRadio selected={field.value === opt.value} />
-                <span className="text-[30px]">{opt.label}</span>
+                <span className="text-[15px] md:text-[30px]">{opt.label}</span>
               </div>
             </Grid>
           ))}

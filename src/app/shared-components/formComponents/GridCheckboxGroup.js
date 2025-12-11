@@ -8,9 +8,7 @@ function CustomCheckbox({ checked }) {
       className={`flex-shrink-0 w-7 h-7 rounded-full border border-black flex items-center justify-center cursor-pointer`}
     >
       <div
-        className={`w-5 h-5 rounded-full transition-colors duration-300 ${
-          checked ? 'bg-[#C8FF75]' : 'bg-transparent'
-        }`}
+        className={`w-5 h-5 rounded-full transition-colors duration-300 ${checked ? 'bg-[#C8FF75]' : 'bg-transparent'}`}
       />
     </div>
   );
@@ -39,12 +37,9 @@ function GridCheckboxGroup(props) {
       <Grid container spacing={2}>
         {options.map((opt, idx) => (
           <Grid item xs={opt.colSpan || 6} key={idx}>
-            <div
-              className="flex items-center gap-3 cursor-pointer"
-              onClick={() => handleChange(opt.value)}
-            >
+            <div className="flex items-center gap-3 cursor-pointer" onClick={() => handleChange(opt.value)}>
               <CustomCheckbox checked={value.includes(opt.value)} />
-              <span className="text-[15px]">{opt.label}</span>
+              <span className="text-[12px] md:text-[15px]">{opt.label}</span>
             </div>
           </Grid>
         ))}

@@ -5,7 +5,7 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
   '& .MuiOutlinedInput-root': {
     borderRadius: 50,
     paddingRight: 22,
-    fontSize: '30px',
+    fontSize: {xs: "15px", md: '30px'},
     '& fieldset': {
       borderColor: '#666',
     },
@@ -20,7 +20,7 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
     /* padding: '10px 16px', */
   },
   '& .MuiInputBase-input::placeholder': {
-    fontSize: '30px',
+    fontSize: {xs: "15px", md: '30px'},
   },
 }));
 

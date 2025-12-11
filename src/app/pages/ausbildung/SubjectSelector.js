@@ -96,29 +96,16 @@ function SubjectSelector(props) {
         <Tabs
           value={tabSelected}
           onChange={(event, value) => setTabSelected(value)}
-          indicatorColor="secondary"
           textColor="inherit"
-          variant="scrollable"
-          scrollButtons={false}
+          indicatorColor="none"
+          variant="standard"
           className="min-w-fit min-h-fit"
           sx={{
             '& .MuiTabs-flexContainer': {
+              flexWrap: 'wrap',
               gap: '6px',
+              justifyContent: 'flex-start',
             },
-          }}
-          classes={{
-            indicator: 'w-full h-full bg-transparent',
-          }}
-          TabIndicatorProps={{
-            children: (
-              <Divider
-                className="w-full h-full rounded-full"
-                sx={{
-                  backgroundColor: '#000000',
-                  zIndex: 1,
-                }}
-              />
-            ),
           }}
         >
           {TAB_OPTIONS.map((option, idx) => (
@@ -128,11 +115,15 @@ function SubjectSelector(props) {
               className="rounded-full min-h-fit h-[28px] py-[2px] px-[12px]"
               sx={{
                 color: tabSelected === idx ? '#ffffff' : '#000000',
-                fontSize: '15px',
+                backgroundColor: tabSelected === idx ? '#000000' : 'transparent',
+                fontSize: { xs: '12px', md: '15px' },
                 lineHeight: 'normal',
                 zIndex: 10,
                 transition: 'color 0.2s',
                 border: '1px solid black',
+                '&:hover': {
+                  backgroundColor: tabSelected === idx ? '#000000' : '#e5e5e5',
+                },
               }}
               disableRipple
             />
@@ -169,15 +160,18 @@ function SubjectSelector(props) {
                   </Typography>
 
                   <Box className="min-w-fit absolute top-2 left-2 right-2 z-10 py-2 px-3 bg-white border border-black rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-                    <Typography sx={{ fontSize: '40px', fontWeight: '400', lineHeight: 'normal' }}>
+                    <Typography sx={{ fontSize: { xs: '20px', md: '40px' }, fontWeight: '400', lineHeight: 'normal' }}>
                       {subject.name}
                     </Typography>
-                    <Typography className="mt-[5px]" sx={{ fontSize: '15px', fontWeight: '400', lineHeight: 'normal' }}>
+                    <Typography
+                      className="mt-[5px]"
+                      sx={{ fontSize: { xs: '12px', md: '15px' }, fontWeight: '400', lineHeight: 'normal' }}
+                    >
                       {subject.description}
                     </Typography>
                     <Typography
                       className="mt-[10px]"
-                      sx={{ fontSize: '15px', fontWeight: '400', lineHeight: 'normal' }}
+                      sx={{ fontSize: { xs: '12px', md: '15px' }, fontWeight: '400', lineHeight: 'normal' }}
                     >
                       Dozent*innen {subject.teacher}
                     </Typography>

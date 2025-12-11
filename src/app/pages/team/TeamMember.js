@@ -1,15 +1,16 @@
 import { Box, Typography, useTheme } from '@mui/material';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 
 function TeamMember() {
   const theme = useTheme();
+  const navigate = useNavigate();
 
   const { memberUrlName } = useParams();
 
   const members = [
     {
       id: 'javier_báez',
-      href: `${process.env.PUBLIC_URL}/team/javier_báez`,
+      href: `/team/javier_báez`,
       name: 'Javier Báez',
       src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto 2025-02-18 um 17.26.20 2.png`,
       roles: ['Hauptfächer'],
@@ -17,7 +18,7 @@ function TeamMember() {
     },
     {
       id: 'raul_valdez',
-      href: `${process.env.PUBLIC_URL}/team/raul_valdez`,
+      href: `/team/raul_valdez`,
       name: 'Raul Valdez',
       src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto 2025-02-18 um 17.26.20 3.png`,
       roles: ['Hauptfächer'],
@@ -25,7 +26,7 @@ function TeamMember() {
     },
     {
       id: 'sina_rundel',
-      href: `${process.env.PUBLIC_URL}/team/sina_rundel`,
+      href: `/team/sina_rundel`,
       name: 'Sina Rundel',
       src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto 2025-02-18 um 17.26.20 4.png`,
       roles: ['Theoriefächer'],
@@ -34,7 +35,7 @@ function TeamMember() {
 
     {
       id: 'ursina_tossi',
-      href: `${process.env.PUBLIC_URL}/team/ursina_tossi`,
+      href: `/team/ursina_tossi`,
       name: 'Ursina Tossi',
       src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto ursina_tossi.png`,
       roles: ['Hauptfächer'],
@@ -42,7 +43,7 @@ function TeamMember() {
     },
     {
       id: 'phillip_benjamin_jenkins',
-      href: `${process.env.PUBLIC_URL}/team/phillip_benjamin_jenkins`,
+      href: `/team/phillip_benjamin_jenkins`,
       name: 'Phillip Benjamin Jenkins',
       src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto phillip_benjamin_jenkins.png`,
       roles: ['Hauptfächer'],
@@ -50,7 +51,7 @@ function TeamMember() {
     },
     {
       id: 'angela_guerreiro',
-      href: `${process.env.PUBLIC_URL}/team/angela_guerreiro`,
+      href: `/team/angela_guerreiro`,
       name: 'Angela Guerreiro',
       src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto angela_guerreiro.png`,
       roles: ['Choreograph*innen'],
@@ -58,7 +59,7 @@ function TeamMember() {
     },
     {
       id: 'filip_van_huffel',
-      href: `${process.env.PUBLIC_URL}/team/filip_van_huffel`,
+      href: `/team/filip_van_huffel`,
       name: 'Filip van Huffel',
       src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto filip_van_huffel.png`,
       roles: ['Gastdozent*innen'],
@@ -69,10 +70,19 @@ function TeamMember() {
 
   return (
     <>
-      <Box component="section" className="header relative flex items-center max-h-860-px" sx={{ height: `100vh` }}>
+      <Box
+        component="section"
+        className="header relative flex items-center max-h-860-px"
+        sx={{ height: { sx: '100%', md: `100vh` }, flexDirection: { xs: 'column-reverse', md: 'row' } }}
+      >
         <Box
-          className="flex-1 w-[50%] h-full flex flex-col justify-between items-start px-[56px] pb-[46px]"
-          sx={{ zIndex: '2' }}
+          className="flex-1 h-full flex-col justify-between items-start"
+          sx={{
+            zIndex: '2',
+            width: { xs: '100%', md: '50%' },
+            padding: { xs: '46px 56px 46px 56px', md: '0 56px 46px 56px' },
+            display: { xs: 'none', md: 'flex' },
+          }}
         >
           <Typography></Typography>
           <Typography
@@ -86,14 +96,23 @@ function TeamMember() {
           </Typography>
           <Box className="flex justify-start items-center gap-[8px]">
             {selectedMember.roles.map((role, idx) => (
-              <span key={idx} className="bg-black text-white rounded-full px-[24px] py-[4px]">
+              <Typography
+                key={idx}
+                className="bg-black text-white rounded-full px-[24px] py-[4px]"
+                sx={{ fontSize: '15px' }}
+              >
                 {role}
-              </span>
+              </Typography>
             ))}
           </Box>
           <Box className="flex flex-col items-start gap-[8px]">
-            <Typography>Fach: {selectedMember.subjects.join(', ')}</Typography>
-            <button onClick={() => {}} className="bg-white border border-black rounded-full px-[16px] py-[2px]">
+            <Typography sx={{ fontSize: '15px' }}>Fach: {selectedMember.subjects.join(', ')}</Typography>
+            <button
+              onClick={() => {
+                navigate(`/team`);
+              }}
+              className="bg-white border border-black rounded-full px-[16px] py-[2px]"
+            >
               zurück
             </button>
           </Box>
@@ -101,20 +120,70 @@ function TeamMember() {
         <Box
           component="img"
           src={selectedMember.src}
-          className="flex-1 w-[50%] h-full"
-          sx={{ objectFit: 'cover' }}
+          className="flex-1 h-full relative"
+          sx={{ objectFit: 'cover', width: { xs: '100%', md: '50%' } }}
         ></Box>
+        <Box
+          sx={{
+            position: 'absolute',
+            left: '24px',
+            bottom: '12px',
+            display: { xs: 'flex', md: 'none' },
+            flexDirection: 'column',
+            gap: '8px',
+          }}
+        >
+          <Typography
+            className="capitalize mix-blend-exclusion"
+            sx={{
+              fontSize: '30px',
+              fontWeight: '400',
+              color: '#ffffff',
+            }}
+          >
+            {selectedMember.name}
+          </Typography>
+          <Box className="flex justify-start items-center gap-[8px]">
+            {selectedMember.roles.map((role, idx) => (
+              <Typography
+                key={idx}
+                className="bg-black text-white rounded-full px-[24px] py-[4px]"
+                sx={{ fontSize: '12px' }}
+              >
+                {role}
+              </Typography>
+            ))}
+          </Box>
+          <Box className="flex flex-col items-start gap-[8px]">
+            <Typography className="text-white mix-blend-exclusion" sx={{ fontSize: '12px' }}>
+              Fach: {selectedMember.subjects.join(', ')}
+            </Typography>
+            <button
+              onClick={() => {
+                navigate(`/team`);
+              }}
+              className="bg-white border border-black rounded-full px-[16px] py-[2px]"
+            >
+              zurück
+            </button>
+          </Box>
+        </Box>
       </Box>
 
       <Box
         component="section"
-        className="py-[110px] px-[48px] flex justify-center items-start gap-[48px]"
-        sx={{ background: theme.palette.secondary.main }}
+        className="px-[48px] flex justify-center items-start"
+        sx={{
+          background: theme.palette.secondary.main,
+          flexDirection: { xs: 'column', md: 'row' },
+          gap: { xs: '24px', md: '48px' },
+          py: { xs: '55px', md: '110px' },
+        }}
       >
         <Typography
           sx={{
             flex: '1',
-            fontSize: '30px',
+            fontSize: { xs: '15px', md: '30px' },
             fontWeight: '400',
           }}
         >
@@ -127,7 +196,7 @@ function TeamMember() {
         <Typography
           sx={{
             flex: '1',
-            fontSize: '30px',
+            fontSize: { xs: '15px', md: '30px' },
             fontWeight: '400',
           }}
         >
@@ -137,6 +206,27 @@ function TeamMember() {
           Theater. Ein erfahrenes Team aus Künstler*innen und Pädagog*innen unterstützt dich bei deiner Entwicklung in
           der tänzerischen Ausbildung.
         </Typography>
+      </Box>
+
+      <Box
+        component="section"
+        className="px-[48px] flex justify-start items-start"
+        sx={{
+          flexDirection: { xs: 'column', md: 'row' },
+          gap: { xs: '24px', md: '48px' },
+          py: { xs: '55px', md: '110px' },
+        }}
+      >
+        <Box className="flex flex-col items-start gap-[8px]">
+          <button
+            onClick={() => {
+              navigate(`/team`);
+            }}
+            className="bg-white border border-black rounded-full px-[16px] py-[2px]"
+          >
+            zurück
+          </button>
+        </Box>
       </Box>
     </>
   );

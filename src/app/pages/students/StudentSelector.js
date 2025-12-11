@@ -10,28 +10,28 @@ import BigLink from 'app/shared-components/link/BigLink';
 const students = [
   {
     id: 'class_2025',
-    href: `${process.env.PUBLIC_URL}/students/yugen`,
+    href: `/students/yugen`,
     name: 'Class 2026',
     src: `${process.env.PUBLIC_URL}/assets/images/students/Bildschirmfoto 2025-02-18 um 17.05.47.png`,
     year: { start: 2025, end: 2028 },
   },
   {
     id: 'yugen',
-    href: `${process.env.PUBLIC_URL}/students/yugen`,
+    href: `/students/yugen`,
     name: 'Yugen',
     src: `${process.env.PUBLIC_URL}/assets/images/students/Bildschirmfoto 2025-02-18 um 17.05.47.png`,
     year: { start: 2024, end: 2027 },
   },
   {
     id: 'ikigai',
-    href: `${process.env.PUBLIC_URL}/students/ikigai`,
+    href: `/students/ikigai`,
     name: 'Ikigai',
     src: `${process.env.PUBLIC_URL}/assets/images/students/Bildschirmfoto 2025-02-18 um 17.06.05.png`,
     year: { start: 2023, end: 2026 },
   },
   {
     id: 'ho_omau',
-    href: `${process.env.PUBLIC_URL}/students/ho_omau`,
+    href: `/students/ho_omau`,
     name: 'Ho’omau',
     src: `${process.env.PUBLIC_URL}/assets/images/students/Bildschirmfoto 2025-02-18 um 17.06.12.png`,
     year: { start: 2022, end: 2025 },
@@ -63,29 +63,16 @@ function StudentSelector(props) {
         <Tabs
           value={tabSelected}
           onChange={(event, value) => setTabSelected(value)}
-          indicatorColor="secondary"
           textColor="inherit"
-          variant="scrollable"
-          scrollButtons={false}
+          indicatorColor="none"
+          variant="standard"
           className="min-w-fit min-h-fit"
           sx={{
             '& .MuiTabs-flexContainer': {
+              flexWrap: 'wrap',
               gap: '6px',
+              justifyContent: 'flex-start',
             },
-          }}
-          classes={{
-            indicator: 'w-full h-full bg-transparent',
-          }}
-          TabIndicatorProps={{
-            children: (
-              <Divider
-                className="w-full h-full rounded-full"
-                sx={{
-                  backgroundColor: '#000000',
-                  zIndex: 1,
-                }}
-              />
-            ),
           }}
         >
           {TAB_OPTIONS.map((option, idx) => (
@@ -95,11 +82,15 @@ function StudentSelector(props) {
               className="rounded-full min-h-fit h-[28px] py-[2px] px-[12px]"
               sx={{
                 color: tabSelected === idx ? '#ffffff' : '#000000',
-                fontSize: '15px',
+                backgroundColor: tabSelected === idx ? '#000000' : 'transparent',
+                fontSize: { xs: '12px', md: '15px' },
                 lineHeight: 'normal',
                 zIndex: 10,
                 transition: 'color 0.2s',
                 border: '1px solid black',
+                '&:hover': {
+                  backgroundColor: tabSelected === idx ? '#000000' : '#e5e5e5',
+                },
               }}
               disableRipple
             />
@@ -107,7 +98,7 @@ function StudentSelector(props) {
         </Tabs>
       </Box>
 
-      <Box className="w-full flex flex-col justify-start items-center">
+      <Box className="w-full px-[45px] flex flex-col justify-start items-center">
         <AnimatePresence mode="popLayout">
           {filteredStudents.map((student, idx) => {
             const isOdd = idx % 2 === 1;
@@ -124,12 +115,13 @@ function StudentSelector(props) {
                 <SplitSection
                   key={idx}
                   title={
-                    <BigLink to={student.href} color={isOdd ? '#ffffff' : '#000000'}>
+                    <BigLink to={student.href}>
                       {student.name}
                     </BigLink>
                   }
                   text={`${student.year.start} - ${student.year.end}`}
                   img={{ src: student.src, alt: student.name }}
+                  href={student.href}
                   reverse={isOdd}
                   bgColor={isOdd && '#8F20FF'}
                   color={isOdd && '#ffffff'}

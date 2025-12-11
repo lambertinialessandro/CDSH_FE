@@ -1,5 +1,6 @@
 import { Box, Typography, useTheme } from '@mui/material';
 import Carousel from 'app/shared-components/carousel/Carousel';
+import { Link } from 'react-router-dom';
 
 const items = [
   {
@@ -55,13 +56,16 @@ const items = [
 
 function Addon({ item }) {
   return (
-    <>
+    <Box className="cursor-pointer group" component={Link} to="/projects/on_the_trail">
       <Typography
         sx={{
           fontSize: { xs: '18px', sm: '22px', md: '30px' },
           fontWeight: 500,
           py: 2,
           lineHeight: 1.2,
+          '.group:hover &': {
+    textDecoration: 'underline',
+  },
         }}
       >
         {item.title}
@@ -74,7 +78,7 @@ function Addon({ item }) {
       >
         {item.description}
       </Typography>
-    </>
+    </Box>
   );
 }
 

@@ -27,6 +27,7 @@ function AboutUs() {
             sx={{
               display: { xs: 'none', md: 'block' },
               fontSize: '80px',
+              lineHeight: '85px',
               fontWeight: '400',
             }}
           >
@@ -35,6 +36,7 @@ function AboutUs() {
           <Typography
             sx={{
               fontSize: { xs: '15px', md: '30px' },
+              lineHeight: { xs: '20px', md: '35px' },
               fontWeight: '400',
             }}
           >
@@ -50,12 +52,14 @@ function AboutUs() {
             sx={{ objectFit: 'cover' }}
           ></Box>
           <Typography
+            className="mix-blend-exclusion"
             sx={{
               position: 'absolute',
               left: '24px',
               bottom: '12px',
               display: { xs: 'block', md: 'none' },
               fontSize: '50px',
+              lineHeight: '55px',
               fontWeight: '400',
               color: 'white',
             }}
@@ -126,7 +130,6 @@ function AboutUs() {
         </LoopBanner>
       </Box>
 
-      {/* TODO: */}
       <Box component="section" className="px-[45px] flex flex-col justify-center items-start">
         <SplitSection
           title="Talent, Technik & Tanzsprache"
@@ -241,7 +244,7 @@ function AboutUs() {
             <Box
               component="img"
               src={`${process.env.PUBLIC_URL}/assets/images/aboutUs/Bildschirmfoto 2025-02-18 um 17.26.20 1.png`}
-              className="flex-1 w-[500px] mb-[24px]"
+              className="flex-1 w-[500px] mx-auto mb-[24px]"
               sx={{ objectFit: 'cover', aspectRatio: 0.75 }}
             ></Box>
 

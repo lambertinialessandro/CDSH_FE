@@ -18,7 +18,7 @@ function Banner({ fixed }) {
 
   return (
     <Box
-      className="w-full z-[50]"
+      className="w-full z-[50] border-b border-black"
       sx={{
         height: { xs: '32px', sm: '45px' },
         background: theme.palette.primary.main,
@@ -48,7 +48,7 @@ function Banner({ fixed }) {
             Die Audition Termine 2025 sind jetzt online.
           </Typography>
           <AnchorLink
-            href="#"
+            href="/auditions"
             extraSx={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -60,7 +60,7 @@ function Banner({ fixed }) {
             }}
             color="#000000"
           >
-            Jetzt anmelden <ArrowForward fontSize="small" sx={{ fontSize: { xs: '16px', sm: '24px' } }} />
+            Jetzt anmelden <ArrowForward fontSize="small" sx={{ fontSize: { xs: '14px', sm: '16px' } }} />
           </AnchorLink>
         </Box>
 

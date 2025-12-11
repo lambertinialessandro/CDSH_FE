@@ -1,6 +1,5 @@
 import { Box, Typography, useTheme } from '@mui/material';
-import { useParams } from 'react-router';
-import { Link } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router';
 import ImpressionenSection from './ImpressionenSection';
 
 const projects = [
@@ -15,6 +14,7 @@ const projects = [
 
 function Project(props) {
   const {} = props;
+  const navigate = useNavigate();
   const theme = useTheme();
   const { projectUrlId } = useParams();
 
@@ -48,7 +48,16 @@ function Project(props) {
           </Box>
           <Box className="flex flex-col items-start gap-[32px]">
             <Typography>Fach: {selectedProject.subjects.join(', ')}</Typography>
-            <button onClick={() => {}} className="bg-white border border-black rounded-full px-[16px] py-[2px]">
+            <button
+              onClick={() => {
+                if (window.history.length > 1) {
+                  navigate(-1);
+                } else {
+                  navigate('/students');
+                }
+              }}
+              className="bg-white border border-black rounded-full px-[16px] py-[2px]"
+            >
               zurück
             </button>
           </Box>

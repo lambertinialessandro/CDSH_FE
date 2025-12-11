@@ -7,7 +7,7 @@ function OutputFormSubtitle(props) {
   return (
     <Typography
       sx={{
-        fontSize: '30px',
+        fontSize: {xs: "15px", md: '30px'},
         fontWeight: '400',
         lineHeight: 'normal',
         textAlign: 'center',

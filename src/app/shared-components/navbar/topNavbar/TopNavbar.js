@@ -74,10 +74,10 @@ function TopNavbar({ fixed }) {
 
         {/* Desktop links */}
         <Box className="hidden md:flex gap-[26px]">
-          <AnchorLink href={`${process.env.PUBLIC_URL}`} color="#fff" extraSx={{ fontSize: '15px' }}>
+          <AnchorLink href={``} color="#fff" extraSx={{ fontSize: '15px' }}>
             English Version
           </AnchorLink>
-          <AnchorLink href={`${process.env.PUBLIC_URL}`} color="#fff" extraSx={{ fontSize: '15px' }}>
+          <AnchorLink href={"/ticketshop"} color="#fff" extraSx={{ fontSize: '15px' }}>
             Ticketshop
           </AnchorLink>
           <AnchorLink
@@ -88,7 +88,6 @@ function TopNavbar({ fixed }) {
               color: '#ffffff',
               fontSize: '15px',
               fontWeight: '400',
-              display: { xs: 'none', md: 'flex' },
             }}
             color="#ffffff"
           >
@@ -98,7 +97,7 @@ function TopNavbar({ fixed }) {
 
         {/* Mobile menu button */}
         <Box className="flex md:hidden gap-[26px]">
-          <AnchorLink href={`${process.env.PUBLIC_URL}`} color="#fff" extraSx={{ fontSize: '15px' }}>
+          <AnchorLink href={``} color="#fff" extraSx={{ fontSize: '15px' }}>
             EN
           </AnchorLink>
           <AnchorLink
@@ -132,7 +131,7 @@ function TopNavbar({ fixed }) {
         <Box className="w-full h-[90px] flex justify-end items-center" sx={{ marginTop: { xs: '12px', md: '24px' } }}>
           <Box className="flex gap-[26px]">
             <AnchorLink
-              href={`${process.env.PUBLIC_URL}`}
+              href={``}
               extraSx={{
                 fontSize: '15px',
                 fontWeight: '400',
@@ -142,7 +141,7 @@ function TopNavbar({ fixed }) {
               English Version
             </AnchorLink>
             <AnchorLink
-              href={`${process.env.PUBLIC_URL}`}
+              href={"/ticketshop"}
               extraSx={{
                 fontSize: '15px',
                 fontWeight: '400',
@@ -211,7 +210,7 @@ function TopNavbar({ fixed }) {
             Studierende
           </AnchorLink>
           <AnchorLink
-            href="/students"
+            href="/ausbildung"
             onClick={() => setIsMenuOpen(false)}
             lineHeight={{ xs: 2, md: 5 }}
             extraSx={{
@@ -225,7 +224,7 @@ function TopNavbar({ fixed }) {
 
           <Box className="flex items-center gap-[6px]">
             <AnchorLink
-              href="/Auditions"
+              href="/auditions"
               onClick={() => setIsMenuOpen(false)}
               lineHeight={{ xs: 2, md: 5 }}
               extraSx={{
@@ -267,7 +266,7 @@ function TopNavbar({ fixed }) {
           </Box>
 
           <AnchorLink
-            href={`${process.env.PUBLIC_URL}`}
+            href={`/aktuelles`}
             onClick={() => setIsMenuOpen(false)}
             lineHeight={{ xs: 2, md: 5 }}
             extraSx={{

@@ -4,8 +4,8 @@ import { styled, useTheme } from '@mui/material/styles';
 const StyledTextField = styled(TextField)(({ theme }) => ({
   '& .MuiOutlinedInput-root': {
     borderRadius: 25,
-    padding: 32,
-    fontSize: '30px',
+    padding: {xs: "16px", md: '32px'},
+    fontSize: {xs: "15px", md: '30px'},
     '& fieldset': {
       borderColor: '#aaa',
     },
@@ -20,7 +20,7 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
     /* padding: '10px 16px', */
   },
   '& .MuiInputBase-input::placeholder': {
-    fontSize: '30px',
+    fontSize: {xs: "15px", md: '30px'},
   },
 }));
 
