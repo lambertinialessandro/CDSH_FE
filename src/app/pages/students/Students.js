@@ -65,7 +65,6 @@ function Students() {
             }}
           >
             {studentsData.intro.headline}
-            {/* Die Studierenden */}
           </Typography>
         </Box>
         <Box className="flex-1 h-full relative" sx={{ width: { xs: '100%', md: '50%' } }}>
@@ -89,7 +88,29 @@ function Students() {
             }}
           >
             {studentsData.intro.headline}
-            {/* Die Studierenden */}
+          </Typography>
+        </Box>
+        <Box className="flex-1 h-full relative" sx={{ width: { xs: '100%', md: '50%' } }}>
+          <Box
+            component="img"
+            src={`${process.env.PUBLIC_URL}/assets/images/students/cdsh-willkommen-1.png`}
+            className="flex-1 w-full"
+            sx={{ objectFit: 'cover', height: {xs: "390px", md: "100%"} }}
+          ></Box>
+          <Typography
+            className="mix-blend-exclusion"
+            sx={{
+              position: 'absolute',
+              left: '24px',
+              bottom: '12px',
+              display: { xs: 'block', md: 'none' },
+              fontSize: '50px',
+              lineHeight: '55px',
+              fontWeight: '400',
+              color: 'white',
+            }}
+          >
+            {studentsData.intro.headline}
           </Typography>
         </Box>
       </Box>
@@ -108,10 +129,6 @@ function Students() {
             }}
           >
             {studentsData.intro.text}
-            {/*Bühnentanz an der CDSH zu studieren heißt nicht nur lernen, sondern auch Gleichgesinnte und Freunde finden.
-            Du arbeitest täglich intensiv mit Menschen deines Faches zusammen. Auf diese Weise entsteht ein vielfältiger
-            Austausch und eine Anregung zur persönlichen Entwicklung unter Tänzer*innen, Choreograf*innen und
-            Performer*innen. */}
           </Typography>
         </Box>
       </Box>
@@ -121,27 +138,24 @@ function Students() {
       <Box
         component="section"
         className="flex flex-col justify-center items-center text-center"
-        sx={{ py: { xs: '60px', md: '120px' } }}
+        sx={{ py: { xs: '60px', md: '120px' }, px: { xs: 4, md: 6 } }}
       >
         <Typography
           sx={{
-            color: '#000000',
-            fontSize: { xs: '35px', md: '80px' },
+            fontSize: { xs: '36px', md: '80px' },
+            marginBottom: { xs: '12px', md: '32px' },
             fontWeight: '400',
+            color: '#000000',
             lineHeight: '1',
-            marginBottom: '32px',
           }}
         >
           {studentsData.footerCta.title}
-          {/*Du möchtest uns kennenlernen?*/}
         </Typography>
         <Typography
           className="max-w-[740px] min-w-[50%] text-center"
           sx={{ color: '#000000', fontSize: { xs: '15px', md: '30px' }, fontWeight: '400' }}
         >
           {studentsData.footerCta.text}
-          {/*Wir dich ebenfalls. Neben den regulären Auditions sind wir bei Fragen rund um die Ausbildung per Mail oder
-          telefonisch für dich da.*/}
         </Typography>
       </Box>
     </>

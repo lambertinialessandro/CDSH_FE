@@ -2,7 +2,6 @@ import { ArrowForward } from '@mui/icons-material';
 import { Box, Typography, useTheme } from '@mui/material';
 import LoopBanner from 'app/shared-components/banner/LoopBanner';
 import BigLink from 'app/shared-components/link/BigLink';
-import Carousel from './Carousel';
 import SubjectSelector from './SubjectSelector';
 import InteractiveSubjects from './InteractiveSubjects';
 import { useSelector } from 'react-redux';
@@ -150,15 +149,14 @@ function Ausbildung() {
             }}
           >
             {ausbuildungData.header.headline}
-            {/*Ausbildung: Aufbau, Fächer Kosten*/}
           </Typography>
         </Box>
         <Box className="flex-1 h-full relative" sx={{ width: { xs: '100%', md: '50%' } }}>
           <Box
             component="img"
             src={`${process.env.PUBLIC_URL}/assets/images/ausbildung/cdsh-willkommen-1.png`}
-            className="flex-1w-full h-full"
-            sx={{ objectFit: 'cover' }}
+            className="flex-1 w-full"
+            sx={{ objectFit: 'cover', height: { xs: '390px', md: '100%' } }}
           ></Box>
           <Typography
             className="mix-blend-exclusion"
@@ -174,7 +172,6 @@ function Ausbildung() {
             }}
           >
             {ausbuildungData.header.text}
-            {/*Ausbildung: Aufbau, Fächer Kosten*/}
           </Typography>
         </Box>
       </Box>
@@ -197,10 +194,6 @@ function Ausbildung() {
           }}
         >
           {ausbuildungData.intro.text_left}
-          {/*Wir ermöglichen den Tänzer*innen eine nachhaltige Beschäftigung mit unterschiedlichen zeitgenössischen und
-          klassischen Tanztechniken und -stilen sowie die Ausbildung in zahlreichen Bewegungs- und Ausdrucksformen zur
-          Vorbereitung auf den Beruf. Neben dem regulären Training laden wir regelmäßig internationale Gäste ein, die
-          ihr Wissen mit unseren Auszubildenden teilen.*/}
         </Typography>
         <Typography
           className="flex-1"
@@ -210,15 +203,12 @@ function Ausbildung() {
           }}
         >
           {ausbuildungData.intro.text_right}
-          {/*Die Förderung individueller Wünsche des Einzelnen und der Gruppe sind Bestandteil der Zielsetzung der CDSH.
-          Wir reagieren auf die Bedürfnisse unserer Studierenden und auf aktuelle Ansprüche des professionellen Umfeldes
-          – unser Programm ist in ständigem Wandel begriffen.*/}
         </Typography>
       </Box>
 
       <Box
         component="section"
-        className="flex justify-start items-center w-full overflow-hidden"
+        className="flex justify-start items-center w-full overflow-hidden border-y border-black"
         sx={{
           background: theme.palette.primary.main,
           my: { xs: '55px', md: '110px' },
@@ -238,7 +228,6 @@ function Ausbildung() {
             }}
           >
             {ausbuildungData.audition_banner.text}
-            {/*DIE AUDITION TERMINE 2025 SIND JETZT ONLINE.*/}
             <BigLink
               extraSx={{
                 display: 'flex',
@@ -254,7 +243,7 @@ function Ausbildung() {
               color="#000000"
             >
               {ausbuildungData.audition_banner.link_text}
-              {/*JETZT ANMELDEN*/} <ArrowForward fontSize="inherit" />
+              <ArrowForward fontSize="inherit" />
             </BigLink>
           </Typography>
         </LoopBanner>
@@ -280,22 +269,18 @@ function Ausbildung() {
           }}
         >
           {ausbuildungData.program_structure.title}
-          {/*Aufbau & Struktur*/}
         </Typography>
         <Typography
           className="max-w-[740px] min-w-[50%] text-center"
           sx={{ color: '#000000', fontSize: { sm: '15px', md: '30px' }, fontWeight: '400' }}
         >
           {ausbuildungData.program_structure.intro}
-          {/*Die dreijährige Ausbildung richtet sich an Bewerber*innen mit soliden Vorkenntnissen in zeitgenössischem Tanz
-          und Ballett. Die Aufnahme erfolgt über Auditions.*/}
         </Typography>
         <Typography
           className="max-w-[740px] min-w-[50%] text-center"
           sx={{ color: '#000000', fontSize: { sm: '15px', md: '30px' }, fontWeight: '400' }}
         >
           {ausbuildungData.program_structure.details}
-          {/*Credits aus anderen Studiengängen können u.U. angerechnet werden. Lorem Ipsum ... Studium in ECTS übersetzen.*/}
         </Typography>
       </Box>
 
@@ -370,16 +355,18 @@ function Ausbildung() {
 
       <Box component="section" className="px-[45px] flex flex-col justify-center items-start">
         <Box className="w-full flex justify-center">
-          <Box className="max-w-[1250px] border-y border-black flex flex-row">
+          <Box
+            className="max-w-[1250px] border-y border-black flex"
+            sx={{ flexDirection: { xs: 'column', md: 'row' } }}
+          >
             <Box
               className="w-full md:w-1/2 py-[32px] pl-[32px] flex flex-col justify-between items-start"
-              sx={{ background: theme.palette.primary.main }}
+              sx={{ background: theme.palette.primary.main, gap: { xs: '16px', md: '0' } }}
             >
               <Typography
                 sx={{ color: '#000000', fontSize: { xs: '35px', md: '80px' }, fontWeight: '400', lineHeight: 'normal' }}
               >
                 {ausbuildungData.ausbildung_years[0].headline}
-                {/*Erstes Jahr*/}
               </Typography>
               <Typography
                 sx={{
@@ -390,10 +377,12 @@ function Ausbildung() {
                 }}
               >
                 {ausbuildungData.ausbildung_years[0].level}
-                {/*Grundlagen*/}
               </Typography>
             </Box>
-            <Box className="w-full md:w-1/2 md:h-[460px] py-[32px] pl-[32px] ">
+            <Box
+              className="w-full md:w-1/2 md:h-[460px] py-[32px]"
+              sx={{ pr: { xs: '26px', md: '0' }, pl: { xs: '26px', md: '32px' } }}
+            >
               <Typography
                 sx={{
                   color: '#000000 ',
@@ -403,15 +392,16 @@ function Ausbildung() {
                 }}
               >
                 {ausbuildungData.ausbildung_years[0].description}
-                {/*Im ersten Ausbildungsjahr liegt der Schwerpunkt auf der Erarbeitung der tanztechnischen Basis in
-                verschiedenen Modern-Techniken, zeitgenössischem Tanz und im klassischen Ballett.*/}
               </Typography>
             </Box>
           </Box>
         </Box>
         <Box className="w-full flex justify-center">
-          <Box className="max-w-[1250px] flex flex-row">
-            <Box className="w-full md:w-1/2 md:h-[460px] py-[32px] pr-[48px]">
+          <Box className="max-w-[1250px] flex" sx={{ flexDirection: { xs: 'column-reverse', md: 'row' } }}>
+            <Box
+              className="w-full md:w-1/2 md:h-[460px] py-[32px]"
+              sx={{ pr: { xs: '26px', md: '48px' }, pl: { xs: '26px', md: '0' } }}
+            >
               <Typography
                 sx={{
                   color: '#000000 ',
@@ -421,51 +411,49 @@ function Ausbildung() {
                 }}
               >
                 {ausbuildungData.ausbildung_years[1].description}
-                {/*Im zweiten Jahr werden die Basistechniken vertieft und entwickelt. Das Fach Improvisation, sowie die
-                Entwicklung und Präsentation eines eigenen Stücks im Rahmen unseres Soloprojekts tragen dazu bei, eine
-                eigene künstlerische Sprache zu finden und eigene kreative Impulse auf der Basis der erlernten
-                technischen Grundlagen individuell umsetzen zu können.*/}
               </Typography>
             </Box>
             <Box
               className="w-full md:w-1/2 py-[32px] pl-[32px] flex flex-col justify-between items-start"
-              sx={{ background: theme.palette.primary.main }}
+              sx={{ background: theme.palette.primary.main, gap: { xs: '16px', md: '0' } }}
             >
               <Typography
                 sx={{ color: '#000000', fontSize: { xs: '35px', md: '80px' }, fontWeight: '400', lineHeight: 'normal' }}
               >
                 {ausbuildungData.ausbildung_years[1].headline}
-                {/*Zweites Jahr*/}
               </Typography>
               <Typography
                 sx={{ color: '#000000', fontSize: { xs: '15px', md: '30px' }, fontWeight: '400', lineHeight: 'normal' }}
               >
                 {ausbuildungData.ausbildung_years[1].level}
-                {/*Intensivierung und künstlerische Entwicklung*/}
               </Typography>
             </Box>
           </Box>
         </Box>
         <Box className="w-full flex justify-center">
-          <Box className="max-w-[1250px] border-y border-black flex flex-row">
+          <Box
+            className="max-w-[1250px] border-y border-black flex"
+            sx={{ flexDirection: { xs: 'column', md: 'row' } }}
+          >
             <Box
               className="w-full md:w-1/2 py-[32px] pl-[32px] pr-[8px] flex flex-col justify-between items-start"
-              sx={{ background: theme.palette.primary.main }}
+              sx={{ background: theme.palette.primary.main, gap: { xs: '16px', md: '0' } }}
             >
               <Typography
                 sx={{ color: '#000000', fontSize: { xs: '35px', md: '80px' }, fontWeight: '400', lineHeight: 'normal' }}
               >
                 {ausbuildungData.ausbildung_years[2].headline}
-                {/*Drittes Jahr*/}
               </Typography>
               <Typography
                 sx={{ color: '#000000', fontSize: { xs: '15px', md: '30px' }, fontWeight: '400', lineHeight: 'normal' }}
               >
                 {ausbuildungData.ausbildung_years[2].level}
-                {/*Spezialisierung, eigenständige künstlerische Arbeit und Companyprojekt*/}
               </Typography>
             </Box>
-            <Box className="w-full md:w-1/2 md:h-[460px] py-[32px] pl-[32px]">
+            <Box
+              className="w-full md:w-1/2 md:h-[460px] py-[32px]"
+              sx={{ pr: { xs: '26px', md: '0' }, pl: { xs: '26px', md: '32px' } }}
+            >
               <Typography
                 sx={{
                   color: '#000000 ',
@@ -475,9 +463,6 @@ function Ausbildung() {
                 }}
               >
                 {ausbuildungData.ausbildung_years[2].description}
-                {/*Im dritten Jahr arbeitest du kreativ mit deiner Klasse. Regelmäßige Showings bereiten auf das
-                Company-Projekt im letzten Semester vor, in dem du unter realistischen Tanzcompany Bedingungen wertvolle
-                Einblicke ins Berufsleben professioneller Tänzer*innen erhältst.*/}
               </Typography>
             </Box>
           </Box>
@@ -499,19 +484,12 @@ function Ausbildung() {
           }}
         >
           {ausbuildungData.costs.headline}
-          {/*Kosten*/}
         </Typography>
         <Typography
           className="max-w-[740px] min-w-[50%] text-center"
           sx={{ color: '#000000', fontSize: { sm: '15px', md: '30px' }, fontWeight: '400' }}
         >
           {ausbuildungData.costs.text}
-          {/*Die Schulgebühr beträgt für ein Schuljahr EUR 6.360,00 € und kann in 12 Raten zu monatlich EUR 530,00 €
-          bezahlt werden. Außerdem besteht eine Kostenbeteiligungspflicht in Höhe von 60,00 € für die Work in Progress
-          Vorstellungen in allen drei Ausbildungsjahren, 120,00 € für das Abschlussprojekt im 1. und 2. Ausbildungsjahr
-          und 240,00 € für das Abschlussprojekt am Ende des 3. Jahres, sowie 160,00 € für das Soloprojekt im 2.
-          Ausbildungsjahr. Die CDSH ist BAföG-anerkannt – wir helfen dir gern bei der Vermittlung eines günstigen
-          Bildungskredites, dessen Beantragung ab dem zweiten Ausbildungsjahr möglich ist.*/}
         </Typography>
       </Box>
 
@@ -531,7 +509,6 @@ function Ausbildung() {
             }}
           >
             {ausbuildungData.fortbildung.headline}
-            {/*Fortbildung*/}
           </Typography>
         </Box>
 
@@ -557,9 +534,6 @@ function Ausbildung() {
                 }}
               >
                 {ausbuildungData.fortbildung.description}
-                {/*Fortbildung in Residence (FIR) ist das exklusive Weiterbildungsprogramm der Contemporary Dance School
-                Hamburg – für ausgebildete Bühnentänzer*innen ohne aktuelles Engagement, die im Training bleiben oder
-                sich weiterentwickeln möchten.*/}
               </Typography>
               <br />
               <Typography
@@ -574,6 +548,7 @@ function Ausbildung() {
                 eigene Projekte zur Verfügung, die bei »Work in Progress« oder dem Abschlussprojekt öffentlich gezeigt
                 werden können. Optional: bis zu 6 Mentoring-Sessions sowie Mitwirkung an bis zu zwei Kreationen der
                 Hauschoreograf*innen.*/}
+                {/* TODO */}
               </Typography>
               <br />
               <Typography
@@ -585,6 +560,7 @@ function Ausbildung() {
               >
                 {/*Voraussetzung: abgeschlossene Tanzausbildung oder gleichwertige Erfahrung. Die Aufnahme erfolgt über
                 Audition (live, per Video oder während des Programms). Kosten: 300 €/Monat*/}
+                {/* TODO */}
               </Typography>
             </Box>
             <Box className="flex flex-col justify-start items-start sticky" sx={{ width: { xs: '100%', md: '50%' } }}>
@@ -616,15 +592,12 @@ function Ausbildung() {
           }}
         >
           {ausbuildungData.footerCta.title}
-          {/*Du möchtest uns kennenlernen?*/}
         </Typography>
         <Typography
           className="max-w-[740px] min-w-[50%] text-center"
           sx={{ color: '#000000', fontSize: { xs: '15px', md: '30px' }, fontWeight: '400' }}
         >
           {ausbuildungData.footerCta.text}
-          {/*Wir dich ebenfalls. Neben den regulären Auditions sind wir bei Fragen rund um die Ausbildung per Mail oder
-          telefonisch für dich da.*/}
         </Typography>
       </Box>
     </>

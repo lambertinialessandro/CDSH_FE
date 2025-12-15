@@ -68,7 +68,6 @@ function Aktuelles() {
             }}
           >
             {data.header.title}
-            {/*Aktuelles*/}
           </Typography>
           <Typography
             sx={{
@@ -78,16 +77,14 @@ function Aktuelles() {
             }}
           >
             {data.header.intro}
-            {/*Hier findest Du alle aktuellen Informationen zu Abschlussarbeiten, Auftritten und sonstigen Geschehnissen in
-            unserer Schule. Stay up to date!*/}
           </Typography>
         </Box>
         <Box className="flex-1 h-full relative" sx={{ width: { xs: '100%', md: '50%' } }}>
           <Box
             component="img"
             src={`${process.env.PUBLIC_URL}/assets/images/students/cdsh-willkommen-1.png`}
-            className="flex-1 w-full h-full"
-            sx={{ objectFit: 'cover' }}
+            className="flex-1 w-full"
+            sx={{ objectFit: 'cover', height: {xs: "390px", md: "100%"} }}
           ></Box>
           <Typography
             className="mix-blend-exclusion"
@@ -103,7 +100,6 @@ function Aktuelles() {
             }}
           >
             {data.header.title}
-            {/*Aktuelles*/}
           </Typography>
         </Box>
       </Box>
@@ -111,7 +107,7 @@ function Aktuelles() {
       {/* Banner Section */}
       <Box
         component="section"
-        className="flex justify-start items-center w-full overflow-hidden"
+        className="flex justify-start items-center w-full overflow-hidden border-y border-black"
         sx={{
           height: { xs: '80px', md: '127px' },
           background: theme.palette.primary.main,
@@ -130,7 +126,6 @@ function Aktuelles() {
             }}
           >
             {data.banner.text}
-            {/*DIE AUDITION TERMINE 2025 SIND JETZT ONLINE.*/}
             <BigLink
               extraSx={{
                 display: 'flex',
@@ -146,7 +141,7 @@ function Aktuelles() {
               color="#000000"
               href={'/auditions'}
             >
-              {data.banner.linkText} {/*JETZT ANMELDEN*/} <ArrowForward fontSize="inherit" />
+              {data.banner.linkText} <ArrowForward fontSize="inherit" />
             </BigLink>
           </Typography>
         </LoopBanner>
@@ -170,15 +165,12 @@ function Aktuelles() {
           }}
         >
           {data.footerCta.title}
-          {/*Du möchtest uns kennenlernen?*/}
         </Typography>
         <Typography
           className="max-w-[740px] min-w-[50%] text-center"
           sx={{ fontSize: { xs: '18px', md: '30px' }, fontWeight: 400, color: '#000000' }}
         >
           {data.footerCta.text}
-          {/*Wir dich ebenfalls. Neben den regulären Auditions sind wir bei Fragen rund um die Ausbildung per Mail oder
-          telefonisch für dich da.*/}
         </Typography>
       </Box>
     </>

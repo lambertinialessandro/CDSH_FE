@@ -84,8 +84,8 @@ function AboutUs() {
           <Box
             component="img"
             src={`${process.env.PUBLIC_URL}/assets/images/aboutUs/cdsh-willkommen-1 1.png`}
-            className="flex-1 w-full h-full"
-            sx={{ objectFit: 'cover' }}
+            className="flex-1 w-full"
+            sx={{ objectFit: 'cover', height: {xs: "390px", md: "100%"} }}
           ></Box>
           <Typography
             className="mix-blend-exclusion"

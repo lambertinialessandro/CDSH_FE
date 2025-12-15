@@ -120,7 +120,9 @@ function SubjectSelector(props) {
   }
   return (
     <>
-      <Box component="section" className="py-[60px] px-[48px] flex flex-col justify-center items-start text-center">
+      <Box component="section"
+      className="flex flex-col justify-center items-start text-center"
+      sx={{py: {xs: "30px", md: "60px"}, px: {xs: "24px", md: "48px"}}}>
         <Tabs
           value={tabSelected}
           onChange={(event, value) => setTabSelected(value)}
@@ -178,7 +180,7 @@ function SubjectSelector(props) {
                     component="img"
                     src={subject.src}
                     className="flex-1 w-[290px] h-[400px] border border-black"
-                    sx={{ objectFit: 'cover' }}
+                    sx={{ objectFit: 'cover', width: {xs: "290px", md: "290px"}, height: {xs: "400px", md: "400px"} }}
                   />
                   <Typography
                     className="absolute border border-black rounded-full bottom-0 right-0 px-[16px] py-[2px] m-[16px]"

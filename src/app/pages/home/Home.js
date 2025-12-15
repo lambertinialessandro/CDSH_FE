@@ -82,7 +82,7 @@ function Home() {
                 Klassischem Ballett.
               </Typography>
               <AnchorLink href={"/team"}>
-                Mehr erfahren <ArrowForward />
+                Mehr erfahren <ArrowForward fontSize="small" sx={{ fontSize: { xs: '14px', sm: '16px' } }}/>
               </AnchorLink>
             </Box>
 
@@ -98,7 +98,7 @@ function Home() {
       {/* Banner Section */}
       <Box
         component="section"
-        className="flex justify-start items-center w-full overflow-hidden"
+        className="flex justify-start items-center w-full overflow-hidden border-y border-black"
         sx={{
           height: { xs: '80px', md: '127px' },
           background: theme.palette.primary.main,
@@ -157,7 +157,7 @@ function Home() {
         </Typography>
         <Typography
           className="max-w-[740px] min-w-[50%] text-center"
-          sx={{ fontSize: { xs: '18px', md: '30px' }, fontWeight: 400, color: '#000000' }}
+          sx={{ fontSize: { xs: '15px', md: '30px' }, fontWeight: 400, color: '#000000' }}
         >
           Wir dich ebenfalls. Neben den regulären Auditions sind wir bei Fragen rund um die Ausbildung per Mail oder
           telefonisch für dich da.

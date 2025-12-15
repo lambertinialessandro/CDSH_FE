@@ -38,8 +38,8 @@ import BigLink from 'app/shared-components/link/BigLink';
   },
 ];*/
 
-function StudentSelector({classes = []}) {
- console.log("classes", classes)
+function StudentSelector({ classes = [] }) {
+  console.log('classes', classes);
 
   const today = new Date();
   const month = today.getMonth() + 1; // getMonth() is 0-indexed
@@ -53,7 +53,7 @@ function StudentSelector({classes = []}) {
       ? classes?.filter(({ year }) => year.end > currentYear)
       : classes?.filter(({ year }) => year.end <= currentYear);
 
-  console.log("filteredStudents", filteredStudents)
+  console.log('filteredStudents', filteredStudents);
 
   if (__.isEmpty(classes)) {
     return <Typography>Empty</Typography>;
@@ -117,13 +117,22 @@ function StudentSelector({classes = []}) {
                 <SplitSection
                   key={idx}
                   title={
-                    <BigLink to={`/students/${group.id}`}>
+                    <BigLink
+                      to={`/students/${group.id}`}
+                      extraSx={{
+                        fontSize: { xs: '28px', md: '80px' },
+                        fontWeight: '400',
+                        whiteSpace: 'nowrap',
+                      }}
+                      fontSize="inherit"
+                      lineHeight={{ xs: '1px', md: '5px' }}
+                    >
                       {group.name}
                     </BigLink>
                   }
                   text={`${group.year.start} - ${group.year.end}`}
                   img={{ src: group.src, alt: group.name }}
-                  href={`/students/${group.id}`} // link to  
+                  href={`/students/${group.id}`} // link to
                   reverse={isOdd}
                   bgColor={isOdd && '#8F20FF'}
                   color={isOdd && '#ffffff'}

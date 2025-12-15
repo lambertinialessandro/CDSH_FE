@@ -147,6 +147,7 @@ function StudentGroup() {
               className="capitalize"
               sx={{
                 fontSize: '80px',
+                lineHeight: '85px',
                 fontWeight: '400',
               }}
             >
@@ -176,11 +177,13 @@ function StudentGroup() {
             </Box>
           </Box>
         </Box>
+                <Box className="flex-1 h-full relative" sx={{ width: { xs: '100%', md: '50%' } }}>
+        
         <Box
           component="img"
           src={selectedStudent.src}
-          className="flex-1 h-full relative"
-          sx={{ objectFit: 'cover', width: { xs: '100%', md: '50%' } }}
+          className="flex-1 w-full relative"
+            sx={{ objectFit: 'cover', height: {xs: "390px", md: "100%"} }}
         ></Box>
         <Box
           className=""
@@ -241,6 +244,7 @@ function StudentGroup() {
               </button>
             </Box>
           </Box>
+        </Box>
         </Box>
       </Box>
 

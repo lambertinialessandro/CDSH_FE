@@ -130,7 +130,30 @@ function Team() {
               color: 'white',
             }}
           >
-            {teamData.intro.headline} {/* Team */}
+            {teamData.intro.headline}
+          </Typography>
+        </Box>
+        <Box className="flex-1 h-full relative" sx={{ width: { xs: '100%', md: '50%' } }}>
+          <Box
+            component="img"
+            src={`${process.env.PUBLIC_URL}/assets/images/team/cdsh-willkommen-1.jpg`}
+            className="flex-1 w-full"
+            sx={{ objectFit: 'cover', height: { xs: '390px', md: '100%' } }}
+          ></Box>
+          <Typography
+            className="mix-blend-exclusion"
+            sx={{
+              position: 'absolute',
+              left: '24px',
+              bottom: '12px',
+              display: { xs: 'block', md: 'none' },
+              fontSize: '50px',
+              lineHeight: '55px',
+              fontWeight: '400',
+              color: 'white',
+            }}
+          >
+            Team
           </Typography>
         </Box>
       </Box>
@@ -153,7 +176,7 @@ function Team() {
                 fontWeight: '400',
               }}
             >
-              {teamData.leadership.headline} {/* Leitungsteam */}
+              {teamData.leadership.headline}
             </Typography>
             <Typography
               sx={{
@@ -162,10 +185,6 @@ function Team() {
               }}
             >
               {teamData.leadership.text}
-              {/*Als Leitungsteam der CDSH können Javier Báez, Raul Valdez und Sina Rundel auf ihre langjährige
-              künstlerische und pädagogische Erfahrung zurückgreifen, um in ihrem Ausbildungsprogramm eine qualitativ
-              hochwertige, den realen Anforderungen gerecht werdende Vorbereitung auf den Beruf zeitgenössische*r
-              Bühnentänzer*in zu garantieren. */}
             </Typography>
           </Box>
 
@@ -238,7 +257,6 @@ function Team() {
           }}
         >
           {teamData.memoriam.headline}
-          {/* In memoriam: Tanja Báez */}
         </Typography>
         <Box className="max-w-[1250px] flex justify-center items-start" sx={{ gap: { xs: '55px', md: '110px' } }}>
           <Box className="w-[50%] flex flex-col justify-start items-start">
@@ -250,10 +268,6 @@ function Team() {
               }}
             >
               {teamData.memoriam.text_left}
-              {/*Mit großer Trauer und Bestürzung mussten wir im Oktober 2016 bekannt geben, dass Tanja Baéz von uns
-              gegangen ist. Tanja war als Mitgründerin der Contemporary Dance School Hamburg von Beginn an eine der
-              tragenden Säulen der Schule, und ihr Verlust wird nur schwer zu ersetzen sein. Sie hat ihre letzte Reise
-              mit Kraft, Mut und nie klagend angetreten und wird uns für immer Vorbild sein. */}
             </Typography>
             <br />
             <Typography
@@ -263,14 +277,13 @@ function Team() {
                 fontWeight: '400',
               }}
             >
-              {/*Ruhe in Frieden, Tanja!*/}
               {teamData.memoriam.text_right}
             </Typography>
           </Box>
           <Box className="w-[50%] flex flex-col justify-start items-start">
             <Box
               component="img"
-              src={teamData.memoriam.image} // src={`${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto 2025-02-18 um 17.26.20 1.png`}
+              src={teamData.memoriam.image}
               className="flex-1 w-[500px] mb-[24px]"
               sx={{ objectFit: 'cover', aspectRatio: 0.75 }}
             ></Box>
@@ -293,19 +306,12 @@ function Team() {
           }}
         >
           {teamData.teachers.headline}
-          {/*Dozent*innen*/}
         </Typography>
         <Typography
           className="max-w-[740px] min-w-[50%] text-center"
           sx={{ color: '#000000', fontSize: { xs: '15px', md: '30px' }, fontWeight: '400' }}
         >
           {teamData.teachers.text}
-          {/*Unser internationales Dozent*innenteam bietet dir ein breites Spektrum an Einblicken in unterschiedliche
-          Arbeitsweisen an ganz unterschiedlichen Orten der Welt. Von Lateinamerika über Osteuropa, den USA, Asien und
-          ganz Europa, bringen unsere Dozent*innen nicht nur rein fachlich, sondern auch ihre Arbeitspraxis betreffend,
-          ganz unterschiedliche Erfahrungen mit. Als Persönlichkeiten mit ausnahmslos eigener künstlerischer Vita können
-          sie dir neben fachlichen und technischen Kompetenzen praxisnah und erfahrungsbasiert ein sehr konkretes Bild
-          der realen Arbeitspraxis vermitteln.*/}
         </Typography>
       </Box>
 
@@ -322,15 +328,12 @@ function Team() {
           }}
         >
           {teamData.contact.headline}
-          {/*Du möchtest uns kennenlernen?*/}
         </Typography>
         <Typography
           className="max-w-[740px] min-w-[50%] text-center"
           sx={{ color: '#000000', fontSize: { xs: '15px', md: '30px' }, fontWeight: '400' }}
         >
           {teamData.contact.text}
-          {/*Wir dich ebenfalls. Neben den regulären Auditions sind wir bei Fragen rund um die Ausbildung per Mail oder
-          telefonisch für dich da.*/}
         </Typography>
       </Box>
     </>

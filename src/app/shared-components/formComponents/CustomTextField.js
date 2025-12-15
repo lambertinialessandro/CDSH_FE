@@ -1,11 +1,11 @@
-import { FormControl, InputAdornment, TextField } from '@mui/material';
+import { FormControl, FormHelperText, InputAdornment, TextField } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
 
 const StyledTextField = styled(TextField)(({ theme }) => ({
   '& .MuiOutlinedInput-root': {
     borderRadius: 50,
     paddingRight: 22,
-    fontSize: '30px',
+    fontSize: { xs: '15px', md: '30px' },
     '& fieldset': {
       borderColor: '#666',
     },
@@ -20,7 +20,7 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
     /* padding: '10px 16px', */
   },
   '& .MuiInputBase-input::placeholder': {
-    fontSize: '30px',
+    fontSize: { xs: '15px', md: '30px' },
   },
 }));
 
@@ -34,6 +34,7 @@ function CustomTextField(props) {
   return (
     <FormControl variant="outlined" fullWidth error={!!error} disabled={readOnly} size={size}>
       <StyledTextField
+        {...field}
         label={label}
         placeholder={placeholder}
         fullWidth
@@ -48,7 +49,7 @@ function CustomTextField(props) {
                   width: 18,
                   height: 18,
                   borderRadius: '50%',
-                  backgroundColor: theme.palette.primary.main,
+                  backgroundColor: !!error ? "#FF2023": theme.palette.primary.main,
                   display: 'inline-block',
                 }}
               />
@@ -57,6 +58,7 @@ function CustomTextField(props) {
         }}
         {...othProps}
       />
+      {!!error && <FormHelperText sx={{color: "#FF2023 !important"}}>{error.message}</FormHelperText>}
     </FormControl>
   );
 }

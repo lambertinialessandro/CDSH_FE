@@ -1,7 +1,7 @@
 import { ArrowBack, ArrowForward } from '@mui/icons-material';
 import { Box, IconButton, Typography } from '@mui/material';
 import useParallaxY from 'app/shared-components/hooks/useParallaxY';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Fragment, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 
@@ -10,11 +10,7 @@ function ImageAnimation({ item, height }) {
   const y = useParallaxY(imgRef, height * 0.05);
 
   return (
-    <motion.div
-      ref={imgRef}
-      style={{ height }}
-      className="w-full overflow-hidden border border-black"
-    >
+    <motion.div key={item.title} ref={imgRef} style={{ height }} className="w-full overflow-hidden border border-black">
       <motion.img
         src={item.src}
         alt={item.title || ''}
@@ -83,7 +79,7 @@ function Carousel({ items, gap, itemWidth, itemHeight, Addon = undefined }) {
               gap: `${gap}px`,
               mb: 3,
               transition: 'transform 0.35s cubic-bezier(0.15, 0.3, 0.25, 1)',
-              transform: `translateX(-${index * (containerWidth / itemsPerPage)}px)`,
+              transform: `translateX(-${index * (containerWidth / itemsPerPage + gap)}px)`,
               width: items.length * (containerWidth / itemsPerPage),
             }}
           >
@@ -92,7 +88,7 @@ function Carousel({ items, gap, itemWidth, itemHeight, Addon = undefined }) {
                 key={idx}
                 className="flex flex-col"
                 sx={{
-                  width: `${containerWidth / itemsPerPage - gap}px`,
+                  width: `${containerWidth / itemsPerPage}px`,
                   flexShrink: 0,
                 }}
               >

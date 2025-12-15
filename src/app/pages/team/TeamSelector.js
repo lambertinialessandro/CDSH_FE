@@ -40,6 +40,9 @@ function TeamSelector({members = []}) {
 
   const MotionBox = motion(Box);
 
+function TeamSelector(props) {
+  const MotionBox = motion(Box);
+
   // ordered from the newest to the older
 
   const [tabSelected, setTabSelected] = useState(3);

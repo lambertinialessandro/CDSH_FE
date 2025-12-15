@@ -142,11 +142,13 @@ function TeamMember() {
             </button>
           </Box>
         </Box>
+                <Box className="flex-1 h-full relative" sx={{ width: { xs: '100%', md: '50%' } }}>
+
         <Box
           component="img"
           src={selectedMember.src}
-          className="flex-1 h-full relative"
-          sx={{ objectFit: 'cover', width: { xs: '100%', md: '50%' } }}
+          className="flex-1 w-full relative"
+            sx={{ objectFit: 'cover', height: {xs: "390px", md: "100%"} }}
         ></Box>
         <Box
           sx={{
@@ -192,6 +194,7 @@ function TeamMember() {
               zurück
             </button>
           </Box>
+        </Box>
         </Box>
       </Box>
 

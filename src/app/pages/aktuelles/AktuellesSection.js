@@ -107,7 +107,6 @@ function AktuellesSection({ items, title }) {
           }}
         >
           {title}
-          {/*Aktuelles*/}
         </Typography>
         <Carousel
           items={items}

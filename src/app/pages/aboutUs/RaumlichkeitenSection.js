@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useMediaQuery } from '@mui/material';
 import Carousel from 'app/shared-components/carousel/Carousel';
 
 function RaumlichkeitenSection({ title, images }) {
@@ -15,6 +15,8 @@ function RaumlichkeitenSection({ title, images }) {
   ];*/
 
   const items = images;
+
+  const isMobile = useMediaQuery('(max-width:900px)');
 
   return (
     <Box
@@ -34,7 +36,11 @@ function RaumlichkeitenSection({ title, images }) {
         {title}
         {/*Räumlichkeiten**/}
       </Typography>
-      <Carousel items={items} gap={32} itemWidth={700} itemHeight={470} />
+      {isMobile ? (
+        <Carousel items={items} gap={32} itemWidth={300} itemHeight={235} />
+      ) : (
+        <Carousel items={items} gap={32} itemWidth={700} itemHeight={470} />
+      )}
     </Box>
   );
 }

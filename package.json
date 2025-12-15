@@ -1,6 +1,6 @@
 {
-	"homepage": "https://lambertinialessandro.github.io/CDSH_FE",
 	"name": "CDSH",
+	"homepage": "https://lambertinialessandro.github.io/CDSH_FE",
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
@@ -52,7 +52,8 @@
 		"start": "react-scripts start",
 		"prod": "cross-env NODE_ENV=development serve -s build",
 		"build": "cross-env NODE_ENV=production GENERATE_SOURCEMAP=false craco build",
-		"deploy": "gh-pages -d build",
+		"build:vanilla": "cross-env NODE_ENV=production react-scripts build",
+		"deploy": "gh-pages -d build --branch gh-pages",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject"
 	},

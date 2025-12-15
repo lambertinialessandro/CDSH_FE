@@ -22,8 +22,12 @@ module.exports = {
         'process.env.GIT_MORE_INFO': JSON.stringify(date),
       }),
     ],
-    configure: {
-      ignoreWarnings: [{ message: /Failed to parse source map/ }],
+    configure: (webpackConfig, { env, paths }) => {
+      // Set publicPath for GitHub Pages subfolder
+      webpackConfig.output.publicPath = '/CDSH_FE/';
+      // Keep your ignoreWarnings
+      webpackConfig.ignoreWarnings = [{ message: /Failed to parse source map/ }];
+      return webpackConfig;
     },
   },
 };

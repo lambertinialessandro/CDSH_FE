@@ -18,7 +18,7 @@ function Banner({ fixed }) {
 
   return (
     <Box
-      className="w-full z-[50]"
+      className="w-full z-[50] border-b border-black"
       sx={{
         height: { xs: '32px', sm: '45px' },
         background: theme.palette.primary.main,
@@ -26,7 +26,7 @@ function Banner({ fixed }) {
       }}
     >
       <Box
-        className="w-full h-full flex justify-between items-center"
+        className="w-full h-full flex justify-between items-center flex-nowrap"
         sx={{
           px: { xs: 1.5, sm: 3 },
           flexWrap: { xs: 'wrap', sm: 'nowrap' },
@@ -45,10 +45,10 @@ function Banner({ fixed }) {
               whiteSpace: { sm: 'nowrap' },
             }}
           >
-            Die Audition Termine 2025 sind jetzt online.
+            Audition 2025 sind jetzt online!
           </Typography>
           <AnchorLink
-            href="#"
+            href="/auditions"
             extraSx={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -60,7 +60,7 @@ function Banner({ fixed }) {
             }}
             color="#000000"
           >
-            Jetzt anmelden <ArrowForward fontSize="small" sx={{ fontSize: { xs: '16px', sm: '24px' } }} />
+            Jetzt anmelden <ArrowForward fontSize="small" sx={{ fontSize: { xs: '14px', sm: '16px' } }} />
           </AnchorLink>
         </Box>
 
