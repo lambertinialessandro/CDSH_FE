@@ -71,29 +71,6 @@ function Students() {
           <Box
             component="img"
             src={`${process.env.PUBLIC_URL}/assets/images/students/cdsh-willkommen-1.png`}
-            className="flex-1 w-full h-full"
-            sx={{ objectFit: 'cover' }}
-          ></Box>
-          <Typography
-            className="mix-blend-exclusion"
-            sx={{
-              position: 'absolute',
-              left: '24px',
-              bottom: '12px',
-              display: { xs: 'block', md: 'none' },
-              fontSize: '50px',
-              lineHeight: '55px',
-              fontWeight: '400',
-              color: 'white',
-            }}
-          >
-            {studentsData.intro.headline}
-          </Typography>
-        </Box>
-        <Box className="flex-1 h-full relative" sx={{ width: { xs: '100%', md: '50%' } }}>
-          <Box
-            component="img"
-            src={`${process.env.PUBLIC_URL}/assets/images/students/cdsh-willkommen-1.png`}
             className="flex-1 w-full"
             sx={{ objectFit: 'cover', height: {xs: "390px", md: "100%"} }}
           ></Box>

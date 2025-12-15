@@ -229,11 +229,6 @@ function TeamMember() {
           }}
         >
           {selectedMember.biography || 'Keine Biografie verfügbar.'}
-          {/* kooperiert mit vielen relevanten Bereichen der tänzerischen Bildung. Ein wirksames Unterrichtsprogramm hilft
-          dir, dich technisch, künstlerisch und kreativ weiterzuentwickeln. Durch choreografische Projektarbeit bekommst
-          du ein Gefühl für die professionelle Arbeit und sammelst Bühnenerfahrung durch regelmäßige Auftritte im
-          Theater. Ein erfahrenes Team aus Künstler*innen und Pädagog*innen unterstützt dich bei deiner Entwicklung in
-          der tänzerischen Ausbildung. */}
         </Typography>
       </Box>
 
