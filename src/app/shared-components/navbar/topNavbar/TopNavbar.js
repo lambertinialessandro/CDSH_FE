@@ -211,7 +211,7 @@ function TopNavbar({ fixed }) {
             Studierende
           </AnchorLink>
           <AnchorLink
-            href="/students"
+            href="/ausbildung"
             onClick={() => setIsMenuOpen(false)}
             lineHeight={{ xs: 2, md: 5 }}
             extraSx={{
@@ -225,7 +225,7 @@ function TopNavbar({ fixed }) {
 
           <Box className="flex items-center gap-[6px]">
             <AnchorLink
-              href="/Auditions"
+              href="/auditions"
               onClick={() => setIsMenuOpen(false)}
               lineHeight={{ xs: 2, md: 5 }}
               extraSx={{
@@ -267,7 +267,7 @@ function TopNavbar({ fixed }) {
           </Box>
 
           <AnchorLink
-            href={`${process.env.PUBLIC_URL}`}
+            href={`/aktuelles`}
             onClick={() => setIsMenuOpen(false)}
             lineHeight={{ xs: 2, md: 5 }}
             extraSx={{

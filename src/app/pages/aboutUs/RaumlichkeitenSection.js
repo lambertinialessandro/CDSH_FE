@@ -1,8 +1,8 @@
 import { Box, Typography } from '@mui/material';
 import Carousel from 'app/shared-components/carousel/Carousel';
 
-function RaumlichkeitenSection() {
-  const items = [
+function RaumlichkeitenSection({ title, images }) {
+  /*const items = [
     {
       src: `${process.env.PUBLIC_URL}/assets/images/aboutUs/Bildschirmfoto 2025-02-21 um 17.23.58.png`,
     },
@@ -12,7 +12,9 @@ function RaumlichkeitenSection() {
     {
       src: `${process.env.PUBLIC_URL}/assets/images/aboutUs/Bildschirmfoto 2025-02-21 um 17.23.58.png`,
     },
-  ];
+  ];*/
+
+  const items = images;
 
   return (
     <Box
@@ -29,7 +31,8 @@ function RaumlichkeitenSection() {
           fontWeight: '400',
         }}
       >
-        Räumlichkeiten
+        {title}
+        {/*Räumlichkeiten**/}
       </Typography>
       <Carousel items={items} gap={32} itemWidth={700} itemHeight={470} />
     </Box>

@@ -3,9 +3,43 @@ import LoopBanner from 'app/shared-components/banner/LoopBanner';
 import KooperationenLogos from './KooperationenLogos';
 import RaumlichkeitenSection from './RaumlichkeitenSection';
 import SplitSection from './SplitSection';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { selectUserLanguage } from 'app/store/app/mainSlice';
 
 function AboutUs() {
   const theme = useTheme();
+  const [aboutUsData, setAboutUsData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const userLanguage = useSelector(selectUserLanguage);
+
+  useEffect(() => {
+    setLoading(true);
+    setError(null);
+    fetch(`http://localhost/plainkit-main/api/aboutUs?lang=${userLanguage}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Network response was not ok, status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setAboutUsData(data);
+      })
+      .catch((error) => {
+        console.error('Fetching error:', error);
+        setError(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [userLanguage]);
+  console.log('aboutUs:', aboutUsData);
+
+  if (loading) return <Box sx={{ p: 10, textAlign: 'center' }}>Loading content...</Box>;
+  if (!aboutUsData) return <Box sx={{ p: 10, textAlign: 'center' }}>Error loading data.</Box>;
 
   return (
     <>
@@ -27,19 +61,23 @@ function AboutUs() {
             sx={{
               display: { xs: 'none', md: 'block' },
               fontSize: '80px',
+              lineHeight: '85px',
               fontWeight: '400',
             }}
           >
-            Über uns
+            {/*Über uns*/}
+            {aboutUsData.header.title}
           </Typography>
           <Typography
             sx={{
               fontSize: { xs: '15px', md: '30px' },
+              lineHeight: { xs: '20px', md: '35px' },
               fontWeight: '400',
             }}
           >
-            Das Ausbildungsprogramm der CDSH verbindet die Vielfalt des zeitgenössischen Tanzes mit den individuellen
-            künstlerischen Bedürfnissen der Studierenden und den Anforderungen der internationalen Branche.
+            {aboutUsData.header.text}
+            {/*Das Ausbildungsprogramm der CDSH verbindet die Vielfalt des zeitgenössischen Tanzes mit den individuellen
+            künstlerischen Bedürfnissen der Studierenden und den Anforderungen der internationalen Branche.*/}
           </Typography>
         </Box>
         <Box className="flex-1 h-full relative" sx={{ width: { xs: '100%', md: '50%' } }}>
@@ -50,17 +88,20 @@ function AboutUs() {
             sx={{ objectFit: 'cover' }}
           ></Box>
           <Typography
+            className="mix-blend-exclusion"
             sx={{
               position: 'absolute',
               left: '24px',
               bottom: '12px',
               display: { xs: 'block', md: 'none' },
               fontSize: '50px',
+              lineHeight: '55px',
               fontWeight: '400',
               color: 'white',
             }}
           >
-            Über uns
+            {/*Über uns*/}
+            {aboutUsData.header.title}
           </Typography>
         </Box>
       </Box>
@@ -82,11 +123,12 @@ function AboutUs() {
             fontWeight: '400',
           }}
         >
-          Die Contemporary Dance School Hamburg bietet dir zeitgenössischen Tanz auf hohem Niveau und die Entwicklung
+          {aboutUsData.description.left}
+          {/*Die Contemporary Dance School Hamburg bietet dir zeitgenössischen Tanz auf hohem Niveau und die Entwicklung
           deiner künstlerischen Persönlichkeit im Austausch mit erfahrenen Mentor*innen aus aller Welt. Das tägliche
           Training bereitet dich auf die Anforderungen deiner Karriere im Bühnentanz vor. Als staatlich anerkannte
           Berufsfachschule für zeitgenössischen Bühnentanz bietet dir die CDSH eine dreijährige praxisnahe
-          Tanzausbildung, bringt dich in Kontakt mit Künstler*innen aus der Szene und
+          Tanzausbildung, bringt dich in Kontakt mit Künstler*innen aus der Szene und*/}
         </Typography>
         <Typography
           className="flex-1"
@@ -95,11 +137,12 @@ function AboutUs() {
             fontWeight: '400',
           }}
         >
-          kooperiert mit vielen relevanten Bereichen der tänzerischen Bildung. Ein wirksames Unterrichtsprogramm hilft
+          {aboutUsData.description.right}
+          {/*kooperiert mit vielen relevanten Bereichen der tänzerischen Bildung. Ein wirksames Unterrichtsprogramm hilft
           dir, dich technisch, künstlerisch und kreativ weiterzuentwickeln. Durch choreografische Projektarbeit bekommst
           du ein Gefühl für die professionelle Arbeit und sammelst Bühnenerfahrung durch regelmäßige Auftritte im
           Theater. Ein erfahrenes Team aus Künstler*innen und Pädagog*innen unterstützt dich bei deiner Entwicklung in
-          der tänzerischen Ausbildung.
+          der tänzerischen Ausbildung.*/}
         </Typography>
       </Box>
 
@@ -121,14 +164,14 @@ function AboutUs() {
               marginRight: '45px',
             }}
           >
-            WORKSHOPS, AUSBILDUNGEN, FORTBILDUNGEN
+            {aboutUsData.banner1}
+            {/*WORKSHOPS, AUSBILDUNGEN, FORTBILDUNGEN*/}
           </Typography>
         </LoopBanner>
       </Box>
 
-      {/* TODO: */}
       <Box component="section" className="px-[45px] flex flex-col justify-center items-start">
-        <SplitSection
+        {/*<SplitSection
           title="Talent, Technik & Tanzsprache"
           text="Wir fördern die Findung der individuellen künsterischen Persönlichkeit. Die Basis dessen bildet eine
                 fundierte Ausbildung im Bereich etablierter Tanzstile."
@@ -156,10 +199,20 @@ function AboutUs() {
             alt: 'Bühnenauftritt',
           }}
           bottom
-        />
+        />*/}
+        {aboutUsData.splitSections.map((section, idx) => (
+          <SplitSection
+            key={idx}
+            title={section.title}
+            text={section.text}
+            img={section.img}
+            reverse={section.reverse}
+            bottom={section.bottom}
+          />
+        ))}
       </Box>
 
-      <KooperationenLogos />
+      <KooperationenLogos title={aboutUsData.cooperations.title} list={aboutUsData.cooperations.items} />
 
       <Box
         component="section"
@@ -179,7 +232,8 @@ function AboutUs() {
               marginRight: '45px',
             }}
           >
-            OFFENHEIT, RESPEKT, TOLERANZ, KREATIVITÄT
+            {aboutUsData.banner2}
+            {/*}FFENHEIT, RESPEKT, TOLERANZ, KREATIVITÄT*/}
           </Typography>
         </LoopBanner>
       </Box>
@@ -198,7 +252,8 @@ function AboutUs() {
             mb: { xs: '55px', md: '110px' },
           }}
         >
-          Künstlerisches Konzept
+          {aboutUsData.concept.title}
+          {/*Künstlerisches Konzept*/}
         </Typography>
         <Box
           className="max-w-[1250px] flex justify-center"
@@ -216,11 +271,12 @@ function AboutUs() {
                 fontWeight: '400',
               }}
             >
-              »In meiner Tätigkeit als Künstlerischer Leiter der Contemporary Dance School Hamburg verbinde ich das
+              {aboutUsData.concept.textLeft}
+              {/*»In meiner Tätigkeit als Künstlerischer Leiter der Contemporary Dance School Hamburg verbinde ich das
               kreative und technische Potenzial der CDSH mit den Ansprüchen einer praxisorientierten Ausbildung für den
               zeitgenössischen Bühnentanz. Mein Ziel ist es, durch den Austausch der CDSH mit unterschiedlichen
               Künstler*innen und Kooperationspartner*innen den zukünftigen Tänzern schon während der Ausbildung eine
-              bestmögliche Einbindung in verschiedene Produktionen und Projekte zu ermöglichen.
+              bestmögliche Einbindung in verschiedene Produktionen und Projekte zu ermöglichen.*/}
             </Typography>
             <br />
             <Typography
@@ -230,18 +286,19 @@ function AboutUs() {
                 fontWeight: '400',
               }}
             >
-              Damit fördern wir ein Netzwerk, das auch über die Ausbildung hinaus einen kreativen Austausch ermöglicht
+              {aboutUsData.concept.textRight}
+              {/*Damit fördern wir ein Netzwerk, das auch über die Ausbildung hinaus einen kreativen Austausch ermöglicht
               und den beruflichen Einstieg erleichtert. Meiner Erfahrung nach ist die Entwicklung des kreativen
               Potenzials in viele Richtungen einer der wichtigsten Bestandteile in der künstlerischen Ausbildung. Das
               Spektrum der CDSH umfasst sowohl die technische Schulung als auch die individuelle Förderung der
-              künstlerischen Persönlichkeit der Tänzer.«
+              künstlerischen Persönlichkeit der Tänzer.«*/}
             </Typography>
           </Box>
           <Box className="flex flex-col justify-start items-start sticky" sx={{ width: { xs: '100%', md: '50%' } }}>
             <Box
               component="img"
               src={`${process.env.PUBLIC_URL}/assets/images/aboutUs/Bildschirmfoto 2025-02-18 um 17.26.20 1.png`}
-              className="flex-1 w-[500px] mb-[24px]"
+              className="flex-1 w-[500px] mx-auto mb-[24px]"
               sx={{ objectFit: 'cover', aspectRatio: 0.75 }}
             ></Box>
 
@@ -252,7 +309,8 @@ function AboutUs() {
                 fontWeight: '400',
               }}
             >
-              RAUL VALDEZ
+              {aboutUsData.concept.name}
+              {/*RAUL VALDEZ*/}
             </Typography>
             <Typography
               sx={{
@@ -261,38 +319,42 @@ function AboutUs() {
                 fontWeight: '400',
               }}
             >
-              Künstlerischer Leiter der CDSH
+              {aboutUsData.concept.role}
+              {/*Künstlerischer Leiter der CDSH*/}
             </Typography>
           </Box>
         </Box>
       </Box>
 
-      <RaumlichkeitenSection />
-
-      <Box
-        component="section"
-        className="px-[45px] flex flex-col justify-center items-center text-center"
-        sx={{ py: { xs: '60px', md: '120px' } }}
-      >
-        <Typography
-          sx={{
-            color: '#000000',
-            fontSize: { xs: '35px', md: '80px' },
-            fontWeight: '400',
-            lineHeight: '1',
-            marginBottom: '32px',
-          }}
+      <RaumlichkeitenSection title={aboutUsData.rooms.title} images={aboutUsData.rooms.images} />
+      {aboutUsData.footerCta?.show && (
+        <Box
+          component="section"
+          className="px-[45px] flex flex-col justify-center items-center text-center"
+          sx={{ py: { xs: '60px', md: '120px' } }}
         >
-          Du möchtest uns kennenlernen?
-        </Typography>
-        <Typography
-          className="max-w-[740px] min-w-[50%] text-center"
-          sx={{ color: '#000000', fontSize: { xs: '15px', md: '30px' }, fontWeight: '400' }}
-        >
-          Wir dich ebenfalls. Neben den regulären Auditions sind wir bei Fragen rund um die Ausbildung per Mail oder
-          telefonisch für dich da.
-        </Typography>
-      </Box>
+          <Typography
+            sx={{
+              color: '#000000',
+              fontSize: { xs: '35px', md: '80px' },
+              fontWeight: '400',
+              lineHeight: '1',
+              marginBottom: '32px',
+            }}
+          >
+            {aboutUsData.footerCta.title}
+            {/*Du möchtest uns kennenlernen?*/}
+          </Typography>
+          <Typography
+            className="max-w-[740px] min-w-[50%] text-center"
+            sx={{ color: '#000000', fontSize: { xs: '15px', md: '30px' }, fontWeight: '400' }}
+          >
+            {aboutUsData.footerCta.text}
+            {/*Wir dich ebenfalls. Neben den regulären Auditions sind wir bei Fragen rund um die Ausbildung per Mail oder
+          telefonisch für dich da.*/}
+          </Typography>
+        </Box>
+      )}
     </>
   );
 }

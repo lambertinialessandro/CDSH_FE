@@ -4,41 +4,41 @@ import { useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
-function TeamSelector(props) {
-  // const {} = props;
-
-  const MotionBox = motion(Box);
-
-  const members = [
+/*const members = [
     {
       id: 'ursina_tossi',
-      href: `${process.env.PUBLIC_URL}/team/ursina_tossi`,
+      href: `/team/ursina_tossi`,
       name: 'Ursina Tossi',
       src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto ursina_tossi.png`,
       subjects: [''],
     },
     {
       id: 'phillip_benjamin_jenkins',
-      href: `${process.env.PUBLIC_URL}/team/phillip_benjamin_jenkins`,
+      href: `/team/phillip_benjamin_jenkins`,
       name: 'Phillip Benjamin Jenkins',
       src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto phillip_benjamin_jenkins.png`,
       subjects: ['Hauptfächer'],
     },
     {
       id: 'angela_guerreiro',
-      href: `${process.env.PUBLIC_URL}/team/angela_guerreiro`,
+      href: `/team/angela_guerreiro`,
       name: 'Angela Guerreiro',
       src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto angela_guerreiro.png`,
       subjects: ['Neben- und Theoriefächer'],
     },
     {
       id: 'filip_van_huffel',
-      href: `${process.env.PUBLIC_URL}/team/filip_van_huffel`,
+      href: `/team/filip_van_huffel`,
       name: 'Filip van Huffel',
       src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto filip_van_huffel.png`,
       subjects: ['Gastdozent*innen 2025'],
     },
-  ];
+  ];*/
+
+function TeamSelector({members = []}) {
+  console.log("member", members)
+
+  const MotionBox = motion(Box);
 
   // ordered from the newest to the older
 
@@ -54,7 +54,9 @@ function TeamSelector(props) {
       return members;
     }
     return members.filter(({ subjects }) => subjects.some((s1) => s1 === TAB_OPTIONS[tabSelected].name));
-  }, [tabSelected]);
+  }, [tabSelected, members]);
+
+  console.log("filteredMembers", filteredMembers)
 
   if (__.isEmpty(members)) {
     return <Typography>Empty</Typography>;
@@ -66,29 +68,16 @@ function TeamSelector(props) {
         <Tabs
           value={tabSelected}
           onChange={(event, value) => setTabSelected(value)}
-          indicatorColor="secondary"
           textColor="inherit"
-          variant="scrollable"
-          scrollButtons={false}
+          indicatorColor="none"
+          variant="standard"
           className="min-w-fit min-h-fit"
           sx={{
             '& .MuiTabs-flexContainer': {
+              flexWrap: 'wrap',
               gap: '6px',
+              justifyContent: 'flex-start',
             },
-          }}
-          classes={{
-            indicator: 'w-full h-full bg-transparent',
-          }}
-          TabIndicatorProps={{
-            children: (
-              <Divider
-                className="w-full h-full rounded-full"
-                sx={{
-                  backgroundColor: '#000000',
-                  zIndex: 1,
-                }}
-              />
-            ),
           }}
         >
           {TAB_OPTIONS.map((option, idx) => (
@@ -98,11 +87,15 @@ function TeamSelector(props) {
               className="rounded-full min-h-fit h-[28px] py-[2px] px-[12px]"
               sx={{
                 color: tabSelected === idx ? '#ffffff' : '#000000',
-                fontSize: '15px',
+                backgroundColor: tabSelected === idx ? '#000000' : 'transparent',
+                fontSize: { xs: '12px', md: '15px' },
                 lineHeight: 'normal',
                 zIndex: 10,
                 transition: 'color 0.2s',
                 border: '1px solid black',
+                '&:hover': {
+                  backgroundColor: tabSelected === idx ? '#000000' : '#e5e5e5',
+                },
               }}
               disableRipple
             />
@@ -112,7 +105,7 @@ function TeamSelector(props) {
 
       <Box className="w-full flex flex-wrap justify-center items-start gap-[24px]">
         <AnimatePresence mode="popLayout" initial={false}>
-          {filteredMembers.map((member, idx) => (
+          {filteredMembers?.map((member, idx) => (
             <MotionBox
               key={member.id}
               layout
@@ -126,14 +119,20 @@ function TeamSelector(props) {
                 <Box
                   component="img"
                   src={member.src}
-                  className="flex-1 w-[290px] h-[400px] border border-black"
-                  sx={{ objectFit: 'cover' }}
+                  className="flex-1 border border-black"
+                  sx={{ objectFit: 'cover', width: { xs: '145px', md: '290px' }, height: { xs: '200px', md: '400px' } }}
                 />
                 <Box
                   component={Link}
-                  to={member.href}
-                  className="absolute border border-black rounded-full bottom-0 right-0 px-[16px] py-[2px] m-[16px]"
-                  sx={{ background: '#ffffff' }}
+                  to={`/team/${member.id}`}
+                  className="absolute border border-black rounded-full bottom-0 right-0"
+                  sx={{
+                    background: '#ffffff',
+                    fontSize: { xs: '12px', md: '15px' },
+                    px: { xs: '8px', md: '16px' },
+                    py: { xs: '2px', md: '2px' },
+                    margin: { xs: '8px', md: '16px' },
+                  }}
                 >
                   VITA
                 </Box>
@@ -142,7 +141,7 @@ function TeamSelector(props) {
               <Typography
                 className="uppercase"
                 sx={{
-                  fontSize: '15px',
+                  fontSize: { xs: '12px', md: '15px' },
                   fontWeight: '400',
                   lineHeight: 'normal',
                 }}

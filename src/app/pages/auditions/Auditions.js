@@ -89,14 +89,13 @@ function Auditions() {
               { value: '27.08.25, Rotterdam', label: '27.08.25, Rotterdam' },
             ],
           },
-          
         ],
       },
-      // 
+      //
       {
         id: 'empty-space-00',
         Component: ({ input: { sx } }) => <Box sx={sx} />,
-        sx: { margin: '48px 0' },
+        sx: { margin: {xs: '24px 0', md: '48px 0'} },
         colSpan: 'col-span-12',
       },
       //
@@ -168,7 +167,7 @@ function Auditions() {
           'Bitte lade hier ein möglichst aktuelles Portraitfoto von dir hoch. Das Foto wird wie alle Daten, die du in dieses Formular eingibst, vertraulich behandelt und nicht an Dritte weitergegeben. Mögliche Dateiformate: JPG, GIF, PNG, BMP, max. 3 MB',
         Component: OutputFormSubtitle,
         colSpan: 'col-span-12',
-        margin: '28px 0 0 0',
+        margin: {xs: '14px 0 0 0', md: '28px 0 0 0'},
       },
       {
         id: 'durchsuchen',
@@ -184,6 +183,7 @@ function Auditions() {
         label: 'Kontakt',
         Component: OutputFormTitle,
         colSpan: 'col-span-12',
+        margin: { xs: '26px 0 0 0', md: '54px 0 0 0' },
       },
       {
         id: 'strasse',
@@ -239,6 +239,7 @@ function Auditions() {
         label: 'Bisherige Ausbildung',
         Component: OutputFormTitle,
         colSpan: 'col-span-12',
+        margin: { xs: '26px 0 0 0', md: '54px 0 0 0' },
       },
       {
         id: 'schulabschluss',
@@ -262,7 +263,7 @@ function Auditions() {
         label: 'Erfahrung in',
         Component: OutputFormTitle,
         colSpan: 'col-span-12',
-        margin: '54px 0 0 0',
+        margin: { xs: '26px 0 0 0', md: '54px 0 0 0' },
       },
       {
         id: 'title-erf-mog',
@@ -299,7 +300,7 @@ function Auditions() {
         label: 'Wie bist du auf uns aufmerksam geworden?',
         Component: OutputFormTitle,
         colSpan: 'col-span-12',
-        margin: '102px 0 32px 0',
+        margin: { xs: '51px 0 32px 0', md: '102px 0 32px 0' },
       },
       {
         id: 'aufmerksam_geworden',
@@ -322,7 +323,7 @@ function Auditions() {
       {
         id: 'empty-space-02',
         Component: ({ input: { sx } }) => <Box sx={sx} />,
-        sx: { margin: '32px 0' },
+        sx: { margin: { xs: '16px 0', md: '32px 0' } },
         colSpan: 'col-span-12',
       },
       //
@@ -349,7 +350,7 @@ function Auditions() {
       {
         id: 'empty-space-03',
         Component: ({ input: { sx } }) => <Box sx={sx} />,
-        sx: { margin: '32px 0' },
+        sx: { margin: { xs: '16px 0', md: '32px 0' } },
         colSpan: 'col-span-12',
       },
     ],
@@ -376,10 +377,20 @@ function Auditions() {
 
   return (
     <>
-      <Box component="section" className="header relative flex items-center max-h-860-px" sx={{ height: `100vh` }}>
+      <Box
+        component="section"
+        className="header relative flex items-center max-h-860-px"
+        sx={{ height: { sx: '100%', md: `100vh` }, flexDirection: { xs: 'column-reverse', md: 'row' } }}
+      >
         <Box
-          className="flex-1 w-[50%] h-full flex flex-col justify-center items-start px-[56px] pb-[46px] gap-[18px]"
-          sx={{ zIndex: '2' }}
+          className="flex-1 h-full flex-col justify-center items-start"
+          sx={{
+            display: { xs: 'none', md: 'flex' },
+            zIndex: '2',
+            width: { xs: '100%', md: '50%' },
+            padding: { xs: '46px 56px 46px 56px', md: '0 56px 46px 56px' },
+            gap: { xs: '8px', md: '18px' },
+          }}
         >
           <Typography
             sx={{
@@ -406,20 +417,58 @@ function Auditions() {
         <Box
           component="img"
           src={`${process.env.PUBLIC_URL}/assets/images/auditions/cdsh-willkommen-1.png`}
-          className="flex-1 w-[50%] h-full"
-          sx={{ objectFit: 'cover' }}
+          className="flex-1 h-full relative"
+          sx={{ objectFit: 'cover', width: { xs: '100%', md: '50%' } }}
         ></Box>
+        <Box
+          sx={{
+            position: 'absolute',
+            left: '24px',
+            bottom: '12px',
+            display: { xs: 'flex', md: 'none' },
+            flexDirection: 'column',
+            gap: '8px',
+          }}
+        >
+          <Typography
+            className="mix-blend-exclusion"
+            sx={{
+              fontSize: '50px',
+              lineHeight: '55px',
+              fontWeight: '400',
+              color: 'white',
+            }}
+          >
+            Auditions
+          </Typography>
+          <Typography
+            className="rounded-full px-[18px] py-[6px]"
+            sx={{
+              color: '#000000',
+              fontSize: '15px',
+              fontWeight: '400',
+              lineHeight: 'normal',
+              background: theme.palette.primary.main,
+            }}
+          >
+            Download Checkliste 2025
+          </Typography>
+        </Box>
       </Box>
 
       <Box
         component="section"
-        className="py-[110px] px-[48px] flex justify-center items-start gap-[48px]"
-        sx={{ background: theme.palette.secondary.main }}
+        className="px-[48px] flex justify-center items-start"
+        sx={{
+          background: theme.palette.secondary.main,
+          gap: { xs: '24px', md: '48px' },
+          py: { xs: '55px', md: '110px' },
+        }}
       >
         <Box className="max-w-[1280px]">
           <Typography
             className="text-center"
-            sx={{ color: '#000000 ', fontSize: '30px', fontWeight: '400', lineHeight: 'normal' }}
+            sx={{ color: '#000000 ', fontSize: { xs: '15px', md: '30px' }, fontWeight: '400', lineHeight: 'normal' }}
           >
             Du kannst dich bei Interesse an unseren Aufnahmeprüfungen für die Video Audition registrieren. Sie ist
             gleichwertig mit einer Audition vor Ort und besteht im Wesentlichen aus der Einsendung von Videos, die uns
@@ -428,7 +477,11 @@ function Auditions() {
         </Box>
       </Box>
 
-      <Box component="section" className="py-[110px] px-[48px] flex justify-center items-start gap-[48px]">
+      <Box
+        component="section"
+        className="px-[48px] flex justify-center items-start"
+        sx={{ py: { xs: '55px', md: '110px' }, gap: { xs: '24px', md: '48px' } }}
+      >
         <form
           onSubmit={onSubmitHandler}
           noValidate
@@ -459,7 +512,7 @@ function Auditions() {
                 disableRipple
                 className="rounded-full max-w-fit py-[12px] px-[54px]"
                 sx={{
-                  fontSize: '40px',
+                  fontSize: { xs: '20px', md: '40px' },
                   lineHeight: 'normal',
                   zIndex: 10,
                   transition: 'color 0.2s',
@@ -479,7 +532,7 @@ function Auditions() {
                 <Typography
                   sx={{
                     color: '#000000',
-                    fontSize: '15px',
+                    fontSize: { xs: '12px', md: '15px' },
                     fontWeight: '400',
                   }}
                 >

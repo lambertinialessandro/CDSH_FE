@@ -1,13 +1,18 @@
 import AboutUs from 'app/pages/aboutUs/AboutUs';
+import Aktuelles from 'app/pages/aktuelles/Aktuelles';
 import Auditions from 'app/pages/auditions/Auditions';
 import Ausbildung from 'app/pages/ausbildung/Ausbildung';
+import FAQ from 'app/pages/faq/FAQ';
+import AGB from 'app/pages/general/AGB';
+import Datenschutz from 'app/pages/general/Datenschutz';
+import Impressum from 'app/pages/general/Impressum';
 import Home from 'app/pages/home/Home';
 import Project from 'app/pages/projects/Project';
 import StudentGroup from 'app/pages/students/StudentGroup';
 import Students from 'app/pages/students/Students';
 import Team from 'app/pages/team/Team';
 import TeamMember from 'app/pages/team/TeamMember';
-import Test from 'app/pages/test/Test';
+import TicketShop from 'app/pages/ticketShop/TicketShop';
 import LandingLayout from 'app/shared-components/layout/LandingLayout';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router';
@@ -66,7 +71,15 @@ function Navigation() {
 
           <Route path={'/auditions'} element={<Auditions />} />
 
-          <Route path={'/test'} element={<Test />} />
+          <Route path={'/aktuelles'} element={<Aktuelles />} />
+
+          <Route path={'/faq'} element={<FAQ />} />
+
+          <Route path={'/datenschutz'} element={<Datenschutz />} />
+          <Route path={'/impressum'} element={<Impressum />} />
+          <Route path={'/agb'} element={<AGB />} />
+
+          <Route path={'/ticketshop'} element={<TicketShop />} />
 
           {/* <Route path={'/*'} element={<Navigate to="/" replace />} /> */}
         </Routes>

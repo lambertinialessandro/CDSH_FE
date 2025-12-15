@@ -53,7 +53,10 @@ function Home() {
       <AktuellesSection />
 
       {/* Über uns */}
-      <Box component="section" sx={{ py: { xs: 8, md: 14 }, px: { xs: 4, md: 6 } }}>
+      <Box component="section" className="w-full flex flex-col justify-start items-center" sx={{ py: { xs: 8, md: 14 }, px: { xs: 4, md: 6 } }}>
+        <Box
+                  className="max-w-[1280px]"
+                >
         <Typography
           className="mb-[60px] md:mb-[110px]"
           sx={{ fontSize: { xs: '40px', md: '80px' }, fontWeight: 400, color: '#000' }}
@@ -74,11 +77,11 @@ function Home() {
                   mb: { xs: 3, md: 0 },
                 }}
               >
-                Die CDSH - CONTEMPORARY DANCE SCHOOL ist eine staatlich anerkannte Berufsfachschule für
-                zeitgenössischen Bühnentanz. Der Schwerpunkt der dreijährigen Ausbildung liegt auf zeitgenössischem und
-                modernem Klassischem Ballett.
+                Die CDSH - CONTEMPORARY DANCE SCHOOL ist eine staatlich anerkannte Berufsfachschule für zeitgenössischen
+                Bühnentanz. Der Schwerpunkt der dreijährigen Ausbildung liegt auf zeitgenössischem und modernem
+                Klassischem Ballett.
               </Typography>
-              <AnchorLink>
+              <AnchorLink href={"/team"}>
                 Mehr erfahren <ArrowForward />
               </AnchorLink>
             </Box>
@@ -88,6 +91,7 @@ function Home() {
               <ImageAnimation />
             </Box>
           </Box>
+        </Box>
         </Box>
       </Box>
 
@@ -126,6 +130,7 @@ function Home() {
               fontSize="inherit"
               lineHeight={{ xs: '1px', md: '5px' }}
               color="#000000"
+              href={"/auditions"}
             >
               JETZT ANMELDEN <ArrowForward fontSize="inherit" />
             </BigLink>
