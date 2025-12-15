@@ -1,4 +1,4 @@
-import { FormControl, InputAdornment, TextField } from '@mui/material';
+import { FormControl, FormHelperText, InputAdornment, TextField } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
 
 const StyledTextField = styled(TextField)(({ theme }) => ({
@@ -34,6 +34,7 @@ function CustomMultilineTextField(props) {
   return (
     <FormControl variant="outlined" fullWidth error={!!error} disabled={readOnly} size={size}>
       <StyledTextField
+      {...field}
         label={label}
         placeholder={placeholder}
         multiline
@@ -58,6 +59,7 @@ function CustomMultilineTextField(props) {
         }}
         {...othProps}
       />
+      {!!error && <FormHelperText sx={{color: "#FF2023 !important"}}>{error.message}</FormHelperText>}
     </FormControl>
   );
 }

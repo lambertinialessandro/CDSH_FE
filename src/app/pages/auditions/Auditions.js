@@ -1,25 +1,29 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Button, Typography, useTheme } from '@mui/material';
-import { dateRegex } from 'app/constants/regex';
+import { dateRegex, emailRegex, phoneRegex } from 'app/constants/regex';
 import ChipCheckboxList from 'app/shared-components/formComponents/ChipCheckboxList';
 import CustomMultilineTextField from 'app/shared-components/formComponents/CustomMultilineTextField';
 import CustomTextField from 'app/shared-components/formComponents/CustomTextField';
-import GridCheckboxGroup from 'app/shared-components/formComponents/GridCheckboxGroup';
+import GridCheckbox from 'app/shared-components/formComponents/GridCheckbox';
 import GridRadioGroup from 'app/shared-components/formComponents/GridRadioGroup';
 import OutputFormSubtitle from 'app/shared-components/formComponents/OutputFormSubtitle';
 import OutputFormTitle from 'app/shared-components/formComponents/OutputFormTitle';
 import SpecialGridRadioGroup from 'app/shared-components/formComponents/SpecialGridRadioGroup';
 import UploadButton from 'app/shared-components/formComponents/UploadButton';
-import { useEffect, useMemo } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { useEffect, useMemo, useState } from 'react';
+import { Controller, FormProvider, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
+import { ns as ns_audition } from './translations';
 
 function Auditions() {
+  const { t } = useTranslation([ns_audition]);
+  const { title, message, error, button } = t(ns_audition);
   const theme = useTheme();
 
   const defaultValues = useMemo(() => {
     return {
-      auditionSelection: '',
+      audition_selection: [],
       //
       vorname: '',
       nachname: '',
@@ -39,49 +43,85 @@ function Auditions() {
       schulabschluss: '',
       tanzabschluss: '',
       //
-      erf_zeitgenossisch: false,
-      erf_modern: false,
-      erf_ballet: false,
-      erf_improvisation: false,
-      erf_jass: false,
-      erf_choreographie: false,
+      erf_mog_list: [],
       zusatzliche_fahigkeiten: '',
       //
-      aufmerksam_geworden: [],
+      aufmerksam_geworden: '',
       //
-      verbindliche_anmeldung: false,
-      newsletter_empfangen: false,
-      datenschutz: false,
+      accept_data_verbindliche_anmeldung: false,
+      accept_data_newsletter_empfangen: false,
+      accept_data_datenschutz: false,
     };
   }, []);
   const validation = useMemo(
     () =>
       yup.object().shape({
+        audition_selection: yup
+          .array()
+          .of(yup.string())
+          .required(error.auditionSelection_required)
+          .min(1, error.auditionSelection_min)
+          .test('min-items-for-presenz', error.auditionSelection_presenz, (value) => {
+            if (!value || !value.includes('as_presenz')) {
+              return value.length >= 1;
+            }
+            return value.length >= 2;
+          }),
         //
-        vorname: yup.string().required(),
-        nachname: yup.string().required(),
-        geburtsdatum: yup.string().matches(dateRegex, { message: 'Wrong format' }).required(),
-        staatsangehorigkeiten: yup.string().required(),
-        muttersprache: yup.string().required(),
-        fremdsprachen: yup.string().required(),
-        pronomen: yup.string().required(),
+        vorname: yup.string().trim().required(error.vorname_required),
+        nachname: yup.string().trim().required(error.nachname_required),
+        geburtsdatum: yup
+          .string()
+          .required(error.geburtsdatum_required)
+          .matches(dateRegex, { message: error.geburtsdatum_format }),
+        staatsangehorigkeiten: yup.string().required(error.staatsangehorigkeiten_required),
+        muttersprache: yup.string().required(error.muttersprache_required),
+        fremdsprachen: yup.string().required(error.fremdsprachen_required),
+        pronomen: yup.string().required(error.pronomen_required),
         //
+        durchsuchen: yup.string().required(error.durchsuchen_required),
+        //
+        strasse: yup.string().trim().required(error.strasse_required),
+        hausnummer: yup.string().required(error.hausnummer_required),
+        plz: yup.string().required(error.plz_required),
+        ort: yup.string().trim().required(error.ort_required),
+        email: yup.string().required(error.email_required).matches(emailRegex, { message: error.email_format }),
+        telefon: yup.string().required(error.telefon_required).matches(phoneRegex, { message: error.telefon_format }),
+        //
+        schulabschluss: yup.string().required(error.schulabschluss_required),
+        tanzabschluss: yup.string().required(error.tanzabschluss_required),
+        //
+        erf_mog_list: yup.array().of(yup.string()).min(1, error.erfMogList_min),
+        zusatzliche_fahigkeiten: yup.string().required(error.zusatzlicheFahigkeiten_required),
+        //
+        aufmerksam_geworden: yup.string().required(error.aufmerksamGeworden_required),
+        //
+        accept_data_verbindliche_anmeldung: yup
+          .bool()
+          .required(error.agreement_required)
+          .isTrue(error.acceptDataVerbindlicheAnmeldung_isTrue),
+        accept_data_newsletter_empfangen: yup.bool(),
+        accept_data_datenschutz: yup
+          .bool()
+          .required(error.agreement_required)
+          .isTrue(error.acceptDataDatenschutz_isTrue),
       }),
     []
   );
   const inputs = useMemo(
     () => [
-      //auditionSelection: '',
+      //auditionSelection
       {
         id: 'audition_selection',
         Component: SpecialGridRadioGroup,
+        required: true,
         colSpan: 'col-span-12',
         options: [
-          { value: 'as_video', label: 'Video Audition' },
-          { value: 'as_live', label: 'Live Audition' },
+          { value: 'as_video', label: message.videoAudition },
+          { value: 'as_live', label: message.liveAudition },
           {
             value: 'as_presenz',
-            label: 'Präsenz Audition',
+            label: message.presenzAudition,
             subSelection: [
               { value: '24.08.25, Rotterdam', label: '24.08.25, Rotterdam' },
               { value: '25.08.25, Rotterdam', label: '25.08.25, Rotterdam' },
@@ -95,83 +135,82 @@ function Auditions() {
       {
         id: 'empty-space-00',
         Component: ({ input: { sx } }) => <Box sx={sx} />,
-        sx: { margin: {xs: '24px 0', md: '48px 0'} },
+        sx: { margin: { xs: '24px 0', md: '48px 0' } },
         colSpan: 'col-span-12',
       },
-      //
+      // personal info
       {
         id: 'vorname',
-        placeholder: 'Vorname',
+        placeholder: message.firstName,
         Component: CustomTextField,
         size: 'small',
         required: true,
-        colSpan: 'col-span-6',
+        colSpan: 'col-span-12 md:col-span-6',
       },
       {
         id: 'nachname',
-        placeholder: 'Nachname',
+        placeholder: message.lastName,
         Component: CustomTextField,
         size: 'small',
         required: true,
-        colSpan: 'col-span-6',
+        colSpan: 'col-span-12 md:col-span-6',
       },
       {
         id: 'geburtsdatum',
-        placeholder: 'Geburtsdatum',
+        placeholder: message.dateOfBirth,
         Component: CustomTextField,
         size: 'small',
         required: true,
-        colSpan: 'col-span-6',
+        colSpan: 'col-span-12 md:col-span-6',
       },
       {
         id: 'staatsangehorigkeiten',
-        placeholder: 'Staatsangehörigkeiten',
+        placeholder: message.nationalities,
         Component: CustomTextField,
         size: 'small',
         required: true,
-        colSpan: 'col-span-6',
+        colSpan: 'col-span-12 md:col-span-6',
       },
       {
         id: 'muttersprache',
-        placeholder: 'Muttersprache',
+        placeholder: message.motherTongue,
         Component: CustomTextField,
         size: 'small',
         required: true,
-        colSpan: 'col-span-6',
+        colSpan: 'col-span-12 md:col-span-6',
       },
       {
         id: 'fremdsprachen',
-        placeholder: 'Fremdsprachen',
+        placeholder: message.foreignLanguages,
         Component: CustomTextField,
         size: 'small',
         required: true,
-        colSpan: 'col-span-6',
+        colSpan: 'col-span-12 md:col-span-6',
       },
       {
         id: 'pronomen',
-        placeholder: 'Pronomen',
+        placeholder: message.pronouns,
         Component: CustomTextField,
         size: 'small',
         required: true,
-        colSpan: 'col-span-6',
+        colSpan: 'col-span-12 md:col-span-6',
       },
       {
         id: 'empty-space-01',
         Component: Box,
-        colSpan: 'col-span-6',
+        colSpan: 'col-span-12 md:col-span-6',
       },
       // Durchsuchen
       {
         id: 'title-img-upl',
-        label:
-          'Bitte lade hier ein möglichst aktuelles Portraitfoto von dir hoch. Das Foto wird wie alle Daten, die du in dieses Formular eingibst, vertraulich behandelt und nicht an Dritte weitergegeben. Mögliche Dateiformate: JPG, GIF, PNG, BMP, max. 3 MB',
+        label: title.uploadPhotoDescription,
         Component: OutputFormSubtitle,
         colSpan: 'col-span-12',
-        margin: {xs: '14px 0 0 0', md: '28px 0 0 0'},
+        margin: { xs: '14px 0 0 0', md: '28px 0 0 0' },
       },
       {
         id: 'durchsuchen',
-        label: 'Durchsuchen',
+        label: message.fileUpload,
         Component: UploadButton,
         size: 'small',
         required: true,
@@ -180,113 +219,114 @@ function Auditions() {
       // Kontakt
       {
         id: 'title-kontakt',
-        label: 'Kontakt',
+        label: title.contact,
         Component: OutputFormTitle,
         colSpan: 'col-span-12',
         margin: { xs: '26px 0 0 0', md: '54px 0 0 0' },
       },
       {
         id: 'strasse',
-        placeholder: 'Strasse',
+        placeholder: message.street,
         Component: CustomTextField,
         size: 'small',
         required: true,
-        colSpan: 'col-span-6',
+        colSpan: 'col-span-12 md:col-span-6',
       },
       {
         id: 'hausnummer',
-        placeholder: 'Hausnummer',
+        placeholder: message.houseNumber,
         Component: CustomTextField,
         size: 'small',
         required: true,
-        colSpan: 'col-span-6',
+        colSpan: 'col-span-12 md:col-span-6',
       },
       {
         id: 'plz',
-        placeholder: 'PLZ',
+        placeholder: message.postalCode,
         Component: CustomTextField,
         size: 'small',
         required: true,
-        colSpan: 'col-span-6',
+        colSpan: 'col-span-12 md:col-span-6',
       },
       {
         id: 'ort',
-        placeholder: 'Ort',
+        placeholder: message.city,
         Component: CustomTextField,
         size: 'small',
         required: true,
-        colSpan: 'col-span-6',
+        colSpan: 'col-span-12 md:col-span-6',
       },
       {
         id: 'email',
-        placeholder: 'E-Mail',
+        placeholder: message.email,
         Component: CustomTextField,
         size: 'small',
         required: true,
-        colSpan: 'col-span-6',
+        colSpan: 'col-span-12 md:col-span-6',
       },
       {
         id: 'telefon',
-        placeholder: 'Telefon',
+        placeholder: message.phone,
         Component: CustomTextField,
         size: 'small',
         required: true,
-        colSpan: 'col-span-6',
+        colSpan: 'col-span-12 md:col-span-6',
       },
       // Bisherige Ausbildung
       {
         id: 'title-bis-aus',
-        label: 'Bisherige Ausbildung',
+        label: title.previousEducation,
         Component: OutputFormTitle,
         colSpan: 'col-span-12',
         margin: { xs: '26px 0 0 0', md: '54px 0 0 0' },
       },
       {
         id: 'schulabschluss',
-        placeholder: 'Schulabschluss',
+        placeholder: message.schoolQualification,
         Component: CustomTextField,
         size: 'small',
         required: true,
-        colSpan: 'col-span-6',
+        colSpan: 'col-span-12 md:col-span-6',
       },
       {
         id: 'tanzabschluss',
-        placeholder: 'Tänz. Abschluss',
+        placeholder: message.danceQualification,
         Component: CustomTextField,
         size: 'small',
         required: true,
-        colSpan: 'col-span-6',
+        colSpan: 'col-span-12 md:col-span-6',
       },
       // Erfahrung in
       {
         id: 'title-erfahrung',
-        label: 'Erfahrung in',
+        label: title.experienceIn,
         Component: OutputFormTitle,
         colSpan: 'col-span-12',
         margin: { xs: '26px 0 0 0', md: '54px 0 0 0' },
       },
       {
         id: 'title-erf-mog',
-        label: 'Mehrfachauswahl möglich',
+        label: title.multipleSelectionPossible,
         Component: OutputFormSubtitle,
         colSpan: 'col-span-12',
       },
       {
-        id: 'subtitle-erf-mog',
+        id: 'erf_mog_list',
         Component: ChipCheckboxList,
+        required: true,
         colSpan: 'col-span-12',
         options: [
-          { value: 'erf_zeitgenossisch', label: 'Zeitgenössisch' },
-          { value: 'erf_modern', label: 'Modern' },
-          { value: 'erf_ballet', label: 'Ballet' },
-          { value: 'erf_improvisation', label: 'Improvisation' },
-          { value: 'erf_jass', label: 'Jass' },
-          { value: 'erf_choreographie', label: 'Choreographie' },
+          { value: 'erf_zeitgenossisch', label: message.contemporary },
+          { value: 'erf_modern', label: message.modern },
+          { value: 'erf_ballet', label: message.ballet },
+          { value: 'erf_improvisation', label: message.improvisation },
+          { value: 'erf_jass', label: message.jazz },
+          { value: 'erf_choreographie', label: message.choreography },
         ],
       },
       {
         id: 'zusatzliche_fahigkeiten',
-        placeholder: 'Zusätzliche Fähigkeiten',
+        placeholder: message.additionalSkills,
         Component: CustomMultilineTextField,
         hasEndDot: false,
         size: 'small',
@@ -297,7 +337,7 @@ function Auditions() {
       //
       {
         id: 'title-auf-gew',
-        label: 'Wie bist du auf uns aufmerksam geworden?',
+        label: title.howDidYouHear,
         Component: OutputFormTitle,
         colSpan: 'col-span-12',
         margin: { xs: '51px 0 32px 0', md: '102px 0 32px 0' },
@@ -305,18 +345,19 @@ function Auditions() {
       {
         id: 'aufmerksam_geworden',
         Component: GridRadioGroup,
+        required: true,
         colSpan: 'col-span-12',
         options: [
-          { value: 'amr_gwr_internet', label: 'Internet-Recherche' },
-          { value: 'amr_gwr_schule', label: 'Empfehlung durch eine Schule' },
+          { value: 'amr_gwr_internet', label: message.internetSearch },
+          { value: 'amr_gwr_schule', label: message.schoolRecommendation },
 
-          { value: 'amr_gwr_freunde', label: 'Freunde' },
-          { value: 'amr_gwr_schuler', label: 'Ehemalige Schüler*innen' },
+          { value: 'amr_gwr_freunde', label: message.friends },
+          { value: 'amr_gwr_schuler', label: message.formerStudents },
 
-          { value: 'amr_gwr_vorstellungen', label: 'Vorstellungen der CDSH' },
-          { value: 'amr_gwr_social', label: 'Soziale Medien' },
+          { value: 'amr_gwr_vorstellungen', label: message.cdshPresentations },
+          { value: 'amr_gwr_social', label: message.socialMedia },
 
-          { value: 'amr_gwr_flzer', label: 'Flyer, Plakate' },
+          { value: 'amr_gwr_flzer', label: message.flyersPosters },
         ],
       },
       //
@@ -328,24 +369,24 @@ function Auditions() {
       },
       //
       {
-        id: 'accept_data',
-        Component: GridCheckboxGroup,
+        id: 'accept_data_verbindliche_anmeldung',
+        Component: GridCheckbox,
+        required: true,
         colSpan: 'col-span-12',
-        options: [
-          {
-            colSpan: 12,
-            value: 'verbindliche_anmeldung',
-            label:
-              'Hiermit bestätige ich meine verbindliche Anmeldung für die Audition der CDSH zum oben angegebenen Zeitpunkt an angegebenem Ort und versichere, dass ich meine Angaben korrekt gemacht habe. Ich verpflichte mich hiermit, 60 Euro Gebühr für die Aufnahmeprüfung fristgerecht, spätestens zwei Wochen nach deiner Anmeldung zur Audition, an die CDSH zu überweisen. Sollte ich nicht zur Aufnahmeprüfung kommen können, jedoch spätestens zwei Wochen vorher per Mail oder telefonisch absagen, wird die von mir geleistete Zahlung abzüglich einer Bearbeitungsgebühr von 20 Euro rückerstattet. Die CDSH behandelt die vom Bewerber gemachten persönlichen Angaben sowie eventuell übermitteltes Bildmaterial vertraulich.',
-          },
-          {
-            colSpan: 12,
-            value: 'newsletter_empfangen',
-            label:
-              'Ich möchte den CDSH-Newsletter empfangen. Ich weiß, dass ich mein Einverständnis jederzeit widerrufen kann.',
-          },
-          { colSpan: 12, value: 'datenschutz', label: 'Datenschutz gelesen und akzeptiert' },
-        ],
+        label: message.bindingRegistrationAgreement,
+      },
+      {
+        id: 'accept_data_newsletter_empfangen',
+        Component: GridCheckbox,
+        colSpan: 'col-span-12',
+        label: message.newsletterOptIn,
+      },
+      {
+        id: 'accept_data_datenschutz',
+        Component: GridCheckbox,
+        required: true,
+        colSpan: 'col-span-12',
+        label: message.dataPrivacyAccepted,
       },
       {
         id: 'empty-space-03',
@@ -357,23 +398,37 @@ function Auditions() {
     []
   );
 
-  const { handleSubmit, control, reset, formState } = useForm({
+  const methods = useForm({
     defaultValues,
     resolver: yupResolver(validation),
   });
+  const { handleSubmit, control, reset, formState, setError } = methods;
   const { errors, isValid } = formState;
 
   useEffect(() => {
     reset(defaultValues);
   }, [reset, defaultValues]);
 
-  const onConfirmHandler = (data) => {};
+  const onConfirmHandler = async (data) => {
+    console.log('data', data);
+    // TODO: send the data to the server
+
+    setHasBeenSend(true);
+    reset(defaultValues);
+  };
   const onSubmitHandler = (ev) => {
     ev.preventDefault();
     handleSubmit(onConfirmHandler)(ev);
   };
 
+  const [hasBeenSend, setHasBeenSend] = useState(false);
   const hasErrors = Object.keys(errors).length > 0;
+
+  useEffect(() => {
+    if (hasErrors) {
+      setHasBeenSend(false);
+    }
+  }, [hasErrors]);
 
   return (
     <>
@@ -385,8 +440,8 @@ function Auditions() {
         <Box
           className="flex-1 h-full flex-col justify-center items-start"
           sx={{
-            display: { xs: 'none', md: 'flex' },
             zIndex: '2',
+            display: { xs: 'none', md: 'flex' },
             width: { xs: '100%', md: '50%' },
             padding: { xs: '46px 56px 46px 56px', md: '0 56px 46px 56px' },
             gap: { xs: '8px', md: '18px' },
@@ -396,13 +451,13 @@ function Auditions() {
             sx={{
               fontSize: '80px',
               fontWeight: '400',
-              lineHeight: 'normal',
+              lineHeight: '85px',
             }}
           >
             Auditions
           </Typography>
           <Typography
-            className="rounded-full px-[18px] py-[6px]"
+            className="rounded-full px-[18px] py-[6px] cursor-pointer"
             sx={{
               color: '#000000',
               fontSize: '15px',
@@ -410,49 +465,53 @@ function Auditions() {
               lineHeight: 'normal',
               background: theme.palette.primary.main,
             }}
+            onClick={() => {}}
           >
             Download Checkliste 2025
           </Typography>
         </Box>
-        <Box
-          component="img"
-          src={`${process.env.PUBLIC_URL}/assets/images/auditions/cdsh-willkommen-1.png`}
-          className="flex-1 h-full relative"
-          sx={{ objectFit: 'cover', width: { xs: '100%', md: '50%' } }}
-        ></Box>
-        <Box
-          sx={{
-            position: 'absolute',
-            left: '24px',
-            bottom: '12px',
-            display: { xs: 'flex', md: 'none' },
-            flexDirection: 'column',
-            gap: '8px',
-          }}
-        >
-          <Typography
-            className="mix-blend-exclusion"
+        <Box className="flex-1 h-full relative" sx={{ width: { xs: '100%', md: '50%' } }}>
+          <Box
+            component="img"
+            src={`${process.env.PUBLIC_URL}/assets/images/auditions/cdsh-willkommen-1.png`}
+            className="flex-1 w-full"
+            sx={{ objectFit: 'cover', height: { xs: '390px', md: '100%' } }}
+          ></Box>
+          <Box
             sx={{
-              fontSize: '50px',
-              lineHeight: '55px',
-              fontWeight: '400',
-              color: 'white',
+              position: 'absolute',
+              left: '24px',
+              bottom: '12px',
+              display: { xs: 'flex', md: 'none' },
+              flexDirection: 'column',
+              gap: '8px',
             }}
           >
-            Auditions
-          </Typography>
-          <Typography
-            className="rounded-full px-[18px] py-[6px]"
-            sx={{
-              color: '#000000',
-              fontSize: '15px',
-              fontWeight: '400',
-              lineHeight: 'normal',
-              background: theme.palette.primary.main,
-            }}
-          >
-            Download Checkliste 2025
-          </Typography>
+            <Typography
+              className="mix-blend-exclusion"
+              sx={{
+                fontSize: '50px',
+                lineHeight: '55px',
+                fontWeight: '400',
+                color: 'white',
+              }}
+            >
+              Auditions
+            </Typography>
+            <Typography
+              className="rounded-full px-[18px] py-[6px] cursor-pointer"
+              sx={{
+                color: '#000000',
+                fontSize: '15px',
+                fontWeight: '400',
+                lineHeight: 'normal',
+                background: theme.palette.primary.main,
+              }}
+              onClick={() => {}}
+            >
+              Download Checkliste 2025
+            </Typography>
+          </Box>
         </Box>
       </Box>
 
@@ -462,6 +521,7 @@ function Auditions() {
         sx={{
           background: theme.palette.secondary.main,
           gap: { xs: '24px', md: '48px' },
+          px: {xs: "24px", md: "48px"},
           py: { xs: '55px', md: '110px' },
         }}
       >
@@ -479,68 +539,81 @@ function Auditions() {
 
       <Box
         component="section"
-        className="px-[48px] flex justify-center items-start"
-        sx={{ py: { xs: '55px', md: '110px' }, gap: { xs: '24px', md: '48px' } }}
+        className="flex justify-center items-start"
+        sx={{ py: { xs: '55px', md: '110px' }, px: {xs: "24px", md: "48px"}, gap: { xs: '24px', md: '48px' } }}
       >
         <form
           onSubmit={onSubmitHandler}
           noValidate
-          className="overflow-y-hidden w-full max-w-[1280px] h-full flex flex-col px-8 py-6"
+          className="overflow-y-hidden w-full max-w-[1280px] h-full flex flex-col px-1 py-6"
         >
-          <Box className="h-full grid grid-cols-12 gap-4 md:gap-8 pt-2">
-            {useMemo(
-              () =>
-                inputs.map(({ id, Component, colSpan = 'col-span-12', ...input }) => {
-                  return (
-                    <Box key={id} className={`${colSpan}`}>
-                      <Controller
-                        name={id}
-                        control={control}
-                        render={({ field }) => {
-                          return <Component input={input} field={field} error={errors[id]} />;
-                        }}
-                      />
-                    </Box>
-                  );
-                }),
-              [inputs, control, errors]
-            )}
-            <Box className="col-span-6">
-              <Button
-                type="submit"
-                fullWidth
-                disableRipple
-                className="rounded-full max-w-fit py-[12px] px-[54px]"
-                sx={{
-                  fontSize: { xs: '20px', md: '40px' },
-                  lineHeight: 'normal',
-                  zIndex: 10,
-                  transition: 'color 0.2s',
-                  border: '1px solid black',
-                  boxShadow: 0,
-                  textTransform: 'capitalize',
-                  backgroundColor: isValid ? 'primary.main' : 'white',
-                  color: isValid ? 'white' : 'black',
-                }}
-              >
-                Abschicken
-              </Button>
-            </Box>
-
-            <Box className="col-span-6 flex justify-end items-center">
-              {hasErrors && (
-                <Typography
+          <FormProvider {...methods}>
+            <Box className="h-full grid grid-cols-12 gap-4 md:gap-8 pt-2">
+              {useMemo(
+                () =>
+                  inputs.map(({ id, Component, colSpan = 'col-span-12', ...input }) => {
+                    return (
+                      <Box key={id} className={`${colSpan}`}>
+                        <Controller
+                          name={id}
+                          control={control}
+                          render={({ field }) => {
+                            return <Component input={input} field={field} error={errors[id]} />;
+                          }}
+                        />
+                      </Box>
+                    );
+                  }),
+                [inputs, control, errors]
+              )}
+              <Box className="col-span-6">
+                <Button
+                  type="submit"
+                  fullWidth
+                  disableRipple
+                  className="rounded-full max-w-fit py-[12px] px-[54px]"
                   sx={{
-                    color: '#000000',
-                    fontSize: { xs: '12px', md: '15px' },
-                    fontWeight: '400',
+                    fontSize: { xs: '20px', md: '40px' },
+                    lineHeight: 'normal',
+                    zIndex: 10,
+                    transition: 'color 0.2s',
+                    border: '1px solid black',
+                    boxShadow: 0,
+                    textTransform: 'capitalize',
+                    backgroundColor: isValid ? 'primary.main' : 'white',
+                    color: isValid ? 'black' : 'black',
                   }}
                 >
-                  Bitte Formular vollständig ausfüllen.
-                </Typography>
-              )}
+                  {button.submit}
+                </Button>
+              </Box>
+
+              <Box className="col-span-6 flex justify-end items-center">
+                {hasErrors && (
+                  <Typography
+                    sx={{
+                      color: '#000000',
+                      fontSize: { xs: '12px', md: '15px' },
+                      fontWeight: '400',
+                    }}
+                  >
+                    {error.fillFormCompletely}
+                  </Typography>
+                )}
+                {hasBeenSend && (
+                  <Typography
+                    sx={{
+                      color: '#000000',
+                      fontSize: { xs: '12px', md: '15px' },
+                      fontWeight: '400',
+                    }}
+                  >
+                    {message.formSentSuccessfully}
+                  </Typography>
+                )}
+              </Box>
             </Box>
-          </Box>
+          </FormProvider>
         </form>
       </Box>
     </>

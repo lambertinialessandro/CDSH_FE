@@ -49,7 +49,7 @@ function Footer() {
         </Box>
 
         {/* Nav Links */}
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '6px', textWrap: 'nowrap' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0px', textWrap: 'nowrap' }}>
           {[
             { label: 'Über uns', href: 'about_us' },
             { label: 'Auditions', href: 'auditions' },
@@ -60,11 +60,13 @@ function Footer() {
               href={href}
               extraSx={{
                 width: 'fit-content',
-                pb: '2px',
+                pb: '1px',
+                mb: '7px',
                 fontSize: { xs: '14px', md: '15px' },
                 fontWeight: 400,
               }}
               color="#000"
+              lineHeight="1.1px"
             >
               {label}
             </AnchorLink>
@@ -72,7 +74,7 @@ function Footer() {
         </Box>
 
         {/* Legal Links */}
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '6px', textWrap: 'nowrap' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0px', textWrap: 'nowrap' }}>
           {[
             { label: 'Datenschutzerklärung', href: 'datenschutz' },
             { label: 'Impressum', href: 'impressum' },
@@ -83,11 +85,13 @@ function Footer() {
               href={href}
               extraSx={{
                 width: 'fit-content',
-                pb: '2px',
+                pb: '1px',
+                mb: '7px',
                 fontSize: { xs: '14px', md: '15px' },
                 fontWeight: 400,
               }}
               color="#000"
+              lineHeight="1.1px"
             >
               {label}
             </AnchorLink>
@@ -97,16 +101,16 @@ function Footer() {
         {/* Contact */}
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: '8px', textWrap: 'nowrap' }}>
           {['Telefon: +49 (0)40 41924560', 'Mail: info@cdsh.de'].map((label, i) => (
-            <AnchorLink
+            <Typography
               key={i}
-              extraSx={{
+              sx={{
                 fontSize: { xs: '14px', md: '15px' },
                 fontWeight: 400,
+                lineHeight: 1,
               }}
-              color="#000"
             >
               {label}
-            </AnchorLink>
+            </Typography>
           ))}
         </Box>
       </Box>
@@ -141,10 +145,12 @@ function Footer() {
               href={href}
               extraSx={{
                 width: 'fit-content',
+                pb: '1px',
                 fontSize: { xs: '12px', md: '14px' },
                 fontWeight: 400,
               }}
               color="#000"
+              lineHeight="1.1px"
             >
               {label}
             </AnchorLink>
@@ -175,8 +181,10 @@ function Footer() {
                   fontSize: '12px',
                   fontWeight: 400,
                   lineHeight: 1.4,
+                  textTransform: 'uppercase',
                 }}
                 color="#000"
+                lineHeight="1.1px"
               >
                 {hrefLabel}
               </AnchorLink>
@@ -186,7 +194,11 @@ function Footer() {
         <Box
           sx={{ display: { xs: 'flex', md: 'none' }, width: '100%', flexDirection: 'column', alignItems: 'flex-start' }}
         >
-          {['Designed by GREAT AT STUDIO', 'Developed by Lambertini Alessandro and Landini Denise'].map((line, i) => (
+          {[
+            { label: 'Designed by ', href: 'greatatstudio.com', hrefLabel: 'GREAT AT STUDIO' },
+            { label: 'Developed by ', href: '#', hrefLabel: 'Lambertini Alessandro' },
+            { label: 'and ', href: '#', hrefLabel: 'Landini Denise' },
+          ].map(({ label, href, hrefLabel }, i) => (
             <Typography
               key={i}
               sx={{
@@ -195,7 +207,22 @@ function Footer() {
                 lineHeight: 1.4,
               }}
             >
-              {line}
+              {label}
+              <AnchorLink
+                href={href}
+                extraSx={{
+                  width: 'fit-content',
+                  pb: '2px',
+                  fontSize: '10px',
+                  fontWeight: 400,
+                  lineHeight: 1.4,
+                  textTransform: 'uppercase',
+                }}
+                color="#000"
+                lineHeight="1.1px"
+              >
+                {hrefLabel}
+              </AnchorLink>
             </Typography>
           ))}
         </Box>

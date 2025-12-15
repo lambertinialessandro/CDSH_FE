@@ -115,7 +115,16 @@ function StudentSelector(props) {
                 <SplitSection
                   key={idx}
                   title={
-                    <BigLink to={student.href}>
+                    <BigLink
+                      to={student.href}
+                      extraSx={{
+                        fontSize: { xs: '28px', md: '80px' },
+                        fontWeight: '400',
+                        whiteSpace: 'nowrap',
+                      }}
+                      fontSize="inherit"
+                      lineHeight={{ xs: '1px', md: '5px' }}
+                    >
                       {student.name}
                     </BigLink>
                   }

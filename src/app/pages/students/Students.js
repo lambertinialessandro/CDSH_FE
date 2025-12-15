@@ -34,8 +34,8 @@ function Students() {
           <Box
             component="img"
             src={`${process.env.PUBLIC_URL}/assets/images/students/cdsh-willkommen-1.png`}
-            className="flex-1 w-full h-full"
-            sx={{ objectFit: 'cover' }}
+            className="flex-1 w-full"
+            sx={{ objectFit: 'cover', height: {xs: "390px", md: "100%"} }}
           ></Box>
           <Typography
             className="mix-blend-exclusion"
@@ -81,15 +81,15 @@ function Students() {
       <Box
         component="section"
         className="flex flex-col justify-center items-center text-center"
-        sx={{ py: { xs: '60px', md: '120px' } }}
+        sx={{ py: { xs: '60px', md: '120px' }, px: { xs: 4, md: 6 } }}
       >
         <Typography
           sx={{
-            color: '#000000',
-            fontSize: { xs: '35px', md: '80px' },
+            fontSize: { xs: '36px', md: '80px' },
+            marginBottom: { xs: '12px', md: '32px' },
             fontWeight: '400',
+            color: '#000000',
             lineHeight: '1',
-            marginBottom: '32px',
           }}
         >
           Du möchtest uns kennenlernen?

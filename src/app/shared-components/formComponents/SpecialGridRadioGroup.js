@@ -9,6 +9,7 @@ import {
   FormControlLabel,
   Typography,
   Box,
+  useMediaQuery,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
@@ -103,7 +104,8 @@ function GridRadioOption({ opt, field, isParentSelected, readOnly, handleSubOpti
   return (
     <Grid
       item
-      xs={opt.subSelection ? 12 : 6}
+      xs={12}
+      md={opt.subSelection ? 12 : 6}
       key={opt.value}
       sx={{
         opacity: readOnly && !isParentSelected ? 0.6 : 1,
@@ -112,7 +114,7 @@ function GridRadioOption({ opt, field, isParentSelected, readOnly, handleSubOpti
     >
       <Grid container spacing={4} alignItems="center">
         {/* Main option control */}
-        <Grid item xs={opt.subSelection ? 6 : 12}>
+        <Grid item xs={12} md={opt.subSelection ? 6 : 12}>
           <FormControlLabel
             value={opt.value}
             className="w-full"
@@ -122,21 +124,21 @@ function GridRadioOption({ opt, field, isParentSelected, readOnly, handleSubOpti
             sx={{
               m: 0,
               alignItems: 'center',
-              '.MuiRadio-root': { mr: 1},
-              '.MuiTypography-root': { width: "100%" },
+              '.MuiRadio-root': { mr: 1 },
+              '.MuiTypography-root': { width: '100%' },
             }}
           />
         </Grid>
 
         {/* Sub-selection row (Chips) */}
         {opt.subSelection && (
-          <Grid item xs={6}>
+          <Grid item xs={12} md={6}>
             <Grid container spacing={2}>
               {opt.subSelection.map((subOpt) => {
                 const selected = isParentSelected && field.value?.[1] === subOpt.value;
 
                 return (
-                  <Grid item xs={subOpt.colSpan || 6} key={subOpt.value}>
+                  <Grid item xs={12} md={subOpt.colSpan || 6} key={subOpt.value}>
                     <Chip
                       label={subOpt.label}
                       clickable
@@ -164,6 +166,8 @@ function SpecialGridRadioGroup(props) {
   const { input, field, error, readOnly } = props;
   const { options } = input;
 
+  const isMobile = useMediaQuery('(max-width:900px)');
+
   // Handler for all sub-option clicks (memoized and passed down)
   const handleSubOptionClick = useCallback(
     (subOptValue) => {
@@ -185,7 +189,7 @@ function SpecialGridRadioGroup(props) {
         // onChange sets only the main value
         onChange={(e) => field.onChange([e.target.value])}
       >
-        <Grid container spacing={4}>
+        <Grid container spacing={isMobile ? 2 : 4}>
           {options.map((opt, idx) => {
             const isParentSelected = field.value?.[0] === opt.value;
 
@@ -202,7 +206,7 @@ function SpecialGridRadioGroup(props) {
           })}
         </Grid>
       </RadioGroup>
-      {!!error && <FormHelperText>{error.message}</FormHelperText>}
+      {!!error && <FormHelperText sx={{color: "#FF2023 !important"}}>{error.message}</FormHelperText>}
     </FormControl>
   );
 }

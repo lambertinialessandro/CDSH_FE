@@ -1,5 +1,5 @@
 import { Close } from '@mui/icons-material';
-import { Button, FormControl, FormLabel, Grid, Chip, Typography, Box, IconButton } from '@mui/material';
+import { Button, FormControl, FormLabel, Grid, Chip, Typography, Box, IconButton, FormHelperText } from '@mui/material';
 
 function ChipCheckboxList(props) {
   const { input, field, error, readOnly } = props;
@@ -19,10 +19,10 @@ function ChipCheckboxList(props) {
               color={selected ? 'primary' : 'default'}
               variant={selected ? 'filled' : 'outlined'}
               sx={{
-                flex: '1',
                 border: '1px solid black',
                 boxShadow: 0,
                 fontSize: { xs: '12px', md: '15px' },
+                maxWidth: "fit-content"
               }}
               onClick={() => {
                 let newValue = [];
@@ -37,6 +37,7 @@ function ChipCheckboxList(props) {
           );
         })}
       </Box>
+      {!!error && <FormHelperText sx={{color: "#FF2023 !important"}}>{error.message}</FormHelperText>}
     </FormControl>
   );
 }

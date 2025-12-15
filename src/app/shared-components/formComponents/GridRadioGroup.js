@@ -7,7 +7,7 @@ function CustomRadio({ selected, onClick }) {
   return (
     <div
       onClick={onClick}
-      className={`w-7 h-7 rounded-full border border-black flex items-center justify-center cursor-pointer`}
+      className={`w-7 h-7 min-w-7 min-h-7 rounded-full border border-black flex items-center justify-center cursor-pointer`}
     >
       <div
         className={`w-5 h-5 rounded-full transition-colors duration-300 ${
@@ -40,7 +40,7 @@ function GridRadioGroup(props) {
           ))}
         </Grid>
       </RadioGroup>
-      {!!error && <FormHelperText error>{error.message}</FormHelperText>}
+      {!!error && <FormHelperText error sx={{color: "#FF2023 !important"}}>{error.message}</FormHelperText>}
     </FormControl>
   );
 }

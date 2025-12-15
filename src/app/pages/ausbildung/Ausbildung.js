@@ -2,9 +2,9 @@ import { ArrowForward } from '@mui/icons-material';
 import { Box, Typography, useTheme } from '@mui/material';
 import LoopBanner from 'app/shared-components/banner/LoopBanner';
 import BigLink from 'app/shared-components/link/BigLink';
-import Carousel from './Carousel';
 import SubjectSelector from './SubjectSelector';
 import InteractiveSubjects from './InteractiveSubjects';
+import Carousel from 'app/shared-components/carousel/Carousel';
 
 const items = [
   {
@@ -121,8 +121,8 @@ function Ausbildung() {
           <Box
             component="img"
             src={`${process.env.PUBLIC_URL}/assets/images/ausbildung/cdsh-willkommen-1.png`}
-            className="flex-1w-full h-full"
-            sx={{ objectFit: 'cover' }}
+            className="flex-1 w-full"
+            sx={{ objectFit: 'cover', height: { xs: '390px', md: '100%' } }}
           ></Box>
           <Typography
             className="mix-blend-exclusion"
@@ -220,7 +220,7 @@ function Ausbildung() {
       </Box>
 
       {/* TODO */}
-      <InteractiveSubjects />
+      {/* <InteractiveSubjects /> */}
 
       {/* TODO */}
       <SubjectSelector />
@@ -233,7 +233,7 @@ function Ausbildung() {
         <Typography
           sx={{
             color: '#000000',
-            fontSize: { sm: '30px', md: '80px' },
+            fontSize: { xs: '30px', md: '80px' },
             fontWeight: '400',
             lineHeight: '1',
             marginBottom: '32px',
@@ -243,14 +243,14 @@ function Ausbildung() {
         </Typography>
         <Typography
           className="max-w-[740px] min-w-[50%] text-center"
-          sx={{ color: '#000000', fontSize: { sm: '15px', md: '30px' }, fontWeight: '400' }}
+          sx={{ color: '#000000', fontSize: { xs: '15px', md: '30px' }, fontWeight: '400' }}
         >
           Die dreijährige Ausbildung richtet sich an Bewerber*innen mit soliden Vorkenntnissen in zeitgenössischem Tanz
           und Ballett. Die Aufnahme erfolgt über Auditions.
         </Typography>
         <Typography
           className="max-w-[740px] min-w-[50%] text-center"
-          sx={{ color: '#000000', fontSize: { sm: '15px', md: '30px' }, fontWeight: '400' }}
+          sx={{ color: '#000000', fontSize: { xs: '15px', md: '30px' }, fontWeight: '400' }}
         >
           Credits aus anderen Studiengängen können u.U. angerechnet werden. Lorem Ipsum ... Studium in ECTS übersetzen.
         </Typography>
@@ -327,20 +327,42 @@ function Ausbildung() {
 
       <Box component="section" className="px-[45px] flex flex-col justify-center items-start">
         <Box className="w-full flex justify-center">
-          <Box className="max-w-[1250px] border-y border-black flex flex-row">
+          <Box
+            className="max-w-[1250px] border-y border-black flex"
+            sx={{ flexDirection: { xs: 'column', md: 'row' } }}
+          >
             <Box
               className="w-full md:w-1/2 py-[32px] pl-[32px] flex flex-col justify-between items-start"
-              sx={{ background: theme.palette.primary.main }}
+              sx={{ background: theme.palette.primary.main, gap: { xs: '16px', md: '0' } }}
             >
-              <Typography sx={{ color: '#000000', fontSize: { xs: '35px', md: '80px' }, fontWeight: '400', lineHeight: 'normal' }}>
+              <Typography
+                sx={{ color: '#000000', fontSize: { xs: '35px', md: '80px' }, fontWeight: '400', lineHeight: 'normal' }}
+              >
                 Erstes Jahr
               </Typography>
-              <Typography sx={{ color: '#000000 ', fontSize: { xs: '15px', md: '30px' }, fontWeight: '400', lineHeight: 'normal' }}>
+              <Typography
+                sx={{
+                  color: '#000000 ',
+                  fontSize: { xs: '15px', md: '30px' },
+                  fontWeight: '400',
+                  lineHeight: 'normal',
+                }}
+              >
                 Grundlagen
               </Typography>
             </Box>
-            <Box className="w-full md:w-1/2 md:h-[460px] py-[32px] pl-[32px] ">
-              <Typography sx={{ color: '#000000 ', fontSize: { xs: '15px', md: '30px' }, fontWeight: '400', lineHeight: 'normal' }}>
+            <Box
+              className="w-full md:w-1/2 md:h-[460px] py-[32px]"
+              sx={{ pr: { xs: '26px', md: '0' }, pl: { xs: '26px', md: '32px' } }}
+            >
+              <Typography
+                sx={{
+                  color: '#000000 ',
+                  fontSize: { xs: '15px', md: '30px' },
+                  fontWeight: '400',
+                  lineHeight: 'normal',
+                }}
+              >
                 Im ersten Ausbildungsjahr liegt der Schwerpunkt auf der Erarbeitung der tanztechnischen Basis in
                 verschiedenen Modern-Techniken, zeitgenössischem Tanz und im klassischen Ballett.
               </Typography>
@@ -348,9 +370,19 @@ function Ausbildung() {
           </Box>
         </Box>
         <Box className="w-full flex justify-center">
-          <Box className="max-w-[1250px] flex flex-row">
-            <Box className="w-full md:w-1/2 md:h-[460px] py-[32px] pr-[48px]">
-              <Typography sx={{ color: '#000000 ', fontSize: { xs: '15px', md: '30px' }, fontWeight: '400', lineHeight: 'normal' }}>
+          <Box className="max-w-[1250px] flex" sx={{ flexDirection: { xs: 'column-reverse', md: 'row' } }}>
+            <Box
+              className="w-full md:w-1/2 md:h-[460px] py-[32px]"
+              sx={{ pr: { xs: '26px', md: '48px' }, pl: { xs: '26px', md: '0' } }}
+            >
+              <Typography
+                sx={{
+                  color: '#000000 ',
+                  fontSize: { xs: '15px', md: '30px' },
+                  fontWeight: '400',
+                  lineHeight: 'normal',
+                }}
+              >
                 Im zweiten Jahr werden die Basistechniken vertieft und entwickelt. Das Fach Improvisation, sowie die
                 Entwicklung und Präsentation eines eigenen Stücks im Rahmen unseres Soloprojekts tragen dazu bei, eine
                 eigene künstlerische Sprache zu finden und eigene kreative Impulse auf der Basis der erlernten
@@ -359,32 +391,53 @@ function Ausbildung() {
             </Box>
             <Box
               className="w-full md:w-1/2 py-[32px] pl-[32px] flex flex-col justify-between items-start"
-              sx={{ background: theme.palette.primary.main }}
+              sx={{ background: theme.palette.primary.main, gap: { xs: '16px', md: '0' } }}
             >
-              <Typography sx={{ color: '#000000', fontSize: { xs: '35px', md: '80px' }, fontWeight: '400', lineHeight: 'normal' }}>
+              <Typography
+                sx={{ color: '#000000', fontSize: { xs: '35px', md: '80px' }, fontWeight: '400', lineHeight: 'normal' }}
+              >
                 Zweites Jahr
               </Typography>
-              <Typography sx={{ color: '#000000', fontSize: { xs: '15px', md: '30px' }, fontWeight: '400', lineHeight: 'normal' }}>
+              <Typography
+                sx={{ color: '#000000', fontSize: { xs: '15px', md: '30px' }, fontWeight: '400', lineHeight: 'normal' }}
+              >
                 Intensivierung und künstlerische Entwicklung
               </Typography>
             </Box>
           </Box>
         </Box>
         <Box className="w-full flex justify-center">
-          <Box className="max-w-[1250px] border-y border-black flex flex-row">
+          <Box
+            className="max-w-[1250px] border-y border-black flex"
+            sx={{ flexDirection: { xs: 'column', md: 'row' } }}
+          >
             <Box
               className="w-full md:w-1/2 py-[32px] pl-[32px] pr-[8px] flex flex-col justify-between items-start"
-              sx={{ background: theme.palette.primary.main }}
+              sx={{ background: theme.palette.primary.main, gap: { xs: '16px', md: '0' } }}
             >
-              <Typography sx={{ color: '#000000', fontSize: { xs: '35px', md: '80px' }, fontWeight: '400', lineHeight: 'normal' }}>
+              <Typography
+                sx={{ color: '#000000', fontSize: { xs: '35px', md: '80px' }, fontWeight: '400', lineHeight: 'normal' }}
+              >
                 Drittes Jahr
               </Typography>
-              <Typography sx={{ color: '#000000', fontSize: { xs: '15px', md: '30px' }, fontWeight: '400', lineHeight: 'normal' }}>
+              <Typography
+                sx={{ color: '#000000', fontSize: { xs: '15px', md: '30px' }, fontWeight: '400', lineHeight: 'normal' }}
+              >
                 Spezialisierung, eigenständige künstlerische Arbeit und Companyprojekt
               </Typography>
             </Box>
-            <Box className="w-full md:w-1/2 md:h-[460px] py-[32px] pl-[32px]">
-              <Typography sx={{ color: '#000000 ', fontSize: { xs: '15px', md: '30px' }, fontWeight: '400', lineHeight: 'normal' }}>
+            <Box
+              className="w-full md:w-1/2 md:h-[460px] py-[32px]"
+              sx={{ pr: { xs: '26px', md: '0' }, pl: { xs: '26px', md: '32px' } }}
+            >
+              <Typography
+                sx={{
+                  color: '#000000 ',
+                  fontSize: { xs: '15px', md: '30px' },
+                  fontWeight: '400',
+                  lineHeight: 'normal',
+                }}
+              >
                 Im dritten Jahr arbeitest du kreativ mit deiner Klasse. Regelmäßige Showings bereiten auf das
                 Company-Projekt im letzten Semester vor, in dem du unter realistischen Tanzcompany Bedingungen wertvolle
                 Einblicke ins Berufsleben professioneller Tänzer*innen erhältst.
@@ -402,17 +455,17 @@ function Ausbildung() {
         <Typography
           sx={{
             color: '#000000',
-            fontSize: { sm: '30px', md: '80px' },
+            fontSize: { xs: '30px', md: '80px' },
             fontWeight: '400',
             lineHeight: '1',
-            marginBottom: { sm: '16px', md: '32px' },
+            marginBottom: { xs: '16px', md: '32px' },
           }}
         >
           Kosten
         </Typography>
         <Typography
           className="max-w-[740px] min-w-[50%] text-center"
-          sx={{ color: '#000000', fontSize: { sm: '15px', md: '30px' }, fontWeight: '400' }}
+          sx={{ color: '#000000', fontSize: { xs: '15px', md: '30px' }, fontWeight: '400' }}
         >
           Die Schulgebühr beträgt für ein Schuljahr EUR 6.360,00 € und kann in 12 Raten zu monatlich EUR 530,00 €
           bezahlt werden. Außerdem besteht eine Kostenbeteiligungspflicht in Höhe von 60,00 € für die Work in Progress
@@ -498,7 +551,7 @@ function Ausbildung() {
                 component="img"
                 src={`${process.env.PUBLIC_URL}/assets/images/ausbildung/Bildschirmfoto 2025-07-03 um 13.50.30 1.png`}
                 className="flex-1 w-[500px]"
-                sx={{ objectFit: 'cover', aspectRatio: 0.75, mb: {xs: "12px", md: "24px"} }}
+                sx={{ objectFit: 'cover', aspectRatio: 0.75, mb: { xs: '12px', md: '24px' } }}
               ></Box>
             </Box>
           </Box>
@@ -507,14 +560,14 @@ function Ausbildung() {
 
       <Box
         component="section"
-      sx={{
-        background: theme.palette.secondary.main,
-        py: { xs: 8, md: 14 },
-        px: { xs: 2, sm: 4, md: 8 },
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-      }}
+        sx={{
+          background: theme.palette.secondary.main,
+          py: { xs: 8, md: 14 },
+          px: { xs: 2, sm: 4, md: 8 },
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
       >
         <Typography
           sx={{ mb: { xs: 6, md: 14 }, color: '#000000', fontSize: { xs: '40px', md: '80px' }, fontWeight: '400' }}

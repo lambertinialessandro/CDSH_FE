@@ -1,19 +1,17 @@
-import { Box, IconButton, Typography, useTheme } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import { ns as ns_navigation } from 'app/navigation/translations';
+import { Box, Typography, useTheme } from '@mui/material';
 import AnchorLink from 'app/shared-components/link/AnchorLink';
-import BigLink from 'app/shared-components/link/BigLink';
 import { selectIsBannerOpen } from 'app/store/app/mainSlice';
+import { languageChanged, selectCurrLanguage } from 'app/store/i18nSlice';
 import { useEffect, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 function TopNavbar({ fixed }) {
-  const { t } = useTranslation([ns_navigation]);
-  const { title } = t(ns_navigation);
   const theme = useTheme();
+  const dispatch = useDispatch();
+
+  const userLanguage = useSelector(selectCurrLanguage);
 
   const isBannerOpen = useSelector(selectIsBannerOpen);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -44,21 +42,19 @@ function TopNavbar({ fixed }) {
     <>
       {/* Top bar */}
       <Box
-        component="nav"
-        className="w-full h-[70px] md:h-[90px] z-[50] mix-blend-exclusion"
+        className="z-[50] mix-blend-exclusion"
         sx={{
           position: fixed ? 'fixed' : 'absolute',
-          top: isBannerOpen ? '45px' : '0px',
+          top: isBannerOpen ? { xs: '56px', md: '54px' } : { xs: '11px', md: '9px' },
           left: 0,
-          right: 0,
+          lineHeight: '28px',
           color: '#fff',
           display: 'flex',
           alignItems: 'center',
-          px: { xs: 2, md: 6 },
-          justifyContent: 'space-between',
+          mx: { xs: 2, md: 6 },
+          justifyContent: 'start',
         }}
       >
-        {/* Logo */}
         <Typography
           component={Link}
           to="/"
@@ -71,13 +67,32 @@ function TopNavbar({ fixed }) {
         >
           CDSH
         </Typography>
-
+      </Box>
+      <Box
+        className="z-[50] mix-blend-exclusion"
+        sx={{
+          position: fixed ? 'fixed' : 'absolute',
+          top: isBannerOpen ? { xs: '65px', md: '75px' } : { xs: '20px', md: '30px' },
+          right: 0,
+          color: '#fff',
+          display: 'flex',
+          alignItems: 'center',
+          mx: { xs: 2, md: 6 },
+          justifyContent: 'end',
+        }}
+      >
         {/* Desktop links */}
         <Box className="hidden md:flex gap-[26px]">
-          <AnchorLink href={``} color="#fff" extraSx={{ fontSize: '15px' }}>
-            English Version
+          <AnchorLink
+            onClick={() => {
+              dispatch(languageChanged(userLanguage == 'en' ? 'de' : 'en'));
+            }}
+            color="#fff"
+            extraSx={{ color: '#ffffff', fontSize: '15px', fontWeight: '400' }}
+          >
+            {userLanguage == 'en' ? 'Deutsche Version' : 'English Version'}
           </AnchorLink>
-          <AnchorLink href={"/ticketshop"} color="#fff" extraSx={{ fontSize: '15px' }}>
+          <AnchorLink href={'/ticketshop'} color="#fff" extraSx={{ fontSize: '15px' }}>
             Ticketshop
           </AnchorLink>
           <AnchorLink
@@ -97,8 +112,14 @@ function TopNavbar({ fixed }) {
 
         {/* Mobile menu button */}
         <Box className="flex md:hidden gap-[26px]">
-          <AnchorLink href={``} color="#fff" extraSx={{ fontSize: '15px' }}>
-            EN
+          <AnchorLink
+            onClick={() => {
+              dispatch(languageChanged(userLanguage == 'en' ? 'de' : 'en'));
+            }}
+            color="#fff"
+            extraSx={{ fontSize: '15px' }}
+          >
+            {userLanguage == 'en' ? 'DE' : 'EN'}
           </AnchorLink>
           <AnchorLink
             onClick={() => {
@@ -118,6 +139,7 @@ function TopNavbar({ fixed }) {
 
       {/* Slide-in menu */}
       <Box
+        component="nav"
         ref={menuRef}
         className="fixed top-0 right-0 h-screen z-[100] flex flex-col justify-between items-start p-[45px] pt-0 overflow-y-auto"
         sx={{
@@ -131,17 +153,19 @@ function TopNavbar({ fixed }) {
         <Box className="w-full h-[90px] flex justify-end items-center" sx={{ marginTop: { xs: '12px', md: '24px' } }}>
           <Box className="flex gap-[26px]">
             <AnchorLink
-              href={``}
+              onClick={() => {
+              dispatch(languageChanged(userLanguage == 'en' ? 'de' : 'en'));
+            }}
               extraSx={{
                 fontSize: '15px',
                 fontWeight: '400',
               }}
               color="#000000"
             >
-              English Version
+            {userLanguage == 'en' ? 'Deutsche Version' : 'English Version'}
             </AnchorLink>
             <AnchorLink
-              href={"/ticketshop"}
+              href={'/ticketshop'}
               extraSx={{
                 fontSize: '15px',
                 fontWeight: '400',

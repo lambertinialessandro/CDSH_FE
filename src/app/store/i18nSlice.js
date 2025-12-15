@@ -24,4 +24,6 @@ const i18nSlice = createSlice({
   },
 });
 
+export const { languageChanged } = i18nSlice.actions;
+
 export default i18nSlice.reducer;
