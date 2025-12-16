@@ -8,7 +8,7 @@ const dictionary = {
       auditionSelection_required: 'At least one audition selection is required.',
       auditionSelection_min: 'Please select at least one option.',
       auditionSelection_presenz: 'If you selected an In-person Audition, you must also select an available date.', // Adjusted message for the .test() condition
-
+      
       // Personal Data
       vorname_required: 'First name is required.',
       nachname_required: 'Last name is required.',
@@ -18,10 +18,10 @@ const dictionary = {
       muttersprache_required: 'Mother tongue is required.',
       fremdsprachen_required: 'Foreign languages are required.',
       pronomen_required: 'Pronoun selection is required.',
-
+      
       // File Upload
       durchsuchen_required: 'A portrait photo is required.',
-
+      
       // Contact
       strasse_required: 'Street name is required.',
       hausnummer_required: 'House number is required.',
@@ -31,22 +31,25 @@ const dictionary = {
       email_format: 'Wrong email format.',
       telefon_required: 'Phone number is required.',
       telefon_format: 'Wrong phone format.',
-
+      
       // Education
       schulabschluss_required: 'School leaving qualification is required.',
       tanzabschluss_required: 'Dance qualification is required.',
-
+      
       // Experience/Skills
       erfMogList_min: 'At least one skill/ability must be selected.',
       zusatzlicheFahigkeiten_required: 'Additional skills are required.',
-
+      
       // How did you hear about us?
       aufmerksamGeworden_required: 'This field is required.',
-
+      
       // Checkboxes (Agreements)
       agreement_required: 'Mandatory agreement is required.',
       acceptDataVerbindlicheAnmeldung_isTrue: 'You must agree to the terms for binding registration.',
       acceptDataDatenschutz_isTrue: 'You must accept the data privacy policy.',
+
+      // end message
+      fillFormCompletely: 'Please fill out the form completely.',
     },
     message: {
       // audition_selection
@@ -104,7 +107,6 @@ const dictionary = {
       dataPrivacyAccepted: 'Data privacy read and accepted',
 
       // end message
-      fillFormCompletely: 'Please fill out the form completely.',
       formSentSuccessfully: 'Form submitted successfully.',
     },
     title: {
