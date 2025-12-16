@@ -1,20 +1,40 @@
 import { Box, Typography, useTheme } from '@mui/material';
 import LoopBanner from 'app/shared-components/banner/LoopBanner';
 import Carousel from 'app/shared-components/carousel/Carousel';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 
 function SplitSection(props) {
-  const { title, text, img = null, href, reverse = false, bottom = false } = props;
+  const { title, text, img = null, projectId, reverse = false, bottom = false } = props;
   const theme = useTheme();
   const navigate = useNavigate();
+  const [projectData, setProjectData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    if (projectId) {
+      setLoading(true);
+      fetch(`http://localhost/plainkit-main/api/projects?id=${projectId}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setProjectData(data);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.error('Error fetching project in SplitSection:', err);
+          setLoading(false);
+        });
+    }
+  }, [projectId]);
+
+  console.log('projectId: ', projectId);
   return (
     <Box className="w-full flex justify-center">
-      <Box className={`max-w-[1250px] w-full border-t ${bottom && 'border-b'} border-black flex flex-col md:flex-row`}
-
-      component={Link}
-      to={href}
+      <Box
+        className={`max-w-[1250px] w-full border-t ${bottom && 'border-b'} border-black flex flex-col md:flex-row`}
+        component={Link}
+        to={`/projects/${projectId}`}
       >
         {!reverse && (
           <Box

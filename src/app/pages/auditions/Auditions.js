@@ -523,7 +523,6 @@ function Auditions() {
         sx={{
           background: theme.palette.secondary.main,
           gap: { xs: '24px', md: '48px' },
-          px: {xs: "24px", md: "48px"},
           py: { xs: '55px', md: '110px' },
         }}
       >

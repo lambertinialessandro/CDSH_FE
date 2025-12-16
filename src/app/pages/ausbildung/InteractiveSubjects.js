@@ -9,84 +9,87 @@ const CIRCLE_COUNT = 5;
 const RADIUS = 2 * 120; // final radius in px
 const SCROLL_LIMIT = 5000; // px
 
-const subjects = [
-  {
-    title: 'Tanztechnik',
-    description: "I don't know",
-    size: 500,
-    x: -100,
-    y: 0,
-  },
-  {
-    title: 'Künstlerische Entwicklung',
-    description: 'Finde und festige deine künstlerische Stimme.',
-    size: 400,
-    x: 300,
-    y: 0,
-  },
-  {
-    title: 'Choreografische Praxis',
-    description:
-      'Mit uns lernst du selbst choreografieren. Unsere festen- und spannende Gast Dozent*innen geben ihr Wissen an dich weiter.',
-    size: 300,
-    x: 100,
-    y: 220,
-  },
-  {
-    title: 'Bühnenpraxis',
-    description: "I don't know",
-    size: 200,
-    x: -100,
-    y: 270,
-  },
-  {
-    title: 'Theorie',
-    description: "I don't know",
-    size: 100,
-    x: -210,
-    y: 250,
-  },
-];
-const subjectsSmall = [
-  {
-    title: 'Tanztechnik',
-    description: "I don't know",
-    size: 350,
-    x: -100,
-    y: 0,
-  },
-  {
-    title: 'Künstlerische Entwicklung',
-    description: 'Finde und festige deine künstlerische Stimme.',
-    size: 300,
-    x: 200,
-    y: 0,
-  },
-  {
-    title: 'Choreografische Praxis',
-    description:
-      'Mit uns lernst du selbst choreografieren. Unsere festen- und spannende Gast Dozent*innen geben ihr Wissen an dich weiter.',
-    size: 250,
-    x: 100,
-    y: 220,
-  },
-  {
-    title: 'Bühnenpraxis',
-    description: "I don't know",
-    size: 200,
-    x: -100,
-    y: 270,
-  },
-  {
-    title: 'Theorie',
-    description: "I don't know",
-    size: 150,
-    x: -250,
-    y: 200,
-  },
-];
-
 function InteractiveSubjects(props) {
+  const { subject_list = [] } = props;
+  console.log('subject_list', subject_list);
+
+  const subjects = [
+    {
+      title: 'Tanztechnik',
+      description: "I don't know",
+      size: 500,
+      x: -100,
+      y: 0,
+    },
+    {
+      title: 'Künstlerische Entwicklung',
+      description: 'Finde und festige deine künstlerische Stimme.',
+      size: 400,
+      x: 300,
+      y: 0,
+    },
+    {
+      title: 'Choreografische Praxis',
+      description:
+        'Mit uns lernst du selbst choreografieren. Unsere festen- und spannende Gast Dozent*innen geben ihr Wissen an dich weiter.',
+      size: 300,
+      x: 100,
+      y: 220,
+    },
+    {
+      title: 'Bühnenpraxis',
+      description: "I don't know",
+      size: 200,
+      x: -100,
+      y: 270,
+    },
+    {
+      title: 'Theorie',
+      description: "I don't know",
+      size: 100,
+      x: -210,
+      y: 250,
+    },
+  ];
+  const subjectsSmall = [
+    {
+      title: 'Tanztechnik',
+      description: "I don't know",
+      size: 350,
+      x: -100,
+      y: 0,
+    },
+    {
+      title: 'Künstlerische Entwicklung',
+      description: 'Finde und festige deine künstlerische Stimme.',
+      size: 300,
+      x: 200,
+      y: 0,
+    },
+    {
+      title: 'Choreografische Praxis',
+      description:
+        'Mit uns lernst du selbst choreografieren. Unsere festen- und spannende Gast Dozent*innen geben ihr Wissen an dich weiter.',
+      size: 250,
+      x: 100,
+      y: 220,
+    },
+    {
+      title: 'Bühnenpraxis',
+      description: "I don't know",
+      size: 200,
+      x: -100,
+      y: 270,
+    },
+    {
+      title: 'Theorie',
+      description: "I don't know",
+      size: 150,
+      x: -250,
+      y: 200,
+    },
+  ];
+
   const theme = useTheme();
   const containerRef = useRef(null);
 
@@ -146,7 +149,7 @@ function InteractiveSubjects(props) {
                     <Typography
                       sx={{
                         color: '#000000',
-                        mt: {xs: "30px", md: "0px"},
+                        mt: { xs: '30px', md: '0px' },
                         fontSize: { xs: '30px', md: '80px' },
                         fontWeight: '400',
                         lineHeight: '1',

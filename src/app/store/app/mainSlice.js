@@ -4,10 +4,12 @@ export const selectCDSH = (state) => state.app.cdsh;
 export const selectCurrTheme = (state) => state.app.cdsh.currTheme;
 
 export const selectIsBannerOpen = (state) => state.app.cdsh.isBannerOpen;
+export const selectUserLanguage = (state) => state.app.cdsh.userLanguage;
 
 const initialState = {
-  currTheme: 'default',  // localStorage.getItem('theme') ?? 'default',
-  isBannerOpen: false
+  currTheme: 'default', // localStorage.getItem('theme') ?? 'default',
+  isBannerOpen: false,
+  userLanguage: 'en',
 };
 
 const cdshSlice = createSlice({
@@ -20,9 +22,9 @@ const cdshSlice = createSlice({
       localStorage.setItem('theme', payload);
     },
 
-    setIsBannerOpen: (state, {payload}) => {
+    setIsBannerOpen: (state, { payload }) => {
       state.isBannerOpen = payload;
-    }
+    },
   },
   /* extraReducers: {} */
 });

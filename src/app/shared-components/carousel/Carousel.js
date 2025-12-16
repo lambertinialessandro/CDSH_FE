@@ -24,7 +24,7 @@ function ImageAnimation({ item, height }) {
   );
 }
 
-function Carousel({ items, gap, itemWidth, itemHeight, Addon }) {
+function Carousel({ items, gap, itemWidth, itemHeight, Addon = undefined }) {
   const containerRef = useRef(null);
   const [containerWidth, setContainerWidth] = useState(0);
   const [index, setIndex] = useState(0);

@@ -2,7 +2,7 @@ import { Box, Typography, useTheme } from '@mui/material';
 import Carousel from 'app/shared-components/carousel/Carousel';
 import { Link } from 'react-router-dom';
 
-const items = [
+/*const items = [
   {
     src: `${process.env.PUBLIC_URL}/assets/images/gallery/cdsh-galley-01.jpg`,
     title: 'Work in Progress 2025: meeting point',
@@ -52,11 +52,11 @@ const items = [
       'Jedes Jahr findet das Abschlussprojekt, die finale Prüfungsleistung unserer Absolvent*innen, unter einem anderen Thema statt.',
   },
   // more images...
-];
+];*/
 
 function Addon({ item }) {
   return (
-    <Box className="cursor-pointer group" component={Link} to="/projects/on_the_trail">
+    <Box className="cursor-pointer group" component={Link} to={`/projects/${item.projectId}`}>
       <Typography
         sx={{
           fontSize: { xs: '18px', sm: '22px', md: '30px' },
@@ -64,8 +64,8 @@ function Addon({ item }) {
           py: 2,
           lineHeight: 1.2,
           '.group:hover &': {
-    textDecoration: 'underline',
-  },
+            textDecoration: 'underline',
+          },
         }}
       >
         {item.title}
@@ -82,7 +82,7 @@ function Addon({ item }) {
   );
 }
 
-function AktuellesSection() {
+function AktuellesSection({ items, title }) {
   const theme = useTheme();
 
   return (
@@ -106,7 +106,7 @@ function AktuellesSection() {
             color: '#000',
           }}
         >
-          Aktuelles
+          {title}
         </Typography>
         <Carousel
           items={items}

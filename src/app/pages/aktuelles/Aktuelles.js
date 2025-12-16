@@ -5,11 +5,43 @@ import useParallaxY from 'app/shared-components/hooks/useParallaxY';
 import AnchorLink from 'app/shared-components/link/AnchorLink';
 import BigLink from 'app/shared-components/link/BigLink';
 import { motion } from 'framer-motion';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import AktuellesSection from './AktuellesSection';
+import { useSelector } from 'react-redux';
+import { selectUserLanguage } from 'app/store/app/mainSlice';
 
 function Aktuelles() {
   const theme = useTheme();
+  const userLanguage = useSelector(selectUserLanguage);
+  const [data, setNews] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    setLoading(true);
+    setError(null);
+    fetch(`http://localhost/plainkit-main/api/news?lang=${userLanguage}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Network response was not ok, status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setNews(data);
+      })
+      .catch((error) => {
+        console.error('Fetching error:', error);
+        setError(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [userLanguage]);
+
+  console.log('data', data);
+  if (loading) return <Box sx={{ p: 10, textAlign: 'center' }}>Loading content...</Box>;
+  if (!data) return <Box sx={{ p: 10, textAlign: 'center' }}>Error loading data.</Box>;
 
   return (
     <>
@@ -35,7 +67,7 @@ function Aktuelles() {
               fontWeight: '400',
             }}
           >
-            Aktuelles
+            {data.header.title}
           </Typography>
           <Typography
             sx={{
@@ -44,8 +76,7 @@ function Aktuelles() {
               fontWeight: '400',
             }}
           >
-            Hier findest Du alle aktuellen Informationen zu Abschlussarbeiten, Auftritten und sonstigen Geschehnissen in
-            unserer Schule. Stay up to date!
+            {data.header.intro}
           </Typography>
         </Box>
         <Box className="flex-1 h-full relative" sx={{ width: { xs: '100%', md: '50%' } }}>
@@ -68,7 +99,7 @@ function Aktuelles() {
               color: 'white',
             }}
           >
-            Aktuelles
+            {data.header.title}
           </Typography>
         </Box>
       </Box>
@@ -94,7 +125,7 @@ function Aktuelles() {
               marginRight: { xs: '16px', md: '45px' },
             }}
           >
-            DIE AUDITION TERMINE 2025 SIND JETZT ONLINE.
+            {data.banner.text}
             <BigLink
               extraSx={{
                 display: 'flex',
@@ -110,13 +141,13 @@ function Aktuelles() {
               color="#000000"
               href={'/auditions'}
             >
-              JETZT ANMELDEN <ArrowForward fontSize="inherit" />
+              {data.banner.linkText} <ArrowForward fontSize="inherit" />
             </BigLink>
           </Typography>
         </LoopBanner>
       </Box>
 
-      <AktuellesSection />
+      <AktuellesSection items={data.newsItems} title={data.header.title} />
 
       {/* Kennenlernen Section */}
       <Box
@@ -133,14 +164,13 @@ function Aktuelles() {
             lineHeight: 1.1,
           }}
         >
-          Du möchtest uns kennenlernen?
+          {data.footerCta.title}
         </Typography>
         <Typography
           className="max-w-[740px] min-w-[50%] text-center"
           sx={{ fontSize: { xs: '18px', md: '30px' }, fontWeight: 400, color: '#000000' }}
         >
-          Wir dich ebenfalls. Neben den regulären Auditions sind wir bei Fragen rund um die Ausbildung per Mail oder
-          telefonisch für dich da.
+          {data.footerCta.text}
         </Typography>
       </Box>
     </>

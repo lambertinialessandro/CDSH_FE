@@ -1,7 +1,7 @@
 import { Box, Typography, useMediaQuery } from '@mui/material';
 
-function KooperationenLogos() {
-  let logoRows = [
+function KooperationenLogos({ title, list }) {
+  /*let logoRows = [
     'Logo Platzhalter',
     'Logo Platzhalter',
     'Logo Platzhalter',
@@ -9,12 +9,16 @@ function KooperationenLogos() {
     'Logo Platzhalter',
     'Logo Platzhalter',
     'Logo Platzhalter',
-  ];
+  ];*/
 
   const isMobile = useMediaQuery('(max-width:900px)');
-  if (isMobile) {
-    logoRows = ['Logo Platzhalter', 'Logo Platzhalter', 'Logo Platzhalter', 'Logo Platzhalter', 'Logo Platzhalter'];
-  }
+  /*if (isMobile) {
+    list;//logoRows = ['Logo Platzhalter', 'Logo Platzhalter', 'Logo Platzhalter', 'Logo Platzhalter', 'Logo Platzhalter'];
+  }*/
+  console.log('list', list);
+  const displayList = isMobile ? list.slice(0, 5) : list;
+
+  console.log('title', title);
 
   return (
     <Box
@@ -31,12 +35,13 @@ function KooperationenLogos() {
           fontWeight: 400,
         }}
       >
-        Kooperationen
+        {title}
+        {/*Kooperationen*/}
       </Typography>
 
       {/* Wrapper */}
       <Box className="flex flex-wrap justify-center gap-[24px] w-full max-w-[1200px]" sx={{}}>
-        {logoRows.map((text, idx) => (
+        {displayList.map((text, idx) => (
           <Box
             key={idx}
             className="rounded-full px-[24px] py-[12px]"

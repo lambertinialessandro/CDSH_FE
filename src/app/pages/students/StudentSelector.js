@@ -7,7 +7,7 @@ import SplitSection from './SplitSection';
 import AnchorLink from 'app/shared-components/link/AnchorLink';
 import BigLink from 'app/shared-components/link/BigLink';
 
-const students = [
+/*const students = [
   {
     id: 'class_2025',
     href: `/students/yugen`,
@@ -36,10 +36,10 @@ const students = [
     src: `${process.env.PUBLIC_URL}/assets/images/students/Bildschirmfoto 2025-02-18 um 17.06.12.png`,
     year: { start: 2022, end: 2025 },
   },
-];
+];*/
 
-function StudentSelector(props) {
-  // const {} = props;
+function StudentSelector({ classes = [] }) {
+  console.log('classes', classes);
 
   const today = new Date();
   const month = today.getMonth() + 1; // getMonth() is 0-indexed
@@ -50,10 +50,12 @@ function StudentSelector(props) {
   const TAB_OPTIONS = [{ name: 'Aktuelle Klassen' }, { name: 'Ehemalige Klassen' }];
   const filteredStudents =
     tabSelected === 0
-      ? students?.filter(({ year }) => year.end > currentYear)
-      : students?.filter(({ year }) => year.end <= currentYear);
+      ? classes?.filter(({ year }) => year.end > currentYear)
+      : classes?.filter(({ year }) => year.end <= currentYear);
 
-  if (__.isEmpty(students)) {
+  console.log('filteredStudents', filteredStudents);
+
+  if (__.isEmpty(classes)) {
     return <Typography>Empty</Typography>;
   }
 
@@ -100,12 +102,12 @@ function StudentSelector(props) {
 
       <Box className="w-full px-[45px] flex flex-col justify-start items-center">
         <AnimatePresence mode="popLayout">
-          {filteredStudents.map((student, idx) => {
+          {filteredStudents.map((group, idx) => {
             const isOdd = idx % 2 === 1;
 
             return (
               <motion.div
-                key={student.id || idx}
+                key={group.id || idx}
                 className="w-full flex flex-col justify-center items-start"
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -116,7 +118,7 @@ function StudentSelector(props) {
                   key={idx}
                   title={
                     <BigLink
-                      to={student.href}
+                      to={`/students/${group.id}`}
                       extraSx={{
                         fontSize: { xs: '28px', md: '80px' },
                         fontWeight: '400',
@@ -125,12 +127,12 @@ function StudentSelector(props) {
                       fontSize="inherit"
                       lineHeight={{ xs: '1px', md: '5px' }}
                     >
-                      {student.name}
+                      {group.name}
                     </BigLink>
                   }
-                  text={`${student.year.start} - ${student.year.end}`}
-                  img={{ src: student.src, alt: student.name }}
-                  href={student.href}
+                  text={`${group.year.start} - ${group.year.end}`}
+                  img={{ src: group.src, alt: group.name }}
+                  href={`/students/${group.id}`} // link to
                   reverse={isOdd}
                   bgColor={isOdd && '#8F20FF'}
                   color={isOdd && '#ffffff'}

@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom';
 import SplitSection from './SplitSection';
 import BigLink from 'app/shared-components/link/BigLink';
 import AnchorLink from 'app/shared-components/link/AnchorLink';
+import { useEffect, useState } from 'react';
 
-const students = [
+/*const students = [
   {
     id: 'yugen',
     href: `/students/yugen`,
@@ -87,14 +88,41 @@ const students = [
     students:
       'Alva Nilsson, Ana Chuntisvili, Ana Paula Salcido Roa, Aurora Pollini, Camila Milton Frattari, Eleonora Poles, Emma Steenblock, Fabio Camoirano, Giulia del Grosso, Ida Zimmermann, Irene Lanzanò, Karenina Lizama Leirana, Leonie Klamer, Martina Vincenza Ventura, Melina Papadopoulu, Milla Matthews, Orla Maria Losardo, Peter Mani, Simone Schachtschneider, Tara Thormann, Vignesh Kumar, Yana Delibashev, Yareli Alejandra Alvarado Macario',
   },
-];
+];*/
 
 function StudentGroup() {
   const theme = useTheme();
   const navigate = useNavigate();
-
   const { studentUrlName } = useParams();
-  const selectedStudent = students.find((m) => m.id === studentUrlName);
+
+  const [selectedStudent, setSelectedStudent] = useState(null);
+  console.log('selectedStudent', selectedStudent);
+  // const selectedStudent = students.find((m) => m.id === studentUrlName);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch(`http://localhost/plainkit-main/api/students?id=${studentUrlName}`)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('Class not found');
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setSelectedStudent(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error('Error:', err);
+        setError(true);
+        setLoading(false);
+      });
+  }, [studentUrlName]);
+
+  if (loading) return <Box sx={{ p: 10, textAlign: 'center' }}>Laden...</Box>;
+  if (error || !selectedStudent) return <Box sx={{ p: 10, textAlign: 'center' }}>Mitglied nicht gefunden.</Box>;
 
   return (
     <>
@@ -126,9 +154,9 @@ function StudentGroup() {
               {selectedStudent.name}
             </Typography>
             <Box className="flex flex-col justify-start items-start gap-[4px] mt-[48px]">
-              {selectedStudent.links.map((link, idx) => (
-                <AnchorLink key={idx} to={link.href} color="#000" extraSx={{ fontSize: '15px', mb: '1px' }}>
-                  {link.name}
+              {selectedStudent.relatedProjects.map((project, idx) => (
+                <AnchorLink key={idx} to={`/projects/${project.id}`} color="#000" extraSx={{ fontSize: '15px', mb: '1px' }}>
+                  {project.name}
                 </AnchorLink>
               ))}
             </Box>
@@ -179,18 +207,18 @@ function StudentGroup() {
             {selectedStudent.name}
           </Typography>
 
-          {selectedStudent.links.map((link, idx) => (
+          {selectedStudent.relatedProjects.map((project, idx) => (
             <AnchorLink
-            key={idx}
+              key={idx}
               className="capitalize mix-blend-exclusion"
-              to={link.href}
+              to={`/projects/${project.id}`}
               sx={{
                 fontSize: '15px',
                 fontWeight: '400',
                 color: '#ffffff',
               }}
             >
-              {link.name}
+              {project.name}
             </AnchorLink>
           ))}
 
@@ -257,20 +285,20 @@ function StudentGroup() {
           mt: { xs: '70px', md: '140px' },
         }}
       >
-        {selectedStudent.links.map((link, idx) => {
+        {selectedStudent.relatedProjects?.map((project, idx) => {
           const isOdd = idx % 2 === 1;
-
+          console.log("project", project.id)
           return (
             <SplitSection
               key={idx}
-              title={link.name}
-              href={link.href}
-              text={link.title}
-              img={{ src: link.src, alt: link.name }}
+              title={project.name}
+              projectId={project.id} // qua vai al singolo progetto ??
+              text={project.title}
+              img={{ src: project.src, alt: project.name }}
               reverse={isOdd}
               bgColor={isOdd && '#8F20FF'}
               color={isOdd && '#ffffff'}
-              bottom={idx === selectedStudent.links.length - 1}
+              bottom={idx === selectedStudent.relatedProjects.length - 1}
             />
           );
         })}

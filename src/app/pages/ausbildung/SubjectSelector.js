@@ -1,10 +1,10 @@
 import { Box, Divider, Tab, Tabs, Typography } from '@mui/material';
 import __ from 'lodash';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
-const subjects = [
+/*const subjects = [
   {
     id: 1,
     name: 'Schauspiel',
@@ -68,19 +68,24 @@ const subjects = [
     src: `${process.env.PUBLIC_URL}/assets/images/ausbildung/Bildschirmfoto 2025-02-18 um 17.26.20 12.png`,
     tab: ['Nebenfächer'],
   },
-];
+]; */
 
 function SubjectSelector(props) {
+  const { subjects = [] } = props;
   const MotionBox = motion(Box);
 
+  console.log("subjects:", subjects);
+
   const [tabSelected, setTabSelected] = useState(0);
-  const TAB_OPTIONS = [
+  /*const TAB_OPTIONS = [
     { name: 'Hauptfächer' },
     { name: 'Nebenfächer' },
     { name: 'Theoriefächer' },
     { name: 'Workshops' },
     { name: 'Kein Filter' },
   ];
+
+
   const filteredSubjects =
     TAB_OPTIONS[tabSelected] === 'Kein Filter'
       ? subjects
@@ -89,7 +94,30 @@ function SubjectSelector(props) {
   if (__.isEmpty(subjects)) {
     return <Typography>Empty</Typography>;
   }
+*/
 
+//TODO: to CHECK 
+  const TAB_OPTIONS = useMemo(() => {
+    const categories = __.flatMap(subjects, (s) => s.tab || []);
+    const uniqueCategories = __.uniq(categories).sort();
+    return [{ name: 'All' }, ...uniqueCategories.map((cat) => ({ name: cat }))];
+  }, [subjects]);
+
+  // 2. Logica di filtraggio
+  const filteredSubjects = useMemo(() => {
+    const activeFilter = TAB_OPTIONS[tabSelected]?.name;
+    if (!activeFilter || activeFilter === 'All') return subjects;
+
+    return subjects.filter((subject) => subject.tab?.includes(activeFilter));
+  }, [subjects, tabSelected, TAB_OPTIONS]);
+
+  if (__.isEmpty(subjects)) {
+    return (
+      <Box className="py-20 text-center">
+        <Typography>No course available.</Typography>
+      </Box>
+    );
+  }
   return (
     <>
       <Box component="section"

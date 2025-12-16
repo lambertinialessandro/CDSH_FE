@@ -1,24 +1,52 @@
 import { Box, Typography, useTheme } from '@mui/material';
 import { useNavigate, useParams } from 'react-router';
 import ImpressionenSection from './ImpressionenSection';
+import { useEffect, useState } from 'react';
 
 const projects = [
   {
     id: 'on_the_trail',
     name: 'On the trail',
-    chategories: ['Absolvent*innen 2021'],
+    categories: ['Absolvent*innen 2021'],
     subjects: ['Choreographie'],
     src: `${process.env.PUBLIC_URL}/assets/images/projects/project1.png`,
   },
 ];
 
 function Project(props) {
-  const {} = props;
+  const { } = props;
   const navigate = useNavigate();
   const theme = useTheme();
   const { projectUrlId } = useParams();
 
-  const selectedProject = projects.find((m) => m.id === projectUrlId);
+  //const selectedProject = projects.find((m) => m.id === projectUrlId);
+  const [selectedProject, setselectedProjectData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  console.log('selectedProject', selectedProject);
+  useEffect(() => {
+    if (projectUrlId) {
+      setLoading(true);
+      fetch(`http://localhost/plainkit-main/api/projects?id=${projectUrlId}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setselectedProjectData(data);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.error('Error fetching project in SplitSection:', err);
+          setLoading(false);
+        });
+    }
+  }, [projectUrlId]);
+
+  if (loading) {
+    return <Box sx={{ p: 10, textAlign: 'center' }}>Loading content...</Box>;
+  }
+
+  if (!selectedProject || selectedProject.error) {
+    return <Box sx={{ p: 10, textAlign: 'center' }}>Project not found.</Box>;
+  }
 
   return (
     <>
@@ -47,7 +75,7 @@ function Project(props) {
               fontWeight: '400',
             }}
           >
-            {selectedProject.name}
+            {selectedProject.title}
           </Typography>
           <Box className="flex justify-start items-center gap-[8px]">
             {selectedProject.chategories.map((role, idx) => (
@@ -79,7 +107,7 @@ function Project(props) {
         <Box className="flex-1 h-full relative" sx={{ width: { xs: '100%', md: '50%' } }}>
           <Box
             component="img"
-            src={selectedProject.src}
+            src={selectedProject.imageSrc}
             className="flex-1 w-full relative"
             sx={{ objectFit: 'cover', height: {xs: "390px", md: "100%"} }}
           ></Box>
@@ -158,10 +186,7 @@ function Project(props) {
             fontWeight: '400',
           }}
         >
-          on the trail beschreibt die Situation nach einem Einschnitt, den Moment, wenn sich Dinge wieder zusammenfügen,
-          nachdem sie erschüttert wurden oder sogar zerbrochen sind. In diesem Moment des scheinbaren Chaos', in welchem
-          die Normalität nicht mehr oder nur bedingt funktioniert, liegt ein Potenzial, die Essenz der Dinge zu erahnen
-          und Normalität neu zu definieren.
+          {selectedProject.descriptionLeft}
         </Typography>
         <Typography
           sx={{
@@ -170,13 +195,11 @@ function Project(props) {
             fontWeight: '400',
           }}
         >
-          Strukturen entwickeln sich, Gewohnheiten manifestieren sich. Was als normal wahrgenommen wird, ist Resultat
-          einer steten mitunter unreflektierten Reproduktion dessen, was als richtig, erstrebenswert und produktiv gilt.
-          Wir funktionieren und vergessen in Frage zu stellen.
+          {selectedProject.descriptionRight}
         </Typography>
       </Box>
 
-      <ImpressionenSection />
+      <ImpressionenSection imgSet= {selectedProject.impressions} />
     </>
   );
 }

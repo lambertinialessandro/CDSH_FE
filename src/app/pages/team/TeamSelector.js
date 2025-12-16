@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
-const members = [
+/*const members = [
     {
       id: 'ursina_tossi',
       href: `/team/ursina_tossi`,
@@ -33,9 +33,11 @@ const members = [
       src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto filip_van_huffel.png`,
       subjects: ['Gastdozent*innen 2025'],
     },
-  ];
+  ];*/
 
-function TeamSelector(props) {
+function TeamSelector({members = []}) {
+  console.log("member", members)
+
   const MotionBox = motion(Box);
 
   // ordered from the newest to the older
@@ -52,7 +54,9 @@ function TeamSelector(props) {
       return members;
     }
     return members.filter(({ subjects }) => subjects.some((s1) => s1 === TAB_OPTIONS[tabSelected].name));
-  }, [tabSelected]);
+  }, [tabSelected, members]);
+
+  console.log("filteredMembers", filteredMembers)
 
   if (__.isEmpty(members)) {
     return <Typography>Empty</Typography>;
@@ -101,7 +105,7 @@ function TeamSelector(props) {
 
       <Box className="w-full flex flex-wrap justify-center items-start gap-[24px]">
         <AnimatePresence mode="popLayout" initial={false}>
-          {filteredMembers.map((member, idx) => (
+          {filteredMembers?.map((member, idx) => (
             <MotionBox
               key={member.id}
               layout
@@ -120,7 +124,7 @@ function TeamSelector(props) {
                 />
                 <Box
                   component={Link}
-                  to={member.href}
+                  to={`/team/${member.id}`}
                   className="absolute border border-black rounded-full bottom-0 right-0"
                   sx={{
                     background: '#ffffff',

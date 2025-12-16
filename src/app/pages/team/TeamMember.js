@@ -1,13 +1,13 @@
 import { Box, Typography, useTheme } from '@mui/material';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 
 function TeamMember() {
   const theme = useTheme();
   const navigate = useNavigate();
-
   const { memberUrlName } = useParams();
 
-  const members = [
+  /*const members = [
     {
       id: 'javier_báez',
       href: `/team/javier_báez`,
@@ -65,8 +65,33 @@ function TeamMember() {
       roles: ['Gastdozent*innen'],
       subjects: ['Choreographie'],
     },
-  ];
-  const selectedMember = members.find((m) => m.id === memberUrlName);
+  ];*/
+  const [selectedMember, setSelectedMember] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch(`http://localhost/plainkit-main/api/team?id=${memberUrlName}`)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('Member not found');
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setSelectedMember(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error('Error:', err);
+        setError(true);
+        setLoading(false);
+      });
+  }, [memberUrlName]);
+
+  if (loading) return <Box sx={{ p: 10, textAlign: 'center' }}>Laden...</Box>;
+  if (error || !selectedMember) return <Box sx={{ p: 10, textAlign: 'center' }}>Mitglied nicht gefunden.</Box>;
 
   return (
     <>
@@ -203,11 +228,7 @@ function TeamMember() {
             fontWeight: '400',
           }}
         >
-          kooperiert mit vielen relevanten Bereichen der tänzerischen Bildung. Ein wirksames Unterrichtsprogramm hilft
-          dir, dich technisch, künstlerisch und kreativ weiterzuentwickeln. Durch choreografische Projektarbeit bekommst
-          du ein Gefühl für die professionelle Arbeit und sammelst Bühnenerfahrung durch regelmäßige Auftritte im
-          Theater. Ein erfahrenes Team aus Künstler*innen und Pädagog*innen unterstützt dich bei deiner Entwicklung in
-          der tänzerischen Ausbildung.
+          {selectedMember.biography || 'Keine Biografie verfügbar.'}
         </Typography>
       </Box>
 

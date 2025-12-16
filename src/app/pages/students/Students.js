@@ -1,8 +1,45 @@
 import { Box, Typography, useTheme } from '@mui/material';
 import StudentSelector from './StudentSelector';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { selectUserLanguage } from 'app/store/app/mainSlice';
 
 function Students() {
   const theme = useTheme();
+
+  const [studentsData, setStudentsData] = useState(null);
+  const userLanguage = useSelector(selectUserLanguage);
+
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  console.log('studentsData:', studentsData);
+
+  useEffect(() => {
+    setLoading(true);
+    setError(null);
+    fetch(`http://localhost/plainkit-main/api/students?lang=${userLanguage}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Network response was not ok, status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setStudentsData(data);
+      })
+      .catch((error) => {
+        console.error('Fetching error:', error);
+        setError(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [userLanguage]);
+  if (loading) return <Box sx={{ p: 10, textAlign: 'center' }}>Loading content...</Box>;
+  if (!studentsData) return <Box sx={{ p: 10, textAlign: 'center' }}>Error loading data.</Box>;
+
+  const studentGroups = studentsData.studentGroups;
 
   return (
     <>
@@ -27,7 +64,7 @@ function Students() {
               fontWeight: '400',
             }}
           >
-            Die Studierenden
+            {studentsData.intro.headline}
           </Typography>
         </Box>
         <Box className="flex-1 h-full relative" sx={{ width: { xs: '100%', md: '50%' } }}>
@@ -50,7 +87,7 @@ function Students() {
               color: 'white',
             }}
           >
-            Die Studierenden
+            {studentsData.intro.headline}
           </Typography>
         </Box>
       </Box>
@@ -68,15 +105,12 @@ function Students() {
               fontWeight: '400',
             }}
           >
-            Bühnentanz an der CDSH zu studieren heißt nicht nur lernen, sondern auch Gleichgesinnte und Freunde finden.
-            Du arbeitest täglich intensiv mit Menschen deines Faches zusammen. Auf diese Weise entsteht ein vielfältiger
-            Austausch und eine Anregung zur persönlichen Entwicklung unter Tänzer*innen, Choreograf*innen und
-            Performer*innen.
+            {studentsData.intro.text}
           </Typography>
         </Box>
       </Box>
 
-      <StudentSelector />
+      <StudentSelector classes={studentsData.studentGroups} />
 
       <Box
         component="section"
@@ -92,14 +126,13 @@ function Students() {
             lineHeight: '1',
           }}
         >
-          Du möchtest uns kennenlernen?
+          {studentsData.footerCta.title}
         </Typography>
         <Typography
           className="max-w-[740px] min-w-[50%] text-center"
           sx={{ color: '#000000', fontSize: { xs: '15px', md: '30px' }, fontWeight: '400' }}
         >
-          Wir dich ebenfalls. Neben den regulären Auditions sind wir bei Fragen rund um die Ausbildung per Mail oder
-          telefonisch für dich da.
+          {studentsData.footerCta.text}
         </Typography>
       </Box>
     </>
