@@ -1,71 +1,16 @@
 import { Box, Typography, useTheme } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
+import { useTranslation } from 'react-i18next';
+import { defaultNS as ns_common } from 'translations';
 
 function TeamMember() {
+  const { t } = useTranslation([ns_common]);
+    const { button } = t(ns_common);
   const theme = useTheme();
   const navigate = useNavigate();
   const { memberUrlName } = useParams();
 
-  /*const members = [
-    {
-      id: 'javier_báez',
-      href: `/team/javier_báez`,
-      name: 'Javier Báez',
-      src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto 2025-02-18 um 17.26.20 2.png`,
-      roles: ['Hauptfächer'],
-      subjects: ['Schulleitung'],
-    },
-    {
-      id: 'raul_valdez',
-      href: `/team/raul_valdez`,
-      name: 'Raul Valdez',
-      src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto 2025-02-18 um 17.26.20 3.png`,
-      roles: ['Hauptfächer'],
-      subjects: ['Künstlerische Leitung'],
-    },
-    {
-      id: 'sina_rundel',
-      href: `/team/sina_rundel`,
-      name: 'Sina Rundel',
-      src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto 2025-02-18 um 17.26.20 4.png`,
-      roles: ['Theoriefächer'],
-      subjects: ['Kommunikation', 'Schüler*innenbetreuung', 'Tanzgeschichte'],
-    },
-
-    {
-      id: 'ursina_tossi',
-      href: `/team/ursina_tossi`,
-      name: 'Ursina Tossi',
-      src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto ursina_tossi.png`,
-      roles: ['Hauptfächer'],
-      subjects: ['Künstlerische Leitung'],
-    },
-    {
-      id: 'phillip_benjamin_jenkins',
-      href: `/team/phillip_benjamin_jenkins`,
-      name: 'Phillip Benjamin Jenkins',
-      src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto phillip_benjamin_jenkins.png`,
-      roles: ['Hauptfächer'],
-      subjects: ['Schulleitung'],
-    },
-    {
-      id: 'angela_guerreiro',
-      href: `/team/angela_guerreiro`,
-      name: 'Angela Guerreiro',
-      src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto angela_guerreiro.png`,
-      roles: ['Choreograph*innen'],
-      subjects: ['Choreographie'],
-    },
-    {
-      id: 'filip_van_huffel',
-      href: `/team/filip_van_huffel`,
-      name: 'Filip van Huffel',
-      src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto filip_van_huffel.png`,
-      roles: ['Gastdozent*innen'],
-      subjects: ['Choreographie'],
-    },
-  ];*/
   const [selectedMember, setSelectedMember] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -138,7 +83,7 @@ function TeamMember() {
               }}
               className="bg-white border border-black rounded-full px-[16px] py-[2px]"
             >
-              zurück
+              {button.back}
             </button>
           </Box>
         </Box>
@@ -191,7 +136,7 @@ function TeamMember() {
               }}
               className="bg-white border border-black rounded-full px-[16px] py-[2px]"
             >
-              zurück
+              {button.back}
             </button>
           </Box>
         </Box>
@@ -248,7 +193,7 @@ function TeamMember() {
             }}
             className="bg-white border border-black rounded-full px-[16px] py-[2px]"
           >
-            zurück
+            {button.back}
           </button>
         </Box>
       </Box>

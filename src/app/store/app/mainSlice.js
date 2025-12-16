@@ -9,7 +9,7 @@ export const selectUserLanguage = (state) => state.app.cdsh.userLanguage;
 const initialState = {
   currTheme: 'default', // localStorage.getItem('theme') ?? 'default',
   isBannerOpen: false,
-  userLanguage: 'en',
+  userLanguage: localStorage.getItem('language') ?? 'en',
 };
 
 const cdshSlice = createSlice({
@@ -25,10 +25,13 @@ const cdshSlice = createSlice({
     setIsBannerOpen: (state, { payload }) => {
       state.isBannerOpen = payload;
     },
+    setUserLanguage: (state, { payload }) => {
+      state.userLanguage = payload;
+    },
   },
   /* extraReducers: {} */
 });
 
-export const { setThemeSettings, setIsBannerOpen } = cdshSlice.actions;
+export const { setThemeSettings, setIsBannerOpen, setUserLanguage } = cdshSlice.actions;
 
 export default cdshSlice.reducer;

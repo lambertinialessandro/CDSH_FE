@@ -8,6 +8,8 @@ import { motion } from 'framer-motion';
 import { useRef } from 'react';
 import AktuellesSection from './AktuellesSection';
 import VideoLooper from './VideoLooper';
+import { useTranslation } from 'react-i18next';
+import { defaultNS as ns_common } from 'translations';
 
 function ImageAnimation() {
   const imgRef = useRef(null);
@@ -28,7 +30,21 @@ function ImageAnimation() {
   );
 }
 
+function Image(props) {
+  const { item } = props;
+
+  return (
+    <img
+      src={item.src}
+      alt={item.title || ``}
+      className="w-full object-cover border border-black h-[300px] md:h-full md:min-h-[460px]"
+    />
+  );
+}
+
 function Home() {
+  const { t } = useTranslation([ns_common]);
+  const { button } = t(ns_common);
   const theme = useTheme();
 
   return (
@@ -53,45 +69,54 @@ function Home() {
       <AktuellesSection />
 
       {/* Über uns */}
-      <Box component="section" className="w-full flex flex-col justify-start items-center" sx={{ py: { xs: 8, md: 14 }, px: { xs: 4, md: 6 } }}>
-        <Box
-                  className="max-w-[1280px]"
+      <Box
+        component="section"
+        className="w-full flex flex-col justify-start items-center"
+        sx={{ py: { xs: 8, md: 14 }, px: { xs: 4, md: 6 } }}
+      >
+        <Box className="max-w-[1280px]">
+          <Typography
+            className="mb-[60px] md:mb-[110px]"
+            sx={{ fontSize: { xs: '40px', md: '80px' }, fontWeight: 400, color: '#000' }}
+          >
+            Über uns
+          </Typography>
+          <Box className="w-full flex flex-col md:flex-row justify-center">
+            <Box className="max-w-[1250px] w-full md:border-y border-black flex flex-col md:flex-row">
+              {/* Text */}
+              <Box className="w-full md:w-1/2 py-[32px] md:py-[54px] flex flex-col justify-between items-start">
+                <Typography
+                  sx={{
+                    fontSize: { xs: '18px', md: '30px' },
+                    fontWeight: 400,
+                    color: '#000',
+                    lineHeight: 'normal',
+                    pr: { xs: 0, md: '45px' },
+                    mb: { xs: 3, md: 0 },
+                  }}
                 >
-        <Typography
-          className="mb-[60px] md:mb-[110px]"
-          sx={{ fontSize: { xs: '40px', md: '80px' }, fontWeight: 400, color: '#000' }}
-        >
-          Über uns
-        </Typography>
-        <Box className="w-full flex flex-col md:flex-row justify-center">
-          <Box className="max-w-[1250px] w-full md:border-y border-black flex flex-col md:flex-row">
-            {/* Text */}
-            <Box className="w-full md:w-1/2 py-[32px] md:py-[54px] flex flex-col justify-between items-start">
-              <Typography
-                sx={{
-                  fontSize: { xs: '18px', md: '30px' },
-                  fontWeight: 400,
-                  color: '#000',
-                  lineHeight: 'normal',
-                  pr: { xs: 0, md: '45px' },
-                  mb: { xs: 3, md: 0 },
-                }}
-              >
-                Die CDSH - CONTEMPORARY DANCE SCHOOL ist eine staatlich anerkannte Berufsfachschule für zeitgenössischen
-                Bühnentanz. Der Schwerpunkt der dreijährigen Ausbildung liegt auf zeitgenössischem und modernem
-                Klassischem Ballett.
-              </Typography>
-              <AnchorLink href={"/team"}>
-                Mehr erfahren <ArrowForward fontSize="small" sx={{ fontSize: { xs: '14px', sm: '16px' } }}/>
-              </AnchorLink>
-            </Box>
+                  Die CDSH - CONTEMPORARY DANCE SCHOOL ist eine staatlich anerkannte Berufsfachschule für
+                  zeitgenössischen Bühnentanz. Der Schwerpunkt der dreijährigen Ausbildung liegt auf zeitgenössischem
+                  und modernem Klassischem Ballett.
+                </Typography>
+                <AnchorLink href={'/team'}>
+                  {button.mehrErfahren} <ArrowForward fontSize="small" sx={{ fontSize: { xs: '14px', sm: '16px' } }} />
+                </AnchorLink>
+              </Box>
 
-            {/* Image */}
-            <Box className="w-full md:w-1/2 border-y md:border-t-0 md:border-l border-black">
-              <ImageAnimation />
+              {/* Image */}
+              <Box className="w-full md:w-1/2 border-y md:border-t-0 md:border-l border-black">
+                {/* <ImageAnimation /> */}
+
+                <Image
+                  item={{
+                    src: `${process.env.PUBLIC_URL}/assets/images/cdsh-willkommen-1.jpg`,
+                    title: 'CDSH Willkommen',
+                  }}
+                />
+              </Box>
             </Box>
           </Box>
-        </Box>
         </Box>
       </Box>
 
@@ -130,7 +155,7 @@ function Home() {
               fontSize="inherit"
               lineHeight={{ xs: '1px', md: '5px' }}
               color="#000000"
-              href={"/auditions"}
+              href={'/auditions'}
             >
               JETZT ANMELDEN <ArrowForward fontSize="inherit" />
             </BigLink>

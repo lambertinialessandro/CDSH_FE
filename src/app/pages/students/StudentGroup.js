@@ -5,92 +5,13 @@ import SplitSection from './SplitSection';
 import BigLink from 'app/shared-components/link/BigLink';
 import AnchorLink from 'app/shared-components/link/AnchorLink';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { defaultNS as ns_common } from 'translations';
 
-/*const students = [
-  {
-    id: 'yugen',
-    href: `/students/yugen`,
-    name: 'Yugen',
-    links: [
-      {
-        name: 'Soloprojekt',
-        title: 'Titel hier einfügen',
-        href: `/projects/on_the_trail`,
-        src: `${process.env.PUBLIC_URL}/assets/images/students/project1.png`,
-      },
-      {
-        name: 'Abschlussprojekt',
-        title: 'Titel hier einfügen',
-        href: `/projects/on_the_trail`,
-        src: `${process.env.PUBLIC_URL}/assets/images/students/project2.png`,
-      },
-    ],
-    src: `${process.env.PUBLIC_URL}/assets/images/students/Bildschirmfoto 2025-02-18 um 17.05.47.png`,
-    year: { start: 2024, end: 2027 },
-    descriptionLeft:
-      '“Ikigai” is a Japanese concept that means your reason for being or your purpose in life. It is unique to every person, it allows you to express yourself freely and truthfully, according to your own rules or values.',
-    descriptionRight:
-      'As a group we are connected through the search for our own ikigai, exploring our unique traits, our role in the world (community) and discovering what we want to say as artists.',
-    students:
-      'Alva Nilsson, Ana Chuntisvili, Ana Paula Salcido Roa, Aurora Pollini, Camila Milton Frattari, Eleonora Poles, Emma Steenblock, Fabio Camoirano, Giulia del Grosso, Ida Zimmermann, Irene Lanzanò, Karenina Lizama Leirana, Leonie Klamer, Martina Vincenza Ventura, Melina Papadopoulu, Milla Matthews, Orla Maria Losardo, Peter Mani, Simone Schachtschneider, Tara Thormann, Vignesh Kumar, Yana Delibashev, Yareli Alejandra Alvarado Macario',
-  },
-  {
-    id: 'ikigai',
-    href: `/students/ikigai`,
-    name: 'Ikigai',
-    links: [
-      {
-        name: 'Soloprojekt',
-        title: 'Titel hier einfügen',
-        href: `/projects/on_the_trail`,
-        src: `${process.env.PUBLIC_URL}/assets/images/students/project1.png`,
-      },
-      {
-        name: 'Abschlussprojekt',
-        title: 'Titel hier einfügen',
-        href: `/projects/on_the_trail`,
-        src: `${process.env.PUBLIC_URL}/assets/images/students/project2.png`,
-      },
-    ],
-    src: `${process.env.PUBLIC_URL}/assets/images/students/Bildschirmfoto 2025-02-18 um 17.06.05.png`,
-    year: { start: 2023, end: 2026 },
-    descriptionLeft:
-      '“Ikigai” is a Japanese concept that means your reason for being or your purpose in life. It is unique to every person, it allows you to express yourself freely and truthfully, according to your own rules or values.',
-    descriptionRight:
-      'As a group we are connected through the search for our own ikigai, exploring our unique traits, our role in the world (community) and discovering what we want to say as artists.',
-    students:
-      'Alva Nilsson, Ana Chuntisvili, Ana Paula Salcido Roa, Aurora Pollini, Camila Milton Frattari, Eleonora Poles, Emma Steenblock, Fabio Camoirano, Giulia del Grosso, Ida Zimmermann, Irene Lanzanò, Karenina Lizama Leirana, Leonie Klamer, Martina Vincenza Ventura, Melina Papadopoulu, Milla Matthews, Orla Maria Losardo, Peter Mani, Simone Schachtschneider, Tara Thormann, Vignesh Kumar, Yana Delibashev, Yareli Alejandra Alvarado Macario',
-  },
-  {
-    id: 'ho_omau',
-    href: `/students/ho_omau`,
-    name: "Ho'omau",
-    links: [
-      {
-        name: 'Soloprojekt',
-        title: 'Titel hier einfügen',
-        href: `/projects/on_the_trail`,
-        src: `${process.env.PUBLIC_URL}/assets/images/projects/project1.png`,
-      },
-      {
-        name: 'Abschlussprojekt',
-        title: 'Titel hier einfügen',
-        href: `/projects/on_the_trail`,
-        src: `${process.env.PUBLIC_URL}/assets/images/projects/project2.png`,
-      },
-    ],
-    src: `${process.env.PUBLIC_URL}/assets/images/students/Bildschirmfoto 2025-02-18 um 17.06.12.png`,
-    year: { start: 2022, end: 2025 },
-    descriptionLeft:
-      '“Ikigai” is a Japanese concept that means your reason for being or your purpose in life. It is unique to every person, it allows you to express yourself freely and truthfully, according to your own rules or values.',
-    descriptionRight:
-      'As a group we are connected through the search for our own ikigai, exploring our unique traits, our role in the world (community) and discovering what we want to say as artists.',
-    students:
-      'Alva Nilsson, Ana Chuntisvili, Ana Paula Salcido Roa, Aurora Pollini, Camila Milton Frattari, Eleonora Poles, Emma Steenblock, Fabio Camoirano, Giulia del Grosso, Ida Zimmermann, Irene Lanzanò, Karenina Lizama Leirana, Leonie Klamer, Martina Vincenza Ventura, Melina Papadopoulu, Milla Matthews, Orla Maria Losardo, Peter Mani, Simone Schachtschneider, Tara Thormann, Vignesh Kumar, Yana Delibashev, Yareli Alejandra Alvarado Macario',
-  },
-];*/
 
 function StudentGroup() {
+  const { t } = useTranslation([ns_common]);
+    const { button } = t(ns_common);
   const theme = useTheme();
   const navigate = useNavigate();
   const { studentUrlName } = useParams();
@@ -172,7 +93,7 @@ function StudentGroup() {
                 }}
                 className="bg-white border border-black rounded-full px-[16px] py-[2px]"
               >
-                zurück
+                {button.back}
               </button>
             </Box>
           </Box>
@@ -240,7 +161,7 @@ function StudentGroup() {
                 }}
                 className="bg-white border border-black rounded-full px-[16px] py-[2px]"
               >
-                zurück
+                {button.back}
               </button>
             </Box>
           </Box>
@@ -292,7 +213,7 @@ function StudentGroup() {
             <SplitSection
               key={idx}
               title={project.name}
-              projectId={project.id} // qua vai al singolo progetto ??
+              to={`/projects/${project.id}`} // qua vai al singolo progetto ??
               text={project.title}
               img={{ src: project.src, alt: project.name }}
               reverse={isOdd}

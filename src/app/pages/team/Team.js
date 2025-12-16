@@ -4,8 +4,12 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectUserLanguage } from 'app/store/app/mainSlice';
+import { useTranslation } from 'react-i18next';
+import { defaultNS as ns_common } from 'translations';
 
 function Team() {
+  const { t } = useTranslation([ns_common]);
+    const { button } = t(ns_common);
   const theme = useTheme();
 
   const [teamData, setTeamData] = useState({
@@ -47,7 +51,7 @@ function Team() {
   }, [userLanguage]);
 
   const teamMembers = teamData.teamMembers;
-  console.log("teamdata", teamData);
+  console.log('teamdata', teamData);
   /*const teamMembers = [
     {
       src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto 2025-02-18 um 17.26.20 2.png`,
@@ -188,32 +192,33 @@ function Team() {
                         margin: { xs: '8px', md: '16px' },
                       }}
                     >
-                      VITA
+                      {button.vita}
                     </Box>
                   )}
                 </Box>
 
-                <Typography
-                  className="uppercase"
-                  sx={{
-                    fontSize: { xs: '12px', md: '15px' },
-                    fontWeight: '400',
-                    lineHeight: 'normal',
-                  }}
-                >
-                  {member.name}
-                </Typography>
+                <Box className="w-min min-w-full">
+                  <Typography
+                    className="uppercase"
+                    sx={{
+                      fontSize: { xs: '12px', md: '15px' },
+                      fontWeight: '400',
+                      lineHeight: 'normal',
+                    }}
+                  >
+                    {member.name}
+                  </Typography>
 
-
-                <Typography
-                  sx={{
-                    fontSize: { xs: '12px', md: '15px' },
-                    fontWeight: '400',
-                    lineHeight: 'normal',
-                  }}
-                >
-                  {member.role}
-                </Typography>
+                  <Typography
+                    sx={{
+                      fontSize: { xs: '12px', md: '15px' },
+                      fontWeight: '400',
+                      lineHeight: 'normal',
+                    }}
+                  >
+                    {member.role}
+                  </Typography>
+                </Box>
               </Box>
             ))}
           </Box>
@@ -223,7 +228,7 @@ function Team() {
       <Box
         component="section"
         className="flex flex-col justify-center items-center"
-        sx={{ background: '#000000', px: { xs: '35px', md: '75px' }, py: { xs: '55px', md: '110px' } }}
+        sx={{ background: '#000000', px: { xs: '75px', md: '75px' }, py: { xs: '55px', md: '110px' } }}
       >
         <Typography
           sx={{
@@ -235,8 +240,15 @@ function Team() {
         >
           {teamData.memoriam.headline}
         </Typography>
-        <Box className="max-w-[1250px] flex justify-center items-start" sx={{ gap: { xs: '55px', md: '110px' } }}>
-          <Box className="w-[50%] flex flex-col justify-start items-start">
+        <Box
+          className="max-w-[1250px] flex justify-center"
+          sx={{
+            flexDirection: { xs: 'column-reverse', md: 'row' },
+            alignItems: { xs: 'center', md: 'start' },
+            gap: { xs: '55px', md: '110px' },
+          }}
+        >
+          <Box className="flex flex-col justify-start items-start" sx={{ width: { xs: '100%', md: '50%' } }}>
             <Typography
               sx={{
                 color: '#ffffff',
@@ -257,11 +269,11 @@ function Team() {
               {teamData.memoriam.text_right}
             </Typography>
           </Box>
-          <Box className="w-[50%] flex flex-col justify-start items-start">
+          <Box className="flex flex-col justify-start items-start sticky" sx={{ width: { xs: '100%', md: '50%' } }}>
             <Box
               component="img"
               src={teamData.memoriam.image}
-              className="flex-1 w-[500px] mb-[24px]"
+              className="flex-1 w-[500px] mx-auto mb-[24px]"
               sx={{ objectFit: 'cover', aspectRatio: 0.75 }}
             ></Box>
           </Box>

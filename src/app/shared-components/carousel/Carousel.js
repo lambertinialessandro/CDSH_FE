@@ -1,8 +1,8 @@
 import { ArrowBack, ArrowForward } from '@mui/icons-material';
 import { Box, IconButton, Typography } from '@mui/material';
 import useParallaxY from 'app/shared-components/hooks/useParallaxY';
-import { AnimatePresence, motion } from 'framer-motion';
-import { Fragment, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
+import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 
 function ImageAnimation({ item, height }) {
@@ -21,6 +21,14 @@ function ImageAnimation({ item, height }) {
         transition={{ duration: 0.6, ease: 'easeOut' }}
       />
     </motion.div>
+  );
+}
+
+function Image(props) {
+  const { item, height } = props;
+
+  return (
+    <img src={item.src} alt={item.title || ``} style={{ height }} className="w-full object-cover border border-black" />
   );
 }
 
@@ -92,7 +100,7 @@ function Carousel({ items, gap, itemWidth, itemHeight, Addon = undefined }) {
                   flexShrink: 0,
                 }}
               >
-                <ImageAnimation item={item} height={itemHeight} />
+                <Image item={item} height={itemHeight} />
                 {Addon && <Addon item={item} />}
               </Box>
             ))}

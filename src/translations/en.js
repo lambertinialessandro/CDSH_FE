@@ -1,8 +1,56 @@
 const dictionary = {
   common: {
-    button: {},
+    button: {
+      mehrErfahren: 'Learn more',
+      vita: "CV", // Or 'Bio' depending on preference
+      back: "Back",
+    },
     error: {},
-    message: {},
+    message: {
+      // top navbar
+      deVersion: 'Deutsche Version',
+      enVersion: 'English Version',
+      deVersionShort: 'DE',
+      enVersionShort: 'EN',
+      ticketShop: 'Ticket Shop',
+      menu: 'Menu',
+
+      uberUns: 'About Us',
+      team: 'Team',
+      studierende: 'Students',
+      ausbildung: 'Education', // Or 'Training Program'
+      auditions: 'Auditions',
+      auditionOpen: 'OPEN',
+      aktuelles: 'News',
+
+      kontakt: "Contact",
+      telefon: "Phone: ",
+      mail: "Mail: ",
+
+      // footer
+      fullNameSchool: 'CDSH - Contemporary',
+      schoolDescription: 'Dance School Hamburg GmbH',
+      schoolStreet: 'Stresemannstraße 374 b', // Address usually stays in local format
+      schoolPLZ: '22761 Hamburg',
+
+      liknInstagram: 'Instagram',
+      liknVimeo: 'Vimeo',
+      liknFacebook: 'Facebook',
+
+      footUberUs: 'About Us',
+      footAuditions: 'Auditions',
+      footFAQ: 'FAQ',
+      footDaten: 'Privacy Policy',
+      footImpressum: 'Imprint', // Standard legal translation for German companies
+      footAGB: 'Terms & Conditions',
+
+      footTelephon: 'Phone: ',
+      footMail: 'Mail: ',
+
+      designed: 'Designed by ',
+      developed: 'Developed by ',
+      and: 'and ',
+    },
     title: {},
     role: {},
     language: {

@@ -116,23 +116,10 @@ function StudentSelector({ classes = [] }) {
               >
                 <SplitSection
                   key={idx}
-                  title={
-                    <BigLink
-                      to={`/students/${group.id}`}
-                      extraSx={{
-                        fontSize: { xs: '28px', md: '80px' },
-                        fontWeight: '400',
-                        whiteSpace: 'nowrap',
-                      }}
-                      fontSize="inherit"
-                      lineHeight={{ xs: '1px', md: '5px' }}
-                    >
-                      {group.name}
-                    </BigLink>
-                  }
+                  title={group.name}
                   text={`${group.year.start} - ${group.year.end}`}
                   img={{ src: group.src, alt: group.name }}
-                  href={`/students/${group.id}`} // link to
+                  to={`/students/${group.id}`} // link to
                   reverse={isOdd}
                   bgColor={isOdd && '#8F20FF'}
                   color={isOdd && '#ffffff'}
