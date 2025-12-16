@@ -65,7 +65,6 @@ function AboutUs() {
               fontWeight: '400',
             }}
           >
-            {/*Über uns*/}
             {aboutUsData.header.title}
           </Typography>
           <Typography
@@ -76,14 +75,12 @@ function AboutUs() {
             }}
           >
             {aboutUsData.header.text}
-            {/*Das Ausbildungsprogramm der CDSH verbindet die Vielfalt des zeitgenössischen Tanzes mit den individuellen
-            künstlerischen Bedürfnissen der Studierenden und den Anforderungen der internationalen Branche.*/}
           </Typography>
         </Box>
         <Box className="flex-1 h-full relative" sx={{ width: { xs: '100%', md: '50%' } }}>
           <Box
             component="img"
-            src={`${process.env.PUBLIC_URL}/assets/images/aboutUs/cdsh-willkommen-1 1.png`}
+            src={aboutUsData.header.image} 
             className="flex-1 w-full"
             sx={{ objectFit: 'cover', height: {xs: "390px", md: "100%"} }}
           ></Box>
@@ -100,7 +97,6 @@ function AboutUs() {
               color: 'white',
             }}
           >
-            {/*Über uns*/}
             {aboutUsData.header.title}
           </Typography>
         </Box>
@@ -124,11 +120,6 @@ function AboutUs() {
           }}
         >
           {aboutUsData.description.left}
-          {/*Die Contemporary Dance School Hamburg bietet dir zeitgenössischen Tanz auf hohem Niveau und die Entwicklung
-          deiner künstlerischen Persönlichkeit im Austausch mit erfahrenen Mentor*innen aus aller Welt. Das tägliche
-          Training bereitet dich auf die Anforderungen deiner Karriere im Bühnentanz vor. Als staatlich anerkannte
-          Berufsfachschule für zeitgenössischen Bühnentanz bietet dir die CDSH eine dreijährige praxisnahe
-          Tanzausbildung, bringt dich in Kontakt mit Künstler*innen aus der Szene und*/}
         </Typography>
         <Typography
           className="flex-1"
@@ -138,11 +129,6 @@ function AboutUs() {
           }}
         >
           {aboutUsData.description.right}
-          {/*kooperiert mit vielen relevanten Bereichen der tänzerischen Bildung. Ein wirksames Unterrichtsprogramm hilft
-          dir, dich technisch, künstlerisch und kreativ weiterzuentwickeln. Durch choreografische Projektarbeit bekommst
-          du ein Gefühl für die professionelle Arbeit und sammelst Bühnenerfahrung durch regelmäßige Auftritte im
-          Theater. Ein erfahrenes Team aus Künstler*innen und Pädagog*innen unterstützt dich bei deiner Entwicklung in
-          der tänzerischen Ausbildung.*/}
         </Typography>
       </Box>
 
@@ -165,41 +151,11 @@ function AboutUs() {
             }}
           >
             {aboutUsData.banner1}
-            {/*WORKSHOPS, AUSBILDUNGEN, FORTBILDUNGEN*/}
           </Typography>
         </LoopBanner>
       </Box>
 
       <Box component="section" className="px-[45px] flex flex-col justify-center items-start">
-        {/*<SplitSection
-          title="Talent, Technik & Tanzsprache"
-          text="Wir fördern die Findung der individuellen künsterischen Persönlichkeit. Die Basis dessen bildet eine
-                fundierte Ausbildung im Bereich etablierter Tanzstile."
-          img={{
-            src: `${process.env.PUBLIC_URL}/assets/images/aboutUs/Bildschirmfoto 2025-02-18 um 17.05.47.png`,
-            alt: 'Tänzer:innen beim Training',
-          }}
-        />
-        <SplitSection
-          title="Förderung & Kooperation"
-          text="Wir vermitteln auch nach dem Abschluss Jobs und stellen Proberäume kostenfrei bereit. Außerdem
-                profitiert ihr während der Ausbildung von unserem Netzwerk internationaler Mentor*innen."
-          img={{
-            src: `${process.env.PUBLIC_URL}/assets/images/aboutUs/Bildschirmfoto 2025-02-18 um 17.06.05.png`,
-            alt: 'Kooperationsprojekt',
-          }}
-          reverse
-        />
-        <SplitSection
-          title="Choreografie & Praxis"
-          text="Wir erarbeiten zielgerichtete Choreografien und sammeln bereits während der Ausbildung viele Erfahrungen
-                auf lokalen Bühnen und Events."
-          img={{
-            src: `${process.env.PUBLIC_URL}/assets/images/aboutUs/Bildschirmfoto 2025-02-18 um 17.06.12.png`,
-            alt: 'Bühnenauftritt',
-          }}
-          bottom
-        />*/}
         {aboutUsData.splitSections.map((section, idx) => (
           <SplitSection
             key={idx}
@@ -233,7 +189,6 @@ function AboutUs() {
             }}
           >
             {aboutUsData.banner2}
-            {/*}FFENHEIT, RESPEKT, TOLERANZ, KREATIVITÄT*/}
           </Typography>
         </LoopBanner>
       </Box>
@@ -253,7 +208,6 @@ function AboutUs() {
           }}
         >
           {aboutUsData.concept.title}
-          {/*Künstlerisches Konzept*/}
         </Typography>
         <Box
           className="max-w-[1250px] flex justify-center"
@@ -272,11 +226,6 @@ function AboutUs() {
               }}
             >
               {aboutUsData.concept.textLeft}
-              {/*»In meiner Tätigkeit als Künstlerischer Leiter der Contemporary Dance School Hamburg verbinde ich das
-              kreative und technische Potenzial der CDSH mit den Ansprüchen einer praxisorientierten Ausbildung für den
-              zeitgenössischen Bühnentanz. Mein Ziel ist es, durch den Austausch der CDSH mit unterschiedlichen
-              Künstler*innen und Kooperationspartner*innen den zukünftigen Tänzern schon während der Ausbildung eine
-              bestmögliche Einbindung in verschiedene Produktionen und Projekte zu ermöglichen.*/}
             </Typography>
             <br />
             <Typography
@@ -287,17 +236,12 @@ function AboutUs() {
               }}
             >
               {aboutUsData.concept.textRight}
-              {/*Damit fördern wir ein Netzwerk, das auch über die Ausbildung hinaus einen kreativen Austausch ermöglicht
-              und den beruflichen Einstieg erleichtert. Meiner Erfahrung nach ist die Entwicklung des kreativen
-              Potenzials in viele Richtungen einer der wichtigsten Bestandteile in der künstlerischen Ausbildung. Das
-              Spektrum der CDSH umfasst sowohl die technische Schulung als auch die individuelle Förderung der
-              künstlerischen Persönlichkeit der Tänzer.«*/}
             </Typography>
           </Box>
           <Box className="flex flex-col justify-start items-start sticky" sx={{ width: { xs: '100%', md: '50%' } }}>
             <Box
               component="img"
-              src={`${process.env.PUBLIC_URL}/assets/images/aboutUs/Bildschirmfoto 2025-02-18 um 17.26.20 1.png`}
+              src={`${process.env.PUBLIC_URL}/assets/images/aboutUs/Bildschirmfoto 2025-02-18 um 17.26.20 1.png`} //src={aboutUsData.concept.image}
               className="flex-1 w-[500px] mx-auto mb-[24px]"
               sx={{ objectFit: 'cover', aspectRatio: 0.75 }}
             ></Box>
@@ -310,7 +254,6 @@ function AboutUs() {
               }}
             >
               {aboutUsData.concept.name}
-              {/*RAUL VALDEZ*/}
             </Typography>
             <Typography
               sx={{
@@ -320,7 +263,6 @@ function AboutUs() {
               }}
             >
               {aboutUsData.concept.role}
-              {/*Künstlerischer Leiter der CDSH*/}
             </Typography>
           </Box>
         </Box>
@@ -343,15 +285,12 @@ function AboutUs() {
             }}
           >
             {aboutUsData.footerCta.title}
-            {/*Du möchtest uns kennenlernen?*/}
           </Typography>
           <Typography
             className="max-w-[740px] min-w-[50%] text-center"
             sx={{ color: '#000000', fontSize: { xs: '15px', md: '30px' }, fontWeight: '400' }}
           >
             {aboutUsData.footerCta.text}
-            {/*Wir dich ebenfalls. Neben den regulären Auditions sind wir bei Fragen rund um die Ausbildung per Mail oder
-          telefonisch für dich da.*/}
           </Typography>
         </Box>
       )}

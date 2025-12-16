@@ -321,7 +321,7 @@ function StudentGroup() {
             marginBottom: '32px',
           }}
         >
-          Die Studierenden
+          {selectedStudent.studentsHeader}
         </Typography>
         <Typography
           className="max-w-[740px] min-w-[50%] text-center"

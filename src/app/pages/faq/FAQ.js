@@ -1,42 +1,11 @@
 import { Box, Typography } from '@mui/material';
+import { selectUserLanguage } from 'app/store/app/mainSlice';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useState } from 'react';
-
-const questions = [
-  {
-    question: 'Muss ich volljährig sein, um die Ausbildung zu beginnen?',
-    answare:
-      'Der Unterricht wird überwiegend auf Englisch durchgeführt, um internationalen Studierenden den Einstieg zu erleichtern. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tempus lorem et sapien tincidunt, vitae porttitor magna hendrerit.',
-  },
-  {
-    question: 'Wie lange dauert die Ausbildung und wie ist sie aufgebaut?',
-    answare:
-      'Der Unterricht wird überwiegend auf Englisch durchgeführt, um internationalen Studierenden den Einstieg zu erleichtern. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tempus lorem et sapien tincidunt, vitae porttitor magna hendrerit.',
-  },
-  {
-    question: 'Wie läuft das Aufnahmeverfahren ab?',
-    answare:
-      'Der Unterricht wird überwiegend auf Englisch durchgeführt, um internationalen Studierenden den Einstieg zu erleichtern. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tempus lorem et sapien tincidunt, vitae porttitor magna hendrerit.',
-  },
-  {
-    question: 'Gibt es einen Tag der offenen Tür?',
-    answare:
-      'Der Unterricht wird überwiegend auf Englisch durchgeführt, um internationalen Studierenden den Einstieg zu erleichtern. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tempus lorem et sapien tincidunt, vitae porttitor magna hendrerit.',
-  },
-  {
-    question: 'In welcher Sprache findet der Unterricht statt?',
-    answare:
-      'Der Unterricht wird überwiegend auf Englisch durchgeführt, um internationalen Studierenden den Einstieg zu erleichtern. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tempus lorem et sapien tincidunt, vitae porttitor magna hendrerit.',
-  },
-  {
-    question: 'Gibt es Finanzierungsmöglichkeiten oder Stipendien?',
-    answare:
-      'Der Unterricht wird überwiegend auf Englisch durchgeführt, um internationalen Studierenden den Einstieg zu erleichtern. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tempus lorem et sapien tincidunt, vitae porttitor magna hendrerit.',
-  },
-];
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 function Question(props) {
-  const { question, answare } = props;
+  const { question, answer } = props;
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -81,7 +50,7 @@ function Question(props) {
                 lineHeight: 'normal',
               }}
             >
-              {answare}
+              {answer}
             </Typography>
           </motion.div>
         )}
@@ -91,6 +60,37 @@ function Question(props) {
 }
 
 function FAQ() {
+  const userLanguage = useSelector(selectUserLanguage);
+  const [faqData, setFaqData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    setLoading(true);
+    setError(null);
+    fetch(`http://localhost/plainkit-main/api/faq?lang=${userLanguage}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Network response was not ok, status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setFaqData(data);
+      })
+      .catch((error) => {
+        console.error('Fetching error:', error);
+        setError(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [userLanguage]);
+
+  console.log('faqData', faqData);
+  if (loading) return <Box sx={{ p: 10, textAlign: 'center' }}>Loading content...</Box>;
+  if (!faqData) return <Box sx={{ p: 10, textAlign: 'center' }}>Error loading data.</Box>;
+
   return (
     <>
       <Box
@@ -112,7 +112,7 @@ function FAQ() {
               lineHeight: 'normal',
             }}
           >
-            FAQ
+            {faqData.header.headline}
           </Typography>
           <Typography
             className="rounded-full"
@@ -125,7 +125,7 @@ function FAQ() {
               maxWidth: { xs: '250px', md: '500px' },
             }}
           >
-            Du hast eine Frage? Vielleicht hat jemand anderes sie bereits gestellt. Schau'doch mal nach!
+            {faqData.header.text}
           </Typography>
         </Box>
       </Box>
@@ -139,8 +139,8 @@ function FAQ() {
         }}
       >
         <Box className="max-w-[1280px] flex flex-col justify-start items-start gap-8">
-          {questions.map(({ question, answare }, idx) => {
-            return <Question key={idx} question={question} answare={answare} />;
+          {faqData.questions.map(({ question, answer }, idx) => {
+            return <Question key={idx} question={question} answer={answer} />;
           })}
         </Box>
       </Box>
@@ -159,14 +159,13 @@ function FAQ() {
             marginBottom: '32px',
           }}
         >
-          Du möchtest uns kennenlernen?
+          {faqData.footerCta.title}
         </Typography>
         <Typography
           className="max-w-[740px] min-w-[50%] text-center"
           sx={{ color: '#000000', fontSize: { xs: '15px', md: '30px' }, fontWeight: '400' }}
         >
-          Wir dich ebenfalls. Neben den regulären Auditions sind wir bei Fragen rund um die Ausbildung per Mail oder
-          telefonisch für dich da.
+          {faqData.footerCta.text}
         </Typography>
       </Box>
     </>

@@ -78,7 +78,7 @@ function Project(props) {
             {selectedProject.title}
           </Typography>
           <Box className="flex justify-start items-center gap-[8px]">
-            {selectedProject.chategories.map((role, idx) => (
+            {selectedProject.categories.map((role, idx) => (
               <span
                 key={idx}
                 className="bg-black text-white rounded-full px-[24px] py-[4px]"
@@ -137,7 +137,7 @@ function Project(props) {
             </Typography>
 
             <Box className="flex justify-start items-center gap-[8px]">
-              {selectedProject.chategories.map((role, idx) => (
+              {selectedProject.categories.map((role, idx) => (
                 <span
                   key={idx}
                   className="bg-black text-white rounded-full px-[24px] py-[4px]"
