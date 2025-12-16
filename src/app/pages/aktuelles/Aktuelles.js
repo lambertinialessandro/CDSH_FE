@@ -82,7 +82,7 @@ function Aktuelles() {
         <Box className="flex-1 h-full relative" sx={{ width: { xs: '100%', md: '50%' } }}>
           <Box
             component="img"
-            src={`${process.env.PUBLIC_URL}/assets/images/students/cdsh-willkommen-1.png`}
+            src={data.header.image}
             className="flex-1 w-full"
             sx={{ objectFit: 'cover', height: {xs: "390px", md: "100%"} }}
           ></Box>

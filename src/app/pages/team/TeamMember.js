@@ -65,15 +65,16 @@ function TeamMember() {
             {selectedMember.name}
           </Typography>
           <Box className="flex justify-start items-center gap-[8px]">
-            {selectedMember.roles.map((role, idx) => (
-              <Typography
-                key={idx}
-                className="bg-black text-white rounded-full px-[24px] py-[4px]"
-                sx={{ fontSize: '15px' }}
-              >
-                {role}
-              </Typography>
-            ))}
+            {selectedMember.roles &&
+              selectedMember.roles.map((role, idx) => (
+                <Typography
+                  key={idx}
+                  className="bg-black text-white rounded-full px-[24px] py-[4px]"
+                  sx={{ fontSize: '15px' }}
+                >
+                  {role.name}
+                </Typography>
+              ))}
           </Box>
           <Box className="flex flex-col items-start gap-[8px]">
             <Typography sx={{ fontSize: '15px' }}>Fach: {selectedMember.subjects.join(', ')}</Typography>
@@ -87,59 +88,59 @@ function TeamMember() {
             </button>
           </Box>
         </Box>
-                <Box className="flex-1 h-full relative" sx={{ width: { xs: '100%', md: '50%' } }}>
-
-        <Box
-          component="img"
-          src={selectedMember.src}
-          className="flex-1 w-full relative"
-            sx={{ objectFit: 'cover', height: {xs: "390px", md: "100%"} }}
-        ></Box>
-        <Box
-          sx={{
-            position: 'absolute',
-            left: '24px',
-            bottom: '12px',
-            display: { xs: 'flex', md: 'none' },
-            flexDirection: 'column',
-            gap: '8px',
-          }}
-        >
-          <Typography
-            className="capitalize mix-blend-exclusion"
+        <Box className="flex-1 h-full relative" sx={{ width: { xs: '100%', md: '50%' } }}>
+          <Box
+            component="img"
+            src={selectedMember.src}
+            className="flex-1 w-full relative"
+            sx={{ objectFit: 'cover', height: { xs: '390px', md: '100%' } }}
+          ></Box>
+          <Box
             sx={{
-              fontSize: '30px',
-              fontWeight: '400',
-              color: '#ffffff',
+              position: 'absolute',
+              left: '24px',
+              bottom: '12px',
+              display: { xs: 'flex', md: 'none' },
+              flexDirection: 'column',
+              gap: '8px',
             }}
           >
-            {selectedMember.name}
-          </Typography>
-          <Box className="flex justify-start items-center gap-[8px]">
-            {selectedMember.roles.map((role, idx) => (
-              <Typography
-                key={idx}
-                className="bg-black text-white rounded-full px-[24px] py-[4px]"
-                sx={{ fontSize: '12px' }}
-              >
-                {role}
-              </Typography>
-            ))}
-          </Box>
-          <Box className="flex flex-col items-start gap-[8px]">
-            <Typography className="text-white mix-blend-exclusion" sx={{ fontSize: '12px' }}>
-              Fach: {selectedMember.subjects.join(', ')}
-            </Typography>
-            <button
-              onClick={() => {
-                navigate(`/team`);
+            <Typography
+              className="capitalize mix-blend-exclusion"
+              sx={{
+                fontSize: '30px',
+                fontWeight: '400',
+                color: '#ffffff',
               }}
-              className="bg-white border border-black rounded-full px-[16px] py-[2px]"
             >
-              {button.back}
-            </button>
+              {selectedMember.name}
+            </Typography>
+            <Box className="flex justify-start items-center gap-[8px]">
+              {selectedMember.roles &&
+                selectedMember.roles.map((role, idx) => (
+                  <Typography
+                    key={idx}
+                    className="bg-black text-white rounded-full px-[24px] py-[4px]"
+                    sx={{ fontSize: '12px' }}
+                  >
+                    {role.name}
+                  </Typography>
+                ))}
+            </Box>
+            <Box className="flex flex-col items-start gap-[8px]">
+              <Typography className="text-white mix-blend-exclusion" sx={{ fontSize: '12px' }}>
+                Fach: {selectedMember.subjects.join(', ')}
+              </Typography>
+              <button
+                onClick={() => {
+                  navigate(`/team`);
+                }}
+                className="bg-white border border-black rounded-full px-[16px] py-[2px]"
+              >
+                {button.back}
+              </button>
+            </Box>
           </Box>
-        </Box>
         </Box>
       </Box>
 
@@ -160,11 +161,7 @@ function TeamMember() {
             fontWeight: '400',
           }}
         >
-          Die Contemporary Dance School Hamburg bietet dir zeitgenössischen Tanz auf hohem Niveau und die Entwicklung
-          deiner künstlerischen Persönlichkeit im Austausch mit erfahrenen Mentor*innen aus aller Welt. Das tägliche
-          Training bereitet dich auf die Anforderungen deiner Karriere im Bühnentanz vor. Als staatlich anerkannte
-          Berufsfachschule für zeitgenössischen Bühnentanz bietet dir die CDSH eine dreijährige praxisnahe
-          Tanzausbildung, bringt dich in Kontakt mit Künstler*innen aus der Szene und
+          {selectedMember.biographyLeft}
         </Typography>
         <Typography
           sx={{
@@ -173,7 +170,7 @@ function TeamMember() {
             fontWeight: '400',
           }}
         >
-          {selectedMember.biography || 'Keine Biografie verfügbar.'}
+          {selectedMember.biographyRight}
         </Typography>
       </Box>
 

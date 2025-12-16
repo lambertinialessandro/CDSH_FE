@@ -80,7 +80,7 @@ function AboutUs() {
         <Box className="flex-1 h-full relative" sx={{ width: { xs: '100%', md: '50%' } }}>
           <Box
             component="img"
-            src={`${process.env.PUBLIC_URL}/assets/images/aboutUs/cdsh-willkommen-1 1.png`}
+            src={aboutUsData.header.image} 
             className="flex-1 w-full"
             sx={{ objectFit: 'cover', height: {xs: "390px", md: "100%"} }}
           ></Box>
@@ -97,7 +97,6 @@ function AboutUs() {
               color: 'white',
             }}
           >
-            {/*Über uns*/}
             {aboutUsData.header.title}
           </Typography>
         </Box>
@@ -241,7 +240,7 @@ function AboutUs() {
           <Box className="flex flex-col justify-start items-start sticky" sx={{ width: { xs: '100%', md: '50%' } }}>
             <Box
               component="img"
-              src={`${process.env.PUBLIC_URL}/assets/images/aboutUs/Bildschirmfoto 2025-02-18 um 17.26.20 1.png`}
+              src={`${process.env.PUBLIC_URL}/assets/images/aboutUs/Bildschirmfoto 2025-02-18 um 17.26.20 1.png`} //src={aboutUsData.concept.image}
               className="flex-1 w-[500px] mx-auto mb-[24px]"
               sx={{ objectFit: 'cover', aspectRatio: 0.75 }}
             ></Box>
@@ -285,15 +284,12 @@ function AboutUs() {
             }}
           >
             {aboutUsData.footerCta.title}
-            {/*Du möchtest uns kennenlernen?*/}
           </Typography>
           <Typography
             className="max-w-[740px] min-w-[50%] text-center"
             sx={{ color: '#000000', fontSize: { xs: '15px', md: '30px' }, fontWeight: '400' }}
           >
             {aboutUsData.footerCta.text}
-            {/*Wir dich ebenfalls. Neben den regulären Auditions sind wir bei Fragen rund um die Ausbildung per Mail oder
-          telefonisch für dich da.*/}
           </Typography>
         </Box>
       )}
