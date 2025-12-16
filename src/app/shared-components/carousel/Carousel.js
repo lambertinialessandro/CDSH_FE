@@ -39,8 +39,8 @@ function Carousel({ items, gap, itemWidth, itemHeight, Addon = undefined }) {
 
   const itemsPerPage = useMemo(() => {
     // shrink item width dynamically for small screens
-    if (containerWidth < 500) return 1;
-    if (containerWidth < 900) return 2;
+    //if (containerWidth < 500) return 1;
+    //if (containerWidth < 900) return 2;
     return Math.floor(containerWidth / (itemWidth + gap)) || 1;
   }, [containerWidth, itemWidth, gap]);
 
@@ -48,6 +48,7 @@ function Carousel({ items, gap, itemWidth, itemHeight, Addon = undefined }) {
   const maxIndex = Math.max(0, maxItems - itemsPerPage);
   const isLeftDisabled = index === 0;
   const isRightDisabled = index >= maxIndex;
+  const actualWidth = Math.min(itemWidth, containerWidth / itemsPerPage)
 
   const handleNext = () => {
     if (index < maxIndex) setIndex((prev) => prev + 1);
@@ -87,8 +88,8 @@ function Carousel({ items, gap, itemWidth, itemHeight, Addon = undefined }) {
               gap: `${gap}px`,
               mb: 3,
               transition: 'transform 0.35s cubic-bezier(0.15, 0.3, 0.25, 1)',
-              transform: `translateX(-${index * (containerWidth / itemsPerPage + gap)}px)`,
-              width: items.length * (containerWidth / itemsPerPage),
+              transform: `translateX(-${index * (actualWidth + gap)}px)`,
+              width: items.length * (actualWidth),
             }}
           >
             {items.map((item, idx) => (
@@ -96,7 +97,7 @@ function Carousel({ items, gap, itemWidth, itemHeight, Addon = undefined }) {
                 key={idx}
                 className="flex flex-col"
                 sx={{
-                  width: `${containerWidth / itemsPerPage}px`,
+                  width: `${actualWidth}px`,
                   flexShrink: 0,
                 }}
               >
