@@ -106,7 +106,7 @@ function Auditions() {
           .required(error.agreement_required)
           .isTrue(error.acceptDataDatenschutz_isTrue),
       }),
-    []
+    [title, message, error, button]
   );
   const inputs = useMemo(
     () => [
@@ -395,7 +395,7 @@ function Auditions() {
         colSpan: 'col-span-12',
       },
     ],
-    []
+    [title, message, error, button]
   );
 
   const methods = useForm({
@@ -422,7 +422,9 @@ function Auditions() {
   };
 
   const [hasBeenSend, setHasBeenSend] = useState(false);
+  console.log("errors", errors)
   const hasErrors = Object.keys(errors).length > 0;
+  console.log("hasErrors", hasErrors)
 
   useEffect(() => {
     if (hasErrors) {
