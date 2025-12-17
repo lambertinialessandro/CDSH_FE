@@ -3,6 +3,8 @@ import StudentSelector from './StudentSelector';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectUserLanguage } from 'app/store/app/mainSlice';
+import { renderers } from 'app/shared-components/htmlStyle/htmlStyle';
+import ReactMarkdown from 'react-markdown';
 
 function Students() {
   const theme = useTheme();
@@ -67,12 +69,13 @@ function Students() {
             {studentsData.intro.headline}
           </Typography>
         </Box>
+
         <Box className="flex-1 h-full relative" sx={{ width: { xs: '100%', md: '50%' } }}>
           <Box
             component="img"
-            src={`${process.env.PUBLIC_URL}/assets/images/students/cdsh-willkommen-1.png`}
+            src={studentsData.intro.image}
             className="flex-1 w-full"
-            sx={{ objectFit: 'cover', height: {xs: "390px", md: "100%"} }}
+            sx={{ objectFit: 'cover', height: { xs: '390px', md: '100%' } }}
           ></Box>
           <Typography
             className="mix-blend-exclusion"
@@ -98,15 +101,9 @@ function Students() {
         sx={{ background: theme.palette.secondary.main, py: { xs: '55px', md: '110px' } }}
       >
         <Box className="max-w-[1280px]">
-          <Typography
-            className="text-center"
-            sx={{
-              fontSize: { xs: '15px', md: '30px' },
-              fontWeight: '400',
-            }}
-          >
-            {studentsData.intro.text}
-          </Typography>
+          <div className="text-center">
+            <ReactMarkdown components={renderers} children={studentsData.intro.text} />
+          </div>
         </Box>
       </Box>
 

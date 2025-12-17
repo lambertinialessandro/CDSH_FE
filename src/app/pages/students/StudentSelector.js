@@ -7,37 +7,6 @@ import SplitSection from './SplitSection';
 import AnchorLink from 'app/shared-components/link/AnchorLink';
 import BigLink from 'app/shared-components/link/BigLink';
 
-/*const students = [
-  {
-    id: 'class_2025',
-    href: `/students/yugen`,
-    name: 'Class 2026',
-    src: `${process.env.PUBLIC_URL}/assets/images/students/Bildschirmfoto 2025-02-18 um 17.05.47.png`,
-    year: { start: 2025, end: 2028 },
-  },
-  {
-    id: 'yugen',
-    href: `/students/yugen`,
-    name: 'Yugen',
-    src: `${process.env.PUBLIC_URL}/assets/images/students/Bildschirmfoto 2025-02-18 um 17.05.47.png`,
-    year: { start: 2024, end: 2027 },
-  },
-  {
-    id: 'ikigai',
-    href: `/students/ikigai`,
-    name: 'Ikigai',
-    src: `${process.env.PUBLIC_URL}/assets/images/students/Bildschirmfoto 2025-02-18 um 17.06.05.png`,
-    year: { start: 2023, end: 2026 },
-  },
-  {
-    id: 'ho_omau',
-    href: `/students/ho_omau`,
-    name: 'Ho’omau',
-    src: `${process.env.PUBLIC_URL}/assets/images/students/Bildschirmfoto 2025-02-18 um 17.06.12.png`,
-    year: { start: 2022, end: 2025 },
-  },
-];*/
-
 function StudentSelector({ classes = [] }) {
   console.log('classes', classes);
 

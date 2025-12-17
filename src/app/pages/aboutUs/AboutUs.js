@@ -6,6 +6,8 @@ import SplitSection from './SplitSection';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectUserLanguage } from 'app/store/app/mainSlice';
+import ReactMarkdown from 'react-markdown';
+import { renderers } from 'app/shared-components/htmlStyle/htmlStyle';
 
 function AboutUs() {
   const theme = useTheme();
@@ -74,15 +76,15 @@ function AboutUs() {
               fontWeight: '400',
             }}
           >
-            {aboutUsData.header.text}
+            <ReactMarkdown components={renderers} children={aboutUsData.header.text} />
           </Typography>
         </Box>
         <Box className="flex-1 h-full relative" sx={{ width: { xs: '100%', md: '50%' } }}>
           <Box
             component="img"
-            src={aboutUsData.header.image} 
+            src={aboutUsData.header.image}
             className="flex-1 w-full"
-            sx={{ objectFit: 'cover', height: {xs: "390px", md: "100%"} }}
+            sx={{ objectFit: 'cover', height: { xs: '390px', md: '100%' } }}
           ></Box>
           <Typography
             className="mix-blend-exclusion"
@@ -119,7 +121,7 @@ function AboutUs() {
             fontWeight: '400',
           }}
         >
-          {aboutUsData.description.left}
+          <ReactMarkdown components={renderers} children={aboutUsData.description.left} />
         </Typography>
         <Typography
           className="flex-1"
@@ -128,7 +130,7 @@ function AboutUs() {
             fontWeight: '400',
           }}
         >
-          {aboutUsData.description.right}
+          <ReactMarkdown components={renderers} children={aboutUsData.description.right} />
         </Typography>
       </Box>
 
@@ -155,6 +157,7 @@ function AboutUs() {
         </LoopBanner>
       </Box>
 
+      {/*TODO: textarea */}
       <Box component="section" className="px-[45px] flex flex-col justify-center items-start">
         {aboutUsData.splitSections.map((section, idx) => (
           <SplitSection
@@ -218,25 +221,9 @@ function AboutUs() {
           }}
         >
           <Box className="flex flex-col justify-start items-start" sx={{ width: { xs: '100%', md: '50%' } }}>
-            <Typography
-              sx={{
-                color: '#000000',
-                fontSize: { xs: '15px', md: '30px' },
-                fontWeight: '400',
-              }}
-            >
-              {aboutUsData.concept.textLeft}
-            </Typography>
+            <ReactMarkdown components={renderers} children={aboutUsData.concept.textLeft} />
             <br />
-            <Typography
-              sx={{
-                color: '#000000',
-                fontSize: { xs: '15px', md: '30px' },
-                fontWeight: '400',
-              }}
-            >
-              {aboutUsData.concept.textRight}
-            </Typography>
+            <ReactMarkdown components={renderers} children={aboutUsData.concept.textRight} />
           </Box>
           <Box className="flex flex-col justify-start items-start sticky" sx={{ width: { xs: '100%', md: '50%' } }}>
             <Box

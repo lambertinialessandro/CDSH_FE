@@ -1,33 +1,34 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography } from '@mui/material';
 
-function VideoLooper() {
+function VideoLooper(props) {
+  const { video } = props;
   return (
     <Box
       component="section"
       className="header relative flex items-center"
-      sx={{ height: "100vh", position: "relative", overflow: "hidden" }}
+      sx={{ height: '100vh', position: 'relative', overflow: 'hidden' }}
     >
       {/* Overlay content */}
       <Box
         className="h-full flex justify-start items-end"
         sx={{
-          position: "relative",
+          position: 'relative',
           zIndex: 2,
           px: { xs: 4, sm: 6, md: 12 }, // responsive horizontal padding
           pb: { xs: 4, sm: 6, md: 8 }, // responsive bottom padding
-          width: "100%",
+          width: '100%',
         }}
       >
         <Box
           sx={{
-            color: "#ffffff",
+            color: '#ffffff',
             lineHeight: 1.2,
           }}
         >
           <Typography
             sx={{
-              color: "#ffffff",
-              fontSize: { xs: "34px", sm: "40px", md: "58px" },
+              color: '#ffffff',
+              fontSize: { xs: '34px', sm: '40px', md: '58px' },
               fontWeight: 400,
             }}
           >
@@ -35,8 +36,8 @@ function VideoLooper() {
           </Typography>
           <Typography
             sx={{
-              color: "#ffffff",
-              fontSize: { xs: "34px", sm: "40px", md: "58px" },
+              color: '#ffffff',
+              fontSize: { xs: '34px', sm: '40px', md: '58px' },
               fontWeight: 400,
             }}
           >
@@ -53,10 +54,10 @@ function VideoLooper() {
         loop
         muted
         disablePictureInPicture
-        src={`${process.env.PUBLIC_URL}/assets/images/CDSH - Trailer Final Performance cutted.mp4`}
+        src={video}
         className="absolute top-0 left-0 w-full h-full"
         sx={{
-          objectFit: "cover",
+          objectFit: 'cover',
           zIndex: 1,
         }}
       />
@@ -65,7 +66,7 @@ function VideoLooper() {
       <Box
         className="absolute top-0 left-0 w-full h-full"
         sx={{
-          background: "linear-gradient(to top, rgba(0,0,0,0.5) 30%, rgba(0,0,0,0) 100%)",
+          background: 'linear-gradient(to top, rgba(0,0,0,0.5) 30%, rgba(0,0,0,0) 100%)',
           zIndex: 1,
         }}
       />

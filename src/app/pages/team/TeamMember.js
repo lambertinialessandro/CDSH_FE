@@ -1,6 +1,8 @@
 import { Box, Typography, useTheme } from '@mui/material';
+import { renderers } from 'app/shared-components/htmlStyle/htmlStyle';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
+import ReactMarkdown from 'react-markdown';
 
 function TeamMember() {
   const theme = useTheme();
@@ -34,6 +36,7 @@ function TeamMember() {
   if (loading) return <Box sx={{ p: 10, textAlign: 'center' }}>Laden...</Box>;
   if (error || !selectedMember) return <Box sx={{ p: 10, textAlign: 'center' }}>Mitglied nicht gefunden.</Box>;
 
+  console.log('selectedMember', selectedMember);
   return (
     <>
       <Box
@@ -150,24 +153,12 @@ function TeamMember() {
           py: { xs: '55px', md: '110px' },
         }}
       >
-        <Typography
-          sx={{
-            flex: '1',
-            fontSize: { xs: '15px', md: '30px' },
-            fontWeight: '400',
-          }}
-        >
-          {selectedMember.biographyLeft}
-        </Typography>
-        <Typography
-          sx={{
-            flex: '1',
-            fontSize: { xs: '15px', md: '30px' },
-            fontWeight: '400',
-          }}
-        >
-          {selectedMember.biographyRight}
-        </Typography>
+        <div flex="1">
+          <ReactMarkdown components={renderers} children={selectedMember.biographyLeft} />
+        </div>
+        <div flex="1">
+          <ReactMarkdown components={renderers} children={selectedMember.biographyRight} />
+        </div>
       </Box>
 
       <Box

@@ -8,6 +8,8 @@ import { useSelector } from 'react-redux';
 import { selectUserLanguage } from 'app/store/app/mainSlice';
 import { useEffect, useState } from 'react';
 import AktuellesSection from '../aktuelles/AktuellesSection';
+import { renderers } from 'app/shared-components/htmlStyle/htmlStyle';
+import ReactMarkdown from 'react-markdown';
 
 function Addon({ item }) {
   return (
@@ -129,24 +131,12 @@ function Ausbildung() {
           py: { xs: '55px', md: '110px' },
         }}
       >
-        <Typography
-          className="flex-1"
-          sx={{
-            fontSize: { xs: '15px', md: '30px' },
-            fontWeight: '400',
-          }}
-        >
-          {ausbuildungData.intro.text_left}
-        </Typography>
-        <Typography
-          className="flex-1"
-          sx={{
-            fontSize: { xs: '15px', md: '30px' },
-            fontWeight: '400',
-          }}
-        >
-          {ausbuildungData.intro.text_right}
-        </Typography>
+        <div className="flex-1">
+          <ReactMarkdown components={renderers} children={ausbuildungData.intro.text_left} />
+        </div>
+        <div className="flex-1">
+          <ReactMarkdown components={renderers} children={ausbuildungData.intro.text_right} />
+        </div>
       </Box>
 
       <Box
@@ -213,18 +203,12 @@ function Ausbildung() {
         >
           {ausbuildungData.program_structure.title}
         </Typography>
-        <Typography
-          className="max-w-[740px] min-w-[50%] text-center"
-          sx={{ color: '#000000', fontSize: { sm: '15px', md: '30px' }, fontWeight: '400' }}
-        >
-          {ausbuildungData.program_structure.intro}
-        </Typography>
-        <Typography
-          className="max-w-[740px] min-w-[50%] text-center"
-          sx={{ color: '#000000', fontSize: { sm: '15px', md: '30px' }, fontWeight: '400' }}
-        >
-          {ausbuildungData.program_structure.details}
-        </Typography>
+        <div className="max-w-[740px] min-w-[50%] text-center">
+          <ReactMarkdown components={renderers} children={ausbuildungData.program_structure.intro} />
+        </div>
+        <div className="max-w-[740px] min-w-[50%] text-center">
+          <ReactMarkdown components={renderers} children={ausbuildungData.program_structure.details} />
+        </div>
       </Box>
 
       {/* <Box component="section" className="px-[45px] flex flex-col justify-center items-start">
@@ -428,12 +412,10 @@ function Ausbildung() {
         >
           {ausbuildungData.costs.headline}
         </Typography>
-        <Typography
-          className="max-w-[740px] min-w-[50%] text-center"
-          sx={{ color: '#000000', fontSize: { sm: '15px', md: '30px' }, fontWeight: '400' }}
-        >
-          {ausbuildungData.costs.text}
-        </Typography>
+
+        <div className="max-w-[740px] min-w-[50%] text-center">
+          <ReactMarkdown components={renderers} children={ausbuildungData.costs.text} />
+        </div>
       </Box>
 
       <Box
@@ -469,42 +451,7 @@ function Ausbildung() {
             }}
           >
             <Box className="flex flex-col justify-start items-start" sx={{ width: { xs: '100%', md: '50%' } }}>
-              <Typography
-                sx={{
-                  color: '#000000',
-                  fontSize: { xs: '15px', md: '30px' },
-                  fontWeight: '400',
-                }}
-              >
-                {ausbuildungData.fortbildung.description}
-              </Typography>
-              <br />
-              <Typography
-                sx={{
-                  color: '#000000',
-                  fontSize: { xs: '15px', md: '30px' },
-                  fontWeight: '400',
-                }}
-              >
-                {/*Zur Auswahl stehen zwei sechmonatige Blöcke: 1. Januar – 1. Juli oder 1. September – 1. März. Bis zu 12
-                Einheiten pro Woche können individuell aus dem Lehrplan gewählt werden. Zudem stehen die Studios für
-                eigene Projekte zur Verfügung, die bei »Work in Progress« oder dem Abschlussprojekt öffentlich gezeigt
-                werden können. Optional: bis zu 6 Mentoring-Sessions sowie Mitwirkung an bis zu zwei Kreationen der
-                Hauschoreograf*innen.*/}
-                {/* TODO */}
-              </Typography>
-              <br />
-              <Typography
-                sx={{
-                  color: '#000000',
-                  fontSize: { xs: '15px', md: '30px' },
-                  fontWeight: '400',
-                }}
-              >
-                {/*Voraussetzung: abgeschlossene Tanzausbildung oder gleichwertige Erfahrung. Die Aufnahme erfolgt über
-                Audition (live, per Video oder während des Programms). Kosten: 300 €/Monat*/}
-                {/* TODO */}
-              </Typography>
+              <ReactMarkdown components={renderers} children={ausbuildungData.fortbildung.description} />
             </Box>
             <Box className="flex flex-col justify-start items-start sticky" sx={{ width: { xs: '100%', md: '50%' } }}>
               <Box
@@ -519,7 +466,7 @@ function Ausbildung() {
       </Box>
 
       <AktuellesSection items={ausbuildungData.aktuelles.items} title={ausbuildungData.aktuelles.headline} />
-      
+
       <Box
         component="section"
         className="px-[45px] flex flex-col justify-center items-center text-center"

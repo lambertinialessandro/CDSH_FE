@@ -4,19 +4,13 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectUserLanguage } from 'app/store/app/mainSlice';
+import ReactMarkdown from 'react-markdown';
+import { renderers } from 'app/shared-components/htmlStyle/htmlStyle';
 
 function Team() {
   const theme = useTheme();
 
-  const [teamData, setTeamData] = useState({
-    intro: { headline: '', text: '', image: '' },
-    leadership: { headline: '', text: '' },
-    teamMembers: [],
-    docentsMembers: [],
-    memoriam: { headline: '', text_left: '', text_right: '', image: '' },
-    teachers: { headline: '', text: '' },
-    contact: { headline: '', text: '' },
-  });
+  const [teamData, setTeamData] = useState(null);
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -46,33 +40,12 @@ function Team() {
       });
   }, [userLanguage]);
 
+  console.log('teamdata', teamData);
+
+  if (loading) return <Box sx={{ p: 10, textAlign: 'center' }}>Loading content...</Box>;
+  if (!teamData) return <Box sx={{ p: 10, textAlign: 'center' }}>Error loading data.</Box>;
+
   const teamMembers = teamData.teamMembers;
-  console.log("teamdata", teamData);
-  /*const teamMembers = [
-    {
-      src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto 2025-02-18 um 17.26.20 2.png`,
-      name: 'Javier Báez',
-      roles: ['Schulleitung'],
-      href: `/team/javier_báez`,
-    },
-    {
-      src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto 2025-02-18 um 17.26.20 3.png`,
-      name: 'Raul Valdez',
-      roles: ['Künstlerische Leitung'],
-      href: `/team/raul_valdez`,
-    },
-    {
-      src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto 2025-02-18 um 17.26.20 4.png`,
-      name: 'Sina Rundel',
-      roles: ['Kommunikation und', 'Schüler*innenbetreuung', 'Tanzgeschichte'],
-      href: `/team/sina_rundel`,
-    },
-    {
-      src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto 2025-02-18 um 17.26.20 5.png`,
-      name: 'Martin Stöckle',
-      roles: ['Kaufmännischer Berater'],
-    },
-  ];*/
 
   return (
     <>
@@ -100,15 +73,7 @@ function Team() {
           >
             {teamData.intro.headline}
           </Typography>
-          <Typography
-            sx={{
-              fontSize: { xs: '15px', md: '30px' },
-              lineHeight: { xs: '20px', md: '35px' },
-              fontWeight: '400',
-            }}
-          >
-            {teamData.intro.text}
-          </Typography>
+          <ReactMarkdown components={renderers} children={teamData.intro.text} />
         </Box>
         <Box className="flex-1 h-full relative" sx={{ width: { xs: '100%', md: '50%' } }}>
           <Box
@@ -155,14 +120,7 @@ function Team() {
             >
               {teamData.leadership.headline}
             </Typography>
-            <Typography
-              sx={{
-                fontSize: { xs: '15px', md: '30px' },
-                fontWeight: '400',
-              }}
-            >
-              {teamData.leadership.text}
-            </Typography>
+            <ReactMarkdown components={renderers} children={teamData.leadership.text} />
           </Box>
 
           <Box className="w-full flex justify-center items-start gap-[24px] flex-wrap">
@@ -204,7 +162,6 @@ function Team() {
                   {member.name}
                 </Typography>
 
-
                 <Typography
                   sx={{
                     fontSize: { xs: '12px', md: '15px' },
@@ -236,26 +193,10 @@ function Team() {
           {teamData.memoriam.headline}
         </Typography>
         <Box className="max-w-[1250px] flex justify-center items-start" sx={{ gap: { xs: '55px', md: '110px' } }}>
-          <Box className="w-[50%] flex flex-col justify-start items-start">
-            <Typography
-              sx={{
-                color: '#ffffff',
-                fontSize: { xs: '15px', md: '30px' },
-                fontWeight: '400',
-              }}
-            >
-              {teamData.memoriam.text_left}
-            </Typography>
+          <Box className="w-[50%] flex flex-col justify-start items-start text-white">
+            <ReactMarkdown components={renderers} children={teamData.memoriam.text_left} />
             <br />
-            <Typography
-              sx={{
-                color: '#ffffff',
-                fontSize: { xs: '15px', md: '30px' },
-                fontWeight: '400',
-              }}
-            >
-              {teamData.memoriam.text_right}
-            </Typography>
+            <ReactMarkdown components={renderers} children={teamData.memoriam.text_right} />
           </Box>
           <Box className="w-[50%] flex flex-col justify-start items-start">
             <Box
@@ -284,12 +225,10 @@ function Team() {
         >
           {teamData.teachers.headline}
         </Typography>
-        <Typography
-          className="max-w-[740px] min-w-[50%] text-center"
-          sx={{ color: '#000000', fontSize: { xs: '15px', md: '30px' }, fontWeight: '400' }}
-        >
-          {teamData.teachers.text}
-        </Typography>
+
+        <div className="max-w-[740px] min-w-[50%] text-center">
+          <ReactMarkdown components={renderers} children={teamData.teachers.text} />
+        </div>
       </Box>
 
       <TeamSelector members={teamData.docentsMembers} />
@@ -304,13 +243,13 @@ function Team() {
             marginBottom: '32px',
           }}
         >
-          {teamData.contact.headline}
+          {teamData.footerCta.title}
         </Typography>
         <Typography
           className="max-w-[740px] min-w-[50%] text-center"
           sx={{ color: '#000000', fontSize: { xs: '15px', md: '30px' }, fontWeight: '400' }}
         >
-          {teamData.contact.text}
+          {teamData.footerCta.text}
         </Typography>
       </Box>
     </>

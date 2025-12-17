@@ -15,11 +15,19 @@ import { Controller, FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 import { ns as ns_audition } from './translations';
+import { selectUserLanguage } from 'app/store/app/mainSlice';
+import { useSelector } from 'react-redux';
+import { renderers } from 'app/shared-components/htmlStyle/htmlStyle';
+import ReactMarkdown from 'react-markdown';
 
 function Auditions() {
   const { t } = useTranslation([ns_audition]);
   const { title, message, error, button } = t(ns_audition);
   const theme = useTheme();
+  const [auditionsData, setAuditionsData] = useState(null);
+  const userLanguage = useSelector(selectUserLanguage);
+
+  const [loading, setLoading] = useState(true);
 
   const defaultValues = useMemo(() => {
     return {
@@ -108,6 +116,12 @@ function Auditions() {
       }),
     [title, message, error, button]
   );
+
+  const presenzSubSelection = useMemo(() => {
+    const dynamicDates = auditionsData?.auditions_list || [];
+    return dynamicDates;
+  }, [auditionsData]);
+
   const inputs = useMemo(
     () => [
       //auditionSelection
@@ -122,12 +136,7 @@ function Auditions() {
           {
             value: 'as_presenz',
             label: message.presenzAudition,
-            subSelection: [
-              { value: '24.08.25, Rotterdam', label: '24.08.25, Rotterdam' },
-              { value: '25.08.25, Rotterdam', label: '25.08.25, Rotterdam' },
-              { value: '26.08.25, Rotterdam', label: '26.08.25, Rotterdam' },
-              { value: '27.08.25, Rotterdam', label: '27.08.25, Rotterdam' },
-            ],
+            subSelection: presenzSubSelection,
           },
         ],
       },
@@ -395,7 +404,7 @@ function Auditions() {
         colSpan: 'col-span-12',
       },
     ],
-    [title, message, error, button]
+    [title, message, error, button, presenzSubSelection]
   );
 
   const methods = useForm({
@@ -404,6 +413,24 @@ function Auditions() {
   });
   const { handleSubmit, control, reset, formState, setError } = methods;
   const { errors, isValid } = formState;
+
+  const formFields = useMemo(
+    () =>
+      inputs.map(({ id, Component, colSpan = 'col-span-12', ...input }) => {
+        return (
+          <Box key={id} className={`${colSpan}`}>
+            <Controller
+              name={id}
+              control={control}
+              render={({ field }) => {
+                return <Component input={input} field={field} error={errors[id]} />;
+              }}
+            />
+          </Box>
+        );
+      }),
+    [inputs, control, errors]
+  );
 
   useEffect(() => {
     reset(defaultValues);
@@ -422,15 +449,52 @@ function Auditions() {
   };
 
   const [hasBeenSend, setHasBeenSend] = useState(false);
-  console.log("errors", errors)
+  console.log('errors', errors);
   const hasErrors = Object.keys(errors).length > 0;
-  console.log("hasErrors", hasErrors)
+  console.log('hasErrors', hasErrors);
 
   useEffect(() => {
     if (hasErrors) {
       setHasBeenSend(false);
     }
   }, [hasErrors]);
+
+  useEffect(() => {
+    setLoading(true);
+    setError(null);
+    fetch(`http://localhost/plainkit-main/api/auditions?lang=${userLanguage}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Network response was not ok, status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setAuditionsData(data);
+      })
+      .catch((error) => {
+        console.error('Fetching error:', error);
+        setError(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [userLanguage]);
+
+  const handleDownload = () => {
+    if (auditionsData?.settings?.download_file) {
+      window.open(auditionsData.settings.download_file, '_blank');
+    }
+  };
+
+  if (loading) return <Box sx={{ p: 10, textAlign: 'center' }}>Loading content...</Box>;
+  if (!auditionsData || !auditionsData.settings.auditions_active) {
+    return (
+      <Box sx={{ p: 10, textAlign: 'center' }}>
+        <Typography variant="h5">Auditions are currently closed or data could not be loaded.</Typography>
+      </Box>
+    );
+  }
 
   return (
     <>
@@ -456,7 +520,7 @@ function Auditions() {
               lineHeight: '85px',
             }}
           >
-            Auditions
+            {auditionsData.header.title}
           </Typography>
           <Typography
             className="rounded-full px-[18px] py-[6px] cursor-pointer"
@@ -467,15 +531,15 @@ function Auditions() {
               lineHeight: 'normal',
               background: theme.palette.primary.main,
             }}
-            onClick={() => {}}
+            onClick={handleDownload}
           >
-            Download Checkliste 2025
+            {auditionsData.settings.download_link_text}
           </Typography>
         </Box>
         <Box className="flex-1 h-full relative" sx={{ width: { xs: '100%', md: '50%' } }}>
           <Box
             component="img"
-            src={`${process.env.PUBLIC_URL}/assets/images/auditions/cdsh-willkommen-1.png`}
+            src={auditionsData.header.image}
             className="flex-1 w-full"
             sx={{ objectFit: 'cover', height: { xs: '390px', md: '100%' } }}
           ></Box>
@@ -498,7 +562,7 @@ function Auditions() {
                 color: 'white',
               }}
             >
-              Auditions
+              {auditionsData.header.title}
             </Typography>
             <Typography
               className="rounded-full px-[18px] py-[6px] cursor-pointer"
@@ -509,9 +573,9 @@ function Auditions() {
                 lineHeight: 'normal',
                 background: theme.palette.primary.main,
               }}
-              onClick={() => {}}
+              onClick={handleDownload}
             >
-              Download Checkliste 2025
+              {auditionsData.settings.download_link_text}
             </Typography>
           </Box>
         </Box>
@@ -527,96 +591,76 @@ function Auditions() {
         }}
       >
         <Box className="max-w-[1280px]">
-          <Typography
-            className="text-center"
-            sx={{ color: '#000000 ', fontSize: { xs: '15px', md: '30px' }, fontWeight: '400', lineHeight: 'normal' }}
-          >
-            Du kannst dich bei Interesse an unseren Aufnahmeprüfungen für die Video Audition registrieren. Sie ist
-            gleichwertig mit einer Audition vor Ort und besteht im Wesentlichen aus der Einsendung von Videos, die uns
-            als Bewertungsgrundlage dienen.
-          </Typography>
+          <div lineHeight="normal" className="text-center">
+            <ReactMarkdown components={renderers} children={auditionsData.header.intro} />
+          </div>
         </Box>
       </Box>
-
-      <Box
-        component="section"
-        className="flex justify-center items-start"
-        sx={{ py: { xs: '55px', md: '110px' }, px: {xs: "24px", md: "48px"}, gap: { xs: '24px', md: '48px' } }}
-      >
-        <form
-          onSubmit={onSubmitHandler}
-          noValidate
-          className="overflow-y-hidden w-full max-w-[1280px] h-full flex flex-col px-1 py-6"
+      {auditionsData.settings.auditions_active && (
+        <Box
+          component="section"
+          className="flex justify-center items-start"
+          sx={{ py: { xs: '55px', md: '110px' }, px: { xs: '24px', md: '48px' }, gap: { xs: '24px', md: '48px' } }}
         >
-          <FormProvider {...methods}>
-            <Box className="h-full grid grid-cols-12 gap-4 md:gap-8 pt-2">
-              {useMemo(
-                () =>
-                  inputs.map(({ id, Component, colSpan = 'col-span-12', ...input }) => {
-                    return (
-                      <Box key={id} className={`${colSpan}`}>
-                        <Controller
-                          name={id}
-                          control={control}
-                          render={({ field }) => {
-                            return <Component input={input} field={field} error={errors[id]} />;
-                          }}
-                        />
-                      </Box>
-                    );
-                  }),
-                [inputs, control, errors]
-              )}
-              <Box className="col-span-6">
-                <Button
-                  type="submit"
-                  fullWidth
-                  disableRipple
-                  className="rounded-full max-w-fit py-[12px] px-[54px]"
-                  sx={{
-                    fontSize: { xs: '20px', md: '40px' },
-                    lineHeight: 'normal',
-                    zIndex: 10,
-                    transition: 'color 0.2s',
-                    border: '1px solid black',
-                    boxShadow: 0,
-                    textTransform: 'capitalize',
-                    backgroundColor: isValid ? 'primary.main' : 'white',
-                    color: isValid ? 'black' : 'black',
-                  }}
-                >
-                  {button.submit}
-                </Button>
-              </Box>
+          <form
+            onSubmit={onSubmitHandler}
+            noValidate
+            className="overflow-y-hidden w-full max-w-[1280px] h-full flex flex-col px-1 py-6"
+          >
+            <FormProvider {...methods}>
+              <Box className="h-full grid grid-cols-12 gap-4 md:gap-8 pt-2">
+                {formFields}
+                <Box className="col-span-6">
+                  <Button
+                    type="submit"
+                    fullWidth
+                    disableRipple
+                    className="rounded-full max-w-fit py-[12px] px-[54px]"
+                    sx={{
+                      fontSize: { xs: '20px', md: '40px' },
+                      lineHeight: 'normal',
+                      zIndex: 10,
+                      transition: 'color 0.2s',
+                      border: '1px solid black',
+                      boxShadow: 0,
+                      textTransform: 'capitalize',
+                      backgroundColor: isValid ? 'primary.main' : 'white',
+                      color: isValid ? 'black' : 'black',
+                    }}
+                  >
+                    {button.submit}
+                  </Button>
+                </Box>
 
-              <Box className="col-span-6 flex justify-end items-center">
-                {hasErrors && (
-                  <Typography
-                    sx={{
-                      color: '#000000',
-                      fontSize: { xs: '12px', md: '15px' },
-                      fontWeight: '400',
-                    }}
-                  >
-                    {error.fillFormCompletely}
-                  </Typography>
-                )}
-                {hasBeenSend && (
-                  <Typography
-                    sx={{
-                      color: '#000000',
-                      fontSize: { xs: '12px', md: '15px' },
-                      fontWeight: '400',
-                    }}
-                  >
-                    {message.formSentSuccessfully}
-                  </Typography>
-                )}
+                <Box className="col-span-6 flex justify-end items-center">
+                  {hasErrors && (
+                    <Typography
+                      sx={{
+                        color: '#000000',
+                        fontSize: { xs: '12px', md: '15px' },
+                        fontWeight: '400',
+                      }}
+                    >
+                      {error.fillFormCompletely}
+                    </Typography>
+                  )}
+                  {hasBeenSend && (
+                    <Typography
+                      sx={{
+                        color: '#000000',
+                        fontSize: { xs: '12px', md: '15px' },
+                        fontWeight: '400',
+                      }}
+                    >
+                      {message.formSentSuccessfully}
+                    </Typography>
+                  )}
+                </Box>
               </Box>
-            </Box>
-          </FormProvider>
-        </form>
-      </Box>
+            </FormProvider>
+          </form>
+        </Box>
+      )}
     </>
   );
 }

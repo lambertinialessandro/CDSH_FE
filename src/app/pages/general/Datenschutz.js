@@ -3,10 +3,11 @@ import { selectUserLanguage } from 'app/store/app/mainSlice';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import ReactMarkdown from 'react-markdown'; 
+import { renderers } from 'app/shared-components/htmlStyle/htmlStyle';
 
 function Datenschutz() {
 
-    const [protectionData, setprotectionData] = useState(null);
+    const [protectionData, setProtectionData] = useState(null);
     const userLanguage = useSelector(selectUserLanguage);
   
     const [loading, setLoading] = useState(true);
@@ -25,7 +26,7 @@ function Datenschutz() {
             return response.json();
           })
           .then((data) => {
-            setprotectionData(data);
+            setProtectionData(data);
           })
           .catch((error) => {
             console.error('Fetching error:', error);
@@ -38,60 +39,6 @@ function Datenschutz() {
 
     if (loading) return <Box sx={{ p: 10, textAlign: 'center' }}><CircularProgress /></Box>;
     if (error || !protectionData) return <Box sx={{ p: 10 }}><Alert severity="error">Error loading data: {error ? error.message : 'No data received.'}</Alert></Box>;
-
-
-    const paragraphStyle = {
-        color: '#000000',
-        fontSize: { xs: '15px', md: '30px' },
-        fontWeight: '400',
-        lineHeight: 'normal',
-    };
-
-    const renderers = {
-        p: ({ node, ...props }) => (
-            <Typography sx={{ ...paragraphStyle, mb: '1em' }} {...props} component="div" />
-        ),
-        
-        strong: ({ node, ...props }) => (
-            <strong style={{ fontWeight: 700 }} {...props} />
-        ),
-        
-        ol: ({ node, ...props }) => (
-            <Box 
-                component="ol" 
-                sx={{ ml: 4, listStyleType: 'decimal', mb: '32px', ...paragraphStyle }} 
-                {...props} 
-            />
-        ),
-        
-        ul: ({ node, ...props }) => (
-            <Box 
-                component="ul" 
-                sx={{ ml: 4, listStyleType: 'disc', mb: '32px', ...paragraphStyle }} 
-                {...props} 
-            />
-        ),
-
-        li: ({ node, ...props }) => (
-            <Typography 
-                component="li" 
-                sx={{ 
-                    ...paragraphStyle, 
-                    mb: '0.5em', 
-                    ml: 0 
-                }} 
-                {...props} 
-            />
-        ),
-        
-        h2: ({ node, ...props }) => (
-             <Typography variant="h4" sx={{ ...paragraphStyle, fontWeight: 700, mt: 4, mb: 2 }} {...props} />
-        ),
-        
-        em: ({ node, ...props }) => (
-            <em style={{ fontStyle: 'italic' }} {...props} />
-        ),
-    };
 
     return (
         <>

@@ -2,6 +2,8 @@ import { Box, Typography, useTheme } from '@mui/material';
 import { useNavigate, useParams } from 'react-router';
 import ImpressionenSection from './ImpressionenSection';
 import { useEffect, useState } from 'react';
+import { renderers } from 'app/shared-components/htmlStyle/htmlStyle';
+import ReactMarkdown from 'react-markdown';
 
 const projects = [
   {
@@ -14,7 +16,7 @@ const projects = [
 ];
 
 function Project(props) {
-  const { } = props;
+  const {} = props;
   const navigate = useNavigate();
   const theme = useTheme();
   const { projectUrlId } = useParams();
@@ -109,7 +111,7 @@ function Project(props) {
             component="img"
             src={selectedProject.imageSrc}
             className="flex-1 w-full relative"
-            sx={{ objectFit: 'cover', height: {xs: "390px", md: "100%"} }}
+            sx={{ objectFit: 'cover', height: { xs: '390px', md: '100%' } }}
           ></Box>
           <Box
             className=""
@@ -179,27 +181,15 @@ function Project(props) {
           py: { xs: '55px', md: '110px' },
         }}
       >
-        <Typography
-          sx={{
-            flex: '1',
-            fontSize: { xs: '15px', md: '30px' },
-            fontWeight: '400',
-          }}
-        >
-          {selectedProject.descriptionLeft}
-        </Typography>
-        <Typography
-          sx={{
-            flex: '1',
-            fontSize: { xs: '15px', md: '30px' },
-            fontWeight: '400',
-          }}
-        >
-          {selectedProject.descriptionRight}
-        </Typography>
+        <div flex="1">
+          <ReactMarkdown components={renderers} children={selectedProject.descriptionLeft} />
+        </div>
+        <div flex="1">
+          <ReactMarkdown components={renderers} children={selectedProject.descriptionRight} />
+        </div>
       </Box>
 
-      <ImpressionenSection imgSet= {selectedProject.impressions} />
+      <ImpressionenSection imgSet={selectedProject.impressions} />
     </>
   );
 }

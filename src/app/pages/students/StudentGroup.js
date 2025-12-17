@@ -5,6 +5,8 @@ import SplitSection from './SplitSection';
 import BigLink from 'app/shared-components/link/BigLink';
 import AnchorLink from 'app/shared-components/link/AnchorLink';
 import { useEffect, useState } from 'react';
+import { renderers } from 'app/shared-components/htmlStyle/htmlStyle';
+import ReactMarkdown from 'react-markdown';
 
 /*const students = [
   {
@@ -155,7 +157,12 @@ function StudentGroup() {
             </Typography>
             <Box className="flex flex-col justify-start items-start gap-[4px] mt-[48px]">
               {selectedStudent.relatedProjects.map((project, idx) => (
-                <AnchorLink key={idx} to={`/projects/${project.id}`} color="#000" extraSx={{ fontSize: '15px', mb: '1px' }}>
+                <AnchorLink
+                  key={idx}
+                  to={`/projects/${project.id}`}
+                  color="#000"
+                  extraSx={{ fontSize: '15px', mb: '1px' }}
+                >
                   {project.name}
                 </AnchorLink>
               ))}
@@ -177,74 +184,73 @@ function StudentGroup() {
             </Box>
           </Box>
         </Box>
-                <Box className="flex-1 h-full relative" sx={{ width: { xs: '100%', md: '50%' } }}>
-        
-        <Box
-          component="img"
-          src={selectedStudent.src}
-          className="flex-1 w-full relative"
-            sx={{ objectFit: 'cover', height: {xs: "390px", md: "100%"} }}
-        ></Box>
-        <Box
-          className=""
-          sx={{
-            position: 'absolute',
-            left: '24px',
-            bottom: '12px',
-            display: { xs: 'flex', md: 'none' },
-            flexDirection: 'column',
-            gap: '8px',
-          }}
-        >
-          <Typography
-            className="capitalize mix-blend-exclusion"
+        <Box className="flex-1 h-full relative" sx={{ width: { xs: '100%', md: '50%' } }}>
+          <Box
+            component="img"
+            src={selectedStudent.src}
+            className="flex-1 w-full relative"
+            sx={{ objectFit: 'cover', height: { xs: '390px', md: '100%' } }}
+          ></Box>
+          <Box
+            className=""
             sx={{
-              fontSize: '30px',
-              fontWeight: '400',
-              color: '#ffffff',
+              position: 'absolute',
+              left: '24px',
+              bottom: '12px',
+              display: { xs: 'flex', md: 'none' },
+              flexDirection: 'column',
+              gap: '8px',
             }}
           >
-            {selectedStudent.name}
-          </Typography>
-
-          {selectedStudent.relatedProjects.map((project, idx) => (
-            <AnchorLink
-              key={idx}
-              className="capitalize mix-blend-exclusion"
-              to={`/projects/${project.id}`}
-              sx={{
-                fontSize: '15px',
-                fontWeight: '400',
-                color: '#ffffff',
-              }}
-            >
-              {project.name}
-            </AnchorLink>
-          ))}
-
-          <Box>
             <Typography
-              className="mix-blend-exclusion"
+              className="capitalize mix-blend-exclusion"
               sx={{
-                fontSize: '12px',
+                fontSize: '30px',
                 fontWeight: '400',
                 color: '#ffffff',
               }}
             >
-              {selectedStudent.year.start} - {selectedStudent.year.end}
+              {selectedStudent.name}
             </Typography>
-            <Box className="flex flex-col items-start gap-[8px]">
-              <button
-                onClick={() => {
-                  navigate(`/students`);
+
+            {selectedStudent.relatedProjects.map((project, idx) => (
+              <AnchorLink
+                key={idx}
+                className="capitalize mix-blend-exclusion"
+                to={`/projects/${project.id}`}
+                sx={{
+                  fontSize: '15px',
+                  fontWeight: '400',
+                  color: '#ffffff',
                 }}
-                className="bg-white border border-black rounded-full px-[16px] py-[2px]"
               >
-                zurück
-              </button>
+                {project.name}
+              </AnchorLink>
+            ))}
+
+            <Box>
+              <Typography
+                className="mix-blend-exclusion"
+                sx={{
+                  fontSize: '12px',
+                  fontWeight: '400',
+                  color: '#ffffff',
+                }}
+              >
+                {selectedStudent.year.start} - {selectedStudent.year.end}
+              </Typography>
+              <Box className="flex flex-col items-start gap-[8px]">
+                <button
+                  onClick={() => {
+                    navigate(`/students`);
+                  }}
+                  className="bg-white border border-black rounded-full px-[16px] py-[2px]"
+                >
+                  zurück
+                </button>
+              </Box>
             </Box>
           </Box>
-        </Box>
         </Box>
       </Box>
 
@@ -258,24 +264,12 @@ function StudentGroup() {
           py: { xs: '55px', md: '110px' },
         }}
       >
-        <Typography
-          sx={{
-            flex: '1',
-            fontSize: { xs: '15px', md: '30px' },
-            fontWeight: '400',
-          }}
-        >
-          {selectedStudent.descriptionLeft}
-        </Typography>
-        <Typography
-          sx={{
-            flex: '1',
-            fontSize: { xs: '15px', md: '30px' },
-            fontWeight: '400',
-          }}
-        >
-          {selectedStudent.descriptionRight}
-        </Typography>
+        <div flex="1">
+          <ReactMarkdown components={renderers} children={selectedStudent.descriptionLeft} />
+        </div>
+        <div flex="1">
+          <ReactMarkdown components={renderers} children={selectedStudent.descriptionRight} />
+        </div>
       </Box>
 
       <Box
@@ -287,7 +281,7 @@ function StudentGroup() {
       >
         {selectedStudent.relatedProjects?.map((project, idx) => {
           const isOdd = idx % 2 === 1;
-          console.log("project", project.id)
+          console.log('project', project.id);
           return (
             <SplitSection
               key={idx}

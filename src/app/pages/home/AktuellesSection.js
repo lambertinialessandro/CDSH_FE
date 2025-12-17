@@ -1,7 +1,7 @@
 import { Box, Typography, useTheme } from '@mui/material';
 import Carousel from 'app/shared-components/carousel/Carousel';
 import { Link } from 'react-router-dom';
-
+// TODO: si puö eliminare
 const items = [
   {
     src: `${process.env.PUBLIC_URL}/assets/images/gallery/cdsh-galley-01.jpg`,

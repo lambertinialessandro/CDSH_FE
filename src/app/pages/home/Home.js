@@ -5,18 +5,22 @@ import useParallaxY from 'app/shared-components/hooks/useParallaxY';
 import AnchorLink from 'app/shared-components/link/AnchorLink';
 import BigLink from 'app/shared-components/link/BigLink';
 import { motion } from 'framer-motion';
-import { useRef } from 'react';
-import AktuellesSection from './AktuellesSection';
-import VideoLooper from './VideoLooper';
+import { useEffect, useRef, useState } from 'react';
 
-function ImageAnimation() {
+import VideoLooper from './VideoLooper';
+import { useSelector } from 'react-redux';
+import { selectUserLanguage } from 'app/store/app/mainSlice';
+import AktuellesSection from '../aktuelles/AktuellesSection';
+
+function ImageAnimation(props) {
+  const { image } = props;
   const imgRef = useRef(null);
   const y = useParallaxY(imgRef, 460 * 0.05);
 
   return (
     <motion.div ref={imgRef} className="w-full h-[300px] md:h-[460px] overflow-hidden">
       <motion.img
-        src={`${process.env.PUBLIC_URL}/assets/images/cdsh-willkommen-1.jpg`}
+        src={image}
         alt="CDSH Willkommen"
         className="w-full h-full object-cover"
         style={{ y: y, willChange: 'transform' }}
@@ -31,9 +35,42 @@ function ImageAnimation() {
 function Home() {
   const theme = useTheme();
 
+  const [homeData, setHomeData] = useState(null);
+  const userLanguage = useSelector(selectUserLanguage);
+
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  console.log('homeData:', homeData);
+
+  useEffect(() => {
+    setLoading(true);
+    setError(null);
+    fetch(`http://localhost/plainkit-main/api/home?lang=${userLanguage}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Network response was not ok, status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setHomeData(data);
+      })
+      .catch((error) => {
+        console.error('Fetching error:', error);
+        setError(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [userLanguage]);
+
+  if (loading) return <Box sx={{ p: 10, textAlign: 'center' }}>Loading content...</Box>;
+  if (!homeData) return <Box sx={{ p: 10, textAlign: 'center' }}>Error loading data.</Box>;
+
   return (
     <>
-      <VideoLooper />
+      <VideoLooper video={homeData.header.video}/>
 
       {/* Intro Section */}
       <Box
@@ -42,56 +79,56 @@ function Home() {
         sx={{ py: { xs: 8, md: 15 }, px: { xs: 4, md: 6 } }}
       >
         <Typography sx={{ fontSize: { xs: '20px', md: '30px' }, fontWeight: 400, color: '#000' }}>
-          Wir sind eine staatlich anerkannte
+          {homeData.intro.text_1}
         </Typography>
         <Typography sx={{ fontSize: { xs: '20px', md: '30px' }, fontWeight: 400, color: '#000' }}>
-          Berufsfachschule für zeitgenössischen Bühnentanz
+          {homeData.intro.text_2}
         </Typography>
       </Box>
 
       {/* Aktuelles Section */}
-      <AktuellesSection />
+      <AktuellesSection items={homeData.aktuelles.items} title={homeData.aktuelles.headline}/>
 
       {/* Über uns */}
-      <Box component="section" className="w-full flex flex-col justify-start items-center" sx={{ py: { xs: 8, md: 14 }, px: { xs: 4, md: 6 } }}>
-        <Box
-                  className="max-w-[1280px]"
+      <Box
+        component="section"
+        className="w-full flex flex-col justify-start items-center"
+        sx={{ py: { xs: 8, md: 14 }, px: { xs: 4, md: 6 } }}
+      >
+        <Box className="max-w-[1280px]">
+          <Typography
+            className="mb-[60px] md:mb-[110px]"
+            sx={{ fontSize: { xs: '40px', md: '80px' }, fontWeight: 400, color: '#000' }}
+          >
+            {homeData.aboutUs.headline}
+          </Typography>
+          <Box className="w-full flex flex-col md:flex-row justify-center">
+            <Box className="max-w-[1250px] w-full md:border-y border-black flex flex-col md:flex-row">
+              {/* Text */}
+              <Box className="w-full md:w-1/2 py-[32px] md:py-[54px] flex flex-col justify-between items-start">
+                <Typography
+                  sx={{
+                    fontSize: { xs: '18px', md: '30px' },
+                    fontWeight: 400,
+                    color: '#000',
+                    lineHeight: 'normal',
+                    pr: { xs: 0, md: '45px' },
+                    mb: { xs: 3, md: 0 },
+                  }}
                 >
-        <Typography
-          className="mb-[60px] md:mb-[110px]"
-          sx={{ fontSize: { xs: '40px', md: '80px' }, fontWeight: 400, color: '#000' }}
-        >
-          Über uns
-        </Typography>
-        <Box className="w-full flex flex-col md:flex-row justify-center">
-          <Box className="max-w-[1250px] w-full md:border-y border-black flex flex-col md:flex-row">
-            {/* Text */}
-            <Box className="w-full md:w-1/2 py-[32px] md:py-[54px] flex flex-col justify-between items-start">
-              <Typography
-                sx={{
-                  fontSize: { xs: '18px', md: '30px' },
-                  fontWeight: 400,
-                  color: '#000',
-                  lineHeight: 'normal',
-                  pr: { xs: 0, md: '45px' },
-                  mb: { xs: 3, md: 0 },
-                }}
-              >
-                Die CDSH - CONTEMPORARY DANCE SCHOOL ist eine staatlich anerkannte Berufsfachschule für zeitgenössischen
-                Bühnentanz. Der Schwerpunkt der dreijährigen Ausbildung liegt auf zeitgenössischem und modernem
-                Klassischem Ballett.
-              </Typography>
-              <AnchorLink href={"/team"}>
-                Mehr erfahren <ArrowForward fontSize="small" sx={{ fontSize: { xs: '14px', sm: '16px' } }}/>
-              </AnchorLink>
-            </Box>
+                  {homeData.aboutUs.text}
+                </Typography>
+                <AnchorLink href={'/team'}>
+                  Mehr erfahren <ArrowForward fontSize="small" sx={{ fontSize: { xs: '14px', sm: '16px' } }} />
+                </AnchorLink>
+              </Box>
 
-            {/* Image */}
-            <Box className="w-full md:w-1/2 border-y md:border-t-0 md:border-l border-black">
-              <ImageAnimation />
+              {/* Image */}
+              <Box className="w-full md:w-1/2 border-y md:border-t-0 md:border-l border-black">
+                <ImageAnimation image={homeData.aboutUs.image} />
+              </Box>
             </Box>
           </Box>
-        </Box>
         </Box>
       </Box>
 
@@ -116,7 +153,7 @@ function Home() {
               marginRight: { xs: '16px', md: '45px' },
             }}
           >
-            DIE AUDITION TERMINE 2025 SIND JETZT ONLINE.
+            {homeData.audition_banner.text}
             <BigLink
               extraSx={{
                 display: 'flex',
@@ -130,9 +167,9 @@ function Home() {
               fontSize="inherit"
               lineHeight={{ xs: '1px', md: '5px' }}
               color="#000000"
-              href={"/auditions"}
+              href={'/auditions'}
             >
-              JETZT ANMELDEN <ArrowForward fontSize="inherit" />
+              {homeData.audition_banner.link_text} <ArrowForward fontSize="inherit" />
             </BigLink>
           </Typography>
         </LoopBanner>
@@ -153,14 +190,13 @@ function Home() {
             lineHeight: 1.1,
           }}
         >
-          Du möchtest uns kennenlernen?
+          {homeData.footerCta.title}
         </Typography>
         <Typography
           className="max-w-[740px] min-w-[50%] text-center"
           sx={{ fontSize: { xs: '15px', md: '30px' }, fontWeight: 400, color: '#000000' }}
         >
-          Wir dich ebenfalls. Neben den regulären Auditions sind wir bei Fragen rund um die Ausbildung per Mail oder
-          telefonisch für dich da.
+         {homeData.footerCta.text}
         </Typography>
       </Box>
     </>
