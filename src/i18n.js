@@ -1,4 +1,6 @@
 import i18n from 'i18next';
+import i18next from 'i18n';
+
 import LanguageDetector from 'i18next-browser-languagedetector';
 import 'intl-pluralrules';
 import { initReactI18next } from 'react-i18next';
@@ -30,3 +32,6 @@ i18n
   });
 
 export default i18n;
+
+i18next.addResourceBundle('en', defaultNS, resources.en, true);
+i18next.addResourceBundle('de', defaultNS, resources.de, true);

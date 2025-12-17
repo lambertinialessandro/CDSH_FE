@@ -1,18 +1,23 @@
 import CloseIcon from '@mui/icons-material/Close';
 import { Box, Typography, useTheme } from '@mui/material';
 import AnchorLink from 'app/shared-components/link/AnchorLink';
-import { selectIsBannerOpen } from 'app/store/app/mainSlice';
-import { languageChanged, selectCurrLanguage } from 'app/store/i18nSlice';
+import { selectIsBannerOpen, setUserLanguage } from 'app/store/app/mainSlice';
+import { changeLanguage, selectCurrLanguage } from 'app/store/i18nSlice';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { defaultNS as ns_common } from 'translations';
 
 function TopNavbar({ fixed }) {
+  const { t } = useTranslation([ns_common]);
+  const { message } = t(ns_common);
   const theme = useTheme();
   const dispatch = useDispatch();
 
   const userLanguage = useSelector(selectCurrLanguage);
 
+  const areAuditionOpen = true;
   const isBannerOpen = useSelector(selectIsBannerOpen);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -85,15 +90,16 @@ function TopNavbar({ fixed }) {
         <Box className="hidden md:flex gap-[26px]">
           <AnchorLink
             onClick={() => {
-              dispatch(languageChanged(userLanguage == 'en' ? 'de' : 'en'));
+              dispatch(changeLanguage(userLanguage === 'en' ? 'de' : 'en'));
+              dispatch(setUserLanguage(userLanguage === 'en' ? 'de' : 'en'));
             }}
             color="#fff"
             extraSx={{ color: '#ffffff', fontSize: '15px', fontWeight: '400' }}
           >
-            {userLanguage == 'en' ? 'Deutsche Version' : 'English Version'}
+            {userLanguage === 'en' ? message.deVersion : message.enVersion}
           </AnchorLink>
           <AnchorLink href={'/ticketshop'} color="#fff" extraSx={{ fontSize: '15px' }}>
-            Ticketshop
+            {message.ticketShop}
           </AnchorLink>
           <AnchorLink
             onClick={() => {
@@ -106,7 +112,7 @@ function TopNavbar({ fixed }) {
             }}
             color="#ffffff"
           >
-            Menü
+            {message.menu}
           </AnchorLink>
         </Box>
 
@@ -114,12 +120,13 @@ function TopNavbar({ fixed }) {
         <Box className="flex md:hidden gap-[26px]">
           <AnchorLink
             onClick={() => {
-              dispatch(languageChanged(userLanguage == 'en' ? 'de' : 'en'));
+              dispatch(changeLanguage(userLanguage === 'en' ? 'de' : 'en'));
+              dispatch(setUserLanguage(userLanguage === 'en' ? 'de' : 'en'));
             }}
             color="#fff"
             extraSx={{ fontSize: '15px' }}
           >
-            {userLanguage == 'en' ? 'DE' : 'EN'}
+            {userLanguage === 'en' ? message.deVersionShort : message.enVersionShort}
           </AnchorLink>
           <AnchorLink
             onClick={() => {
@@ -132,7 +139,7 @@ function TopNavbar({ fixed }) {
             }}
             color="#ffffff"
           >
-            Menü
+            {message.menu}
           </AnchorLink>
         </Box>
       </Box>
@@ -154,25 +161,30 @@ function TopNavbar({ fixed }) {
           <Box className="flex gap-[26px]">
             <AnchorLink
               onClick={() => {
-              dispatch(languageChanged(userLanguage == 'en' ? 'de' : 'en'));
-            }}
+                dispatch(changeLanguage(userLanguage === 'en' ? 'de' : 'en'));
+                dispatch(setUserLanguage(userLanguage === 'en' ? 'de' : 'en'));
+              }}
               extraSx={{
                 fontSize: '15px',
                 fontWeight: '400',
+                height: 'fit-content',
               }}
               color="#000000"
+              lineHeight="1.1px"
             >
-            {userLanguage == 'en' ? 'Deutsche Version' : 'English Version'}
+              {userLanguage === 'en' ? message.deVersion : message.enVersion}
             </AnchorLink>
             <AnchorLink
               href={'/ticketshop'}
               extraSx={{
                 fontSize: '15px',
                 fontWeight: '400',
+                height: 'fit-content',
               }}
               color="#000000"
+              lineHeight="1.1px"
             >
-              Ticketshop
+              {message.ticketShop}
             </AnchorLink>
 
             <Typography
@@ -207,7 +219,7 @@ function TopNavbar({ fixed }) {
               whiteSpace: 'nowrap',
             }}
           >
-            Über uns
+            {message.uberUns}
           </AnchorLink>
           <AnchorLink
             href="/team"
@@ -219,7 +231,7 @@ function TopNavbar({ fixed }) {
               whiteSpace: 'nowrap',
             }}
           >
-            Team
+            {message.team}
           </AnchorLink>
           <AnchorLink
             href="/students"
@@ -231,7 +243,7 @@ function TopNavbar({ fixed }) {
               whiteSpace: 'nowrap',
             }}
           >
-            Studierende
+            {message.studierende}
           </AnchorLink>
           <AnchorLink
             href="/ausbildung"
@@ -243,7 +255,7 @@ function TopNavbar({ fixed }) {
               whiteSpace: 'nowrap',
             }}
           >
-            Ausbildung
+            {message.ausbildung}
           </AnchorLink>
 
           <Box className="flex items-center gap-[6px]">
@@ -257,36 +269,38 @@ function TopNavbar({ fixed }) {
                 whiteSpace: 'nowrap',
               }}
             >
-              Auditions
+              {message.auditions}
             </AnchorLink>
 
-            <Box
-              className="h-fit border border-black rounded-full flex justify-between items-center"
-              sx={{
-                background: '#ffffff',
-                padding: { xs: '2px', md: '2px' },
-                gap: { xs: '6px', md: '12px' },
-                marginTop: { xs: '8px', md: '18px' },
-              }}
-            >
-              <Box />
-              <Typography
+            {areAuditionOpen && (
+              <Box
+                className="h-fit border border-black rounded-full flex justify-between items-center"
                 sx={{
-                  fontSize: { xs: '12px', md: '15px' },
-                  fontWeight: '400',
-                  lineHeight: 'normal',
+                  background: '#ffffff',
+                  padding: { xs: '2px', md: '2px' },
+                  gap: { xs: '6px', md: '12px' },
+                  marginTop: { xs: '8px', md: '18px' },
                 }}
               >
-                OPEN
-              </Typography>
-              <Box
-                className="rounded-full"
-                sx={{
-                  background: theme.palette.primary.main,
-                  padding: { xs: '8px', md: '12px' },
-                }}
-              />
-            </Box>
+                <Box />
+                <Typography
+                  sx={{
+                    fontSize: { xs: '12px', md: '15px' },
+                    fontWeight: '400',
+                    lineHeight: 'normal',
+                  }}
+                >
+                  {message.auditionOpen}
+                </Typography>
+                <Box
+                  className="rounded-full"
+                  sx={{
+                    background: theme.palette.primary.main,
+                    padding: { xs: '8px', md: '12px' },
+                  }}
+                />
+              </Box>
+            )}
           </Box>
 
           <AnchorLink
@@ -299,17 +313,19 @@ function TopNavbar({ fixed }) {
               whiteSpace: 'nowrap',
             }}
           >
-            Aktuelles
+            {message.aktuelles}
           </AnchorLink>
         </Box>
 
         {/* Footer info */}
         <Box sx={{ marginTop: { xs: '12px', md: '24px' } }}>
-          <Typography sx={{ fontSize: { xs: '12px', md: '15px' }, fontWeight: 400 }}>Kontakt</Typography>
+          <Typography sx={{ fontSize: { xs: '12px', md: '15px' }, fontWeight: 400 }}>{message.kontakt}</Typography>
           <Typography sx={{ fontSize: { xs: '10px', md: '14px' }, fontWeight: 400 }}>
-            Telefon: +49 (0)40 41924560
+            {message.telefon}+49 (0)40 41924560
           </Typography>
-          <Typography sx={{ fontSize: { xs: '10px', md: '14px' }, fontWeight: 400 }}>Mail: info@cdsh.de</Typography>
+          <Typography sx={{ fontSize: { xs: '10px', md: '14px' }, fontWeight: 400 }}>
+            {message.mail}info@cdsh.de
+          </Typography>
         </Box>
       </Box>
     </>

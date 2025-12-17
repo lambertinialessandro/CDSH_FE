@@ -1,7 +1,11 @@
 import { Box, Typography, useTheme } from '@mui/material';
 import AnchorLink from '../link/AnchorLink';
+import { useTranslation } from 'react-i18next';
+import { defaultNS as ns_common } from 'translations';
 
 function Footer() {
+  const { t } = useTranslation([ns_common]);
+  const { message } = t(ns_common);
   const theme = useTheme();
 
   return (
@@ -32,7 +36,7 @@ function Footer() {
       >
         {/* Address */}
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: '8px', textWrap: 'nowrap' }}>
-          {['CDSH - Contemporary', 'Dance School Hamburg GmbH', 'Stresemannstraße 374 b', '22761 Hamburg'].map(
+          {[message.fullNameSchool, message.schoolDescription, message.schoolStreet, message.schoolPLZ].map(
             (line, i) => (
               <Typography
                 key={i}
@@ -51,9 +55,9 @@ function Footer() {
         {/* Nav Links */}
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0px', textWrap: 'nowrap' }}>
           {[
-            { label: 'Über uns', href: 'about_us' },
-            { label: 'Auditions', href: 'auditions' },
-            { label: 'FAQ', href: 'faq' },
+            { label: message.footUberUs, href: 'about_us' },
+            { label: message.footAuditions, href: 'auditions' },
+            { label: message.footFAQ, href: 'faq' },
           ].map(({ label, href }, i) => (
             <AnchorLink
               key={i}
@@ -76,9 +80,9 @@ function Footer() {
         {/* Legal Links */}
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0px', textWrap: 'nowrap' }}>
           {[
-            { label: 'Datenschutzerklärung', href: 'datenschutz' },
-            { label: 'Impressum', href: 'impressum' },
-            { label: 'AGB', href: 'agb' },
+            { label: message.footDaten, href: 'datenschutz' },
+            { label: message.footImpressum, href: 'impressum' },
+            { label: message.footAGB, href: 'agb' },
           ].map(({ label, href }, i) => (
             <AnchorLink
               key={i}
@@ -100,7 +104,7 @@ function Footer() {
 
         {/* Contact */}
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: '8px', textWrap: 'nowrap' }}>
-          {['Telefon: +49 (0)40 41924560', 'Mail: info@cdsh.de'].map((label, i) => (
+          {[message.footTelephon + '+49 (0)40 41924560', message.footMail + 'info@cdsh.de'].map((label, i) => (
             <Typography
               key={i}
               sx={{
@@ -136,9 +140,9 @@ function Footer() {
           }}
         >
           {[
-            { label: 'Instagram', href: '#' },
-            { label: 'Vimeo', href: '#' },
-            { label: 'Facebook', href: '#' },
+            { label: message.liknInstagram, href: '#' },
+            { label: message.liknVimeo, href: '#' },
+            { label: message.liknFacebook, href: '#' },
           ].map(({ label, href }, i) => (
             <AnchorLink
               key={i}
@@ -160,9 +164,13 @@ function Footer() {
         {/* Credits */}
         <Box sx={{ display: { xs: 'none', md: 'flex' }, flexDirection: 'column', alignItems: 'flex-end' }}>
           {[
-            { label: 'Designed by ', href: 'greatatstudio.com', hrefLabel: 'GREAT AT STUDIO' },
-            { label: 'Developed by ', href: '#', hrefLabel: 'Lambertini Alessandro' },
-            { label: 'and ', href: '#', hrefLabel: 'Landini Denise' },
+            { label: message.designed, href: 'https://greatatstudio.com', hrefLabel: 'GREAT AT STUDIO' },
+            {
+              label: message.developed,
+              href: 'https://github.com/lambertinialessandro',
+              hrefLabel: 'Lambertini Alessandro',
+            },
+            { label: message.and, href: 'https://github.com/deniselandini', hrefLabel: 'Landini Denise' },
           ].map(({ label, href, hrefLabel }, i) => (
             <Typography
               key={i}
@@ -170,6 +178,7 @@ function Footer() {
                 fontSize: '12px',
                 fontWeight: 400,
                 lineHeight: 1.4,
+                mb: '2px',
               }}
             >
               {label}
@@ -177,7 +186,8 @@ function Footer() {
                 href={href}
                 extraSx={{
                   width: 'fit-content',
-                  pb: '2px',
+                  pb: '1px',
+
                   fontSize: '12px',
                   fontWeight: 400,
                   lineHeight: 1.4,
@@ -195,9 +205,13 @@ function Footer() {
           sx={{ display: { xs: 'flex', md: 'none' }, width: '100%', flexDirection: 'column', alignItems: 'flex-start' }}
         >
           {[
-            { label: 'Designed by ', href: 'greatatstudio.com', hrefLabel: 'GREAT AT STUDIO' },
-            { label: 'Developed by ', href: '#', hrefLabel: 'Lambertini Alessandro' },
-            { label: 'and ', href: '#', hrefLabel: 'Landini Denise' },
+            { label: message.designed, href: 'https://greatatstudio.com', hrefLabel: 'GREAT AT STUDIO' },
+            {
+              label: message.developed,
+              href: 'https://github.com/lambertinialessandro',
+              hrefLabel: 'Lambertini Alessandro',
+            },
+            { label: message.and, href: 'https://github.com/deniselandini', hrefLabel: 'Landini Denise' },
           ].map(({ label, href, hrefLabel }, i) => (
             <Typography
               key={i}

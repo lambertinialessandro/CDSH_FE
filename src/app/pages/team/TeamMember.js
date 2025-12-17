@@ -3,8 +3,12 @@ import { renderers } from 'app/shared-components/htmlStyle/htmlStyle';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import ReactMarkdown from 'react-markdown';
+import { useTranslation } from 'react-i18next';
+import { defaultNS as ns_common } from 'translations';
 
 function TeamMember() {
+  const { t } = useTranslation([ns_common]);
+    const { button } = t(ns_common);
   const theme = useTheme();
   const navigate = useNavigate();
   const { memberUrlName } = useParams();
@@ -83,7 +87,7 @@ function TeamMember() {
               }}
               className="bg-white border border-black rounded-full px-[16px] py-[2px]"
             >
-              zurück
+              {button.back}
             </button>
           </Box>
         </Box>
@@ -136,7 +140,7 @@ function TeamMember() {
                 }}
                 className="bg-white border border-black rounded-full px-[16px] py-[2px]"
               >
-                zurück
+                {button.back}
               </button>
             </Box>
           </Box>
@@ -177,7 +181,7 @@ function TeamMember() {
             }}
             className="bg-white border border-black rounded-full px-[16px] py-[2px]"
           >
-            zurück
+            {button.back}
           </button>
         </Box>
       </Box>

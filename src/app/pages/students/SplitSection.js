@@ -6,39 +6,18 @@ import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 
 function SplitSection(props) {
-  const { title, text, img = null, projectId, reverse = false, bottom = false } = props;
-  const theme = useTheme();
-  const navigate = useNavigate();
-  const [projectData, setProjectData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const { title, text, img = null, to, reverse = false, bottom = false } = props;
 
-  useEffect(() => {
-    if (projectId) {
-      setLoading(true);
-      fetch(`http://localhost/plainkit-main/api/projects?id=${projectId}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setProjectData(data);
-          setLoading(false);
-        })
-        .catch((err) => {
-          console.error('Error fetching project in SplitSection:', err);
-          setLoading(false);
-        });
-    }
-  }, [projectId]);
-
-  console.log('projectId: ', projectId);
   return (
     <Box className="w-full flex justify-center">
       <Box
         className={`max-w-[1250px] w-full border-t ${bottom && 'border-b'} border-black flex flex-col md:flex-row`}
         component={Link}
-        to={`/projects/${projectId}`}
+        to={to}
       >
         {!reverse && (
           <Box
-            className="w-full md:w-1/2 py-8 px-6 flex flex-col justify-between items-start truncate"
+            className="w-full md:w-1/2 py-8 px-6 flex flex-col justify-between items-start truncate group"
             sx={{
               color: '#000000',
               cursor: 'pointer',
@@ -50,7 +29,14 @@ function SplitSection(props) {
           >
             <Typography
               component="h2"
-              sx={{ fontSize: { xs: '30px', md: '70px' }, fontWeight: 400, lineHeight: 'normal' }}
+              sx={{
+                fontSize: { xs: '30px', md: '70px' },
+                fontWeight: 400,
+                lineHeight: 'normal',
+                '.group:hover &': {
+                  textDecoration: 'underline',
+                },
+              }}
             >
               {title}
             </Typography>
@@ -74,7 +60,7 @@ function SplitSection(props) {
         </Box>
         {reverse && (
           <Box
-            className="w-full md:w-1/2 py-8 px-6 flex flex-col justify-between items-start truncate"
+            className="w-full md:w-1/2 py-8 px-6 flex flex-col justify-between items-start truncate group"
             sx={{
               color: '#000000',
               cursor: 'pointer',
@@ -86,7 +72,14 @@ function SplitSection(props) {
           >
             <Typography
               component="h2"
-              sx={{ fontSize: { xs: '30px', md: '70px' }, fontWeight: 400, lineHeight: 'normal' }}
+              sx={{
+                fontSize: { xs: '30px', md: '70px' },
+                fontWeight: 400,
+                lineHeight: 'normal',
+                '.group:hover &': {
+                  textDecoration: 'underline',
+                },
+              }}
             >
               {title}
             </Typography>

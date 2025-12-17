@@ -202,7 +202,6 @@ function AboutUs() {
         sx={{ background: theme.palette.primary.main, py: { xs: '55px', md: '110px' } }}
       >
         <Typography
-          className=""
           sx={{
             color: '#000000',
             fontSize: { xs: '35px', md: '80px' },

@@ -42,7 +42,7 @@ function ImpressionenSection(props) {
       {isMobile ? (
         <Carousel items={imgSet} gap={32} itemWidth={300} itemHeight={235} />
       ) : (
-        <Carousel items={imgSet} gap={32} itemWidth={700} itemHeight={470} />
+        <Carousel items={imgSet} gap={32} itemWidth={600} itemHeight={420} />
       )}
     </Box>
   );

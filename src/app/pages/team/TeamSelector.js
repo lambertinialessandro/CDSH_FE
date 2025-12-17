@@ -3,39 +3,12 @@ import __ from 'lodash';
 import { useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-
-/*const members = [
-    {
-      id: 'ursina_tossi',
-      href: `/team/ursina_tossi`,
-      name: 'Ursina Tossi',
-      src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto ursina_tossi.png`,
-      subjects: [''],
-    },
-    {
-      id: 'phillip_benjamin_jenkins',
-      href: `/team/phillip_benjamin_jenkins`,
-      name: 'Phillip Benjamin Jenkins',
-      src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto phillip_benjamin_jenkins.png`,
-      subjects: ['Hauptfächer'],
-    },
-    {
-      id: 'angela_guerreiro',
-      href: `/team/angela_guerreiro`,
-      name: 'Angela Guerreiro',
-      src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto angela_guerreiro.png`,
-      subjects: ['Neben- und Theoriefächer'],
-    },
-    {
-      id: 'filip_van_huffel',
-      href: `/team/filip_van_huffel`,
-      name: 'Filip van Huffel',
-      src: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto filip_van_huffel.png`,
-      subjects: ['Gastdozent*innen 2025'],
-    },
-  ];*/
+import { useTranslation } from 'react-i18next';
+import { defaultNS as ns_common } from 'translations';
 
 function TeamSelector({members = []}) {
+  const { t } = useTranslation([ns_common]);
+    const { button } = t(ns_common);
   console.log("member", members)
 
   const MotionBox = motion(Box);
@@ -134,7 +107,7 @@ function TeamSelector({members = []}) {
                     margin: { xs: '8px', md: '16px' },
                   }}
                 >
-                  VITA
+                  {button.vita}
                 </Box>
               </Box>
 

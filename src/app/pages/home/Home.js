@@ -11,6 +11,8 @@ import VideoLooper from './VideoLooper';
 import { useSelector } from 'react-redux';
 import { selectUserLanguage } from 'app/store/app/mainSlice';
 import AktuellesSection from '../aktuelles/AktuellesSection';
+import { useTranslation } from 'react-i18next';
+import { defaultNS as ns_common } from 'translations';
 
 function ImageAnimation(props) {
   const { image } = props;
@@ -32,7 +34,21 @@ function ImageAnimation(props) {
   );
 }
 
+function Image(props) {
+  const { item } = props;
+
+  return (
+    <img
+      src={item.src}
+      alt={item.title || ``}
+      className="w-full object-cover border border-black h-[300px] md:h-full md:min-h-[460px]"
+    />
+  );
+}
+
 function Home() {
+  const { t } = useTranslation([ns_common]);
+  const { button } = t(ns_common);
   const theme = useTheme();
 
   const [homeData, setHomeData] = useState(null);
@@ -119,13 +135,20 @@ function Home() {
                   {homeData.aboutUs.text}
                 </Typography>
                 <AnchorLink href={'/team'}>
-                  Mehr erfahren <ArrowForward fontSize="small" sx={{ fontSize: { xs: '14px', sm: '16px' } }} />
+                  {button.mehrErfahren} <ArrowForward fontSize="small" sx={{ fontSize: { xs: '14px', sm: '16px' } }} />
                 </AnchorLink>
               </Box>
 
               {/* Image */}
               <Box className="w-full md:w-1/2 border-y md:border-t-0 md:border-l border-black">
-                <ImageAnimation image={homeData.aboutUs.image} />
+                {/* <ImageAnimation /> */}
+
+                <Image
+                  item={{
+                    src: homeData.aboutUs.image,
+                    title: 'CDSH Willkommen',
+                  }}
+                />
               </Box>
             </Box>
           </Box>

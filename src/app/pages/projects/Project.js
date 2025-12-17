@@ -4,19 +4,13 @@ import ImpressionenSection from './ImpressionenSection';
 import { useEffect, useState } from 'react';
 import { renderers } from 'app/shared-components/htmlStyle/htmlStyle';
 import ReactMarkdown from 'react-markdown';
-
-const projects = [
-  {
-    id: 'on_the_trail',
-    name: 'On the trail',
-    categories: ['Absolvent*innen 2021'],
-    subjects: ['Choreographie'],
-    src: `${process.env.PUBLIC_URL}/assets/images/projects/project1.png`,
-  },
-];
+import { useTranslation } from 'react-i18next';
+import { defaultNS as ns_common } from 'translations';
 
 function Project(props) {
   const {} = props;
+  const { t } = useTranslation([ns_common]);
+    const { button } = t(ns_common);
   const navigate = useNavigate();
   const theme = useTheme();
   const { projectUrlId } = useParams();
@@ -102,7 +96,7 @@ function Project(props) {
               }}
               className="bg-white border border-black rounded-full px-[16px] py-[2px]"
             >
-              zurück
+              {button.back}
             </button>
           </Box>
         </Box>
@@ -164,7 +158,7 @@ function Project(props) {
                 }}
                 className="bg-white border border-black rounded-full px-[16px] py-[2px]"
               >
-                zurück
+                {button.back}
               </button>
             </Box>
           </Box>
