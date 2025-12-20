@@ -29,16 +29,16 @@ function MediaItem({ item, height }) {
 
   if (isVideo) {
     return (
-      <Box 
+      <Box
         component="video"
         src={item.src}
         controls
         playsInline
-        sx={{ 
-          height: `${height}px`, 
-          width: '100%', 
-          objectFit: 'cover', 
-          border: '1px solid black' 
+        sx={{
+          height: `${height}px`,
+          width: '100%',
+          objectFit: 'cover',
+          border: '1px solid black',
         }}
       />
     );
@@ -49,11 +49,11 @@ function MediaItem({ item, height }) {
       component="img"
       src={item.src}
       alt={item.title || ''}
-      sx={{ 
-        height: `${height}px`, 
-        width: '100%', 
-        objectFit: 'cover', 
-        border: '1px solid black' 
+      sx={{
+        height: `${height}px`,
+        width: '100%',
+        objectFit: 'cover',
+        border: '1px solid black',
       }}
     />
   );
@@ -67,15 +67,17 @@ function Image(props) {
   );
 }
 
-function Carousel({ items, gap, itemWidth, itemHeight, Addon = undefined }) {
+function Carousel({ items, gap, itemWidth, itemHeight, Addon = undefined, stretch = false }) {
   const containerRef = useRef(null);
   const [containerWidth, setContainerWidth] = useState(0);
   const [index, setIndex] = useState(0);
 
   const itemsPerPage = useMemo(() => {
     // shrink item width dynamically for small screens
-    //if (containerWidth < 500) return 1;
-    //if (containerWidth < 900) return 2;
+    if (stretch) {
+      if (containerWidth < 375) return 1;
+      if (containerWidth < 750) return 2;
+    }
     return Math.floor(containerWidth / (itemWidth + gap)) || 1;
   }, [containerWidth, itemWidth, gap]);
 
@@ -83,7 +85,13 @@ function Carousel({ items, gap, itemWidth, itemHeight, Addon = undefined }) {
   const maxIndex = Math.max(0, maxItems - itemsPerPage);
   const isLeftDisabled = index === 0;
   const isRightDisabled = index >= maxIndex;
-  const actualWidth = Math.min(itemWidth, containerWidth / itemsPerPage);
+
+  let actualWidth = 0;
+  if (stretch && containerWidth < 800) {
+    actualWidth = containerWidth / itemsPerPage;
+  } else {
+    actualWidth = Math.min(itemWidth, containerWidth / itemsPerPage);
+  }
 
   const handleNext = () => {
     if (index < maxIndex) setIndex((prev) => prev + 1);

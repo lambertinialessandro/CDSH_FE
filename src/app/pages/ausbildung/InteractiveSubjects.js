@@ -139,10 +139,11 @@ function InteractiveSubjects(props) {
           <Box component="section" className="py-[90px]">
             <Box ref={containerRef} className="relative" sx={{ height: `${SCROLL_LIMIT}px` }}>
               <AnimatePresence mode="wait">
+                <Box className="w-full h-full absolute flex flex-col justify-start items-center px-[75px] ">
                 <Box
-                  component={motion.div}
                   key={selectedSubject}
-                  className={`flex flex-col justify-start items-center mt-[30px] px-[75px] sticky top-[54px] left-0 right-0 z-20`}
+                  component={motion.div}
+                  className={`sticky top-[54px] left-0 right-0 z-20`}
                   sx={{ marginBottom: { xs: 'calc(100vh - 180px - 54px)', md: 'calc(100vh - 180px - 54px)' } }}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -174,6 +175,7 @@ function InteractiveSubjects(props) {
                   >
                     {selectedSubject === -1 ? subjects_balls[0].description : subjects[selectedSubject].description}
                   </Typography>
+                </Box>
                 </Box>
               </AnimatePresence>
               <Box
@@ -209,18 +211,18 @@ function InteractiveSubjects(props) {
                       <Box
                         key={i}
                         component={motion.div}
-                        initial={{ scale: 0.8, opacity: 0 }}
+                        initial={{ /*scale: 0.8,  opacity: 0 */ }}
                         animate={{
                           scale: 1,
-                          opacity: eased,
+                          /* opacity: eased, */
                           x,
                           y,
                         }}
-                        transition={{
+                        /* transition={{
                           type: 'spring',
                           stiffness: 120,
                           damping: 20,
-                        }}
+                        }} */
                         sx={{
                           width: sizePx,
                           height: sizePx,

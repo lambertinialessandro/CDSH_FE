@@ -62,6 +62,7 @@ function AktuellesSection({ items, title }) {
           itemWidth={280} // desktop baseline
           itemHeight={180}
           Addon={Addon}
+          stretch
         />
       </Box>
     </Box>

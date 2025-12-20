@@ -161,7 +161,7 @@ function AboutUs() {
               {
                 title: 'F\u00f6rderung & Kooperation',
                 text: 'Wir vermitteln auch nach dem Abschluss Jobs und stellen Prober\u00e4ume kostenfrei bereit. Au\u00dferdem profitiert ihr w\u00e4hrend der Ausbildung von unserem Netzwerk internationaler Mentor*innen.',
-                reverse: false,
+                reverse: true,
                 bottom: false,
                 img: {
                   src: `${process.env.PUBLIC_URL}/assets/images/aboutUs/Bildschirmfoto 2025-02-18 um 17.06.05.png`,
@@ -171,8 +171,8 @@ function AboutUs() {
               {
                 title: 'Choreografie & Praxis',
                 text: 'Wir erarbeiten zielgerichtete Choreografien und sammeln bereits w\u00e4hrend der Ausbildung viele Erfahrungen auf lokalen B\u00fchnen und Events.',
-                reverse: true,
-                bottom: false,
+                reverse: false,
+                bottom: true,
                 img: {
                   src: `${process.env.PUBLIC_URL}/assets/images/aboutUs/Bildschirmfoto 2025-02-18 um 17.06.12.png`,
                   alt: 'Choreografie & Praxis',

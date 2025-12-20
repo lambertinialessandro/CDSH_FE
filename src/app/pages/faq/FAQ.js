@@ -20,7 +20,7 @@ function Question(props) {
           setIsOpen((prev) => !prev);
         }}
       >
-        <div className={`size-4 ${isOpen ? 'bg-[#C8FF75]' : 'bg-black'} rounded-full group-hover:bg-[#C8FF75]`}></div>
+        <div className={`min-w-4 size-4 ${isOpen ? 'bg-[#C8FF75]' : 'bg-black'} rounded-full group-hover:bg-[#C8FF75]`}></div>
         <Typography
           className="text-left"
           sx={{

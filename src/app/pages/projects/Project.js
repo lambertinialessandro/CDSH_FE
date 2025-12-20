@@ -27,10 +27,10 @@ function Project(props) {
   useEffect(() => {
     if (projectUrlId) {
       if (selectedProject) {
-      setLoading(false);
-      setError(null);
-      return;
-    }
+        setLoading(false);
+        setError(null);
+        return;
+      }
 
       setLoading(true);
       setError(null);
@@ -48,7 +48,7 @@ function Project(props) {
           return response.json();
         })
         .then((data) => {
-          dispatch(setSelectedProject({ userLanguage, data: data}));
+          dispatch(setSelectedProject({ userLanguage, data: data }));
         })
         .catch((err) => {
           if (userLanguage === 'en') {
@@ -63,13 +63,21 @@ function Project(props) {
                 'The central examination requirement in the second year of the CDSH program consists of creating an original short production. This year, 19 dancers developed short pieces, which, under the theme "What does Looking Taste Like?", explore a wide range of topics.',
               descriptionRight:
                 'The **Ho\u2019Omau class** invites you to embark on a delicious journey of three different dinners, each featuring a carefully assembled six-course meal. A variety of flavors is guaranteed to delight even the most refined and discerning palate. You will taste coldness and darkness, splashed with a dash of tenderness, as well as warmth and joy, accompanied by vibrant colors and aromas. A feast for the senses.\n\n*Whatever your eyes crave, we are.*',
+              titleImpressions: 'Impressions',
               impressions: [
                 {
+                  src: `${process.env.PUBLIC_URL}/assets/images/CDSH - Trailer Final Performance opt.mp4`,
+                  mime: 'video/mp4',
+                  type: 'video',
+                },
+                {
                   src: `${process.env.PUBLIC_URL}/assets/images/aktuelles/what_does_looking_taste_like.png`,
+                  alt: null,
+                  type: 'image',
                 },
               ],
             };
-            dispatch(setSelectedProject({ userLanguage, data: mockData}));
+            dispatch(setSelectedProject({ userLanguage, data: mockData }));
           } else {
             const mockData = {
               id: 'solo_project_2024',
@@ -82,13 +90,21 @@ function Project(props) {
                 'Die zentrale Prüfungsleistung im zweiten Ausbildungsjahr der CDSH besteht in der Entwicklung einer eigenständigen Kurzproduktion. In diesem Jahr haben 19 Tänzer*innen kurze Stücke erarbeitet, die sich unter dem Thema „What Does Looking Taste Like?“ mit einer Vielzahl unterschiedlicher Fragestellungen auseinandersetzen.',
               descriptionRight:
                 'Die **Ho’Omau-Klasse** lädt dich ein zu einer genussvollen Reise durch drei unterschiedliche Dinner-Erlebnisse, die jeweils aus einem sorgfältig zusammengestellten Sechs-Gänge-Menü bestehen. Eine Vielfalt an Geschmacksrichtungen verspricht, selbst die feinsten und anspruchsvollsten Gaumen zu begeistern. Du wirst Kälte und Dunkelheit kosten, verfeinert mit einem Hauch von Zärtlichkeit, ebenso wie Wärme und Freude, begleitet von leuchtenden Farben und intensiven Aromen. Ein Fest für die Sinne.\n\n*Was immer deine Augen begehren – wir sind es.*',
+              titleImpressions: 'Impressionen',
               impressions: [
                 {
+                  src: `${process.env.PUBLIC_URL}/assets/images/CDSH - Trailer Final Performance opt.mp4`,
+                  mime: 'video/mp4',
+                  type: 'video',
+                },
+                {
                   src: `${process.env.PUBLIC_URL}/assets/images/aktuelles/what_does_looking_taste_like.png`,
+                  alt: null,
+                  type: 'image',
                 },
               ],
             };
-            dispatch(setSelectedProject({ userLanguage, data: mockData}));
+            dispatch(setSelectedProject({ userLanguage, data: mockData }));
           }
 
           // TODO: commented for temp deploy

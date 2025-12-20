@@ -63,6 +63,44 @@ function Ausbildung() {
               text: 'THE AUDITION DATES FOR 2025 ARE NOW ONLINE',
               link_text: 'REGISTER NOW',
             },
+            subjects_balls: [
+              {
+                id: 0,
+                title: 'Academic subjects',
+                description:
+                  'A combination of sound theory and a holistic mix of practical modules forms the basis of our training model.',
+              },
+              {
+                id: 1,
+                title: 'Dance technique',
+                description:
+                  'Focus on perfecting body awareness, technical precision, and physical strength across various styles. This module builds a versatile physical instrument capable of meeting the rigorous demands of professional contemporary choreography.',
+              },
+              {
+                id: 2,
+                title: 'Artistic Development',
+                description:
+                  'A dedicated journey to discover and consolidate your unique artistic identity and creative voice. Through personal research, students are guided to push expressive boundaries and develop an authentic, conscious stage presence.',
+              },
+              {
+                id: 3,
+                title: 'Choreographic Practice',
+                description:
+                  'A laboratory focused on the methods of composition and the creative process. Students learn to structure movement in space and time, working with resident and guest artists to transform abstract concepts into concrete performances.',
+              },
+              {
+                id: 4,
+                title: 'Stage Practice',
+                description:
+                  'Direct application of skills in a real performance context. This subject prepares students for the stage by focusing on spatial management, audience interaction, and the professional discipline required during high-level productions.',
+              },
+              {
+                id: 5,
+                title: 'Theory',
+                description:
+                  'A solid academic foundation that integrates physical practice with dance history, applied anatomy, and movement analysis. These studies provide the critical tools necessary to understand the cultural and scientific context of dance.',
+              },
+            ],
             filterCategories: [
               {
                 id: 'major_subjects',
@@ -262,12 +300,16 @@ function Ausbildung() {
             },
             fortbildung: {
               headline: 'Further training',
-              description:
-                'Continuing Education in Residence (FIR) is the exclusive professional development program of the Contemporary Dance School Hamburg \u2013 for trained stage dancers without current engagements who wish to maintain their training or further develop their skills.\r\n\r\nTwo six-month blocks are available: January 1 \u2013 July 1 or September 1 \u2013 March 1. Participants can individually select up to 12 classes per week from the curriculum. The studios are also available for individual projects, which can be presented publicly as part of the "Work in Progress" series or the final project. Optional extras include up to six mentoring sessions and the opportunity to collaborate on up to two creations by the resident choreographers.\r\n\r\nRequirements: completed dance training or equivalent experience. Admission is via audition (live, via video, or during the program). Cost: \u20ac300/month',
+              overview:
+                'Continuing Education in Residence (**FIR**) is the exclusive professional development program of the Contemporary Dance School Hamburg \u2013 for trained stage dancers without current engagements who wish to maintain their training or further develop their skills.',
+              schedule:
+                'Two six-month blocks are available: **January 1 \u2013 July 1 or September 1 \u2013 March 1**. Participants can individually select up to 12 classes per week from the curriculum. The studios are also available for individual projects, which can be presented publicly as part of the "Work in Progress" series or the final project. Optional extras include up to six mentoring sessions and the opportunity to collaborate on up to two creations by the resident choreographers.',
+              requirement:
+                'Requirements: completed dance training or equivalent experience. Admission is via audition (*live, via video, or during the program*). Cost: **\u20ac300/month**',
               image: `${process.env.PUBLIC_URL}/assets/images/ausbildung/Bildschirmfoto 2025-07-03 um 13.50.30 1.png`,
             },
             aktuelles: {
-              headline: 'Aktuelles',
+              headline: 'New',
               items: [
                 {
                   title: 'What dies Looking Taste like',
@@ -324,6 +366,44 @@ function Ausbildung() {
               text: 'DIE AUDITION TERMINE 2025 SIND JETZT ONLINE.',
               link_text: 'JETZT ANMELDEN',
             },
+            subjects_balls: [
+              {
+                id: 0,
+                title: 'F\u00e4cher',
+                description:
+                  'Eine Kombination aus fundierter Theorie und einem ganzheitlichen Mix aus praktischen Modulen bildet die Grundlage unseres Ausbildungsmodells.',
+              },
+              {
+                id: 1,
+                title: 'Tanztechnik',
+                description:
+                  'Fokus auf die Perfektionierung des K\u00f6rperbewusstseins, technischer Pr\u00e4zision und physischer Kraft in verschiedenen Stilen. Dieses Modul formt ein vielseitiges k\u00f6rperliches Instrument, das den hohen Anforderungen zeitgen\u00f6ssischer Choreografien gerecht wird.',
+              },
+              {
+                id: 2,
+                title: 'K\u00fcnstlerische Entwicklung',
+                description:
+                  'Eine Reise zur Entdeckung und Festigung der eigenen k\u00fcnstlerischen Identit\u00e4t und kreativen Stimme. Durch pers\u00f6nliche Recherche werden die Studierenden angeleitet, expressive Grenzen zu \u00fcberschreiten und eine authentische, bewusste B\u00fchnenpr\u00e4senz zu entwickeln.',
+              },
+              {
+                id: 3,
+                title: 'Choreografische Praxis',
+                description:
+                  'Ein Laboratorium, das sich auf Kompositionsmethoden und den kreativen Prozess konzentriert. Die Studierenden lernen, Bewegung in Raum und Zeit zu strukturieren, und arbeiten mit Dozenten sowie Gastk\u00fcnstlern zusammen, um abstrakte Konzepte in konkrete Performances zu verwandeln.',
+              },
+              {
+                id: 4,
+                title: 'B\u00fchnenpraxis',
+                description:
+                  'Die direkte Anwendung der erworbenen F\u00e4higkeiten in einem realen Auff\u00fchrungskontext. Dieses Fach bereitet auf die B\u00fchne vor, indem es sich auf die Raumgestaltung, die Interaktion mit dem Publikum und die f\u00fcr professionelle Produktionen erforderliche Disziplin konzentriert.',
+              },
+              {
+                id: 5,
+                title: 'Theorie',
+                description:
+                  'Ein fundiertes akademisches Fundament, das die physische Praxis mit Tanzgeschichte, angewandter Anatomie und Bewegungsanalyse verbindet. Diese Studien vermitteln die kritischen Werkzeuge, um den kulturellen und wissenschaftlichen Kontext des Tanzes zu verstehen.',
+              },
+            ],
             filterCategories: [
               {
                 id: 'hauptf\u00e4cher',
@@ -523,8 +603,12 @@ function Ausbildung() {
             },
             fortbildung: {
               headline: 'Fortbildung',
-              description:
-                'Fortbildung in Residence (FIR) ist das exklusive Weiterbildungsprogramm der Contemporary Dance School Hamburg \u2013 f\u00fcr ausgebildete B\u00fchnent\u00e4nzer*innen ohne aktuelles Engagement, die im Training bleiben oder sich weiterentwickeln m\u00f6chten.\r\n\r\nZur Auswahl stehen zwei sechmonatige Bl\u00f6cke: 1. Januar \u2013 1. Juli oder 1. September \u2013 1. M\u00e4rz. Bis zu 12 Einheiten pro Woche k\u00f6nnen individuell aus dem Lehrplan gew\u00e4hlt werden. Zudem stehen die Studios f\u00fcr eigene Projekte zur Verf\u00fcgung, die bei \u00bbWork in Progress\u00ab oder dem Abschlussprojekt \u00f6ffentlich gezeigt werden k\u00f6nnen. Optional: bis zu 6 Mentoring-Sessions sowie Mitwirkung an bis zu zwei Kreationen der Hauschoreograf*innen.\r\n\r\nVoraussetzung: abgeschlossene Tanzausbildung oder gleichwertige Erfahrung. Die Aufnahme erfolgt \u00fcber Audition (live, per Video oder w\u00e4hrend des Programms). Kosten: 300\u202f\u20ac/Monat',
+              overview:
+                'Fortbildung in Residence (**FIR**) ist das exklusive Weiterbildungsprogramm der Contemporary Dance School Hamburg \u2013 f\u00fcr ausgebildete B\u00fchnent\u00e4nzer*innen ohne aktuelles Engagement, die im Training bleiben oder sich weiterentwickeln m\u00f6chten.',
+              schedule:
+                'Zur Auswahl stehen zwei sechmonatige Bl\u00f6cke: **1. Januar \u2013 1. Juli** oder **1. September \u2013 1. M\u00e4rz**. Bis zu 12 Einheiten pro Woche k\u00f6nnen individuell aus dem Lehrplan gew\u00e4hlt werden. Zudem stehen die Studios f\u00fcr eigene Projekte zur Verf\u00fcgung, die bei \u00bbWork in Progress\u00ab oder dem Abschlussprojekt \u00f6ffentlich gezeigt werden k\u00f6nnen. Optional: bis zu 6 Mentoring-Sessions sowie Mitwirkung an bis zu zwei Kreationen der Hauschoreograf*innen.',
+              requirement:
+                'Voraussetzung: abgeschlossene Tanzausbildung oder gleichwertige Erfahrung. Die Aufnahme erfolgt \u00fcber Audition (*live, per Video oder w\u00e4hrend des Programms*). Kosten: **300\u202f\u20ac/Monat**',
               image: `${process.env.PUBLIC_URL}/assets/images/ausbildung/Bildschirmfoto 2025-07-03 um 13.50.30 1.png`,
             },
             aktuelles: {
@@ -697,9 +781,9 @@ function Ausbildung() {
         </LoopBanner>
       </Box>
 
-      <InteractiveSubjects subjects_balls={ausbuildungData.subjects_balls}  />
+      {/* <InteractiveSubjects subjects_balls={ausbuildungData.subjects_balls} /> */}
 
-      <SubjectSelector subjects={ausbuildungData.subjects} categories={ausbuildungData.categories_manager} />
+      <SubjectSelector subjects={ausbuildungData.subjects} categories={ausbuildungData.filterCategories} />
 
       <Box
         component="section"
@@ -909,7 +993,8 @@ function Ausbildung() {
           >
             <Box className="flex flex-col justify-start items-start" sx={{ width: { xs: '100%', md: '50%' } }}>
               <ReactMarkdown components={renderers} children={ausbuildungData.fortbildung.overview} /> <br></br>
-              <ReactMarkdown components={renderers} children={ausbuildungData.fortbildung.schedule} /><br></br>
+              <ReactMarkdown components={renderers} children={ausbuildungData.fortbildung.schedule} />
+              <br></br>
               <ReactMarkdown components={renderers} children={ausbuildungData.fortbildung.requirement} />
             </Box>
             <Box className="flex flex-col justify-start items-start sticky" sx={{ width: { xs: '100%', md: '50%' } }}>

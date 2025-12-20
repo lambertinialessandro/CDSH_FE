@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+export const selectBannerData = (state, userLanguage) => state.app.page.bannerData?.[userLanguage];
+
 export const selectAboutUsData = (state, userLanguage) => state.app.page.aboutUsData?.[userLanguage];
 export const selectAktuelleData = (state, userLanguage) => state.app.page.aktuelleData?.[userLanguage];
 export const selectAuditionsData = (state, userLanguage) => state.app.page.auditionsData?.[userLanguage];
@@ -17,6 +19,8 @@ export const selectSelectedStudent = (state, userLanguage) => state.app.page.sel
 export const selectSelectedMember = (state, userLanguage) => state.app.page.selectedMember?.[userLanguage];
 
 const initialState = {
+  bannerData: {},
+
   aboutUsData: {},
   aktuelleData: {},
   auditionsData: {},
@@ -38,6 +42,10 @@ const pageSlice = createSlice({
   name: 'page',
   initialState,
   reducers: {
+    setBannerData: (state, { payload: { userLanguage, data } }) => {
+      state.bannerData[userLanguage] = data;
+    },
+
     setAboutUsData: (state, { payload: { userLanguage, data } }) => {
       state.aboutUsData[userLanguage] = data;
     },
@@ -86,6 +94,8 @@ const pageSlice = createSlice({
 });
 
 export const {
+  setBannerData,
+
   setAboutUsData,
   setAktuelleData,
   setAuditionsData,

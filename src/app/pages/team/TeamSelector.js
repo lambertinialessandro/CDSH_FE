@@ -7,14 +7,13 @@ import { Link } from 'react-router-dom';
 import { defaultNS as ns_common } from 'translations';
 
 function TeamSelector(props) {
-  const { members = [], educationCategories = [], educationSubjects = [] } = props;
+  const { members = [], educationCategories = [] } = props;
   const { t } = useTranslation([ns_common]);
-  const { button } = t(ns_common);
+  const { message, button } = t(ns_common);
   console.log('member', members);
 
   const MotionBox = motion(Box);
   console.log('educationCategories', educationCategories);
-  console.log('educationSubjects', educationSubjects);
   // ordered from the newest to the older
   //const [tabSelected, setTabSelected] = useState(3);
   /*const TAB_OPTIONS = [
@@ -36,7 +35,7 @@ function TeamSelector(props) {
       name: cat.name,
     }));
 
-    return [...categories, { id: 'all', name: 'No Filter' }];
+    return [...categories, { id: 'all', name: message.keinFilter }]; 
   }, [educationCategories]);
 
   const [tabSelected, setTabSelected] = useState(0);
@@ -54,6 +53,9 @@ function TeamSelector(props) {
     if (!currentTab || currentTab.id === 'all') {
       return members;
     }
+
+    console.log(members[0].category)
+    console.log(currentTab.name)
     return members.filter((member) => member.category && member.category.includes(currentTab.name));
   }, [tabSelected, members, tabOptions]);
 

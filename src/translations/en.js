@@ -35,6 +35,12 @@ const dictionary = {
       // TeamMember
       fach: "Academic subject:",
 
+      // selectors
+      keinFilter: "No Filter",
+      alle: "All",
+      aktuelleKlassen: "Current Classes",
+      ehemaligeKlassen: "Former Classes",
+
       // footer
       fullNameSchool: 'CDSH - Contemporary',
       schoolDescription: 'Dance School Hamburg GmbH',

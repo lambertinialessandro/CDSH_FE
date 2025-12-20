@@ -23,7 +23,6 @@ function Team() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-
   useEffect(() => {
     if (teamData) {
       setLoading(false);
@@ -45,11 +44,29 @@ function Team() {
         return response.json();
       })
       .then((data) => {
-        dispatch(setTeamData({ userLanguage, data: data}));
+        dispatch(setTeamData({ userLanguage, data: data }));
       })
       .catch((error) => {
         if (userLanguage === 'en') {
           const mockData = {
+            educationCategories: [
+              {
+                id: 'major_subjects',
+                name: 'Major Subjects',
+              },
+              {
+                id: 'minor_subjects',
+                name: 'Minor Subjects',
+              },
+              {
+                id: 'theory_subjects',
+                name: 'Theory Subjects',
+              },
+              {
+                id: 'workshops',
+                name: 'Workshops',
+              },
+            ],
             intro: {
               headline: 'Team',
               text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.',
@@ -96,6 +113,7 @@ function Team() {
                 role: 'Teacher',
                 subjects: ['Ballet'],
                 src: `${process.env.PUBLIC_URL}/assets/images/team/helena_stemm.png`,
+                category: ['Major Subjects'],
               },
               {
                 id: 'mihir_grover',
@@ -103,6 +121,7 @@ function Team() {
                 role: 'Teacher, Choreographer',
                 subjects: ['Choreography', 'Contemporary', 'Floorwork'],
                 src: `${process.env.PUBLIC_URL}/assets/images/team/mihir_grover.png`,
+                category: ['Major Subjects'],
               },
               {
                 id: 'stacey_denham',
@@ -110,6 +129,7 @@ function Team() {
                 role: 'Teacher',
                 subjects: ['Horton Technique'],
                 src: `${process.env.PUBLIC_URL}/assets/images/team/stacey_denham.png`,
+                category: ['Major Subjects'],
               },
               {
                 id: 'victoria_onz\u00e1lez',
@@ -117,6 +137,7 @@ function Team() {
                 role: 'Teacher',
                 subjects: ['Graham Technique'],
                 src: `${process.env.PUBLIC_URL}/assets/images/team/victoria_gonzalez.png`,
+                category: ['Major Subjects'],
               },
               {
                 id: 'isabel_navarro',
@@ -124,6 +145,7 @@ function Team() {
                 role: 'Teacher',
                 subjects: ['Drama'],
                 src: `${process.env.PUBLIC_URL}/assets/images/team/isabel-navarro.png`,
+                category: ['Minor Subjects', 'Theory Subjects'],
               },
               {
                 id: 'yolanda_morales',
@@ -131,6 +153,7 @@ function Team() {
                 role: 'Choreographer, Teacher',
                 subjects: ['Choreography'],
                 src: `${process.env.PUBLIC_URL}/assets/images/team/yolanda_morales.png`,
+                category: ['Major Subjects'],
               },
               {
                 id: 'katharina_pfahl',
@@ -138,6 +161,7 @@ function Team() {
                 role: 'Teacher',
                 subjects: ['Anatomy'],
                 src: `${process.env.PUBLIC_URL}/assets/images/team/katharina_pfahl.png`,
+                category: ['Theory Subjects'],
               },
             ],
             memoriam: {
@@ -146,7 +170,6 @@ function Team() {
                 "It was with great sadness and shock that we announced the passing of Tanja B\u00e1ez in October 2016. As a co-founder of the Contemporary Dance School Hamburg, Tanja was one of the school's pillars from the very beginning, and her loss will be irreplaceable. She embarked on her final journey with strength, courage, and without complaint, and will forever be a role model for us.",
               text_right: 'Rest in peace, Tanja!',
               image: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto 2025-02-18 um 17.26.20 1.png`,
-
             },
             teachers: {
               headline: 'Teachers',
@@ -158,9 +181,27 @@ function Team() {
               text: "We'd like to get to know you too. Besides the regular auditions, we're available by email or phone to answer any questions you may have about the training program.",
             },
           };
-          dispatch(setTeamData({ userLanguage, data: mockData}));
+          dispatch(setTeamData({ userLanguage, data: mockData }));
         } else {
           const mockData = {
+            educationCategories: [
+              {
+                id: 'hauptf\u00e4cher',
+                name: 'Hauptf\u00e4cher',
+              },
+              {
+                id: 'nebenf\u00e4cher',
+                name: 'Nebenf\u00e4cher',
+              },
+              {
+                id: 'theorief\u00e4cher',
+                name: 'Theorief\u00e4cher',
+              },
+              {
+                id: 'workshops',
+                name: 'Workshops',
+              },
+            ],
             intro: {
               headline: 'Team',
               text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.',
@@ -207,6 +248,7 @@ function Team() {
                 role: 'Lehrkraft',
                 subjects: ['Ballett'],
                 src: `${process.env.PUBLIC_URL}/assets/images/team/helena_stemm.png`,
+                category: ['Hauptf\u00e4cher'],
               },
               {
                 id: 'mihir_grover',
@@ -214,6 +256,7 @@ function Team() {
                 role: 'Lehrer, Choreograf',
                 subjects: ['Choreografie', 'Contemporary', 'Floorwork'],
                 src: `${process.env.PUBLIC_URL}/assets/images/team/mihir_grover.png`,
+                category: ['Hauptf\u00e4cher'],
               },
               {
                 id: 'stacey_denham',
@@ -221,6 +264,7 @@ function Team() {
                 role: 'Lehrkraft',
                 subjects: ['Horton Technik'],
                 src: `${process.env.PUBLIC_URL}/assets/images/team/stacey_denham.png`,
+                category: ['Hauptf\u00e4cher'],
               },
               {
                 id: 'victoria_onzález',
@@ -228,6 +272,7 @@ function Team() {
                 role: 'Lehrkraft',
                 subjects: ['Graham Technik'],
                 src: `${process.env.PUBLIC_URL}/assets/images/team/victoria_gonzalez.png`,
+                category: ['Hauptf\u00e4cher'],
               },
               {
                 id: 'isabel_navarro',
@@ -235,6 +280,7 @@ function Team() {
                 role: 'Lehrkraft',
                 subjects: ['Drama'],
                 src: `${process.env.PUBLIC_URL}/assets/images/team/isabel-navarro.png`,
+                category: ['Nebenf\u00e4cher', 'Theorief\u00e4cher'],
               },
               {
                 id: 'yolanda_morales',
@@ -242,6 +288,7 @@ function Team() {
                 role: 'Choreografin, Lehrkraft',
                 subjects: ['Choreografie'],
                 src: `${process.env.PUBLIC_URL}/assets/images/team/yolanda_morales.png`,
+                category: ['Hauptf\u00e4cher'],
               },
               {
                 id: 'katharina_pfahl',
@@ -249,6 +296,7 @@ function Team() {
                 role: 'Lehrkraft',
                 subjects: ['Anatomie'],
                 src: `${process.env.PUBLIC_URL}/assets/images/team/katharina_pfahl.png`,
+                category: ['Theorief\u00e4cher'],
               },
             ],
             memoriam: {
@@ -268,7 +316,7 @@ function Team() {
               text: 'Wir dich ebenfalls. Neben den regulären Auditions sind wir per E-Mail oder telefonisch für dich da, wenn du Fragen zur Ausbildung hast.',
             },
           };
-          dispatch(setTeamData({ userLanguage, data: mockData}));
+          dispatch(setTeamData({ userLanguage, data: mockData }));
         }
 
         // TODO: commented for temp deploy
@@ -481,11 +529,7 @@ function Team() {
         </div>
       </Box>
 
-      <TeamSelector
-        members={teamData.docentsMembers}
-        educationCategories={teamData.educationCategories}
-        educationSubjects={teamData.educationSubjects}
-      />
+      <TeamSelector members={teamData.docentsMembers} educationCategories={teamData.educationCategories} />
 
       <Box component="section" className="py-[120px] px-[25px] flex flex-col justify-center items-center text-center">
         <Typography

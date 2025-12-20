@@ -2,9 +2,13 @@ import { Box, Tab, Tabs, Typography } from '@mui/material';
 import { AnimatePresence, motion } from 'framer-motion';
 import __ from 'lodash';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { defaultNS as ns_common } from 'translations';
 import SplitSection from './SplitSection';
 
 function StudentSelector({ classes = [] }) {
+  const { t } = useTranslation([ns_common]);
+  const { message } = t(ns_common);
   console.log('classes', classes);
 
   const today = new Date();
@@ -13,7 +17,7 @@ function StudentSelector({ classes = [] }) {
   const currentYear = month < 9 ? year - 1 : year;
 
   const [tabSelected, setTabSelected] = useState(0);
-  const TAB_OPTIONS = [{ name: 'Aktuelle Klassen' }, { name: 'Ehemalige Klassen' }];
+  const TAB_OPTIONS = [{ name: message.aktuelleKlassen }, { name: message.ehemaligeKlassen }];
   const filteredStudents =
     tabSelected === 0
       ? classes?.filter(({ year }) => year.end > currentYear)

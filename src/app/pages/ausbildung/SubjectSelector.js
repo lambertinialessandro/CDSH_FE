@@ -1,30 +1,30 @@
-import { Box, Divider, Tab, Tabs, Typography } from '@mui/material';
+import { Box, Tab, Tabs, Typography } from '@mui/material';
+import { AnimatePresence, motion } from 'framer-motion';
 import __ from 'lodash';
 import { useMemo, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-
+import { useTranslation } from 'react-i18next';
+import { defaultNS as ns_common } from 'translations';
 
 function SubjectSelector(props) {
-  const { subjects = [] } = props;
+  const { subjects = [], categories = [] } = props;
+  const { t } = useTranslation([ns_common]);
+  const { message } = t(ns_common);
   const MotionBox = motion(Box);
 
-  console.log("subjects:", subjects);
+  console.log('subjects:', subjects);
 
   const [tabSelected, setTabSelected] = useState(0);
 
-  const TAB_OPTIONS = useMemo(() => {
-    const categories = __.flatMap(subjects, (s) => s.tab || []);
-    const uniqueCategories = __.uniq(categories).sort();
-    return [{ name: 'All' }, ...uniqueCategories.map((cat) => ({ name: cat }))]; // TODO: ALL ? no!
+  const tabOptions = useMemo(() => {
+    return [{ id: 'all', name: message.alle }, ...categories];
   }, [subjects]);
 
   const filteredSubjects = useMemo(() => {
-    const activeFilter = TAB_OPTIONS[tabSelected]?.name;
-    if (!activeFilter || activeFilter === 'All') return subjects; // TODO: ALL ? no!
+    const activeFilter = tabOptions[tabSelected];
+    if (!activeFilter || activeFilter.id === 'all') return subjects;
 
-    return subjects.filter((subject) => subject.tab?.includes(activeFilter));
-  }, [subjects, tabSelected, TAB_OPTIONS]);
+    return subjects.filter((subject) => subject.tab?.includes(activeFilter.name));
+  }, [subjects, tabSelected, tabOptions]);
 
   if (__.isEmpty(subjects)) {
     return (
@@ -35,9 +35,11 @@ function SubjectSelector(props) {
   }
   return (
     <>
-      <Box component="section"
-      className="flex flex-col justify-center items-start text-center"
-      sx={{py: {xs: "30px", md: "60px"}, px: {xs: "24px", md: "48px"}}}>
+      <Box
+        component="section"
+        className="flex flex-col justify-center items-start text-center"
+        sx={{ py: { xs: '30px', md: '60px' }, px: { xs: '24px', md: '48px' } }}
+      >
         <Tabs
           value={tabSelected}
           onChange={(event, value) => setTabSelected(value)}
@@ -53,7 +55,7 @@ function SubjectSelector(props) {
             },
           }}
         >
-          {TAB_OPTIONS.map((option, idx) => (
+          {tabOptions.map((option, idx) => (
             <Tab
               key={idx}
               label={option.name}
@@ -95,7 +97,11 @@ function SubjectSelector(props) {
                     component="img"
                     src={subject.src}
                     className="flex-1 w-[290px] h-[400px] border border-black"
-                    sx={{ objectFit: 'cover', width: {xs: "290px", md: "290px"}, height: {xs: "400px", md: "400px"} }}
+                    sx={{
+                      objectFit: 'cover',
+                      width: { xs: '290px', md: '290px' },
+                      height: { xs: '400px', md: '400px' },
+                    }}
                   />
                   <Typography
                     className="absolute border border-black rounded-full bottom-0 right-0 px-[16px] py-[2px] m-[16px]"
