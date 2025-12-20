@@ -781,7 +781,7 @@ function Ausbildung() {
         </LoopBanner>
       </Box>
 
-      {/* <InteractiveSubjects subjects_balls={ausbuildungData.subjects_balls} /> */}
+      <InteractiveSubjects subjects_balls={ausbuildungData.subjects_balls} />
 
       <SubjectSelector subjects={ausbuildungData.subjects} categories={ausbuildungData.filterCategories} />
 
