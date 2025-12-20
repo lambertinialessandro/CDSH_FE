@@ -1,5 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 
 function SplitSection(props) {
   const { title, text, img = null, to, reverse = false, bottom = false } = props;

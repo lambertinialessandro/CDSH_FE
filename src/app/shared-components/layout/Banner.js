@@ -1,21 +1,29 @@
 import { Box, IconButton, Typography, useTheme } from '@mui/material';
 import { ArrowForward, Close } from '@mui/icons-material';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import AnchorLink from '../link/AnchorLink';
-import { setIsBannerOpen } from 'app/store/app/mainSlice';
+import { selectUserLanguage, setIsBannerOpen } from 'app/store/app/mainSlice';
 
-function Banner({ fixed }) {
+function Banner({ fixed, bannerData }) {
   const theme = useTheme();
   const dispatch = useDispatch();
   const [isClosed, setIsClosed] = useState(false);
 
-  useEffect(() => {
+  /*useEffect(() => {
     dispatch(setIsBannerOpen(true));
   }, [dispatch]);
 
-  if (isClosed) return null;
+  if (isClosed) return null;*/
+  useEffect(() => {
+    const shouldBeOpen = bannerData.active && !isClosed;
+    dispatch(setIsBannerOpen(shouldBeOpen));
+    return () => dispatch(setIsBannerOpen(false));
+  }, [bannerData.active, isClosed, dispatch]);
 
+
+  if (!bannerData.active || isClosed) return null;
+  
   return (
     <Box
       className="w-full z-[50] border-b border-black"
@@ -45,7 +53,7 @@ function Banner({ fixed }) {
               whiteSpace: { xs: 'nowrap' },
             }}
           >
-            Audition 2025 sind jetzt online!
+            {bannerData.title}
           </Typography>
           <AnchorLink
             href="/auditions"
@@ -60,7 +68,7 @@ function Banner({ fixed }) {
             }}
             color="#000000"
           >
-            Jetzt anmelden <ArrowForward fontSize="small" sx={{ fontSize: { xs: '14px', sm: '16px' } }} />
+            {bannerData.link} <ArrowForward fontSize="small" sx={{ fontSize: { xs: '14px', sm: '16px' } }} />
           </AnchorLink>
         </Box>
 

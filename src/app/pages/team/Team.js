@@ -481,7 +481,11 @@ function Team() {
         </div>
       </Box>
 
-      <TeamSelector members={teamData.docentsMembers} />
+      <TeamSelector
+        members={teamData.docentsMembers}
+        educationCategories={teamData.educationCategories}
+        educationSubjects={teamData.educationSubjects}
+      />
 
       <Box component="section" className="py-[120px] px-[25px] flex flex-col justify-center items-center text-center">
         <Typography

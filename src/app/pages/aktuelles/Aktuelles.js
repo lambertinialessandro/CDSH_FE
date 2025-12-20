@@ -3,6 +3,8 @@ import { Box, Typography, useTheme } from '@mui/material';
 import LoopBanner from 'app/shared-components/banner/LoopBanner';
 import BigLink from 'app/shared-components/link/BigLink';
 import { selectUserLanguage } from 'app/store/app/mainSlice';
+import ReactMarkdown from 'react-markdown';
+import { renderers } from 'app/shared-components/htmlStyle/htmlStyle';
 import { selectAktuelleData, setAktuelleData } from 'app/store/app/pageSlice';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -196,7 +198,7 @@ function Aktuelles() {
               fontWeight: '400',
             }}
           >
-            {aktuelleData.header.intro}
+            <ReactMarkdown components={renderers} children={aktuelleData.header.intro} />
           </Typography>
         </Box>
         <Box className="flex-1 h-full relative" sx={{ width: { xs: '100%', md: '50%' } }}>

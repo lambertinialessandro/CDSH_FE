@@ -5,6 +5,7 @@ import Ausbildung from 'app/pages/ausbildung/Ausbildung';
 import FAQ from 'app/pages/faq/FAQ';
 import AGB from 'app/pages/general/AGB';
 import Datenschutz from 'app/pages/general/Datenschutz';
+import ErrorPage from 'app/pages/general/ErrorPage';
 import Impressum from 'app/pages/general/Impressum';
 import Home from 'app/pages/home/Home';
 import Project from 'app/pages/projects/Project';
@@ -80,6 +81,7 @@ function Navigation() {
           <Route path={'/agb'} element={<AGB />} />
 
           <Route path={'/ticketshop'} element={<TicketShop />} />
+          <Route path={'/error'} element={<ErrorPage />} />
 
           {/* <Route path={'/*'} element={<Navigate to="/" replace />} /> */}
         </Routes>

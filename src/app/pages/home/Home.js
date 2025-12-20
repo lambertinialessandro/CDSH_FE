@@ -2,14 +2,15 @@ import { ArrowForward } from '@mui/icons-material';
 import { Box, Typography, useTheme } from '@mui/material';
 import LoopBanner from 'app/shared-components/banner/LoopBanner';
 import useParallaxY from 'app/shared-components/hooks/useParallaxY';
+import { renderers } from 'app/shared-components/htmlStyle/htmlStyle';
 import AnchorLink from 'app/shared-components/link/AnchorLink';
 import BigLink from 'app/shared-components/link/BigLink';
-import { motion } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
-
 import { selectUserLanguage } from 'app/store/app/mainSlice';
 import { selectHomeData, setHomeData } from 'app/store/app/pageSlice';
+import { motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import ReactMarkdown from 'react-markdown';
 import { useDispatch, useSelector } from 'react-redux';
 import { defaultNS as ns_common } from 'translations';
 import AktuellesSection from '../aktuelles/AktuellesSection';
@@ -233,12 +234,9 @@ function Home() {
         className="flex flex-col justify-center items-center text-center"
         sx={{ py: { xs: 8, md: 15 }, px: { xs: 4, md: 6 } }}
       >
-        <Typography sx={{ fontSize: { xs: '20px', md: '30px' }, fontWeight: 400, color: '#000' }}>
-          {homeData.intro.text_1}
-        </Typography>
-        <Typography sx={{ fontSize: { xs: '20px', md: '30px' }, fontWeight: 400, color: '#000' }}>
-          {homeData.intro.text_2}
-        </Typography>
+        <ReactMarkdown components={renderers} children={homeData.intro.text_1} />
+        <br></br>
+        <ReactMarkdown components={renderers} children={homeData.intro.text_2} />
       </Box>
 
       {/* Aktuelles Section */}

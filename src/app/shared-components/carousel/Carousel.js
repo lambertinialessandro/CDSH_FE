@@ -24,6 +24,41 @@ function ImageAnimation({ item, height }) {
   );
 }
 
+function MediaItem({ item, height }) {
+  const isVideo = item.type === 'video' || item.src?.endsWith('.mp4');
+
+  if (isVideo) {
+    return (
+      <Box 
+        component="video"
+        src={item.src}
+        controls
+        playsInline
+        sx={{ 
+          height: `${height}px`, 
+          width: '100%', 
+          objectFit: 'cover', 
+          border: '1px solid black' 
+        }}
+      />
+    );
+  }
+
+  return (
+    <Box
+      component="img"
+      src={item.src}
+      alt={item.title || ''}
+      sx={{ 
+        height: `${height}px`, 
+        width: '100%', 
+        objectFit: 'cover', 
+        border: '1px solid black' 
+      }}
+    />
+  );
+}
+
 function Image(props) {
   const { item, height } = props;
 
@@ -101,7 +136,7 @@ function Carousel({ items, gap, itemWidth, itemHeight, Addon = undefined }) {
                   flexShrink: 0,
                 }}
               >
-                <Image item={item} height={itemHeight} />
+                <MediaItem item={item} height={itemHeight} />
                 {Addon && <Addon item={item} />}
               </Box>
             ))}

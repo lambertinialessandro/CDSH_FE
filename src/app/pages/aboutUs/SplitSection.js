@@ -1,4 +1,6 @@
 import { Box, Typography } from '@mui/material';
+import { renderers } from 'app/shared-components/htmlStyle/htmlStyle';
+import ReactMarkdown from 'react-markdown';
 
 function SplitSection(props) {
   const { title, text, img, reverse = false, bottom = false } = props;
@@ -19,9 +21,7 @@ function SplitSection(props) {
             >
               {title}
             </Typography>
-            <Typography sx={{ fontSize: { xs: '15px', md: '30px' }, fontWeight: 400, lineHeight: 'normal' }}>
-              {text}
-            </Typography>
+            <ReactMarkdown components={renderers} children={text} />
           </Box>
         )}
         <Box
@@ -42,9 +42,7 @@ function SplitSection(props) {
             >
               {title}
             </Typography>
-            <Typography sx={{ fontSize: { xs: '15px', md: '30px' }, fontWeight: 400, lineHeight: 'normal' }}>
-              {text}
-            </Typography>
+            <ReactMarkdown components={renderers} children={text} />
           </Box>
         )}
         <Box

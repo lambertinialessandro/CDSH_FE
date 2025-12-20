@@ -8,80 +8,79 @@ import { useSelector } from 'react-redux';
 const SCROLL_LIMIT = 5000; // px
 
 function InteractiveSubjects(props) {
-  const { subject_list = [] } = props;
-  console.log('subject_list', subject_list);
+  const { subjects_balls } = props;
+  console.log('subjects_balls', subjects_balls);
 
   const subjects = [
     {
-      title: 'Tanztechnik',
-      description: "I don't know",
+      title: subjects_balls[1].title,
+      description: subjects_balls[1].description,
       size: 0.9,
       x: -0.35,
       y: -0.05,
     },
     {
-      title: 'Künstlerische Entwicklung',
-      description: 'Finde und festige deine künstlerische Stimme.',
+      title: subjects_balls[2].title,
+      description: subjects_balls[2].description,
       size: 0.75,
       x: 0.4,
       y: -0.1,
     },
     {
-      title: 'Choreografische Praxis',
-      description:
-        'Mit uns lernst du selbst choreografieren. Unsere festen- und spannende Gast Dozent*innen geben ihr Wissen an dich weiter.',
+      title: subjects_balls[3].title,
+      description: subjects_balls[3].description,
       size: 0.6,
       x: 0.2,
       y: 0.3,
     },
     {
-      title: 'Bühnenpraxis',
-      description: "I don't know",
+      title: subjects_balls[4].title,
+      description: subjects_balls[4].description,
       size: 0.45,
       x: -0.25,
       y: 0.35,
     },
     {
-      title: 'Theorie',
-      description: "I don't know",
+      title: subjects_balls[5].title,
+      description: subjects_balls[5].description,
       size: 0.3,
       x: -0.55,
       y: 0.3,
     },
   ];
+
   const subjectsSmall = [
     {
-      title: 'Tanztechnik',
-      description: "I don't know",
+      title: subjects_balls[1].title,
+      description: subjects_balls[1].description,
       size: 0.85,
       x: -0.25,
       y: -0.35,
     },
     {
-      title: 'Künstlerische Entwicklung',
-      description: 'Finde und festige deine künstlerische Stimme.',
+      title: subjects_balls[2].title,
+      description: subjects_balls[2].description,
       size: 0.7,
       x: 0.3,
       y: -0.1,
     },
     {
-      title: 'Choreografische Praxis',
-      description:
-        'Mit uns lernst du selbst choreografieren. Unsere festen- und spannende Gast Dozent*innen geben ihr Wissen an dich weiter.',
+      title: subjects_balls[3].title,
+      description: subjects_balls[3].description,
       size: 0.6,
       x: 0.18,
       y: 0.5,
     },
     {
-      title: 'Bühnenpraxis',
-      description: "I don't know",
+      title: subjects_balls[4].title,
+      description: subjects_balls[4].description,
       size: 0.45,
       x: -0.23,
       y: 0.23,
     },
     {
-      title: 'Theorie',
-      description: "I don't know",
+      title: subjects_balls[5].title,
+      description: subjects_balls[5].description,
       size: 0.3,
       x: -0.4,
       y: -0.03,
@@ -160,7 +159,7 @@ function InteractiveSubjects(props) {
                       textAlign: 'center',
                     }}
                   >
-                    {selectedSubject === -1 ? 'Fächer' : subjects[selectedSubject].title}
+                    {selectedSubject === -1 ? subjects_balls[0].title : subjects[selectedSubject].title}
                   </Typography>
 
                   <Typography
@@ -173,9 +172,7 @@ function InteractiveSubjects(props) {
                       mt: 2,
                     }}
                   >
-                    {selectedSubject === -1
-                      ? 'Ein Zusammenspiel aus fundierter Theorie und einem ganzheitlichen Mix aus Praxismodulen bildet die Basis unseres Ausbildungsmodells.'
-                      : subjects[selectedSubject].description}
+                    {selectedSubject === -1 ? subjects_balls[0].description : subjects[selectedSubject].description}
                   </Typography>
                 </Box>
               </AnimatePresence>

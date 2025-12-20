@@ -249,7 +249,7 @@ function Project(props) {
         </Box>
       </Box>
 
-      <ImpressionenSection imgSet={selectedProject.impressions} />
+      <ImpressionenSection title={selectedProject.titleImpressions} items={selectedProject.impressions} />
     </>
   );
 }
