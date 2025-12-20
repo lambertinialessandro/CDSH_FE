@@ -6,13 +6,14 @@ import AnchorLink from 'app/shared-components/link/AnchorLink';
 import BigLink from 'app/shared-components/link/BigLink';
 import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
-
 import VideoLooper from './VideoLooper';
 import { useSelector } from 'react-redux';
 import { selectUserLanguage } from 'app/store/app/mainSlice';
 import AktuellesSection from '../aktuelles/AktuellesSection';
 import { useTranslation } from 'react-i18next';
 import { defaultNS as ns_common } from 'translations';
+import ReactMarkdown from 'react-markdown';
+import { renderers } from 'app/shared-components/htmlStyle/htmlStyle';
 
 function ImageAnimation(props) {
   const { image } = props;
@@ -86,7 +87,7 @@ function Home() {
 
   return (
     <>
-      <VideoLooper video={homeData.header.video}/>
+      <VideoLooper video={homeData.header.video} />
 
       {/* Intro Section */}
       <Box
@@ -94,16 +95,13 @@ function Home() {
         className="flex flex-col justify-center items-center text-center"
         sx={{ py: { xs: 8, md: 15 }, px: { xs: 4, md: 6 } }}
       >
-        <Typography sx={{ fontSize: { xs: '20px', md: '30px' }, fontWeight: 400, color: '#000' }}>
-          {homeData.intro.text_1}
-        </Typography>
-        <Typography sx={{ fontSize: { xs: '20px', md: '30px' }, fontWeight: 400, color: '#000' }}>
-          {homeData.intro.text_2}
-        </Typography>
+        <ReactMarkdown components={renderers} children={homeData.intro.text_1} />
+        <br></br>
+        <ReactMarkdown components={renderers} children={homeData.intro.text_2} />
       </Box>
 
       {/* Aktuelles Section */}
-      <AktuellesSection items={homeData.aktuelles.items} title={homeData.aktuelles.headline}/>
+      <AktuellesSection items={homeData.aktuelles.items} title={homeData.aktuelles.headline} />
 
       {/* Über uns */}
       <Box
@@ -219,7 +217,7 @@ function Home() {
           className="max-w-[740px] min-w-[50%] text-center"
           sx={{ fontSize: { xs: '15px', md: '30px' }, fontWeight: 400, color: '#000000' }}
         >
-         {homeData.footerCta.text}
+          {homeData.footerCta.text}
         </Typography>
       </Box>
     </>

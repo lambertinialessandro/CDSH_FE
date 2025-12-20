@@ -9,6 +9,8 @@ import { useEffect, useRef, useState } from 'react';
 import AktuellesSection from './AktuellesSection';
 import { useSelector } from 'react-redux';
 import { selectUserLanguage } from 'app/store/app/mainSlice';
+import ReactMarkdown from 'react-markdown';
+import { renderers } from 'app/shared-components/htmlStyle/htmlStyle';
 
 function Aktuelles() {
   const theme = useTheme();
@@ -76,7 +78,7 @@ function Aktuelles() {
               fontWeight: '400',
             }}
           >
-            {data.header.intro}
+            <ReactMarkdown components={renderers} children={data.header.intro} />
           </Typography>
         </Box>
         <Box className="flex-1 h-full relative" sx={{ width: { xs: '100%', md: '50%' } }}>

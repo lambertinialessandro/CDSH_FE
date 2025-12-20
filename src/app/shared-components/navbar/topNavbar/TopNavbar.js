@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { defaultNS as ns_common } from 'translations';
 
-function TopNavbar({ fixed }) {
+function TopNavbar({ fixed, active }) {
   const { t } = useTranslation([ns_common]);
   const { message } = t(ns_common);
   const theme = useTheme();
@@ -17,7 +17,7 @@ function TopNavbar({ fixed }) {
 
   const userLanguage = useSelector(selectCurrLanguage);
 
-  const areAuditionOpen = true;
+  const areAuditionOpen = active;
   const isBannerOpen = useSelector(selectIsBannerOpen);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 

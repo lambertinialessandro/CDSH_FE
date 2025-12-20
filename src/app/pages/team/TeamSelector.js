@@ -1,37 +1,65 @@
 import { Box, Divider, Tab, Tabs, Typography } from '@mui/material';
 import __ from 'lodash';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { defaultNS as ns_common } from 'translations';
 
-function TeamSelector({members = []}) {
+function TeamSelector(props) {
+  const { members = [], educationCategories = [], educationSubjects = [] } = props;
   const { t } = useTranslation([ns_common]);
-    const { button } = t(ns_common);
-  console.log("member", members)
+  const { button } = t(ns_common);
+  console.log('member', members);
 
   const MotionBox = motion(Box);
-
+  console.log('educationCategories', educationCategories);
+  console.log('educationSubjects', educationSubjects);
   // ordered from the newest to the older
-
-  const [tabSelected, setTabSelected] = useState(3);
-  const TAB_OPTIONS = [
+  //const [tabSelected, setTabSelected] = useState(3);
+  /*const TAB_OPTIONS = [
     { name: 'Hauptfächer' },
     { name: 'Neben- und Theoriefächer' },
     { name: 'Choreograph*innen 2025' },
     { name: 'Kein Filter' },
-  ];
-  const filteredMembers = useMemo(() => {
+  ];*/
+  /*const filteredMembers = useMemo(() => {
     if (TAB_OPTIONS[tabSelected].name === 'Kein Filter') {
       return members;
     }
     return members.filter(({ subjects }) => subjects.some((s1) => s1 === TAB_OPTIONS[tabSelected].name));
-  }, [tabSelected, members]);
+  }, [tabSelected, members]);*/
 
-  console.log("filteredMembers", filteredMembers)
+  const tabOptions = useMemo(() => {
+    const categories = educationCategories.map((cat) => ({
+      id: cat.id,
+      name: cat.name,
+    }));
 
-  if (__.isEmpty(members)) {
+    return [...categories, { id: 'all', name: 'No Filter' }];
+  }, [educationCategories]);
+
+  const [tabSelected, setTabSelected] = useState(0);
+
+  useEffect(() => {
+    if (tabOptions.length > 0) {
+      const allIndex = tabOptions.findIndex((opt) => opt.id === 'all');
+      setTabSelected(allIndex !== -1 ? allIndex : 0);
+    }
+  }, [tabOptions]);
+
+  const filteredMembers = useMemo(() => {
+    const currentTab = tabOptions[tabSelected];
+
+    if (!currentTab || currentTab.id === 'all') {
+      return members;
+    }
+    return members.filter((member) => member.category && member.category.includes(currentTab.name));
+  }, [tabSelected, members, tabOptions]);
+
+  console.log('filteredMembers', filteredMembers);
+
+  if (__.isEmpty(members) && educationCategories.length === 0) {
     return <Typography>Empty</Typography>;
   }
 
@@ -53,7 +81,7 @@ function TeamSelector({members = []}) {
             },
           }}
         >
-          {TAB_OPTIONS.map((option, idx) => (
+          {tabOptions.map((option, idx) => (
             <Tab
               key={idx}
               label={option.name}
@@ -120,6 +148,14 @@ function TeamSelector({members = []}) {
                 }}
               >
                 {member.name}
+              </Typography>
+              <Typography
+                sx={{
+                  fontSize: { xs: '11px', md: '13px' },
+                  color: 'gray',
+                }}
+              >
+                {member.subjects?.join(', ')}
               </Typography>
             </MotionBox>
           ))}

@@ -2,7 +2,7 @@ import { Box, Typography, useMediaQuery } from '@mui/material';
 import Carousel from 'app/shared-components/carousel/Carousel';
 
 function ImpressionenSection(props) {
-  const { imgSet } = props;
+  const { title, items } = props;
   /*const items = [
     {
       src: `${process.env.PUBLIC_URL}/assets/images/projects/Bildschirmfoto 2025-02-21 um 17.23.58.png`,
@@ -16,10 +16,9 @@ function ImpressionenSection(props) {
   ];*/
 
   const isMobile = useMediaQuery('(max-width:900px)');
-  
 
-  console.log('imgSet', imgSet);
-  if (!imgSet || imgSet.length === 0) {
+  console.log('items', items);
+  if (!items || items.length === 0) {
     return null;
   }
   return (
@@ -37,12 +36,12 @@ function ImpressionenSection(props) {
           mb: { xs: '55px', md: '110px' },
         }}
       >
-        Impressionen
+        {title}
       </Typography>
       {isMobile ? (
-        <Carousel items={imgSet} gap={32} itemWidth={300} itemHeight={235} />
+        <Carousel items={items} gap={32} itemWidth={300} itemHeight={235} />
       ) : (
-        <Carousel items={imgSet} gap={32} itemWidth={600} itemHeight={420} />
+        <Carousel items={items} gap={32} itemWidth={600} itemHeight={420} />
       )}
     </Box>
   );

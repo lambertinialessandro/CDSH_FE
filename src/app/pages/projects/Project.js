@@ -183,7 +183,7 @@ function Project(props) {
         </div>
       </Box>
 
-      <ImpressionenSection imgSet={selectedProject.impressions} />
+      <ImpressionenSection title={selectedProject.titleImpressions} items={selectedProject.impressions} />
     </>
   );
 }

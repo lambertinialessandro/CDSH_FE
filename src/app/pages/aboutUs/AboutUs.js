@@ -157,7 +157,6 @@ function AboutUs() {
         </LoopBanner>
       </Box>
 
-      {/*TODO: textarea */}
       <Box component="section" className="px-[45px] flex flex-col justify-center items-start">
         {aboutUsData.splitSections.map((section, idx) => (
           <SplitSection
@@ -227,7 +226,7 @@ function AboutUs() {
           <Box className="flex flex-col justify-start items-start sticky" sx={{ width: { xs: '100%', md: '50%' } }}>
             <Box
               component="img"
-              src={`${process.env.PUBLIC_URL}/assets/images/aboutUs/Bildschirmfoto 2025-02-18 um 17.26.20 1.png`} //src={aboutUsData.concept.image}
+              src={aboutUsData.concept.image}
               className="flex-1 w-[500px] mx-auto mb-[24px]"
               sx={{ objectFit: 'cover', aspectRatio: 0.75 }}
             ></Box>

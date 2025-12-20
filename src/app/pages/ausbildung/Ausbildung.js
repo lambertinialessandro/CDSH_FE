@@ -183,7 +183,7 @@ function Ausbildung() {
       </Box>
 
       {/* TODO */}
-      <InteractiveSubjects subjects={ausbuildungData.subjects} />
+      <InteractiveSubjects subjects_balls={ausbuildungData.subjects_balls}  />
       {/* TODO */}
       <SubjectSelector subjects={ausbuildungData.subjects} categories={ausbuildungData.categories_manager} />
 
@@ -451,7 +451,9 @@ function Ausbildung() {
             }}
           >
             <Box className="flex flex-col justify-start items-start" sx={{ width: { xs: '100%', md: '50%' } }}>
-              <ReactMarkdown components={renderers} children={ausbuildungData.fortbildung.description} />
+              <ReactMarkdown components={renderers} children={ausbuildungData.fortbildung.overview} /> <br></br>
+              <ReactMarkdown components={renderers} children={ausbuildungData.fortbildung.schedule} /><br></br>
+              <ReactMarkdown components={renderers} children={ausbuildungData.fortbildung.requirement} />
             </Box>
             <Box className="flex flex-col justify-start items-start sticky" sx={{ width: { xs: '100%', md: '50%' } }}>
               <Box

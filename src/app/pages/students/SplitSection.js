@@ -4,6 +4,7 @@ import Carousel from 'app/shared-components/carousel/Carousel';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 
 function SplitSection(props) {
   const { title, text, img = null, to, reverse = false, bottom = false } = props;
