@@ -1,9 +1,9 @@
 import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
-import { AnimatePresence, motion, useAnimation } from 'framer-motion';
 import Ribbons from 'app/shared-components/ReactBits/Ribbons';
-import { memo, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { selectIsBannerOpen } from 'app/store/app/mainSlice';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const SCROLL_LIMIT = 5000; // px
 
@@ -70,14 +70,14 @@ function InteractiveSubjects(props) {
         'Mit uns lernst du selbst choreografieren. Unsere festen- und spannende Gast Dozent*innen geben ihr Wissen an dich weiter.',
       size: 0.6,
       x: 0.18,
-      y: 0.35,
+      y: 0.5,
     },
     {
       title: 'Bühnenpraxis',
       description: "I don't know",
       size: 0.45,
       x: -0.23,
-      y: 0.17,
+      y: 0.23,
     },
     {
       title: 'Theorie',
@@ -92,7 +92,6 @@ function InteractiveSubjects(props) {
   const containerRef = useRef(null);
   const containerSizeRef = useRef(null);
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
-  console.log('containerSize', containerSize);
 
   const isBannerOpen = useSelector(selectIsBannerOpen);
 
@@ -129,7 +128,7 @@ function InteractiveSubjects(props) {
   const progress = Math.min(scrollY / SCROLL_LIMIT, 1);
   const eased = progress < 0.6 ? progress / 0.6 : 1;
 
-  const maxRadius = Math.min(Math.min(containerSize.width, containerSize.height) * 0.65, 600);
+  const maxRadius = Math.min(Math.min(containerSize.width, containerSize.height) * 0.55, 600);
 
   const isMobile = useMediaQuery('(max-width:900px)');
   const selectedBalls = isMobile ? subjectsSmall : subjects;
@@ -141,43 +140,45 @@ function InteractiveSubjects(props) {
           <Box component="section" className="py-[90px]">
             <Box ref={containerRef} className="relative" sx={{ height: `${SCROLL_LIMIT}px` }}>
               <AnimatePresence mode="wait">
-                  <motion.div
-                    key={selectedSubject}
-                    className={`flex flex-col justify-start items-center mt-[30px] mb-[30px] px-[75px] sticky top-[54px] left-0 right-0 z-20`}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.4 }}
+                <Box
+                  component={motion.div}
+                  key={selectedSubject}
+                  className={`flex flex-col justify-start items-center mt-[30px] px-[75px] sticky top-[54px] left-0 right-0 z-20`}
+                  sx={{ marginBottom: { xs: 'calc(100vh - 180px - 54px)', md: 'calc(100vh - 180px - 54px)' } }}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.4 }}
+                >
+                  <Typography
+                    sx={{
+                      color: '#000000',
+                      mt: { xs: '30px', md: '0px' },
+                      fontSize: { xs: '30px', md: '80px' },
+                      fontWeight: '400',
+                      lineHeight: '1',
+                      textAlign: 'center',
+                    }}
                   >
-                    <Typography
-                      sx={{
-                        color: '#000000',
-                        mt: { xs: '30px', md: '0px' },
-                        fontSize: { xs: '30px', md: '80px' },
-                        fontWeight: '400',
-                        lineHeight: '1',
-                        textAlign: 'center',
-                      }}
-                    >
-                      {selectedSubject === -1 ? 'Fächer' : subjects[selectedSubject].title}
-                    </Typography>
+                    {selectedSubject === -1 ? 'Fächer' : subjects[selectedSubject].title}
+                  </Typography>
 
-                    <Typography
-                      className="max-w-[740px] min-w-[50%] text-center"
-                      sx={{
-                        color: '#000000',
-                        fontSize: { xs: '15px', md: '30px' },
-                        fontWeight: '400',
-                        lineHeight: '1',
-                        mt: 2,
-                      }}
-                    >
-                      {selectedSubject === -1
-                        ? 'Ein Zusammenspiel aus fundierter Theorie und einem ganzheitlichen Mix aus Praxismodulen bildet die Basis unseres Ausbildungsmodells.'
-                        : subjects[selectedSubject].description}
-                    </Typography>
-                  </motion.div>
-                </AnimatePresence>
+                  <Typography
+                    className="max-w-[740px] min-w-[50%] text-center"
+                    sx={{
+                      color: '#000000',
+                      fontSize: { xs: '15px', md: '30px' },
+                      fontWeight: '400',
+                      lineHeight: '1',
+                      mt: 2,
+                    }}
+                  >
+                    {selectedSubject === -1
+                      ? 'Ein Zusammenspiel aus fundierter Theorie und einem ganzheitlichen Mix aus Praxismodulen bildet die Basis unseres Ausbildungsmodells.'
+                      : subjects[selectedSubject].description}
+                  </Typography>
+                </Box>
+              </AnimatePresence>
               <Box
                 ref={containerSizeRef}
                 className="sticky h-screen w-full flex flex-col justify-center items-center z-10 gap-[32px]"
@@ -199,44 +200,6 @@ function InteractiveSubjects(props) {
                   ),
                   []
                 )}
-                {/* <AnimatePresence mode="wait">
-                  <motion.div
-                    key={selectedSubject}
-                    className={`flex flex-col justify-start items-center mt-[30px] mb-[30px] px-[75px]`}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.4 }}
-                  >
-                    <Typography
-                      sx={{
-                        color: '#000000',
-                        mt: { xs: '30px', md: '0px' },
-                        fontSize: { xs: '30px', md: '80px' },
-                        fontWeight: '400',
-                        lineHeight: '1',
-                        textAlign: 'center',
-                      }}
-                    >
-                      {selectedSubject === -1 ? 'Fächer' : subjects[selectedSubject].title}
-                    </Typography>
-
-                    <Typography
-                      className="max-w-[740px] min-w-[50%] text-center"
-                      sx={{
-                        color: '#000000',
-                        fontSize: { xs: '15px', md: '30px' },
-                        fontWeight: '400',
-                        lineHeight: '1',
-                        mt: 2,
-                      }}
-                    >
-                      {selectedSubject === -1
-                        ? 'Ein Zusammenspiel aus fundierter Theorie und einem ganzheitlichen Mix aus Praxismodulen bildet die Basis unseres Ausbildungsmodells.'
-                        : subjects[selectedSubject].description}
-                    </Typography>
-                  </motion.div>
-                </AnimatePresence> */}
 
                 <div className="relative w-[300px] h-[300px] mt-[82px]">
                   {selectedBalls.map((subject, i) => {

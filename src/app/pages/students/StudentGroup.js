@@ -1,51 +1,140 @@
 import { Box, Typography, useTheme } from '@mui/material';
-import { useLocation, useNavigate, useParams } from 'react-router';
-import { Link } from 'react-router-dom';
-import SplitSection from './SplitSection';
-import BigLink from 'app/shared-components/link/BigLink';
-import AnchorLink from 'app/shared-components/link/AnchorLink';
-import { useEffect, useState } from 'react';
 import { renderers } from 'app/shared-components/htmlStyle/htmlStyle';
-import ReactMarkdown from 'react-markdown';
+import AnchorLink from 'app/shared-components/link/AnchorLink';
+import { selectUserLanguage } from 'app/store/app/mainSlice';
+import { selectSelectedStudent, setSelectedStudent } from 'app/store/app/pageSlice';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import ReactMarkdown from 'react-markdown';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router';
 import { defaultNS as ns_common } from 'translations';
-
+import ErrorPage from '../general/ErrorPage';
+import LoadingPage from '../general/LoadingPage';
+import SplitSection from './SplitSection';
 
 function StudentGroup() {
+  const dispatch = useDispatch();
   const { t } = useTranslation([ns_common]);
-    const { button } = t(ns_common);
+  const { button } = t(ns_common);
   const theme = useTheme();
   const navigate = useNavigate();
   const { studentUrlName } = useParams();
+  const userLanguage = useSelector(selectUserLanguage);
 
-  const [selectedStudent, setSelectedStudent] = useState(null);
-  console.log('selectedStudent', selectedStudent);
-  // const selectedStudent = students.find((m) => m.id === studentUrlName);
+  const selectedStudent = useSelector((state) => selectSelectedStudent(state, userLanguage));
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  console.log('selectedStudent', selectedStudent);
 
   useEffect(() => {
+    if (selectedStudent) {
+      setLoading(false);
+      setError(null);
+      return;
+    }
+
     setLoading(true);
-    fetch(`http://localhost/plainkit-main/api/students?id=${studentUrlName}`)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error('Class not found');
+    setError(null);
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 1);
+
+    fetch(`http://localhost/plainkit-main/api/students?lang=${userLanguage}&id=${studentUrlName}`, {
+      signal: controller.signal,
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Network response was not ok, status: ${response.status}`);
         }
-        return res.json();
+        return response.json();
       })
       .then((data) => {
-        setSelectedStudent(data);
-        setLoading(false);
+        dispatch(setSelectedStudent({ userLanguage, data: data }));
       })
       .catch((err) => {
-        console.error('Error:', err);
-        setError(true);
-        setLoading(false);
-      });
-  }, [studentUrlName]);
+        if (userLanguage === 'en') {
+          const mockData = {
+            id: 'ho\u2019omau',
+            name: 'Ho\u2019omau',
+            descriptionLeft:
+              'Ho\u2019omau signifies resilience and perseverance. As a class, we value and trust the process of growth, in the many different forms it may come in. By understanding that our journeys as artists won\u2019t always be linear or necessarily',
+            descriptionRight:
+              'smooth sailing, we are able to steady each other and carry on together. We are a group who keeps moving forward, no matter the obstacles, and in doing so, learns how to take care of each other as dancers and most importantly, as people.',
+            studentsHeader: 'The students',
+            students:
+              'Agnese Fornara Erbetta, Alanna Reimpell Bravo, Alessia Marra, Cristina Vaino, Daria Barbone, Daria Barbone, Denise Landini, Ellen Burgess, Emir Garc\u00eda Pineda, Gina Kudzai Marange, Haeyeon Kang, Kyte Br\u00fcggmann, Luisa Fernanda Rivas Castillo, Nathalia G\u00f3mez Res\u00e9ndiz, Olad\u00e9 Roland Rodolpho Sagbo, Tatjana Walter, Wendy Yeh L\u00f3pez,  Clara B\u00e4hr,  Edwin E. S\u00e1nchez,  Katherine Aileen Osalde Lezama,  Madeleine Julie Reichert',
+            src: `${process.env.PUBLIC_URL}/assets/images/students/Bildschirmfoto 2025-02-18 um 17.06.12.png`,
+            relatedProjects: [
+              {
+                id: 'solo_project_2024',
+                name: 'Solo project',
+                title: 'What does Looking taste like?',
+                src: `${process.env.PUBLIC_URL}/assets/images/aktuelles/what_does_looking_taste_like.png`,
+                categories: [],
+              },
+              {
+                id: 'meeting_point',
+                name: 'Final projet',
+                title: 'Meeting Point',
+                src: `${process.env.PUBLIC_URL}/assets/images/aktuelles/meeting_point.png`,
+                categories: ['Graduates 2025'],
+              },
+            ],
+            year: {
+              start: 2022,
+              end: 2025,
+            },
+          };
+          dispatch(setSelectedStudent({ userLanguage, data: mockData }));
+        } else {
+          const mockData = {
+            id: 'ho\u2019omau',
+            name: 'Ho\u2019omau',
+            descriptionLeft:
+              'Ho\u2019omau steht für Widerstandskraft und Durchhaltevermögen. Als Klasse schätzen und vertrauen wir dem Prozess des Wachsens – in all den unterschiedlichen Formen, die er annehmen kann. Indem wir verstehen, dass unsere Wege als Künstler*innen nicht immer linear verlaufen oder zwangsläufig',
+            descriptionRight:
+              'reibungslos sind, können wir uns gegenseitig stabilisieren und gemeinsam weitermachen. Wir sind eine Gruppe, die sich unabhängig von Hindernissen weiterentwickelt und dabei lernt, füreinander zu sorgen – als Tänzer*innen und vor allem als Menschen.',
+            studentsHeader: 'Die Studierenden',
+            students:
+              'Agnese Fornara Erbetta, Alanna Reimpell Bravo, Alessia Marra, Cristina Vaino, Daria Barbone, Daria Barbone, Denise Landini, Ellen Burgess, Emir García Pineda, Gina Kudzai Marange, Haeyeon Kang, Kyte Brüggmann, Luisa Fernanda Rivas Castillo, Nathalia Gómez Reséndiz, Oladé Roland Rodolpho Sagbo, Tatjana Walter, Wendy Yeh López, Clara Bähr, Edwin E. Sánchez, Katherine Aileen Osalde Lezama, Madeleine Julie Reichert',
+            src: `${process.env.PUBLIC_URL}/assets/images/students/Bildschirmfoto 2025-02-18 um 17.06.12.png`,
+            relatedProjects: [
+              {
+                id: 'solo_project_2024',
+                name: 'Solo-Projekt',
+                title: 'What Does Looking Taste Like?',
+                src: `${process.env.PUBLIC_URL}/assets/images/aktuelles/what_does_looking_taste_like.png`,
+                categories: [],
+              },
+              {
+                id: 'meeting_point',
+                name: 'Abschlussprojekt',
+                title: 'Meeting Point',
+                src: `${process.env.PUBLIC_URL}/assets/images/aktuelles/meeting_point.png`,
+                categories: ['Absolvent*innen 2025'],
+              },
+            ],
+            year: {
+              start: 2022,
+              end: 2025,
+            },
+          };
+          dispatch(setSelectedStudent({ userLanguage, data: mockData }));
+        }
 
-  if (loading) return <Box sx={{ p: 10, textAlign: 'center' }}>Laden...</Box>;
-  if (error || !selectedStudent) return <Box sx={{ p: 10, textAlign: 'center' }}>Mitglied nicht gefunden.</Box>;
+        // TODO: commented for temp deploy
+        // console.error('Fetching error:', error);
+        // setError(error);
+      })
+      .finally(() => {
+        setLoading(false);
+        clearTimeout(timeout);
+      });
+  }, [studentUrlName, userLanguage]);
+
+  if (loading) return <LoadingPage />;
+  if (error || !selectedStudent) return <ErrorPage />;
 
   return (
     <>
@@ -149,29 +238,29 @@ function StudentGroup() {
               </AnchorLink>
             ))}
 
-          <Box>
-            <Typography
-              className="mix-blend-exclusion"
-              sx={{
-                fontSize: '12px',
-                fontWeight: '400',
-                color: '#ffffff',
-              }}
-            >
-              {selectedStudent.year.start} - {selectedStudent.year.end}
-            </Typography>
-            <Box className="flex flex-col items-start gap-[8px]">
-              <button
-                onClick={() => {
-                  navigate(`/students`);
+            <Box className="flex flex-col items-start gap-[32px]">
+              <Typography
+                className="mix-blend-exclusion"
+                sx={{
+                  fontSize: '12px',
+                  fontWeight: '400',
+                  color: '#ffffff',
                 }}
-                className="bg-white border border-black rounded-full px-[16px] py-[2px]"
               >
-                {button.back}
-              </button>
+                {selectedStudent.year.start} - {selectedStudent.year.end}
+              </Typography>
+              <Box className="flex flex-col items-start gap-[8px]">
+                <button
+                  onClick={() => {
+                    navigate(`/students`);
+                  }}
+                  className="bg-white border border-black rounded-full px-[16px] py-[2px]"
+                >
+                  {button.back}
+                </button>
+              </Box>
             </Box>
           </Box>
-        </Box>
         </Box>
       </Box>
 
@@ -185,12 +274,12 @@ function StudentGroup() {
           py: { xs: '55px', md: '110px' },
         }}
       >
-        <div flex="1">
+        <Box className="flex-1" sx={{ width: { xs: '100%', md: '50%' } }}>
           <ReactMarkdown components={renderers} children={selectedStudent.descriptionLeft} />
-        </div>
-        <div flex="1">
+        </Box>
+        <Box className="flex-1" sx={{ width: { xs: '100%', md: '50%' } }}>
           <ReactMarkdown components={renderers} children={selectedStudent.descriptionRight} />
-        </div>
+        </Box>
       </Box>
 
       <Box

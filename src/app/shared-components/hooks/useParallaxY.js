@@ -1,4 +1,4 @@
-import { motion, useTransform, useScroll } from 'framer-motion';
+import { useScroll, useTransform } from 'framer-motion';
 
 function useParallaxY(ref, distance = 20) {
   const { scrollYProgress } = useScroll({

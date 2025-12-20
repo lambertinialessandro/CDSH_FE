@@ -1,14 +1,10 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import event from './eventSlice';
 import cdsh from './mainSlice';
-import staff from './staffSlice';
-import user from './userSlice';
+import page from './pageSlice';
 
 const slpReducers = combineReducers({
-  event,
   cdsh,
-  staff,
-  user,
+  page,
 });
 
 export default slpReducers;

@@ -1,47 +1,167 @@
 import { ArrowForward } from '@mui/icons-material';
 import { Box, Typography, useTheme } from '@mui/material';
 import LoopBanner from 'app/shared-components/banner/LoopBanner';
-import useParallaxY from 'app/shared-components/hooks/useParallaxY';
-import AnchorLink from 'app/shared-components/link/AnchorLink';
 import BigLink from 'app/shared-components/link/BigLink';
-import { motion } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
-import AktuellesSection from './AktuellesSection';
-import { useSelector } from 'react-redux';
 import { selectUserLanguage } from 'app/store/app/mainSlice';
+import { selectAktuelleData, setAktuelleData } from 'app/store/app/pageSlice';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import ErrorPage from '../general/ErrorPage';
+import LoadingPage from '../general/LoadingPage';
+import AktuellesSection from './AktuellesSection';
 
 function Aktuelles() {
+  const dispatch = useDispatch();
   const theme = useTheme();
   const userLanguage = useSelector(selectUserLanguage);
-  const [data, setNews] = useState(null);
+
+  const aktuelleData = useSelector((state) => selectAktuelleData(state, userLanguage));
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    if (aktuelleData) {
+      setLoading(false);
+      setError(null);
+      return;
+    }
+
     setLoading(true);
     setError(null);
-    fetch(`http://localhost/plainkit-main/api/news?lang=${userLanguage}`)
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 1);
+
+    fetch(`http://localhost/plainkit-main/api/news?lang=${userLanguage}`, { signal: controller.signal })
       .then((response) => {
         if (!response.ok) {
           throw new Error(`Network response was not ok, status: ${response.status}`);
         }
         return response.json();
       })
-      .then((data) => {
-        setNews(data);
+      .then((aktuelleData) => {
+        dispatch(setAktuelleData({ userLanguage, data: aktuelleData }));
       })
       .catch((error) => {
-        console.error('Fetching error:', error);
-        setError(error);
+        if (userLanguage === 'en') {
+          const mockData = {
+            header: {
+              title: 'News',
+              intro:
+                "Here you'll find all the latest information about final projects, performances, and other events at our school. Stay up to date!",
+              image: `${process.env.PUBLIC_URL}/assets/images/aktuelles/cdsh-galley-09.jpg`,
+            },
+            banner: {
+              text: 'THE AUDITION DATES FOR 2025 ARE NOW ONLINE.',
+              linkText: 'REGISTER NOW',
+              linkUrl: '',
+            },
+            newsItems: [
+              {
+                title: 'What dies Looking Taste like',
+                description: 'Short description solo project "What does Looking Taste like"',
+                src: `${process.env.PUBLIC_URL}/assets/images/aktuelles/what_does_looking_taste_like.png`,
+                projectId: 'solo_project_2024',
+              },
+              {
+                title: 'Meeting point',
+                description: 'Meeting point short description',
+                src: `${process.env.PUBLIC_URL}/assets/images/aktuelles/meeting_point.png`,
+                projectId: 'meeting_point',
+              },
+              {
+                title: 'Under Utopia',
+                description: 'Under Utopia short description',
+                src: `${process.env.PUBLIC_URL}/assets/images/aktuelles/under_utopia.png`,
+                projectId: 'under_utopia',
+              },
+              {
+                title: 'APERCEPTION',
+                description: 'APERCEPTION short description',
+                src: `${process.env.PUBLIC_URL}/assets/images/aktuelles/aperception.png`,
+                projectId: 'aperception',
+              },
+              {
+                title: 'RESET',
+                description: 'RESET short description',
+                src: `${process.env.PUBLIC_URL}/assets/images/aktuelles/reset.png`,
+                projectId: 'reset',
+              },
+            ],
+            footerCta: {
+              show: true,
+              title: 'Want to get to know us?',
+              text: "We'd like to get to know you too. Besides the regular auditions, we're available by email or phone to answer any questions you may have about the training program.",
+            },
+          };
+          dispatch(setAktuelleData({ userLanguage, data: mockData }));
+        } else {
+          const mockData = {
+            header: {
+              title: 'Aktuelles',
+              intro:
+                'Hier findest du alle aktuellen Informationen zu Abschlussprojekten, Aufführungen und weiteren Veranstaltungen an unserer Schule. Bleib auf dem Laufenden!',
+              image: `${process.env.PUBLIC_URL}/assets/images/aktuelles/cdsh-galley-09.jpg`,
+            },
+            banner: {
+              text: 'DIE AUDITION-TERMINE FÜR 2025 SIND JETZT ONLINE.',
+              linkText: 'JETZT ANMELDEN',
+              linkUrl: '',
+            },
+            newsItems: [
+              {
+                title: 'What Does Looking Taste Like',
+                description: 'Kurzbeschreibung des Solo-Projekts „What Does Looking Taste Like“',
+                src: `${process.env.PUBLIC_URL}/assets/images/aktuelles/what_does_looking_taste_like.png`,
+                projectId: 'solo_project_2024',
+              },
+              {
+                title: 'Meeting Point',
+                description: 'Kurzbeschreibung des Projekts „Meeting Point“',
+                src: `${process.env.PUBLIC_URL}/assets/images/aktuelles/meeting_point.png`,
+                projectId: 'meeting_point',
+              },
+              {
+                title: 'Under Utopia',
+                description: 'Kurzbeschreibung des Projekts „Under Utopia“',
+                src: `${process.env.PUBLIC_URL}/assets/images/aktuelles/under_utopia.png`,
+                projectId: 'under_utopia',
+              },
+              {
+                title: 'APERCEPTION',
+                description: 'Kurzbeschreibung des Projekts „APERCEPTION“',
+                src: `${process.env.PUBLIC_URL}/assets/images/aktuelles/aperception.png`,
+                projectId: 'aperception',
+              },
+              {
+                title: 'RESET',
+                description: 'Kurzbeschreibung des Projekts „RESET“',
+                src: `${process.env.PUBLIC_URL}/assets/images/aktuelles/reset.png`,
+                projectId: 'reset',
+              },
+            ],
+            footerCta: {
+              show: true,
+              title: 'Du m\u00f6chtest uns kennenlernen?',
+              text: 'Wir dich ebenfalls. Neben den regul\u00e4ren Auditions sind wir bei Fragen rund um die Ausbildung per Mail oder telefonisch f\u00fcr dich da.',
+            },
+          };
+          dispatch(setAktuelleData({ userLanguage, data: mockData }));
+        }
+
+        // TODO: commented for temp deploy
+        // console.error('Fetching error:', error);
+        // setError(error);
       })
       .finally(() => {
         setLoading(false);
+        clearTimeout(timeout);
       });
   }, [userLanguage]);
 
-  console.log('data', data);
-  if (loading) return <Box sx={{ p: 10, textAlign: 'center' }}>Loading content...</Box>;
-  if (!data) return <Box sx={{ p: 10, textAlign: 'center' }}>Error loading data.</Box>;
+  console.log('Aktuelles aktuelleData', aktuelleData);
+  if (loading) return <LoadingPage />;
+  if (error || !aktuelleData) return <ErrorPage />;
 
   return (
     <>
@@ -67,7 +187,7 @@ function Aktuelles() {
               fontWeight: '400',
             }}
           >
-            {data.header.title}
+            {aktuelleData.header.title}
           </Typography>
           <Typography
             sx={{
@@ -76,15 +196,15 @@ function Aktuelles() {
               fontWeight: '400',
             }}
           >
-            {data.header.intro}
+            {aktuelleData.header.intro}
           </Typography>
         </Box>
         <Box className="flex-1 h-full relative" sx={{ width: { xs: '100%', md: '50%' } }}>
           <Box
             component="img"
-            src={data.header.image}
+            src={aktuelleData.header.image}
             className="flex-1 w-full"
-            sx={{ objectFit: 'cover', height: {xs: "390px", md: "100%"} }}
+            sx={{ objectFit: 'cover', height: { xs: '390px', md: '100%' } }}
           ></Box>
           <Typography
             className="mix-blend-exclusion"
@@ -99,7 +219,7 @@ function Aktuelles() {
               color: 'white',
             }}
           >
-            {data.header.title}
+            {aktuelleData.header.title}
           </Typography>
         </Box>
       </Box>
@@ -125,7 +245,7 @@ function Aktuelles() {
               marginRight: { xs: '16px', md: '45px' },
             }}
           >
-            {data.banner.text}
+            {aktuelleData.banner.text}
             <BigLink
               extraSx={{
                 display: 'flex',
@@ -141,13 +261,13 @@ function Aktuelles() {
               color="#000000"
               href={'/auditions'}
             >
-              {data.banner.linkText} <ArrowForward fontSize="inherit" />
+              {aktuelleData.banner.linkText} <ArrowForward fontSize="inherit" />
             </BigLink>
           </Typography>
         </LoopBanner>
       </Box>
 
-      <AktuellesSection items={data.newsItems} title={data.header.title} />
+      <AktuellesSection items={aktuelleData.newsItems} title={aktuelleData.header.title} />
 
       {/* Kennenlernen Section */}
       <Box
@@ -164,13 +284,13 @@ function Aktuelles() {
             lineHeight: 1.1,
           }}
         >
-          {data.footerCta.title}
+          {aktuelleData.footerCta.title}
         </Typography>
         <Typography
           className="max-w-[740px] min-w-[50%] text-center"
           sx={{ fontSize: { xs: '18px', md: '30px' }, fontWeight: 400, color: '#000000' }}
         >
-          {data.footerCta.text}
+          {aktuelleData.footerCta.text}
         </Typography>
       </Box>
     </>

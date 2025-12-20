@@ -48,7 +48,7 @@ function Carousel({ items, gap, itemWidth, itemHeight, Addon = undefined }) {
   const maxIndex = Math.max(0, maxItems - itemsPerPage);
   const isLeftDisabled = index === 0;
   const isRightDisabled = index >= maxIndex;
-  const actualWidth = Math.min(itemWidth, containerWidth / itemsPerPage)
+  const actualWidth = Math.min(itemWidth, containerWidth / itemsPerPage);
 
   const handleNext = () => {
     if (index < maxIndex) setIndex((prev) => prev + 1);
@@ -89,7 +89,7 @@ function Carousel({ items, gap, itemWidth, itemHeight, Addon = undefined }) {
               mb: 3,
               transition: 'transform 0.35s cubic-bezier(0.15, 0.3, 0.25, 1)',
               transform: `translateX(-${index * (actualWidth + gap)}px)`,
-              width: items.length * (actualWidth),
+              width: items.length * actualWidth,
             }}
           >
             {items.map((item, idx) => (

@@ -12,10 +12,9 @@ function UploadButton(props) {
           display: 'flex',
           alignItems: 'center',
           gap: '16px',
-          // Correct MUI responsive syntax
           flexDirection: {
-            xs: 'column', // Smallest breakpoint: column
-            md: 'row', // Medium breakpoint and up: row
+            xs: 'column',
+            md: 'row',
           },
         }}
       >

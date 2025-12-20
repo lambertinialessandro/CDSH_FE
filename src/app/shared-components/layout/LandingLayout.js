@@ -1,14 +1,10 @@
-import { Box, useTheme } from '@mui/material';
-import TopNavbar from '../navbar/topNavbar/TopNavbar';
+import { Box } from '@mui/material';
 import Footer from '../foooter/Footer';
+import TopNavbar from '../navbar/topNavbar/TopNavbar';
 import Banner from './Banner';
-import { useMemo } from 'react';
 
 function LandingLayout(props) {
   const { children } = props;
-  const theme = useTheme();
-
-  const top = useMemo(() => <TopNavbar fixed />, []);
 
   return (
     <>
@@ -16,9 +12,7 @@ function LandingLayout(props) {
         <Banner fixed />
         <TopNavbar fixed />
         <main>
-          <Box className="w-full min-h-screen bg-gray-50">
-            {children}
-          </Box>
+          <Box className="w-full min-h-screen bg-gray-50">{children}</Box>
         </main>
         <Footer />
       </Box>

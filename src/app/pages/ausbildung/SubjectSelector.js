@@ -4,71 +4,6 @@ import { useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
-/*const subjects = [
-  {
-    id: 1,
-    name: 'Schauspiel',
-    description:
-      'Lorem Ipsum für Designer, Schriftsetzer, Layouter, Grafikenthusiasten und alle anderen. Generiere einfach soviel Lorem Ipsum Text wie du brauchst. Lorem Ipsum für Designer, Schriftsetzer, Layouter, Grafikenthusiasten und alle anderen. Generiere einfach soviel Lorem Ipsum Text wie du brauchst.',
-    teacher: 'Sina Rundel',
-    src: `${process.env.PUBLIC_URL}/assets/images/ausbildung/Bildschirmfoto 2025-02-18 um 17.26.20 6.png`,
-    tab: ['Nebenfächer'],
-  },
-  {
-    id: 2,
-    name: 'Gesang',
-    description:
-      'Lorem Ipsum für Designer, Schriftsetzer, Layouter, Grafikenthusiasten und alle anderen. Generiere einfach soviel Lorem Ipsum Text wie du brauchst. Lorem Ipsum für Designer, Schriftsetzer, Layouter, Grafikenthusiasten und alle anderen. Generiere einfach soviel Lorem Ipsum Text wie du brauchst.',
-    teacher: 'Sina Rundel',
-    src: `${process.env.PUBLIC_URL}/assets/images/ausbildung/Bildschirmfoto 2025-02-18 um 17.26.20 7.png`,
-    tab: ['Nebenfächer'],
-  },
-  {
-    id: 3,
-    name: 'Feldenkrais',
-    description:
-      'Lorem Ipsum für Designer, Schriftsetzer, Layouter, Grafikenthusiasten und alle anderen. Generiere einfach soviel Lorem Ipsum Text wie du brauchst. Lorem Ipsum für Designer, Schriftsetzer, Layouter, Grafikenthusiasten und alle anderen. Generiere einfach soviel Lorem Ipsum Text wie du brauchst.',
-    teacher: 'Sina Rundel',
-    src: `${process.env.PUBLIC_URL}/assets/images/ausbildung/Bildschirmfoto 2025-02-18 um 17.26.20 8.png`,
-    tab: ['Nebenfächer'],
-  },
-  {
-    id: 4,
-    name: 'Pilates',
-    description:
-      'Lorem Ipsum für Designer, Schriftsetzer, Layouter, Grafikenthusiasten und alle anderen. Generiere einfach soviel Lorem Ipsum Text wie du brauchst. Lorem Ipsum für Designer, Schriftsetzer, Layouter, Grafikenthusiasten und alle anderen. Generiere einfach soviel Lorem Ipsum Text wie du brauchst.',
-    teacher: 'Sina Rundel',
-    src: `${process.env.PUBLIC_URL}/assets/images/ausbildung/Bildschirmfoto 2025-02-18 um 17.26.20 9.png`,
-    tab: ['Nebenfächer'],
-  },
-  {
-    id: 5,
-    name: 'Yoga',
-    description:
-      'Lorem Ipsum für Designer, Schriftsetzer, Layouter, Grafikenthusiasten und alle anderen. Generiere einfach soviel Lorem Ipsum Text wie du brauchst. Lorem Ipsum für Designer, Schriftsetzer, Layouter, Grafikenthusiasten und alle anderen. Generiere einfach soviel Lorem Ipsum Text wie du brauchst.',
-    teacher: 'Sina Rundel',
-    src: `${process.env.PUBLIC_URL}/assets/images/ausbildung/Bildschirmfoto 2025-02-18 um 17.26.20 10.png`,
-    tab: ['Nebenfächer'],
-  },
-  {
-    id: 6,
-    name: 'Anatomie',
-    description:
-      'Lorem Ipsum für Designer, Schriftsetzer, Layouter, Grafikenthusiasten und alle anderen. Generiere einfach soviel Lorem Ipsum Text wie du brauchst. Lorem Ipsum für Designer, Schriftsetzer, Layouter, Grafikenthusiasten und alle anderen. Generiere einfach soviel Lorem Ipsum Text wie du brauchst.',
-    teacher: 'Sina Rundel',
-    src: `${process.env.PUBLIC_URL}/assets/images/ausbildung/Bildschirmfoto 2025-02-18 um 17.26.20 11.png`,
-    tab: ['Nebenfächer'],
-  },
-  {
-    id: 7,
-    name: 'Tanzgeschichte',
-    description:
-      'Lorem Ipsum für Designer, Schriftsetzer, Layouter, Grafikenthusiasten und alle anderen. Generiere einfach soviel Lorem Ipsum Text wie du brauchst. Lorem Ipsum für Designer, Schriftsetzer, Layouter, Grafikenthusiasten und alle anderen. Generiere einfach soviel Lorem Ipsum Text wie du brauchst.',
-    teacher: 'Sina Rundel',
-    src: `${process.env.PUBLIC_URL}/assets/images/ausbildung/Bildschirmfoto 2025-02-18 um 17.26.20 12.png`,
-    tab: ['Nebenfächer'],
-  },
-]; */
 
 function SubjectSelector(props) {
   const { subjects = [] } = props;
@@ -77,36 +12,16 @@ function SubjectSelector(props) {
   console.log("subjects:", subjects);
 
   const [tabSelected, setTabSelected] = useState(0);
-  /*const TAB_OPTIONS = [
-    { name: 'Hauptfächer' },
-    { name: 'Nebenfächer' },
-    { name: 'Theoriefächer' },
-    { name: 'Workshops' },
-    { name: 'Kein Filter' },
-  ];
 
-
-  const filteredSubjects =
-    TAB_OPTIONS[tabSelected] === 'Kein Filter'
-      ? subjects
-      : subjects?.filter(({ tab }) => tab.some((s1) => s1 === TAB_OPTIONS[tabSelected].name));
-
-  if (__.isEmpty(subjects)) {
-    return <Typography>Empty</Typography>;
-  }
-*/
-
-//TODO: to CHECK 
   const TAB_OPTIONS = useMemo(() => {
     const categories = __.flatMap(subjects, (s) => s.tab || []);
     const uniqueCategories = __.uniq(categories).sort();
-    return [{ name: 'All' }, ...uniqueCategories.map((cat) => ({ name: cat }))];
+    return [{ name: 'All' }, ...uniqueCategories.map((cat) => ({ name: cat }))]; // TODO: ALL ? no!
   }, [subjects]);
 
-  // 2. Logica di filtraggio
   const filteredSubjects = useMemo(() => {
     const activeFilter = TAB_OPTIONS[tabSelected]?.name;
-    if (!activeFilter || activeFilter === 'All') return subjects;
+    if (!activeFilter || activeFilter === 'All') return subjects; // TODO: ALL ? no!
 
     return subjects.filter((subject) => subject.tab?.includes(activeFilter));
   }, [subjects, tabSelected, TAB_OPTIONS]);

@@ -1,5 +1,4 @@
-import { Close } from '@mui/icons-material';
-import { Button, FormControl, FormLabel, Grid, Chip, Typography, Box, IconButton, FormHelperText } from '@mui/material';
+import { Chip, FormControl, FormHelperText, Grid } from '@mui/material';
 
 function ChipRadioList(props) {
   const { input, field, error, readOnly } = props;
@@ -21,9 +20,9 @@ function ChipRadioList(props) {
           </Grid>
         ))}
       </Grid>
-      {!!error && <FormHelperText sx={{color: "#FF2023 !important"}}>{error.message}</FormHelperText>}
+      {!!error && <FormHelperText sx={{ color: '#FF2023 !important' }}>{error.message}</FormHelperText>}
     </FormControl>
   );
 }
 
-export default GridRadioGroup;
+export default ChipRadioList;

@@ -27,6 +27,14 @@ const dictionary = {
       telefon: "Phone: ",
       mail: "Mail: ",
 
+      // pages
+      loading: "Loading content...",
+      error: "Error loading data.",
+      closedAuditions: "Auditions are currently closed.",
+
+      // TeamMember
+      fach: "Academic subject:",
+
       // footer
       fullNameSchool: 'CDSH - Contemporary',
       schoolDescription: 'Dance School Hamburg GmbH',

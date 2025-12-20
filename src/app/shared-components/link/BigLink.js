@@ -1,7 +1,7 @@
 import AnchorLink from './AnchorLink';
 
 function BigLink(props) {
-  const { children, extraSx = {}, fontSize="60px", lineHeight = 5, color = '#000000', ...othProps } = props;
+  const { children, extraSx = {}, fontSize = '60px', lineHeight = 5, color = '#000000', ...othProps } = props;
 
   return (
     <AnchorLink

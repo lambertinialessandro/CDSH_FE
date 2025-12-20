@@ -10,7 +10,7 @@ export const changeLanguage = (languageId) => (dispatch, getState) => {
 export const selectCurrLanguage = (state) => state.i18n.language;
 
 const initialState = {
-  language: localStorage.getItem('language') ?? 'en', // ?? i18next.resolvedLanguage ?? 'en',
+  language: 'en',
 };
 
 const i18nSlice = createSlice({

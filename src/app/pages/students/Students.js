@@ -1,26 +1,40 @@
 import { Box, Typography, useTheme } from '@mui/material';
-import StudentSelector from './StudentSelector';
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { selectUserLanguage } from 'app/store/app/mainSlice';
 import { renderers } from 'app/shared-components/htmlStyle/htmlStyle';
+import { selectUserLanguage } from 'app/store/app/mainSlice';
+import { selectStudentsData, setStudentsData } from 'app/store/app/pageSlice';
+import { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
+import { useDispatch, useSelector } from 'react-redux';
+import ErrorPage from '../general/ErrorPage';
+import LoadingPage from '../general/LoadingPage';
+import StudentSelector from './StudentSelector';
 
 function Students() {
+  const dispatch = useDispatch();
   const theme = useTheme();
 
-  const [studentsData, setStudentsData] = useState(null);
   const userLanguage = useSelector(selectUserLanguage);
 
+  const studentsData = useSelector((state) => selectStudentsData(state, userLanguage));
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   console.log('studentsData:', studentsData);
 
   useEffect(() => {
+    if (studentsData) {
+      setLoading(false);
+      setError(null);
+      return;
+    }
+
     setLoading(true);
     setError(null);
-    fetch(`http://localhost/plainkit-main/api/students?lang=${userLanguage}`)
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 1);
+
+    fetch(`http://localhost/plainkit-main/api/students?lang=${userLanguage}`, { signal: controller.signal })
       .then((response) => {
         if (!response.ok) {
           throw new Error(`Network response was not ok, status: ${response.status}`);
@@ -28,20 +42,109 @@ function Students() {
         return response.json();
       })
       .then((data) => {
-        setStudentsData(data);
+        dispatch(setStudentsData({ userLanguage, data: data }));
       })
       .catch((error) => {
-        console.error('Fetching error:', error);
-        setError(error);
+        if (userLanguage === 'en') {
+          const mockData = {
+            intro: {
+              headline: 'The students',
+              text: 'Studying stage dance at CDSH means not only learning, but also finding like-minded people and friends. You work intensively with people in your field every day. This fosters a diverse exchange and encourages personal development among dancers, choreographers, and performers.',
+              image: `${process.env.PUBLIC_URL}/assets/images/students/cdsh-willkommen-1.png`,
+            },
+            studentGroups: [
+              {
+                id: 'yuugen',
+                name: 'Yugen',
+                src: `${process.env.PUBLIC_URL}/assets/images/students/Bildschirmfoto 2025-02-18 um 17.05.47.png`,
+                year: {
+                  start: 2024,
+                  end: 2027,
+                },
+              },
+              {
+                id: 'ikigai',
+                name: 'Ikigai',
+                src: `${process.env.PUBLIC_URL}/assets/images/students/Bildschirmfoto 2025-02-18 um 17.06.05.png`,
+                year: {
+                  start: 2023,
+                  end: 2026,
+                },
+              },
+              {
+                id: 'ho\u2019omau',
+                name: 'Ho\u2019omau',
+                src: `${process.env.PUBLIC_URL}/assets/images/students/Bildschirmfoto 2025-02-18 um 17.06.12.png`,
+                year: {
+                  start: 2022,
+                  end: 2025,
+                },
+              },
+            ],
+            footerCta: {
+              show: true,
+              title: 'Want to get to know us?',
+              text: "We'd like to get to know you too. Besides the regular auditions, we're available by email or phone to answer any questions you may have about the training program.",
+            },
+          };
+          dispatch(setStudentsData({ userLanguage, data: mockData }));
+        } else {
+          const mockData = {
+            intro: {
+              headline: 'Die Studierende',
+              text: 'Ein Studium des Bühnentanzes an der CDSH bedeutet nicht nur Lernen, sondern auch das Finden von Gleichgesinnten und Freundschaften. Du arbeitest täglich intensiv mit Menschen aus deinem Fachbereich zusammen. Dies fördert einen vielfältigen Austausch und unterstützt die persönliche Entwicklung von Tänzer*innen, Choreograf*innen und Performer*innen.',
+              image: `${process.env.PUBLIC_URL}/assets/images/students/cdsh-willkommen-1.png`,
+            },
+            studentGroups: [
+              {
+                id: 'yuugen',
+                name: 'Yugen',
+                src: `${process.env.PUBLIC_URL}/assets/images/students/Bildschirmfoto 2025-02-18 um 17.05.47.png`,
+                year: {
+                  start: 2024,
+                  end: 2027,
+                },
+              },
+              {
+                id: 'ikigai',
+                name: 'Ikigai',
+                src: `${process.env.PUBLIC_URL}/assets/images/students/Bildschirmfoto 2025-02-18 um 17.06.05.png`,
+                year: {
+                  start: 2023,
+                  end: 2026,
+                },
+              },
+              {
+                id: 'ho\u2019omau',
+                name: 'Ho\u2019omau',
+                src: `${process.env.PUBLIC_URL}/assets/images/students/Bildschirmfoto 2025-02-18 um 17.06.12.png`,
+                year: {
+                  start: 2022,
+                  end: 2025,
+                },
+              },
+            ],
+            footerCta: {
+              show: true,
+              title: 'Du möchtest uns kennenlernen?',
+              text: 'Wir dich ebenfalls. Neben den regulären Auditions sind wir per E-Mail oder telefonisch für dich da, wenn du Fragen rund um die Ausbildung hast.',
+            },
+          };
+          dispatch(setStudentsData({ userLanguage, data: mockData }));
+        }
+
+        // TODO: commented for temp deploy
+        // console.error('Fetching error:', error);
+        // setError(error);
       })
       .finally(() => {
         setLoading(false);
+        clearTimeout(timeout);
       });
   }, [userLanguage]);
-  if (loading) return <Box sx={{ p: 10, textAlign: 'center' }}>Loading content...</Box>;
-  if (!studentsData) return <Box sx={{ p: 10, textAlign: 'center' }}>Error loading data.</Box>;
 
-  const studentGroups = studentsData.studentGroups;
+  if (loading) return <LoadingPage />;
+  if (error || !studentsData) return <ErrorPage />;
 
   return (
     <>

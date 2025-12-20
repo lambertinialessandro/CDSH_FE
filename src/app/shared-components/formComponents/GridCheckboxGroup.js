@@ -1,6 +1,4 @@
-import { FormControl, Grid, FormControlLabel, Checkbox, FormHelperText } from '@mui/material';
-import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
-import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
+import { FormControl, FormHelperText, Grid } from '@mui/material';
 
 function CustomCheckbox({ checked }) {
   return (
@@ -44,7 +42,11 @@ function GridCheckboxGroup(props) {
           </Grid>
         ))}
       </Grid>
-      {!!error && <FormHelperText error sx={{color: "#FF2023 !important"}}>{error.message}</FormHelperText>}
+      {!!error && (
+        <FormHelperText error sx={{ color: '#FF2023 !important' }}>
+          {error.message}
+        </FormHelperText>
+      )}
     </FormControl>
   );
 }

@@ -1,7 +1,5 @@
-import { FormControl, Grid, RadioGroup, FormControlLabel, Radio, FormHelperText } from '@mui/material';
-import { styled, useTheme } from '@mui/material/styles';
-import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
-import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
+import { FormControl, FormHelperText, Grid, RadioGroup } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
 function CustomRadio({ selected, onClick }) {
   return (
@@ -40,7 +38,11 @@ function GridRadioGroup(props) {
           ))}
         </Grid>
       </RadioGroup>
-      {!!error && <FormHelperText error sx={{color: "#FF2023 !important"}}>{error.message}</FormHelperText>}
+      {!!error && (
+        <FormHelperText error sx={{ color: '#FF2023 !important' }}>
+          {error.message}
+        </FormHelperText>
+      )}
     </FormControl>
   );
 }

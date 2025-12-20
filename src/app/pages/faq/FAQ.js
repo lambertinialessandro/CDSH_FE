@@ -1,8 +1,11 @@
 import { Box, Typography } from '@mui/material';
 import { selectUserLanguage } from 'app/store/app/mainSlice';
+import { selectFaqData, setFaqData } from 'app/store/app/pageSlice';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import ErrorPage from '../general/ErrorPage';
+import LoadingPage from '../general/LoadingPage';
 
 function Question(props) {
   const { question, answer } = props;
@@ -60,15 +63,27 @@ function Question(props) {
 }
 
 function FAQ() {
+  const dispatch = useDispatch();
   const userLanguage = useSelector(selectUserLanguage);
-  const [faqData, setFaqData] = useState(null);
+
+  const faqData = useSelector((state) => selectFaqData(state, userLanguage));
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    if (faqData) {
+      setLoading(false);
+      setError(null);
+      return;
+    }
+
     setLoading(true);
     setError(null);
-    fetch(`http://localhost/plainkit-main/api/faq?lang=${userLanguage}`)
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 1);
+
+    fetch(`http://localhost/plainkit-main/api/faq?lang=${userLanguage}`, { signal: controller.signal })
       .then((response) => {
         if (!response.ok) {
           throw new Error(`Network response was not ok, status: ${response.status}`);
@@ -76,20 +91,116 @@ function FAQ() {
         return response.json();
       })
       .then((data) => {
-        setFaqData(data);
+        dispatch(setFaqData({ userLanguage, data: data }));
       })
       .catch((error) => {
-        console.error('Fetching error:', error);
-        setError(error);
+        if (userLanguage === 'en') {
+          const mockData = {
+            title: 'faq',
+            header: {
+              headline: 'FAQ',
+              text: 'Do you have a question? Perhaps someone else has already asked it. Why not take a look?',
+            },
+            questions: [
+              {
+                question: 'Do I have to be of legal age to start the training?',
+                answer:
+                  'The lessons are mainly conducted in English to make it easier for international students to get started. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Present tempus lorem et sapien tincidunt, vitae porttitor magna hendrerit.',
+              },
+              {
+                question: 'How long does the training last and how is it structured?',
+                answer:
+                  'The lessons are mainly conducted in English to make it easier for international students to get started. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Present tempus lorem et sapien tincidunt, vitae porttitor magna hendrerit.',
+              },
+              {
+                question: 'How does the application process work?',
+                answer:
+                  'The lessons are mainly conducted in English to make it easier for international students to get started. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Present tempus lorem et sapien tincidunt, vitae porttitor magna hendrerit.',
+              },
+              {
+                question: 'Is there an open day?',
+                answer:
+                  'The lessons are mainly conducted in English to make it easier for international students to get started. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Present tempus lorem et sapien tincidunt, vitae porttitor magna hendrerit.',
+              },
+              {
+                question: 'In which language is the instruction given?',
+                answer:
+                  'The lessons are mainly conducted in English to make it easier for international students to get started. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Present tempus lorem et sapien tincidunt, vitae porttitor magna hendrerit.',
+              },
+              {
+                question: 'Are there any funding opportunities or scholarships available?',
+                answer:
+                  'The lessons are mainly conducted in English to make it easier for international students to get started. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Present tempus lorem et sapien tincidunt, vitae porttitor magna hendrerit.',
+              },
+            ],
+            footerCta: {
+              show: true,
+              title: 'Want to get to know us?',
+              text: "We'd like to get to know you too. Besides the regular auditions, we're available by email or phone to answer any questions you may have about the training program.",
+            },
+          };
+          dispatch(setFaqData({ userLanguage, data: mockData }));
+        } else {
+          const mockData = {
+            title: 'faq',
+            header: {
+              headline: 'FAQ',
+              text: "Du hast eine Frage? Vielleicht hat jemand anderes sie bereits gestellt. Schau'doch mal nach!",
+            },
+            questions: [
+              {
+                question: 'Muss ich vollj\u00e4hrig sein, um die Ausbildung zu beginnen?',
+                answer:
+                  'Der Unterricht wird \u00fcberwiegend auf Englisch durchgef\u00fchrt, um internationalen Studierenden den Einstieg zu erleichtern. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tempus lorem et sapien tincidunt, vitae porttitor magna hendrerit.',
+              },
+              {
+                question: 'Wie lange dauert die Ausbildung und wie st sie aufgebaut?',
+                answer:
+                  'Der Unterricht wird \u00fcberwiegend auf Englisch durchgef\u00fchrt, um internationalen Studierenden den Einstieg zu erleichtern. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tempus lorem et sapien tincidunt, vitae porttitor magna hendrerit.',
+              },
+              {
+                question: 'Wie l\u00e4uft das Aufnahmeverfahren ab?',
+                answer:
+                  'Der Unterricht wird \u00fcberwiegend auf Englisch durchgef\u00fchrt, um internationalen Studierenden den Einstieg zu erleichtern. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tempus lorem et sapien tincidunt, vitae porttitor magna hendrerit.',
+              },
+              {
+                question: 'Gibt es einen Tag der offenen T\u00fcr?',
+                answer:
+                  'Der Unterricht wird \u00fcberwiegend auf Englisch durchgef\u00fchrt, um internationalen Studierenden den Einstieg zu erleichtern. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tempus lorem et sapien tincidunt, vitae porttitor magna hendrerit.',
+              },
+              {
+                question: 'In welcher Sprache findet der Unterricht statt?',
+                answer:
+                  'Der Unterricht wird \u00fcberwiegend auf Englisch durchgef\u00fchrt, um internationalen Studierenden den Einstieg zu erleichtern. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tempus lorem et sapien tincidunt, vitae porttitor magna hendrerit.',
+              },
+              {
+                question: 'Gibt es Finanzierungsm\u00f6glichkeiten oder Stipendien?',
+                answer:
+                  'Der Unterricht wird \u00fcberwiegend auf Englisch durchgef\u00fchrt, um internationalen Studierenden den Einstieg zu erleichtern. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tempus lorem et sapien tincidunt, vitae porttitor magna hendrerit.',
+              },
+            ],
+            footerCta: {
+              show: true,
+              title: 'Du m\u00f6chtest uns kennenlernen?',
+              text: 'Wir dich ebenfalls. Neben den regul\u00e4ren Auditions sind wir bei Fragen rund um die Ausbildung per Mail oder telefonisch f\u00fcr dich da.',
+            },
+          };
+          dispatch(setFaqData({ userLanguage, data: mockData }));
+        }
+
+        // TODO: commented for temp deploy
+        // console.error('Fetching error:', error);
+        // setError(error);
       })
       .finally(() => {
         setLoading(false);
+        clearTimeout(timeout);
       });
   }, [userLanguage]);
 
   console.log('faqData', faqData);
-  if (loading) return <Box sx={{ p: 10, textAlign: 'center' }}>Loading content...</Box>;
-  if (!faqData) return <Box sx={{ p: 10, textAlign: 'center' }}>Error loading data.</Box>;
+  if (loading) return <LoadingPage />;
+  if (error || !faqData) return <ErrorPage />;
 
   return (
     <>

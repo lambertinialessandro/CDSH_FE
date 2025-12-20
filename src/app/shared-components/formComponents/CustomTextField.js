@@ -27,7 +27,6 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
 function CustomTextField(props) {
   const { input, field, error, readOnly } = props;
   const { label, placeholder, maxLength, required, size, hasEndDot = true, ...othProps } = input;
-  //const labelId = `${field.name}-label`;
 
   const theme = useTheme();
 
@@ -49,7 +48,7 @@ function CustomTextField(props) {
                   width: 18,
                   height: 18,
                   borderRadius: '50%',
-                  backgroundColor: !!error ? "#FF2023": theme.palette.primary.main,
+                  backgroundColor: !!error ? '#FF2023' : theme.palette.primary.main,
                   display: 'inline-block',
                 }}
               />
@@ -58,7 +57,7 @@ function CustomTextField(props) {
         }}
         {...othProps}
       />
-      {!!error && <FormHelperText sx={{color: "#FF2023 !important"}}>{error.message}</FormHelperText>}
+      {!!error && <FormHelperText sx={{ color: '#FF2023 !important' }}>{error.message}</FormHelperText>}
     </FormControl>
   );
 }

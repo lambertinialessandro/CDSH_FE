@@ -7,12 +7,15 @@ import BigLink from 'app/shared-components/link/BigLink';
 import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 
-import VideoLooper from './VideoLooper';
-import { useSelector } from 'react-redux';
 import { selectUserLanguage } from 'app/store/app/mainSlice';
-import AktuellesSection from '../aktuelles/AktuellesSection';
+import { selectHomeData, setHomeData } from 'app/store/app/pageSlice';
 import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
 import { defaultNS as ns_common } from 'translations';
+import AktuellesSection from '../aktuelles/AktuellesSection';
+import ErrorPage from '../general/ErrorPage';
+import LoadingPage from '../general/LoadingPage';
+import VideoLooper from './VideoLooper';
 
 function ImageAnimation(props) {
   const { image } = props;
@@ -41,28 +44,38 @@ function Image(props) {
     <img
       src={item.src}
       alt={item.title || ``}
-      className="w-full object-cover border border-black h-[300px] md:h-full md:min-h-[460px]"
+      className="w-full object-cover h-[300px] md:h-full md:min-h-[460px]"
     />
   );
 }
 
 function Home() {
+  const dispatch = useDispatch();
   const { t } = useTranslation([ns_common]);
   const { button } = t(ns_common);
   const theme = useTheme();
-
-  const [homeData, setHomeData] = useState(null);
   const userLanguage = useSelector(selectUserLanguage);
 
+  const homeData = useSelector((state) => selectHomeData(state, userLanguage));
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   console.log('homeData:', homeData);
 
   useEffect(() => {
+    if (homeData) {
+      setLoading(false);
+      setError(null);
+      return;
+    }
+
     setLoading(true);
     setError(null);
-    fetch(`http://localhost/plainkit-main/api/home?lang=${userLanguage}`)
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 1);
+
+    fetch(`http://localhost/plainkit-main/api/home?lang=${userLanguage}`, { signal: controller.signal })
       .then((response) => {
         if (!response.ok) {
           throw new Error(`Network response was not ok, status: ${response.status}`);
@@ -70,23 +83,149 @@ function Home() {
         return response.json();
       })
       .then((data) => {
-        setHomeData(data);
+        dispatch(setHomeData({ userLanguage, data: data }));
       })
       .catch((error) => {
-        console.error('Fetching error:', error);
-        setError(error);
+        if (userLanguage === 'en') {
+          const mockData = {
+            header: {
+              headline: 'Contemporay Dannce School of Hamburg',
+              video: `${process.env.PUBLIC_URL}/assets/images/CDSH - Trailer Final Performance opt.mp4`,
+            },
+            intro: {
+              text_1: 'We are a **state-accredited**',
+              text_2: 'vocational school for contemporary stage dance',
+            },
+            aktuelles: {
+              headline: 'News',
+              items: [
+                {
+                  title: 'What dies Looking Taste like',
+                  description: 'Short description solo project "What does Looking Taste like"',
+                  src: `${process.env.PUBLIC_URL}/assets/images/aktuelles/what_does_looking_taste_like.png`,
+                  projectId: 'solo_project_2024',
+                },
+                {
+                  title: 'Meeting point',
+                  description: 'Meeting point short description',
+                  src: `${process.env.PUBLIC_URL}/assets/images/aktuelles/meeting_point.png`,
+                  projectId: 'meeting_point',
+                },
+                {
+                  title: 'Under Utopia',
+                  description: 'Under Utopia short description',
+                  src: `${process.env.PUBLIC_URL}/assets/images/aktuelles/under_utopia.png`,
+                  projectId: 'under_utopia',
+                },
+                {
+                  title: 'APERCEPTION',
+                  description: 'APERCEPTION short description',
+                  src: `${process.env.PUBLIC_URL}/assets/images/aktuelles/aperception.png`,
+                  projectId: 'aperception',
+                },
+                {
+                  title: 'RESET',
+                  description: 'RESET short description',
+                  src: `${process.env.PUBLIC_URL}/assets/images/aktuelles/reset.png`,
+                  projectId: 'reset',
+                },
+              ],
+            },
+            aboutUs: {
+              headline: 'About Us',
+              text: 'The CDSH - Contemporary Dance School is a state-accredited vocational school for contemporary stage dance. The three-year program focuses on contemporary and modern classical ballet.',
+              image: `${process.env.PUBLIC_URL}/assets/images/cdsh-willkommen-1.jpg`,
+            },
+            audition_banner: {
+              text: 'THE AUDITION DATES 2026 ARE NOW ONLINE',
+              link_text: 'REGISTER NOW',
+            },
+            footerCta: {
+              show: true,
+              title: 'Want to get to know us?',
+              text: "We'd like to get to know you too. Besides the regular auditions, we're available by email or phone to answer any questions you may have about the training program.",
+            },
+          };
+          dispatch(setHomeData({ userLanguage, data: mockData }));
+        } else {
+          const mockData = {
+            header: {
+              headline: 'Contemporary Dance School Hamburg',
+              video: `${process.env.PUBLIC_URL}/assets/images/CDSH - Trailer Final Performance opt.mp4`,
+            },
+            intro: {
+              text_1: 'Wir sind eine **staatlich anerkannte**',
+              text_2: 'Berufsfachschule für zeitgenössischen Bühnentanz',
+            },
+            aktuelles: {
+              headline: 'Aktuelles',
+              items: [
+                {
+                  title: 'What Does Looking Taste Like',
+                  description: 'Kurzbeschreibung des Solo-Projekts „What Does Looking Taste Like“',
+                  src: `${process.env.PUBLIC_URL}/assets/images/aktuelles/what_does_looking_taste_like.png`,
+                  projectId: 'solo_project_2024',
+                },
+                {
+                  title: 'Meeting Point',
+                  description: 'Kurzbeschreibung des Projekts „Meeting Point“',
+                  src: `${process.env.PUBLIC_URL}/assets/images/aktuelles/meeting_point.png`,
+                  projectId: 'meeting_point',
+                },
+                {
+                  title: 'Under Utopia',
+                  description: 'Kurzbeschreibung des Projekts „Under Utopia“',
+                  src: `${process.env.PUBLIC_URL}/assets/images/aktuelles/under_utopia.png`,
+                  projectId: 'under_utopia',
+                },
+                {
+                  title: 'APERCEPTION',
+                  description: 'Kurzbeschreibung des Projekts „APERCEPTION“',
+                  src: `${process.env.PUBLIC_URL}/assets/images/aktuelles/aperception.png`,
+                  projectId: 'aperception',
+                },
+                {
+                  title: 'RESET',
+                  description: 'Kurzbeschreibung des Projekts „RESET“',
+                  src: `${process.env.PUBLIC_URL}/assets/images/aktuelles/reset.png`,
+                  projectId: 'reset',
+                },
+              ],
+            },
+            aboutUs: {
+              headline: 'Über uns',
+              text: 'Die CDSH – Contemporary Dance School Hamburg ist eine staatlich anerkannte Berufsfachschule für zeitgenössischen Bühnentanz. Die dreijährige Ausbildung legt ihren Schwerpunkt auf Contemporary Dance und modernes klassisches Ballett.',
+              image: `${process.env.PUBLIC_URL}/assets/images/cdsh-willkommen-1.jpg`,
+            },
+            audition_banner: {
+              text: 'DIE AUDITION-TERMINE 2026 SIND JETZT ONLINE',
+              link_text: 'JETZT ANMELDEN',
+            },
+            footerCta: {
+              show: true,
+              title: 'Du möchtest uns kennenlernen?',
+              text: 'Wir dich ebenfalls. Neben den regulären Auditions sind wir bei Fragen rund um die Ausbildung per E-Mail oder telefonisch für dich da.',
+            },
+          };
+          dispatch(setHomeData({ userLanguage, data: mockData }));
+        }
+
+        // TODO: commented for temp deploy
+        // console.error('Fetching error:', error);
+        // setError(error);
       })
       .finally(() => {
         setLoading(false);
+        clearTimeout(timeout);
       });
   }, [userLanguage]);
 
-  if (loading) return <Box sx={{ p: 10, textAlign: 'center' }}>Loading content...</Box>;
-  if (!homeData) return <Box sx={{ p: 10, textAlign: 'center' }}>Error loading data.</Box>;
+  if (loading) return <LoadingPage />;
+  if (error || !homeData) return <ErrorPage />;
 
   return (
     <>
-      <VideoLooper video={homeData.header.video}/>
+      <VideoLooper video={homeData.header.video} />
 
       {/* Intro Section */}
       <Box
@@ -103,7 +242,7 @@ function Home() {
       </Box>
 
       {/* Aktuelles Section */}
-      <AktuellesSection items={homeData.aktuelles.items} title={homeData.aktuelles.headline}/>
+      <AktuellesSection items={homeData.aktuelles.items} title={homeData.aktuelles.headline} />
 
       {/* Über uns */}
       <Box
@@ -141,8 +280,6 @@ function Home() {
 
               {/* Image */}
               <Box className="w-full md:w-1/2 border-y md:border-t-0 md:border-l border-black">
-                {/* <ImageAnimation /> */}
-
                 <Image
                   item={{
                     src: homeData.aboutUs.image,
@@ -219,7 +356,7 @@ function Home() {
           className="max-w-[740px] min-w-[50%] text-center"
           sx={{ fontSize: { xs: '15px', md: '30px' }, fontWeight: 400, color: '#000000' }}
         >
-         {homeData.footerCta.text}
+          {homeData.footerCta.text}
         </Typography>
       </Box>
     </>

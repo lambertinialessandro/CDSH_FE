@@ -4,9 +4,9 @@ import AnchorLink from 'app/shared-components/link/AnchorLink';
 import { selectIsBannerOpen, setUserLanguage } from 'app/store/app/mainSlice';
 import { changeLanguage, selectCurrLanguage } from 'app/store/i18nSlice';
 import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import { defaultNS as ns_common } from 'translations';
 
 function TopNavbar({ fixed }) {
@@ -16,6 +16,7 @@ function TopNavbar({ fixed }) {
   const dispatch = useDispatch();
 
   const userLanguage = useSelector(selectCurrLanguage);
+  console.log(' ### userLanguage', userLanguage, message);
 
   const areAuditionOpen = true;
   const isBannerOpen = useSelector(selectIsBannerOpen);

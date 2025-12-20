@@ -1,8 +1,8 @@
 import { StyledEngineProvider } from '@mui/material/styles';
+import { SnackbarProvider } from 'notistack';
 import Provider from 'react-redux/es/components/Provider';
 import AppContext from './AppContext';
 import store from './store';
-import { SnackbarProvider } from 'notistack';
 
 const withAppProviders = (Component) => (props) => {
   const WrapperComponent = () => {

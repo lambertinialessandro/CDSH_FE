@@ -1,24 +1,8 @@
 import { Box, Typography, useMediaQuery } from '@mui/material';
 
 function KooperationenLogos({ title, list }) {
-  /*let logoRows = [
-    'Logo Platzhalter',
-    'Logo Platzhalter',
-    'Logo Platzhalter',
-    'Logo Platzhalter',
-    'Logo Platzhalter',
-    'Logo Platzhalter',
-    'Logo Platzhalter',
-  ];*/
-
   const isMobile = useMediaQuery('(max-width:900px)');
-  /*if (isMobile) {
-    list;//logoRows = ['Logo Platzhalter', 'Logo Platzhalter', 'Logo Platzhalter', 'Logo Platzhalter', 'Logo Platzhalter'];
-  }*/
-  console.log('list', list);
   const displayList = isMobile ? list.slice(0, 5) : list;
-
-  console.log('title', title);
 
   return (
     <Box
@@ -36,10 +20,8 @@ function KooperationenLogos({ title, list }) {
         }}
       >
         {title}
-        {/*Kooperationen*/}
       </Typography>
 
-      {/* Wrapper */}
       <Box className="flex flex-wrap justify-center gap-[24px] w-full max-w-[1200px]" sx={{}}>
         {displayList.map((text, idx) => (
           <Box

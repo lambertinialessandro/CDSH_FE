@@ -3,20 +3,8 @@ import Carousel from 'app/shared-components/carousel/Carousel';
 
 function ImpressionenSection(props) {
   const { imgSet } = props;
-  /*const items = [
-    {
-      src: `${process.env.PUBLIC_URL}/assets/images/projects/Bildschirmfoto 2025-02-21 um 17.23.58.png`,
-    },
-    {
-      src: `${process.env.PUBLIC_URL}/assets/images/projects/Bildschirmfoto 2025-02-21 um 17.24.14.png`,
-    },
-    {
-      src: `${process.env.PUBLIC_URL}/assets/images/projects/Bildschirmfoto 2025-02-21 um 17.23.58.png`,
-    },
-  ];*/
 
   const isMobile = useMediaQuery('(max-width:900px)');
-  
 
   console.log('imgSet', imgSet);
   if (!imgSet || imgSet.length === 0) {

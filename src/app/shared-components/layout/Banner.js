@@ -42,7 +42,7 @@ function Banner({ fixed }) {
               color: '#000',
               fontSize: { xs: '14px', sm: '15px' },
               fontWeight: 400,
-              whiteSpace: { sm: 'nowrap' },
+              whiteSpace: { xs: 'nowrap' },
             }}
           >
             Audition 2025 sind jetzt online!

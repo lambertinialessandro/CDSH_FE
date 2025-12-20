@@ -1,17 +1,14 @@
-import { Box, Divider, Tab, Tabs, Typography } from '@mui/material';
+import { Box, Tab, Tabs, Typography } from '@mui/material';
+import { AnimatePresence, motion } from 'framer-motion';
 import __ from 'lodash';
 import { useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import SplitSection from './SplitSection';
-import AnchorLink from 'app/shared-components/link/AnchorLink';
-import BigLink from 'app/shared-components/link/BigLink';
 
 function StudentSelector({ classes = [] }) {
   console.log('classes', classes);
 
   const today = new Date();
-  const month = today.getMonth() + 1; // getMonth() is 0-indexed
+  const month = today.getMonth() + 1;
   const year = today.getFullYear();
   const currentYear = month < 9 ? year - 1 : year;
 

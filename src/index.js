@@ -7,7 +7,6 @@ import App from './app/App';
 import './i18n';
 import './styles/index.css';
 
-// https://patorjk.com/software/taag/#p=display&h=0&f=Tmplr&t=CDSH%0A | tmplr | Spliff
 const presentation = [
   '┏┓┳┓┏┓┓┏',
   '┃ ┃┃┗┓┣┫',

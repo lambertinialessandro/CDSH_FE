@@ -1,15 +1,15 @@
-import { Box, Divider, Tab, Tabs, Typography } from '@mui/material';
+import { Box, Tab, Tabs, Typography } from '@mui/material';
+import { AnimatePresence, motion } from 'framer-motion';
 import __ from 'lodash';
 import { useMemo, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import { defaultNS as ns_common } from 'translations';
 
-function TeamSelector({members = []}) {
+function TeamSelector({ members = [] }) {
   const { t } = useTranslation([ns_common]);
-    const { button } = t(ns_common);
-  console.log("member", members)
+  const { button } = t(ns_common);
+  console.log('member', members);
 
   const MotionBox = motion(Box);
 
@@ -29,7 +29,7 @@ function TeamSelector({members = []}) {
     return members.filter(({ subjects }) => subjects.some((s1) => s1 === TAB_OPTIONS[tabSelected].name));
   }, [tabSelected, members]);
 
-  console.log("filteredMembers", filteredMembers)
+  console.log('filteredMembers', filteredMembers);
 
   if (__.isEmpty(members)) {
     return <Typography>Empty</Typography>;

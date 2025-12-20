@@ -1,7 +1,7 @@
 import { Box, Typography, useTheme } from '@mui/material';
-import AnchorLink from '../link/AnchorLink';
 import { useTranslation } from 'react-i18next';
 import { defaultNS as ns_common } from 'translations';
+import AnchorLink from '../link/AnchorLink';
 
 function Footer() {
   const { t } = useTranslation([ns_common]);

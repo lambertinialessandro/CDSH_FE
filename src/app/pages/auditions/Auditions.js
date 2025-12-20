@@ -10,24 +10,30 @@ import OutputFormSubtitle from 'app/shared-components/formComponents/OutputFormS
 import OutputFormTitle from 'app/shared-components/formComponents/OutputFormTitle';
 import SpecialGridRadioGroup from 'app/shared-components/formComponents/SpecialGridRadioGroup';
 import UploadButton from 'app/shared-components/formComponents/UploadButton';
+import { renderers } from 'app/shared-components/htmlStyle/htmlStyle';
+import { selectUserLanguage } from 'app/store/app/mainSlice';
+import { selectAuditionsData, setAuditionsData } from 'app/store/app/pageSlice';
 import { useEffect, useMemo, useState } from 'react';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import * as yup from 'yup';
-import { ns as ns_audition } from './translations';
-import { selectUserLanguage } from 'app/store/app/mainSlice';
-import { useSelector } from 'react-redux';
-import { renderers } from 'app/shared-components/htmlStyle/htmlStyle';
 import ReactMarkdown from 'react-markdown';
+import { useDispatch, useSelector } from 'react-redux';
+import * as yup from 'yup';
+import ClosedAuditionPage from '../general/ClosedAuditionPage';
+import ErrorPage from '../general/ErrorPage';
+import LoadingPage from '../general/LoadingPage';
+import { ns as ns_audition } from './translations';
 
 function Auditions() {
+  const dispatch = useDispatch();
   const { t } = useTranslation([ns_audition]);
-  const { title, message, error, button } = t(ns_audition);
+  const { title, message, error: error_t, button } = t(ns_audition);
   const theme = useTheme();
-  const [auditionsData, setAuditionsData] = useState(null);
   const userLanguage = useSelector(selectUserLanguage);
 
+  const auditionsData = useSelector((state) => selectAuditionsData(state, userLanguage));
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const defaultValues = useMemo(() => {
     return {
@@ -67,54 +73,57 @@ function Auditions() {
         audition_selection: yup
           .array()
           .of(yup.string())
-          .required(error.auditionSelection_required)
-          .min(1, error.auditionSelection_min)
-          .test('min-items-for-presenz', error.auditionSelection_presenz, (value) => {
+          .required(error_t.auditionSelection_required)
+          .min(1, error_t.auditionSelection_min)
+          .test('min-items-for-presenz', error_t.auditionSelection_presenz, (value) => {
             if (!value || !value.includes('as_presenz')) {
               return value.length >= 1;
             }
             return value.length >= 2;
           }),
         //
-        vorname: yup.string().trim().required(error.vorname_required),
-        nachname: yup.string().trim().required(error.nachname_required),
+        vorname: yup.string().trim().required(error_t.vorname_required),
+        nachname: yup.string().trim().required(error_t.nachname_required),
         geburtsdatum: yup
           .string()
-          .required(error.geburtsdatum_required)
-          .matches(dateRegex, { message: error.geburtsdatum_format }),
-        staatsangehorigkeiten: yup.string().required(error.staatsangehorigkeiten_required),
-        muttersprache: yup.string().required(error.muttersprache_required),
-        fremdsprachen: yup.string().required(error.fremdsprachen_required),
-        pronomen: yup.string().required(error.pronomen_required),
+          .required(error_t.geburtsdatum_required)
+          .matches(dateRegex, { message: error_t.geburtsdatum_format }),
+        staatsangehorigkeiten: yup.string().required(error_t.staatsangehorigkeiten_required),
+        muttersprache: yup.string().required(error_t.muttersprache_required),
+        fremdsprachen: yup.string().required(error_t.fremdsprachen_required),
+        pronomen: yup.string().required(error_t.pronomen_required),
         //
-        durchsuchen: yup.string().required(error.durchsuchen_required),
+        durchsuchen: yup.string().required(error_t.durchsuchen_required),
         //
-        strasse: yup.string().trim().required(error.strasse_required),
-        hausnummer: yup.string().required(error.hausnummer_required),
-        plz: yup.string().required(error.plz_required),
-        ort: yup.string().trim().required(error.ort_required),
-        email: yup.string().required(error.email_required).matches(emailRegex, { message: error.email_format }),
-        telefon: yup.string().required(error.telefon_required).matches(phoneRegex, { message: error.telefon_format }),
+        strasse: yup.string().trim().required(error_t.strasse_required),
+        hausnummer: yup.string().required(error_t.hausnummer_required),
+        plz: yup.string().required(error_t.plz_required),
+        ort: yup.string().trim().required(error_t.ort_required),
+        email: yup.string().required(error_t.email_required).matches(emailRegex, { message: error_t.email_format }),
+        telefon: yup
+          .string()
+          .required(error_t.telefon_required)
+          .matches(phoneRegex, { message: error_t.telefon_format }),
         //
-        schulabschluss: yup.string().required(error.schulabschluss_required),
-        tanzabschluss: yup.string().required(error.tanzabschluss_required),
+        schulabschluss: yup.string().required(error_t.schulabschluss_required),
+        tanzabschluss: yup.string().required(error_t.tanzabschluss_required),
         //
-        erf_mog_list: yup.array().of(yup.string()).min(1, error.erfMogList_min),
-        zusatzliche_fahigkeiten: yup.string().required(error.zusatzlicheFahigkeiten_required),
+        erf_mog_list: yup.array().of(yup.string()).min(1, error_t.erfMogList_min),
+        zusatzliche_fahigkeiten: yup.string().required(error_t.zusatzlicheFahigkeiten_required),
         //
-        aufmerksam_geworden: yup.string().required(error.aufmerksamGeworden_required),
+        aufmerksam_geworden: yup.string().required(error_t.aufmerksamGeworden_required),
         //
         accept_data_verbindliche_anmeldung: yup
           .bool()
-          .required(error.agreement_required)
-          .isTrue(error.acceptDataVerbindlicheAnmeldung_isTrue),
+          .required(error_t.agreement_required)
+          .isTrue(error_t.acceptDataVerbindlicheAnmeldung_isTrue),
         accept_data_newsletter_empfangen: yup.bool(),
         accept_data_datenschutz: yup
           .bool()
-          .required(error.agreement_required)
-          .isTrue(error.acceptDataDatenschutz_isTrue),
+          .required(error_t.agreement_required)
+          .isTrue(error_t.acceptDataDatenschutz_isTrue),
       }),
-    [title, message, error, button]
+    [title, message, error_t, button]
   );
 
   const presenzSubSelection = useMemo(() => {
@@ -404,14 +413,14 @@ function Auditions() {
         colSpan: 'col-span-12',
       },
     ],
-    [title, message, error, button, presenzSubSelection]
+    [title, message, presenzSubSelection]
   );
 
   const methods = useForm({
     defaultValues,
     resolver: yupResolver(validation),
   });
-  const { handleSubmit, control, reset, formState, setError } = methods;
+  const { handleSubmit, control, reset, formState } = methods;
   const { errors, isValid } = formState;
 
   const formFields = useMemo(
@@ -460,9 +469,19 @@ function Auditions() {
   }, [hasErrors]);
 
   useEffect(() => {
+    if (auditionsData) {
+      setLoading(false);
+      setError(null);
+      return;
+    }
+
     setLoading(true);
     setError(null);
-    fetch(`http://localhost/plainkit-main/api/auditions?lang=${userLanguage}`)
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 1);
+
+    fetch(`http://localhost/plainkit-main/api/auditions?lang=${userLanguage}`, { signal: controller.signal })
       .then((response) => {
         if (!response.ok) {
           throw new Error(`Network response was not ok, status: ${response.status}`);
@@ -470,14 +489,68 @@ function Auditions() {
         return response.json();
       })
       .then((data) => {
-        setAuditionsData(data);
+        dispatch(setAuditionsData({ userLanguage, data }));
       })
       .catch((error) => {
-        console.error('Fetching error:', error);
-        setError(error);
+        if (userLanguage === 'en') {
+          const mockData = {
+            header: {
+              title: 'Auditions',
+              intro:
+                'If you are interested in our entrance exams, you can register for the video audition. It is equivalent to an on-site audition and essentially consists of submitting videos, which we use as the basis for our evaluation.',
+              image: `${process.env.PUBLIC_URL}/assets/images/auditions/cdsh-willkommen-1.png`,
+            },
+            auditions_list: [
+              {
+                value: '01.01.26, Rotterdam',
+                label: '01.01.26, Rotterdam',
+              },
+              {
+                value: '16.01.25, Hamburg',
+                label: '16.01.25, Hamburg',
+              },
+            ],
+            settings: {
+              auditions_active: true,
+              download_link_text: 'Download Checklist 2025',
+              download_file: `${process.env.PUBLIC_URL}/assets/images/auditions/export_tools.pdf`,
+            },
+          };
+          dispatch(setAuditionsData({ userLanguage, data: mockData }));
+        } else {
+          const mockData = {
+            header: {
+              title: 'Auditions',
+              intro:
+                'Du kannst dich bei Interesse an unseren Aufnahmepr\u00fcfungen f\u00fcr die Video Audition registrieren. Sie ist gleichwertig mit einer Audition vor Ort und besteht im Wesentlichen aus der Einsendung von Videos, die uns als Bewertungsgrundlage dienen.',
+              image: `${process.env.PUBLIC_URL}/assets/images/auditions/cdsh-willkommen-1.png`,
+            },
+            auditions_list: [
+              {
+                value: '01.01.26, Rotterdam',
+                label: '01.01.26, Rotterdam',
+              },
+              {
+                value: '16.01.25, Hamburg',
+                label: '16.01.25, Hamburg',
+              },
+            ],
+            settings: {
+              auditions_active: true,
+              download_link_text: 'Download Checkliste 2025',
+              download_file: `${process.env.PUBLIC_URL}/assets/images/auditions/export_tools.pdf`,
+            },
+          };
+          dispatch(setAuditionsData({ userLanguage, data: mockData }));
+        }
+
+        // TODO: commented for temp deploy
+        // console.error('Fetching error:', error);
+        // setError(error);
       })
       .finally(() => {
         setLoading(false);
+        clearTimeout(timeout);
       });
   }, [userLanguage]);
 
@@ -487,13 +560,12 @@ function Auditions() {
     }
   };
 
-  if (loading) return <Box sx={{ p: 10, textAlign: 'center' }}>Loading content...</Box>;
-  if (!auditionsData || !auditionsData.settings.auditions_active) {
-    return (
-      <Box sx={{ p: 10, textAlign: 'center' }}>
-        <Typography variant="h5">Auditions are currently closed or data could not be loaded.</Typography>
-      </Box>
-    );
+  if (loading) return <LoadingPage />;
+  if (error || !auditionsData) {
+    return <ErrorPage />;
+  }
+  if (!auditionsData.settings.auditions_active) {
+    return <ClosedAuditionPage />;
   }
 
   return (
@@ -641,7 +713,7 @@ function Auditions() {
                         fontWeight: '400',
                       }}
                     >
-                      {error.fillFormCompletely}
+                      {error_t.fillFormCompletely}
                     </Typography>
                   )}
                   {hasBeenSend && (

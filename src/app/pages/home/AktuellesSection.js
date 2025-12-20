@@ -1,58 +1,6 @@
 import { Box, Typography, useTheme } from '@mui/material';
 import Carousel from 'app/shared-components/carousel/Carousel';
 import { Link } from 'react-router-dom';
-// TODO: si puö eliminare
-const items = [
-  {
-    src: `${process.env.PUBLIC_URL}/assets/images/gallery/cdsh-galley-01.jpg`,
-    title: 'Work in Progress 2025: meeting point',
-    description:
-      'Jedes Jahr finden unsere Work in Progress Vorstellungen und unsere Abschlussvorstellungen unter einem anderen Motto statt.',
-  },
-  {
-    src: `${process.env.PUBLIC_URL}/assets/images/gallery/cdsh-galley-02.jpg`,
-    title: 'Abschlussprojekt 2024 : joy',
-    description:
-      'Jedes Jahr findet das Abschlussprojekt, die finale Prüfungsleistung unserer Absolvent*innen, unter einem anderen Thema statt.',
-  },
-  {
-    src: `${process.env.PUBLIC_URL}/assets/images/gallery/cdsh-galley-03.jpg`,
-    title: 'What does Looking taste like?',
-    description:
-      'Die zentrale Prüfungsleistung im zweiten Ausbildungsjahr der CDSH besteht in der Realisierung einer eigenen Kurzproduktion.',
-  },
-  {
-    src: `${process.env.PUBLIC_URL}/assets/images/gallery/cdsh-galley-04.jpg`,
-    title: 'Abschlussprojekt 2023: KONTINUUM',
-    description:
-      'Jedes Jahr findet das Abschlussprojekt, die finale Prüfungsleistung unserer Absolvent*innen, unter einem anderen Thema statt.',
-  },
-  {
-    src: `${process.env.PUBLIC_URL}/assets/images/gallery/cdsh-galley-01.jpg`,
-    title: 'Work in Progress 2025: meeting point',
-    description:
-      'Jedes Jahr finden unsere Work in Progress Vorstellungen und unsere Abschlussvorstellungen unter einem anderen Motto statt.',
-  },
-  {
-    src: `${process.env.PUBLIC_URL}/assets/images/gallery/cdsh-galley-02.jpg`,
-    title: 'Abschlussprojekt 2024 : joy',
-    description:
-      'Jedes Jahr findet das Abschlussprojekt, die finale Prüfungsleistung unserer Absolvent*innen, unter einem anderen Thema statt.',
-  },
-  {
-    src: `${process.env.PUBLIC_URL}/assets/images/gallery/cdsh-galley-03.jpg`,
-    title: 'What does Looking taste like?',
-    description:
-      'Die zentrale Prüfungsleistung im zweiten Ausbildungsjahr der CDSH besteht in der Realisierung einer eigenen Kurzproduktion.',
-  },
-  {
-    src: `${process.env.PUBLIC_URL}/assets/images/gallery/cdsh-galley-04.jpg`,
-    title: 'Abschlussprojekt 2023: KONTINUUM',
-    description:
-      'Jedes Jahr findet das Abschlussprojekt, die finale Prüfungsleistung unserer Absolvent*innen, unter einem anderen Thema statt.',
-  },
-  // more images...
-];
 
 function Addon({ item }) {
   return (

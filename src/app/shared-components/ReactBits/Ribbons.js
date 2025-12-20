@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react';
-import { Renderer, Transform, Vec3, Color, Polyline } from 'ogl';
 import { Box } from '@mui/material';
+import { Color, Polyline, Renderer, Transform, Vec3 } from 'ogl';
+import { useEffect, useRef } from 'react';
 
 const Ribbons = ({
   colors = ['#FC8EAC'],
@@ -26,12 +26,7 @@ const Ribbons = ({
     const renderer = new Renderer({ dpr: window.devicePixelRatio || 2, alpha: true });
     const gl = renderer.gl;
     if (Array.isArray(backgroundColor) && backgroundColor.length === 4) {
-      gl.clearColor(
-        backgroundColor[0],
-        backgroundColor[1],
-        backgroundColor[2],
-        backgroundColor[3]
-      );
+      gl.clearColor(backgroundColor[0], backgroundColor[1], backgroundColor[2], backgroundColor[3]);
     } else {
       gl.clearColor(0, 0, 0, 0);
     }
@@ -110,7 +105,7 @@ const Ribbons = ({
       const width = container.clientWidth;
       const height = container.clientHeight;
       renderer.setSize(width, height);
-      lines.forEach(line => line.polyline.resize());
+      lines.forEach((line) => line.polyline.resize());
     }
     window.addEventListener('resize', resize);
 
@@ -187,11 +182,8 @@ const Ribbons = ({
       const dt = Math.min(currentTime - lastTime, 15);
       lastTime = currentTime;
 
-      lines.forEach(line => {
-        tmp.copy(mouse)
-          .add(line.mouseOffset)
-          .sub(line.points[0])
-          .multiply(line.spring);
+      lines.forEach((line) => {
+        tmp.copy(mouse).add(line.mouseOffset).sub(line.points[0]).multiply(line.spring);
         line.mouseVelocity.add(tmp).multiply(line.friction);
         line.points[0].add(line.mouseVelocity);
 
@@ -237,16 +229,10 @@ const Ribbons = ({
     enableFade,
     enableShaderEffect,
     effectAmplitude,
-    backgroundColor
+    backgroundColor,
   ]);
 
-  return (
-    <Box
-      ref={containerRef}
-      className="w-full h-full absolute"
-      sx={{zIndex: 0}}
-    />
-  );
+  return <Box ref={containerRef} className="w-full h-full absolute" sx={{ zIndex: 0 }} />;
 };
 
 export default Ribbons;

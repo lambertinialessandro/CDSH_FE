@@ -1,8 +1,4 @@
-import { Box, Typography, useTheme } from '@mui/material';
-import LoopBanner from 'app/shared-components/banner/LoopBanner';
-import Carousel from 'app/shared-components/carousel/Carousel';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
+import { Box, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 function SplitSection(props) {

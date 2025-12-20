@@ -2,8 +2,8 @@ const dictionary = {
   common: {
     button: {
       mehrErfahren: 'Mehr erfahren',
-      vita: "VITA",
-      back: "zurück",
+      vita: 'VITA',
+      back: 'zurück',
     },
     error: {},
     message: {
@@ -23,9 +23,17 @@ const dictionary = {
       auditionOpen: 'OPEN',
       aktuelles: 'Aktuelles',
 
-      kontakt: "Kontakt",
-      telefon: "Telefon: ",
-      mail: "Mail: ",
+      kontakt: 'Kontakt',
+      telefon: 'Telefon: ',
+      mail: 'Mail: ',
+
+      // pages
+      loading: 'Inhalt wird geladen...',
+      error: 'Fehler beim Laden der Daten.',
+      closedAuditions: 'Die Auditions sind derzeit geschlossen.',
+
+      // TeamMember
+      fach: 'Fach:',
 
       // footer
       fullNameSchool: 'CDSH - Contemporary',

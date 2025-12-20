@@ -62,7 +62,6 @@ function VideoLooper(props) {
         }}
       />
 
-      {/* Optional gradient overlay for better text contrast */}
       <Box
         className="absolute top-0 left-0 w-full h-full"
         sx={{

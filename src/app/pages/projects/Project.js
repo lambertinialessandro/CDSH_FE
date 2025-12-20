@@ -1,46 +1,112 @@
 import { Box, Typography, useTheme } from '@mui/material';
-import { useNavigate, useParams } from 'react-router';
-import ImpressionenSection from './ImpressionenSection';
-import { useEffect, useState } from 'react';
 import { renderers } from 'app/shared-components/htmlStyle/htmlStyle';
-import ReactMarkdown from 'react-markdown';
+import { selectUserLanguage } from 'app/store/app/mainSlice';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import ReactMarkdown from 'react-markdown';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router';
 import { defaultNS as ns_common } from 'translations';
+import ImpressionenSection from './ImpressionenSection';
+import { selectSelectedProject, setSelectedProject } from 'app/store/app/pageSlice';
 
 function Project(props) {
-  const {} = props;
+  const dispatch = useDispatch();
   const { t } = useTranslation([ns_common]);
-    const { button } = t(ns_common);
+  const { button } = t(ns_common);
   const navigate = useNavigate();
   const theme = useTheme();
   const { projectUrlId } = useParams();
+  const userLanguage = useSelector(selectUserLanguage);
 
-  //const selectedProject = projects.find((m) => m.id === projectUrlId);
-  const [selectedProject, setselectedProjectData] = useState(null);
+  const selectedProject = useSelector((state) => selectSelectedProject(state, userLanguage));
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   console.log('selectedProject', selectedProject);
   useEffect(() => {
     if (projectUrlId) {
+      if (selectedProject) {
+      setLoading(false);
+      setError(null);
+      return;
+    }
+
       setLoading(true);
-      fetch(`http://localhost/plainkit-main/api/projects?id=${projectUrlId}`)
-        .then((res) => res.json())
+      setError(null);
+
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 1);
+
+      fetch(`http://localhost/plainkit-main/api/projects?lang=${userLanguage}&id=${projectUrlId}`, {
+        signal: controller.signal,
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`Network response was not ok, status: ${response.status}`);
+          }
+          return response.json();
+        })
         .then((data) => {
-          setselectedProjectData(data);
-          setLoading(false);
+          dispatch(setSelectedProject({ userLanguage, data: data}));
         })
         .catch((err) => {
-          console.error('Error fetching project in SplitSection:', err);
+          if (userLanguage === 'en') {
+            const mockData = {
+              id: 'solo_project_2024',
+              name: 'Solo project',
+              title: 'What does Looking taste like?',
+              imageSrc: `${process.env.PUBLIC_URL}/assets/images/aktuelles/what_does_looking_taste_like.png`,
+              categories: [],
+              subjects: ['Solo project'],
+              descriptionLeft:
+                'The central examination requirement in the second year of the CDSH program consists of creating an original short production. This year, 19 dancers developed short pieces, which, under the theme "What does Looking Taste Like?", explore a wide range of topics.',
+              descriptionRight:
+                'The **Ho\u2019Omau class** invites you to embark on a delicious journey of three different dinners, each featuring a carefully assembled six-course meal. A variety of flavors is guaranteed to delight even the most refined and discerning palate. You will taste coldness and darkness, splashed with a dash of tenderness, as well as warmth and joy, accompanied by vibrant colors and aromas. A feast for the senses.\n\n*Whatever your eyes crave, we are.*',
+              impressions: [
+                {
+                  src: `${process.env.PUBLIC_URL}/assets/images/aktuelles/what_does_looking_taste_like.png`,
+                },
+              ],
+            };
+            dispatch(setSelectedProject({ userLanguage, data: mockData}));
+          } else {
+            const mockData = {
+              id: 'solo_project_2024',
+              name: 'Solo-Projekt',
+              title: 'What Does Looking Taste Like?',
+              imageSrc: `${process.env.PUBLIC_URL}/assets/images/aktuelles/what_does_looking_taste_like.png`,
+              categories: [],
+              subjects: ['Solo-Projekt'],
+              descriptionLeft:
+                'Die zentrale Prüfungsleistung im zweiten Ausbildungsjahr der CDSH besteht in der Entwicklung einer eigenständigen Kurzproduktion. In diesem Jahr haben 19 Tänzer*innen kurze Stücke erarbeitet, die sich unter dem Thema „What Does Looking Taste Like?“ mit einer Vielzahl unterschiedlicher Fragestellungen auseinandersetzen.',
+              descriptionRight:
+                'Die **Ho’Omau-Klasse** lädt dich ein zu einer genussvollen Reise durch drei unterschiedliche Dinner-Erlebnisse, die jeweils aus einem sorgfältig zusammengestellten Sechs-Gänge-Menü bestehen. Eine Vielfalt an Geschmacksrichtungen verspricht, selbst die feinsten und anspruchsvollsten Gaumen zu begeistern. Du wirst Kälte und Dunkelheit kosten, verfeinert mit einem Hauch von Zärtlichkeit, ebenso wie Wärme und Freude, begleitet von leuchtenden Farben und intensiven Aromen. Ein Fest für die Sinne.\n\n*Was immer deine Augen begehren – wir sind es.*',
+              impressions: [
+                {
+                  src: `${process.env.PUBLIC_URL}/assets/images/aktuelles/what_does_looking_taste_like.png`,
+                },
+              ],
+            };
+            dispatch(setSelectedProject({ userLanguage, data: mockData}));
+          }
+
+          // TODO: commented for temp deploy
+          // console.error('Fetching error:', error);
+          // setError(error);
+        })
+        .finally(() => {
           setLoading(false);
+          clearTimeout(timeout);
         });
     }
-  }, [projectUrlId]);
+  }, [projectUrlId, userLanguage]);
 
   if (loading) {
     return <Box sx={{ p: 10, textAlign: 'center' }}>Loading content...</Box>;
   }
 
-  if (!selectedProject || selectedProject.error) {
+  if (error || !selectedProject || selectedProject.error) {
     return <Box sx={{ p: 10, textAlign: 'center' }}>Project not found.</Box>;
   }
 
@@ -175,12 +241,12 @@ function Project(props) {
           py: { xs: '55px', md: '110px' },
         }}
       >
-        <div flex="1">
+        <Box className="flex-1" sx={{ width: { xs: '100%', md: '50%' } }}>
           <ReactMarkdown components={renderers} children={selectedProject.descriptionLeft} />
-        </div>
-        <div flex="1">
+        </Box>
+        <Box className="flex-1" sx={{ width: { xs: '100%', md: '50%' } }}>
           <ReactMarkdown components={renderers} children={selectedProject.descriptionRight} />
-        </div>
+        </Box>
       </Box>
 
       <ImpressionenSection imgSet={selectedProject.impressions} />

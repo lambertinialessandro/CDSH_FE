@@ -34,7 +34,11 @@ function GridCheckbox(props) {
           </div>
         </Grid>
       </Grid>
-      {!!error && <FormHelperText error sx={{color: "#FF2023 !important"}}>{error.message}</FormHelperText>}
+      {!!error && (
+        <FormHelperText error sx={{ color: '#FF2023 !important' }}>
+          {error.message}
+        </FormHelperText>
+      )}
     </FormControl>
   );
 }

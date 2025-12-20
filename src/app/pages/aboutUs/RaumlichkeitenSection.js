@@ -2,20 +2,7 @@ import { Box, Typography, useMediaQuery } from '@mui/material';
 import Carousel from 'app/shared-components/carousel/Carousel';
 
 function RaumlichkeitenSection({ title, images }) {
-  /*const items = [
-    {
-      src: `${process.env.PUBLIC_URL}/assets/images/aboutUs/Bildschirmfoto 2025-02-21 um 17.23.58.png`,
-    },
-    {
-      src: `${process.env.PUBLIC_URL}/assets/images/aboutUs/Bildschirmfoto 2025-02-21 um 17.24.14.png`,
-    },
-    {
-      src: `${process.env.PUBLIC_URL}/assets/images/aboutUs/Bildschirmfoto 2025-02-21 um 17.23.58.png`,
-    },
-  ];*/
-
   const items = images;
-
   const isMobile = useMediaQuery('(max-width:900px)');
 
   return (
@@ -34,7 +21,6 @@ function RaumlichkeitenSection({ title, images }) {
         }}
       >
         {title}
-        {/*Räumlichkeiten**/}
       </Typography>
       {isMobile ? (
         <Carousel items={items} gap={32} itemWidth={300} itemHeight={235} />

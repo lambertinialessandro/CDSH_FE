@@ -7,7 +7,7 @@ export const selectIsBannerOpen = (state) => state.app.cdsh.isBannerOpen;
 export const selectUserLanguage = (state) => state.app.cdsh.userLanguage;
 
 const initialState = {
-  currTheme: 'default', // localStorage.getItem('theme') ?? 'default',
+  currTheme: 'default',
   isBannerOpen: false,
   userLanguage: localStorage.getItem('language') ?? 'en',
 };
