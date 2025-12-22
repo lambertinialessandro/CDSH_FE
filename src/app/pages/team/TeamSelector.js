@@ -141,6 +141,8 @@ function TeamSelector(props) {
                 </Box>
               </Box>
 
+<Box className="w-min min-w-full">
+
               <Typography
                 className="uppercase"
                 sx={{
@@ -148,7 +150,7 @@ function TeamSelector(props) {
                   fontWeight: '400',
                   lineHeight: 'normal',
                 }}
-              >
+                >
                 {member.name}
               </Typography>
               <Typography
@@ -156,9 +158,10 @@ function TeamSelector(props) {
                   fontSize: { xs: '11px', md: '13px' },
                   color: 'gray',
                 }}
-              >
+                >
                 {member.subjects?.join(', ')}
               </Typography>
+                </Box>
             </MotionBox>
           ))}
         </AnimatePresence>

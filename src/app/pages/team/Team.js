@@ -19,6 +19,7 @@ function Team() {
   const theme = useTheme();
   const userLanguage = useSelector(selectUserLanguage);
 
+  const [hasContent, setContent] =useState(false)
   const teamData = useSelector((state) => selectTeamData(state, userLanguage));
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -324,6 +325,7 @@ function Team() {
         // setError(error);
       })
       .finally(() => {
+        setContent(true);
         setLoading(false);
         clearTimeout(timeout);
       });
@@ -331,7 +333,7 @@ function Team() {
 
   console.log('teamdata', teamData);
 
-  if (loading) return <LoadingPage />;
+  if (!hasContent && loading) return <LoadingPage />;
   if (error || !teamData) return <ErrorPage />;
 
   const teamMembers = teamData.teamMembers;

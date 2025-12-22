@@ -28,7 +28,7 @@ function Banner({ fixed, bannerData }) {
     <Box
       className="w-full z-[50] border-b border-black"
       sx={{
-        height: { xs: '32px', sm: '45px' },
+        minHeight: { xs: '32px', sm: '45px' },
         background: theme.palette.primary.main,
         ...(fixed && { position: 'fixed', top: 0, left: 0 }),
       }}
