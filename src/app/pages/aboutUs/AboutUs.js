@@ -49,19 +49,19 @@ function AboutUs() {
           const mockData = {
             header: {
               title: 'About Us',
-              text: 'The CDSH training program combines the diversity of contemporary dance with the individual artistic needs of the students and the requirements of the international industry.',
+              text: 'The **CDSH** training program combines the diversity of **contemporary** dance with the individual artistic needs of the students and the requirements of the international industry.',
               image: `${process.env.PUBLIC_URL}/assets/images/aboutUs/cdsh-willkommen-1 1.png`,
             },
             description: {
-              left: 'The Contemporary Dance School Hamburg offers you high-level contemporary dance and the development of your artistic personality through exchange with experienced mentors from around the world. Daily training prepares you for the demands of a career in stage dance. As a state-accredited vocational school for contemporary stage dance, the CDSH offers you a three-year, practice-oriented dance education, connects you with artists in the scene, and',
+              left: 'The **Contemporary Dance School Hamburg** offers you high-level contemporary dance and the development of your artistic personality through exchange with experienced mentors from around the world. Daily training prepares you for the demands of a career in stage dance. As a state-accredited vocational school for contemporary stage dance, the CDSH offers you a three-year, practice-oriented dance education, connects you with artists in the scene, and',
               right:
-                'collaborates with many relevant areas of dance education. An effective curriculum helps you develop technically, artistically, and creatively. Through choreographic project work, you gain an understanding of professional practice and acquire stage experience through regular performances in theaters. An experienced team of artists and educators supports you in your development during your dance training.',
+                'collaborates with many relevant areas of dance education. An effective curriculum helps you develop technically, artistically, and creatively. Through **choreographic** project work, you gain an understanding of **professional practice** and acquire stage experience through regular performances in theaters. An experienced team of artists and educators supports you in your development during your dance training.',
             },
             banner1: 'WORKSHOPS, EDUCATION, TRAINING',
             splitSections: [
               {
                 title: 'Talent, Technique & Dance Language',
-                text: 'We foster the development of individual artistic personality. This is based on a solid foundation in established dance styles.',
+                text: 'We foster the development of **individual artistic personality**. This is based on a solid foundation in established dance styles.',
                 reverse: false,
                 bottom: false,
                 img: {
@@ -71,7 +71,7 @@ function AboutUs() {
               },
               {
                 title: 'Support & Cooperation',
-                text: 'We also help you find jobs after graduation and provide rehearsal spaces free of charge. Furthermore, you will benefit from our network of international mentors during your training.',
+                text: 'We also help you **find jobs** after graduation and provide rehearsal spaces free of charge. Furthermore, you will benefit from our network of international mentors during your training.',
                 reverse: true,
                 bottom: false,
                 img: {
@@ -81,7 +81,7 @@ function AboutUs() {
               },
               {
                 title: 'Choreography & Practice',
-                text: 'We develop targeted choreographies and gain extensive experience on local stages and at events during our training.',
+                text: 'We develop targeted **choreographies** and gain extensive experience on local stages and at events during our training.',
                 reverse: false,
                 bottom: true,
                 img: {
@@ -106,9 +106,9 @@ function AboutUs() {
             concept: {
               title: 'Artistic concept',
               textLeft:
-                '\u201cIn my role as Artistic Director of the Contemporary Dance School Hamburg (CDSH), I combine the CDSH\u2019s creative and technical potential with the demands of a practice-oriented education for contemporary stage dance. My goal is to enable future dancers to be integrated into various productions and projects as effectively as possible during their training by fostering exchange between the CDSH and diverse artists and partners.',
+                '\u201cIn my role as **Artistic Director** of the *Contemporary Dance School Hamburg* (CDSH), I combine the CDSH\u2019s creative and technical potential with the demands of a practice-oriented education for contemporary stage dance. My goal is to enable future dancers to be integrated into various productions and projects as effectively as possible during their training by fostering exchange between the CDSH and diverse artists and partners.',
               textRight:
-                'In this way, we cultivate a network that facilitates creative exchange beyond the training program and eases the transition to professional life. In my experience, developing creative potential in many directions is one of the most important components of artistic training. The CDSH\u2019s offerings encompass both technical instruction and the individual development of each dancer\u2019s artistic personality.\u201d',
+                'In this way, we cultivate a **network** that facilitates creative exchange beyond the training program and eases the transition to professional life. In my experience, developing creative potential in many directions is one of the most important components of artistic training. The CDSH\u2019s offerings encompass both technical instruction and the individual development of each dancer\u2019s artistic personality.\u201d',
               name: 'RAUL VALDEZ',
               role: 'Artistic Director',
               image: `${process.env.PUBLIC_URL}/assets/images/aboutUs/Bildschirmfoto 2025-02-18 um 17.26.20 1.png`,

@@ -50,7 +50,7 @@ function Aktuelles() {
             header: {
               title: 'News',
               intro:
-                "Here you'll find all the latest information about final projects, performances, and other events at our school. Stay up to date!",
+                "Here you'll find all the **latest information** about final projects, performances, and other events at our school. Stay up to date!",
               image: `${process.env.PUBLIC_URL}/assets/images/aktuelles/cdsh-galley-09.jpg`,
             },
             banner: {

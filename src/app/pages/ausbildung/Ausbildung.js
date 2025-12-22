@@ -55,7 +55,7 @@ function Ausbildung() {
             },
             intro: {
               text_left:
-                'We enable dancers to engage sustainably with diverse contemporary and classical dance techniques and styles, as well as receive training in numerous forms of movement and expression to prepare them for a career. In addition to regular training, we regularly invite international guests who share their knowledge with our trainees.',
+                'We enable dancers to engage **sustainably** with diverse **contemporary** and **classical** dance techniques and styles, as well as receive training in numerous forms of movement and expression to prepare them for a career. In addition to regular training, we regularly invite international guests who share their knowledge with our trainees.',
               text_right:
                 "Fostering the individual wishes of both individuals and groups is part of the CDSH's mission. We respond to the needs of our students and to current demands in the professional environment \u2013 \u200b\u200bour program is constantly evolving.",
             },
@@ -267,9 +267,9 @@ function Ausbildung() {
             program_structure: {
               title: 'Structure & Organization',
               intro:
-                'This three-year program is designed for applicants with solid prior knowledge of contemporary dance and ballet. Admission is via audition.',
+                'This **three-year program** is designed for applicants with solid prior knowledge of contemporary dance and ballet. Admission is via audition.',
               details:
-                'Credits from other degree programs may be transferable. Lorem Ipsum ... translate study to ECTS.',
+                'Credits from other degree programs may be transferable. Lorem Ipsum ... translate study to **ECTS**.',
             },
             ausbildung_years: [
               {
@@ -277,26 +277,26 @@ function Ausbildung() {
                 headline: 'First Year',
                 level: 'Basics',
                 description:
-                  'In the first year of training, the focus is on developing the basic dance techniques in various modern techniques, contemporary dance and classical ballet.',
+                  'In the **first year** of training, the focus is on developing the basic dance techniques in various modern techniques, contemporary dance and classical ballet.',
               },
               {
                 year: 2,
                 headline: 'Second Year',
                 level: 'Intensification and artistic development',
                 description:
-                  "In the second year, the basic techniques are deepened and developed. The subject of improvisation, as well as the development and presentation of an original piece within our solo project, contribute to finding one's own artistic language and being able to individually implement one's own creative impulses based on the learned technical fundamentals.",
+                  "In the **second year**, the basic techniques are deepened and developed. The subject of improvisation, as well as the development and presentation of an original piece within our solo project, contribute to finding one's own artistic language and being able to individually implement one's own creative impulses based on the learned technical fundamentals.",
               },
               {
                 year: 3,
                 headline: 'Third Year',
                 level: 'Specialization, independent artistic work and company project',
                 description:
-                  "In your third year, you'll work creatively with your class. Regular showings prepare you for the company project in the final semester, where you'll gain valuable insights into the professional lives of dancers under realistic dance company conditions.",
+                  "In your **third year**, you'll work creatively with your class. Regular showings prepare you for the company project in the final semester, where you'll gain valuable insights into the professional lives of dancers under realistic dance company conditions.",
               },
             ],
             costs: {
               headline: 'Cost',
-              text: 'The tuition fee for one academic year is \u20ac6,360.00 and can be paid in 12 monthly installments of \u20ac530.00. In addition, there is a mandatory contribution of \u20ac60.00 for the work-in-progress presentations in all three years of study, \u20ac120.00 for the final project in the first and second years, \u20ac240.00 for the final project at the end of the third year, and \u20ac160.00 for the solo project in the second year. The CDSH is recognized by the German Federal Training Assistance Act (BAf\u00f6G) \u2013 we are happy to help you find an affordable student loan, which can be applied for starting in the second year of study.',
+              text: 'The tuition fee for one academic year is **\u20ac6,360.00** and can be paid in 12 monthly installments of \u20ac530.00. In addition, there is a mandatory contribution of \u20ac60.00 for the work-in-progress presentations in all three years of study, \u20ac120.00 for the final project in the first and second years, \u20ac240.00 for the final project at the end of the third year, and \u20ac160.00 for the solo project in the second year. The CDSH is recognized by the German Federal Training Assistance Act (BAf\u00f6G) \u2013 we are happy to help you find an affordable student loan, which can be applied for starting in the second year of study.',
             },
             fortbildung: {
               headline: 'Further training',
@@ -843,16 +843,7 @@ function Ausbildung() {
               className="w-full md:w-1/2 md:h-[460px] py-[32px]"
               sx={{ pr: { xs: '26px', md: '0' }, pl: { xs: '26px', md: '32px' } }}
             >
-              <Typography
-                sx={{
-                  color: '#000000 ',
-                  fontSize: { xs: '15px', md: '30px' },
-                  fontWeight: '400',
-                  lineHeight: 'normal',
-                }}
-              >
-                {ausbuildungData.ausbildung_years[0].description}
-              </Typography>
+              <ReactMarkdown components={renderers} children={ausbuildungData.ausbildung_years[0].description} />
             </Box>
           </Box>
         </Box>
@@ -862,16 +853,7 @@ function Ausbildung() {
               className="w-full md:w-1/2 md:h-[460px] py-[32px]"
               sx={{ pr: { xs: '26px', md: '48px' }, pl: { xs: '26px', md: '0' } }}
             >
-              <Typography
-                sx={{
-                  color: '#000000 ',
-                  fontSize: { xs: '15px', md: '30px' },
-                  fontWeight: '400',
-                  lineHeight: 'normal',
-                }}
-              >
-                {ausbuildungData.ausbildung_years[1].description}
-              </Typography>
+              <ReactMarkdown components={renderers} children={ausbuildungData.ausbildung_years[1].description} />
             </Box>
             <Box
               className="w-full md:w-1/2 py-[32px] flex flex-col justify-between items-start"
@@ -922,16 +904,7 @@ function Ausbildung() {
               className="w-full md:w-1/2 md:h-[460px] py-[32px]"
               sx={{ pr: { xs: '26px', md: '0' }, pl: { xs: '26px', md: '32px' } }}
             >
-              <Typography
-                sx={{
-                  color: '#000000 ',
-                  fontSize: { xs: '15px', md: '30px' },
-                  fontWeight: '400',
-                  lineHeight: 'normal',
-                }}
-              >
-                {ausbuildungData.ausbildung_years[2].description}
-              </Typography>
+              <ReactMarkdown components={renderers} children={ausbuildungData.ausbildung_years[2].description} />
             </Box>
           </Box>
         </Box>

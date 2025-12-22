@@ -259,18 +259,8 @@ function Home() {
             <Box className="max-w-[1250px] w-full md:border-y border-black flex flex-col md:flex-row">
               {/* Text */}
               <Box className="w-full md:w-1/2 py-[32px] md:py-[54px] flex flex-col justify-between items-start">
-                <Typography
-                  sx={{
-                    fontSize: { xs: '18px', md: '30px' },
-                    fontWeight: 400,
-                    color: '#000',
-                    lineHeight: 'normal',
-                    pr: { xs: 0, md: '45px' },
-                    mb: { xs: 3, md: 0 },
-                  }}
-                >
-                  {homeData.aboutUs.text}
-                </Typography>
+                <ReactMarkdown components={renderers} children={homeData.aboutUs.text} />
+
                 <AnchorLink href={'/team'}>
                   {button.mehrErfahren} <ArrowForward fontSize="small" sx={{ fontSize: { xs: '14px', sm: '16px' } }} />
                 </AnchorLink>

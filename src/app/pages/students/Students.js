@@ -49,7 +49,7 @@ function Students() {
           const mockData = {
             intro: {
               headline: 'The students',
-              text: 'Studying stage dance at CDSH means not only learning, but also finding like-minded people and friends. You work intensively with people in your field every day. This fosters a diverse exchange and encourages personal development among dancers, choreographers, and performers.',
+              text: 'Studying stage dance at **CDSH** means not only learning, but also finding like-minded people and friends. You work intensively with people in your field every day. This fosters a diverse exchange and encourages personal development among dancers, choreographers, and performers.',
               image: `${process.env.PUBLIC_URL}/assets/images/students/cdsh-willkommen-1.png`,
             },
             studentGroups: [

@@ -58,7 +58,7 @@ function StudentGroup() {
             id: 'ho\u2019omau',
             name: 'Ho\u2019omau',
             descriptionLeft:
-              'Ho\u2019omau signifies resilience and perseverance. As a class, we value and trust the process of growth, in the many different forms it may come in. By understanding that our journeys as artists won\u2019t always be linear or necessarily',
+              'Ho\u2019omau signifies **resilience** and perseverance. As a class, we value and trust the process of growth, in the many different forms it may come in. By understanding that our journeys as artists won\u2019t always be linear or necessarily',
             descriptionRight:
               'smooth sailing, we are able to steady each other and carry on together. We are a group who keeps moving forward, no matter the obstacles, and in doing so, learns how to take care of each other as dancers and most importantly, as people.',
             studentsHeader: 'The students',

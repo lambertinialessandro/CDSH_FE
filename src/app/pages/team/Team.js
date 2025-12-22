@@ -70,12 +70,12 @@ function Team() {
             ],
             intro: {
               headline: 'Team',
-              text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.',
+              text: 'Lorem ipsum **dolor** sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.',
               image: `${process.env.PUBLIC_URL}/assets/images/team/cdsh-willkommen-1.jpg`,
             },
             leadership: {
               headline: 'Management Team',
-              text: 'As the management team of CDSH, Javier B\u00e1ez, Raul Valdez, and Sina Rundel can draw on their many years of artistic and pedagogical experience to guarantee a high-quality, real-world preparation for the profession of contemporary stage dancer in their training program.',
+              text: 'As the management team of CDSH, **Javier B\u00e1ez**, **Raul Valdez**, and **Sina Rundel** can draw on their many years of artistic and pedagogical experience to guarantee a high-quality, real-world preparation for the profession of contemporary stage dancer in their training program.',
             },
             teamMembers: [
               {
@@ -168,13 +168,13 @@ function Team() {
             memoriam: {
               headline: 'In Memoriam: Tanja B\u00e1ez',
               text_left:
-                "It was with great sadness and shock that we announced the passing of Tanja B\u00e1ez in October 2016. As a co-founder of the Contemporary Dance School Hamburg, Tanja was one of the school's pillars from the very beginning, and her loss will be irreplaceable. She embarked on her final journey with strength, courage, and without complaint, and will forever be a role model for us.",
-              text_right: 'Rest in peace, Tanja!',
+                "It was with great sadness and shock that we announced the passing of **Tanja B\u00e1ez** in October 2016. As a co-founder of the Contemporary Dance School Hamburg, Tanja was one of the school's pillars from the very beginning, and her loss will be irreplaceable. She embarked on her final journey with strength, courage, and without complaint, and will forever be a role model for us.",
+              text_right: '**Rest in peace, Tanja!**',
               image: `${process.env.PUBLIC_URL}/assets/images/team/Bildschirmfoto 2025-02-18 um 17.26.20 1.png`,
             },
             teachers: {
               headline: 'Teachers',
-              text: 'Our international team of lecturers offers you a broad spectrum of insights into diverse working methods in very different parts of the world. From Latin America to Eastern Europe, the USA, Asia, and across Europe, our lecturers bring a wide range of experiences, not only in their subject matter but also in their practical work. As individuals with their own artistic backgrounds, they can provide you with a very concrete, practical, and experience-based picture of real-world work practices, in addition to their professional and technical expertise.',
+              text: 'Our **international team** of lecturers offers you a broad spectrum of insights into diverse working methods in very different parts of the world. From Latin America to Eastern Europe, the USA, Asia, and across Europe, our lecturers bring a wide range of experiences, not only in their subject matter but also in their practical work. As individuals with their own artistic backgrounds, they can provide you with a very concrete, practical, and experience-based picture of real-world work practices, in addition to their professional and technical expertise.',
             },
             footerCta: {
               show: true,

@@ -497,7 +497,7 @@ function Auditions() {
             header: {
               title: 'Auditions',
               intro:
-                'If you are interested in our entrance exams, you can register for the video audition. It is equivalent to an on-site audition and essentially consists of submitting videos, which we use as the basis for our evaluation.',
+                'If you are interested in our **entrance exams**, you can register for the video audition. It is equivalent to an on-site audition and essentially consists of submitting videos, which we use as the basis for our evaluation.',
               image: `${process.env.PUBLIC_URL}/assets/images/auditions/cdsh-willkommen-1.png`,
             },
             auditions_list: [
