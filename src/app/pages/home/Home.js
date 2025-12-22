@@ -42,11 +42,7 @@ function Image(props) {
   const { item } = props;
 
   return (
-    <img
-      src={item.src}
-      alt={item.title || ``}
-      className="w-full object-cover h-[300px] md:h-full md:min-h-[460px]"
-    />
+    <img src={item.src} alt={item.title || ``} className="w-full object-cover h-[300px] md:h-full md:min-h-[460px]" />
   );
 }
 
@@ -74,7 +70,7 @@ function Home() {
     setError(null);
 
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 1);
+    //const timeout = setTimeout(() => controller.abort(), 1);
 
     fetch(`http://localhost/plainkit-main/api/home?lang=${userLanguage}`, { signal: controller.signal })
       .then((response) => {
@@ -94,8 +90,9 @@ function Home() {
               video: `${process.env.PUBLIC_URL}/assets/images/CDSH - Trailer Final Performance opt.mp4`,
             },
             intro: {
-              text_1: 'We are a **state-accredited**',
-              text_2: 'vocational school for contemporary stage dance',
+              text_1:
+                'The *CONTEMPORARY DANCE SCHOOL HAMBURG* (or simply CDSH) is a state-accredited vocational school for contemporary stage dance \u2013 and the only school of its kind in Northern Germany. The practical training focuses on contemporary dance, modern dance, ballet, and improvisation. An experienced team of internationally active dancers and teachers will support you on your journey and prepare you for a professional career on the stage, which \u2013 soon to be your world too.',
+              text_2: 'Other text in english',
             },
             aktuelles: {
               headline: 'News',
@@ -134,8 +131,8 @@ function Home() {
             },
             aboutUs: {
               headline: 'About Us',
-              text: 'The CDSH - Contemporary Dance School is a state-accredited vocational school for contemporary stage dance. The three-year program focuses on contemporary and modern classical ballet.',
-              image: `${process.env.PUBLIC_URL}/assets/images/cdsh-willkommen-1.jpg`,
+              text: 'The **CDSH** - Contemporary Dance School is a state-accredited vocational school for contemporary stage dance. The three-year program focuses on contemporary and modern classical ballet.',
+              image: 'http://localhost/plainkit-main/media/pages/home/c9ecbae653-1765953561/team_trio.png',
             },
             audition_banner: {
               text: 'THE AUDITION DATES 2026 ARE NOW ONLINE',
@@ -147,6 +144,7 @@ function Home() {
               text: "We'd like to get to know you too. Besides the regular auditions, we're available by email or phone to answer any questions you may have about the training program.",
             },
           };
+
           dispatch(setHomeData({ userLanguage, data: mockData }));
         } else {
           const mockData = {
@@ -155,8 +153,9 @@ function Home() {
               video: `${process.env.PUBLIC_URL}/assets/images/CDSH - Trailer Final Performance opt.mp4`,
             },
             intro: {
-              text_1: 'Wir sind eine **staatlich anerkannte**',
-              text_2: 'Berufsfachschule für zeitgenössischen Bühnentanz',
+              text_1:
+                'Die *CONTEMPORARY DANCE SCHOOL HAMBURG* (kurz CDSH) ist eine staatlich anerkannte Berufsfachschule f\u00fcr zeitgen\u00f6ssischen B\u00fchnentanz \u2013 und die einzige ihrer Art in Norddeutschland. Die praktische Ausbildung konzentriert sich auf zeitgen\u00f6ssischen Tanz, Modern Dance, Ballett und Improvisation. Ein erfahrenes Team international t\u00e4tiger T\u00e4nzer und Lehrer begleitet Sie auf Ihrem Weg und bereitet Sie auf eine professionelle B\u00fchnenkarriere vor, die schon bald auch Ihre Welt sein wird.',
+              text_2: 'Hier k\u00f6nnen Sie weiteren deutsch Text einf\u00fcgen. Vielleicht eine kurze Beschreibung.',
             },
             aktuelles: {
               headline: 'Aktuelles',
@@ -194,9 +193,9 @@ function Home() {
               ],
             },
             aboutUs: {
-              headline: 'Über uns',
-              text: 'Die CDSH – Contemporary Dance School Hamburg ist eine staatlich anerkannte Berufsfachschule für zeitgenössischen Bühnentanz. Die dreijährige Ausbildung legt ihren Schwerpunkt auf Contemporary Dance und modernes klassisches Ballett.',
-              image: `${process.env.PUBLIC_URL}/assets/images/cdsh-willkommen-1.jpg`,
+              headline: '\u00dcber uns',
+              text: 'Die *CDSH* \u2013 Contemporary Dance School ist eine staatlich anerkannte Berufsschule f\u00fcr zeitgen\u00f6ssischen B\u00fchnentanz. Das dreij\u00e4hrige Programm konzentriert sich auf zeitgen\u00f6ssisches und modernes klassisches Ballett.',
+              image: 'http://localhost/plainkit-main/media/pages/home/c9ecbae653-1765953561/team_trio.png',
             },
             audition_banner: {
               text: 'DIE AUDITION-TERMINE 2026 SIND JETZT ONLINE',
@@ -208,6 +207,7 @@ function Home() {
               text: 'Wir dich ebenfalls. Neben den regulären Auditions sind wir bei Fragen rund um die Ausbildung per E-Mail oder telefonisch für dich da.',
             },
           };
+
           dispatch(setHomeData({ userLanguage, data: mockData }));
         }
 
@@ -217,7 +217,7 @@ function Home() {
       })
       .finally(() => {
         setLoading(false);
-        clearTimeout(timeout);
+        //clearTimeout(timeout);
       });
   }, [userLanguage]);
 

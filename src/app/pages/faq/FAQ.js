@@ -15,12 +15,12 @@ function Question(props) {
   return (
     <div className="w-full">
       <Box
-        className="group w-full border-b border-black pb-4 flex gap-4 justify-start items-end cursor-pointer"
+        className="group w-full border-b border-black pb-4 flex gap-4 justify-start items-start cursor-pointer"
         onClick={() => {
           setIsOpen((prev) => !prev);
         }}
       >
-        <div className={`min-w-4 size-4 ${isOpen ? 'bg-[#C8FF75]' : 'bg-black'} rounded-full group-hover:bg-[#C8FF75]`}></div>
+        <div className={`mt-[3px] min-w-4 size-4 ${isOpen ? 'bg-[#C8FF75]' : 'bg-black'} rounded-full group-hover:bg-[#C8FF75]`}></div>
         <Typography
           className="text-left"
           sx={{

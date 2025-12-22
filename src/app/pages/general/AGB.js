@@ -27,7 +27,7 @@ function AGB() {
     setError(null);
 
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 1);
+    //const timeout = setTimeout(() => controller.abort(), 1);
 
     fetch(`http://localhost/plainkit-main/api/agb?lang=${userLanguage}`, { signal: controller.signal })
       .then((response) => {
@@ -64,7 +64,7 @@ function AGB() {
       })
       .finally(() => {
         setLoading(false);
-        clearTimeout(timeout);
+        //clearTimeout(timeout);
       });
   }, [userLanguage]);
 

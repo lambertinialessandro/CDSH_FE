@@ -139,43 +139,44 @@ function InteractiveSubjects(props) {
           <Box component="section" className="py-[90px]">
             <Box ref={containerRef} className="relative" sx={{ height: `${SCROLL_LIMIT}px` }}>
               <AnimatePresence mode="wait">
-                <Box className="w-full h-full absolute flex flex-col justify-start items-center px-[75px] ">
-                <Box
-                  key={selectedSubject}
-                  component={motion.div}
-                  className={`sticky top-[54px] left-0 right-0 z-20`}
-                  sx={{ marginBottom: { xs: 'calc(100vh - 180px - 54px)', md: 'calc(100vh - 180px - 54px)' } }}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.4 }}
-                >
-                  <Typography
-                    sx={{
-                      color: '#000000',
-                      mt: { xs: '30px', md: '0px' },
-                      fontSize: { xs: '30px', md: '80px' },
-                      fontWeight: '400',
-                      lineHeight: '1',
-                      textAlign: 'center',
-                    }}
+                <Box className="w-full h-full absolute flex flex-col justify-start items-center" 
+                sx={{px: {xs: "25px", md: "75px"}}}>
+                  <Box
+                    key={selectedSubject}
+                    component={motion.div}
+                    className={`sticky top-[54px] left-0 right-0 z-20`}
+                    sx={{ marginBottom: { xs: 'calc(100vh - 180px - 54px)', md: 'calc(100vh - 180px - 54px)' } }}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.4 }}
                   >
-                    {selectedSubject === -1 ? subjects_balls[0].title : subjects[selectedSubject].title}
-                  </Typography>
+                    <Typography
+                      sx={{
+                        color: '#000000',
+                        mt: { xs: '30px', md: '0px' },
+                        fontSize: { xs: '30px', md: '80px' },
+                        fontWeight: '400',
+                        lineHeight: '1',
+                        textAlign: 'center',
+                      }}
+                    >
+                      {selectedSubject === -1 ? subjects_balls[0].title : subjects[selectedSubject].title}
+                    </Typography>
 
-                  <Typography
-                    className="max-w-[740px] min-w-[50%] text-center"
-                    sx={{
-                      color: '#000000',
-                      fontSize: { xs: '15px', md: '30px' },
-                      fontWeight: '400',
-                      lineHeight: '1',
-                      mt: 2,
-                    }}
-                  >
-                    {selectedSubject === -1 ? subjects_balls[0].description : subjects[selectedSubject].description}
-                  </Typography>
-                </Box>
+                    <Typography
+                      className="max-w-[1280px] text-center"
+                      sx={{
+                        color: '#000000',
+                        fontSize: { xs: '15px', md: '30px' },
+                        fontWeight: '400',
+                        lineHeight: '1',
+                        mt: 2,
+                      }}
+                    >
+                      {selectedSubject === -1 ? subjects_balls[0].description : subjects[selectedSubject].description}
+                    </Typography>
+                  </Box>
                 </Box>
               </AnimatePresence>
               <Box
@@ -211,7 +212,11 @@ function InteractiveSubjects(props) {
                       <Box
                         key={i}
                         component={motion.div}
-                        initial={{ /*scale: 0.8,  opacity: 0 */ }}
+                        initial={
+                          {
+                            /*scale: 0.8,  opacity: 0 */
+                          }
+                        }
                         animate={{
                           scale: 1,
                           /* opacity: eased, */
