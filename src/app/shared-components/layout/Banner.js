@@ -32,10 +32,11 @@ function Banner({ fixed, bannerData }) {
         background: theme.palette.primary.main,
         ...(fixed && { position: 'fixed', top: 0, left: 0 }),
       }}
-    >
+      >
       <Box
         className="w-full h-full flex justify-between items-center flex-nowrap"
         sx={{
+          minHeight: { xs: '32px', sm: '45px' },
           px: { xs: 1.5, sm: 3 },
           flexWrap: { xs: 'wrap', sm: 'nowrap' },
         }}
