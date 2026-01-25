@@ -155,6 +155,7 @@ function Auditions() {
         Component: ({ input: { sx } }) => <Box sx={sx} />,
         sx: { margin: { xs: '24px 0', md: '48px 0' } },
         colSpan: 'col-span-12',
+        needController: false,
       },
       // personal info
       {
@@ -217,6 +218,7 @@ function Auditions() {
         id: 'empty-space-01',
         Component: Box,
         colSpan: 'col-span-12 md:col-span-6',
+        needController: false,
       },
       // Durchsuchen
       {
@@ -225,6 +227,7 @@ function Auditions() {
         Component: OutputFormSubtitle,
         colSpan: 'col-span-12',
         margin: { xs: '14px 0 0 0', md: '28px 0 0 0' },
+        needController: false,
       },
       {
         id: 'durchsuchen',
@@ -241,6 +244,7 @@ function Auditions() {
         Component: OutputFormTitle,
         colSpan: 'col-span-12',
         margin: { xs: '26px 0 0 0', md: '54px 0 0 0' },
+        needController: false,
       },
       {
         id: 'strasse',
@@ -297,6 +301,7 @@ function Auditions() {
         Component: OutputFormTitle,
         colSpan: 'col-span-12',
         margin: { xs: '26px 0 0 0', md: '54px 0 0 0' },
+        needController: false,
       },
       {
         id: 'schulabschluss',
@@ -321,12 +326,14 @@ function Auditions() {
         Component: OutputFormTitle,
         colSpan: 'col-span-12',
         margin: { xs: '26px 0 0 0', md: '54px 0 0 0' },
+        needController: false,
       },
       {
         id: 'title-erf-mog',
         label: title.multipleSelectionPossible,
         Component: OutputFormSubtitle,
         colSpan: 'col-span-12',
+        needController: false,
       },
       {
         id: 'erf_mog_list',
@@ -359,6 +366,7 @@ function Auditions() {
         Component: OutputFormTitle,
         colSpan: 'col-span-12',
         margin: { xs: '51px 0 32px 0', md: '102px 0 32px 0' },
+        needController: false,
       },
       {
         id: 'aufmerksam_geworden',
@@ -384,6 +392,7 @@ function Auditions() {
         Component: ({ input: { sx } }) => <Box sx={sx} />,
         sx: { margin: { xs: '16px 0', md: '32px 0' } },
         colSpan: 'col-span-12',
+        needController: false,
       },
       //
       {
@@ -411,6 +420,7 @@ function Auditions() {
         Component: ({ input: { sx } }) => <Box sx={sx} />,
         sx: { margin: { xs: '16px 0', md: '32px 0' } },
         colSpan: 'col-span-12',
+        needController: false,
       },
     ],
     [title, message, presenzSubSelection]
@@ -425,16 +435,20 @@ function Auditions() {
 
   const formFields = useMemo(
     () =>
-      inputs.map(({ id, Component, colSpan = 'col-span-12', ...input }) => {
+      inputs.map(({ id, Component, colSpan = 'col-span-12', needController = true, ...input }) => {
         return (
           <Box key={id} className={`${colSpan}`}>
-            <Controller
-              name={id}
-              control={control}
-              render={({ field }) => {
-                return <Component input={input} field={field} error={errors[id]} />;
-              }}
-            />
+            {needController ? (
+              <Controller
+                name={id}
+                control={control}
+                render={({ field }) => {
+                  return <Component input={input} field={field} error={errors[id]} />;
+                }}
+              />
+            ) : (
+              <Component input={input} error={errors[id]} />
+            )}
           </Box>
         );
       }),
@@ -447,11 +461,48 @@ function Auditions() {
 
   const onConfirmHandler = async (data) => {
     console.log('data', data);
+    try {
+      const formData = new FormData();
+
+      // Simple fields
+      Object.entries(data).forEach(([key, value]) => {
+        if (Array.isArray(value)) {
+          console.log(`${key}[]`, value);
+          value.forEach((v) => formData.append(`${key}[]`, v));
+        } else if (value !== undefined && value !== null) {
+          console.log(key, value);
+          formData.append(key, value);
+        }
+      });
+
+      // File (UploadButton should give you a File object)
+      if (data.durchsuchen instanceof File) {
+        formData.append('picture', data.durchsuchen);
+      }
+      console.log('formData', formData);
+
+      const response = await fetch('http://localhost/plainkit-main/form/audition', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error('Submission failed');
+      }
+
+      setHasBeenSend(true);
+      reset(defaultValues);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  /* const onConfirmHandler = async (data) => {
+    console.log('data', data);
     // TODO: send the data to the server
 
     setHasBeenSend(true);
     reset(defaultValues);
-  };
+  }; */
   const onSubmitHandler = (ev) => {
     ev.preventDefault();
     handleSubmit(onConfirmHandler)(ev);
@@ -663,7 +714,7 @@ function Auditions() {
         }}
       >
         <Box className="max-w-[1280px]">
-          <div lineHeight="normal" className="text-center">
+          <div style={{ lineHeight: 'normal' }} className="text-center">
             <ReactMarkdown components={renderers} children={auditionsData.header.intro} />
           </div>
         </Box>

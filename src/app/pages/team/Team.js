@@ -391,11 +391,10 @@ function Team() {
         </Box>
       </Box>
 
-      <Box component="section" className="relative">
-        <Box className="absolute w-full h-[65%]" sx={{ background: theme.palette.secondary.main, zIndex: '1' }}></Box>
-
+      <Box component="section" className="relative" sx={{ background: theme.palette.secondary.main }}>
+        {/* <Box className="absolute w-full h-[65%]" sx={{ background: theme.palette.secondary.main, zIndex: '1' }}></Box> */}
         <Box
-          className="px-[48px] mb-[110px] flex flex-col justify-start items-center relative z-[10]"
+          className="px-[48px] pb-[110px] flex flex-col justify-start items-center relative z-[10]"
           sx={{
             gap: { xs: '24px', md: '48px' },
             py: { xs: '55px', md: '110px' },
