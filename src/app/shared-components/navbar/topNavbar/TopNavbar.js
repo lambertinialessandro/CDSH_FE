@@ -16,7 +16,6 @@ function TopNavbar({ fixed, active }) {
   const dispatch = useDispatch();
 
   const userLanguage = useSelector(selectCurrLanguage);
-  console.log(' ### userLanguage', userLanguage, message);
 
   const areAuditionOpen = active;
   const isBannerOpen = useSelector(selectIsBannerOpen);
@@ -176,7 +175,8 @@ function TopNavbar({ fixed, active }) {
               {userLanguage === 'en' ? message.deVersion : message.enVersion}
             </AnchorLink>
             <AnchorLink
-              href={'/ticketshop'}
+              href="/ticketshop"
+              onClick={() => setIsMenuOpen(false)}
               extraSx={{
                 fontSize: '15px',
                 fontWeight: '400',

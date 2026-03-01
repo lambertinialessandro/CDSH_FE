@@ -161,7 +161,6 @@ function Aktuelles() {
       });
   }, [userLanguage]);
 
-  console.log('Aktuelles aktuelleData', aktuelleData);
   if (loading) return <LoadingPage />;
   if (error || !aktuelleData) return <ErrorPage />;
 

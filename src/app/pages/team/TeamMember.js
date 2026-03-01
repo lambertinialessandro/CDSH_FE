@@ -24,8 +24,6 @@ function TeamMember() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  console.log('message.fach', message.fach);
-
   useEffect(() => {
     if (selectedMember) {
       setLoading(false);
@@ -119,7 +117,6 @@ function TeamMember() {
   if (loading) return <LoadingPage />;
   if (error || !selectedMember) return <ErrorPage />;
 
-  console.log('selectedMember', selectedMember);
   return (
     <>
       <Box

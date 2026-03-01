@@ -10,10 +10,8 @@ function TeamSelector(props) {
   const { members = [], educationCategories = [] } = props;
   const { t } = useTranslation([ns_common]);
   const { message, button } = t(ns_common);
-  console.log('member', members);
 
   const MotionBox = motion(Box);
-  console.log('educationCategories', educationCategories);
   // ordered from the newest to the older
   //const [tabSelected, setTabSelected] = useState(3);
   /*const TAB_OPTIONS = [
@@ -35,7 +33,7 @@ function TeamSelector(props) {
       name: cat.name,
     }));
 
-    return [...categories, { id: 'all', name: message.keinFilter }]; 
+    return [...categories, { id: 'all', name: message.keinFilter }];
   }, [educationCategories]);
 
   const [tabSelected, setTabSelected] = useState(0);
@@ -53,13 +51,8 @@ function TeamSelector(props) {
     if (!currentTab || currentTab.id === 'all') {
       return members;
     }
-
-    console.log(members[0].category)
-    console.log(currentTab.name)
     return members.filter((member) => member.category && member.category.includes(currentTab.name));
   }, [tabSelected, members, tabOptions]);
-
-  console.log('filteredMembers', filteredMembers);
 
   if (__.isEmpty(members) && educationCategories.length === 0) {
     return <Typography>Empty</Typography>;
@@ -141,27 +134,26 @@ function TeamSelector(props) {
                 </Box>
               </Box>
 
-<Box className="w-min min-w-full">
-
-              <Typography
-                className="uppercase"
-                sx={{
-                  fontSize: { xs: '12px', md: '15px' },
-                  fontWeight: '400',
-                  lineHeight: 'normal',
-                }}
+              <Box className="w-min min-w-full">
+                <Typography
+                  className="uppercase"
+                  sx={{
+                    fontSize: { xs: '12px', md: '15px' },
+                    fontWeight: '400',
+                    lineHeight: 'normal',
+                  }}
                 >
-                {member.name}
-              </Typography>
-              <Typography
-                sx={{
-                  fontSize: { xs: '11px', md: '13px' },
-                  color: 'gray',
-                }}
+                  {member.name}
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: { xs: '11px', md: '13px' },
+                    color: 'gray',
+                  }}
                 >
-                {member.subjects?.join(', ')}
-              </Typography>
-                </Box>
+                  {member.subjects?.join(', ')}
+                </Typography>
+              </Box>
             </MotionBox>
           ))}
         </AnimatePresence>

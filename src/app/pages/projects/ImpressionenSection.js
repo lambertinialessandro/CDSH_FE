@@ -6,18 +6,17 @@ function ImpressionenSection(props) {
 
   const isMobile = useMediaQuery('(max-width:900px)');
 
-  console.log('items', items);
   if (!items || items.length === 0) {
     return null;
   }
   return (
     <Box
       component="section"
-      className="px-[45px] flex flex-col justify-center items-start"
+      className="px-[45px] flex flex-col justify-center items-start z-1"
       sx={{ py: { xs: '55px', md: '110px' } }}
     >
       <Typography
-        className=""
+        className="block z-10"
         sx={{
           color: '#000000',
           fontSize: { xs: '35px', md: '80px' },
@@ -28,9 +27,9 @@ function ImpressionenSection(props) {
         {title}
       </Typography>
       {isMobile ? (
-        <Carousel items={items} gap={32} itemWidth={300} itemHeight={235} />
+        <Carousel items={items} gap={32} itemWidth={300} itemHeight={235} canFullscreen />
       ) : (
-        <Carousel items={items} gap={32} itemWidth={600} itemHeight={420} />
+        <Carousel items={items} gap={32} itemWidth={600} itemHeight={420} canFullscreen />
       )}
     </Box>
   );

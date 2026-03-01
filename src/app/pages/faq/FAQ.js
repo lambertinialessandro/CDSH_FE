@@ -198,7 +198,6 @@ function FAQ() {
       });
   }, [userLanguage]);
 
-  console.log('faqData', faqData);
   if (loading) return <LoadingPage />;
   if (error || !faqData) return <ErrorPage />;
 

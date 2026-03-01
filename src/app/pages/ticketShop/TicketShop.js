@@ -10,7 +10,7 @@ function TicketShop() {
     window.Page = 'ListEvents';
     window.Width = '100%';
     window.Height = '400';
-    window.BgdColor = '#FFFFFF';
+    window.BgdColor = '#f9fafb';
 
     // Create the script element
     const script = document.createElement('script');
@@ -23,7 +23,7 @@ function TicketShop() {
     return () => {
       document.body.removeChild(script);
     };
-  }, []);
+  }, [{}]);
 
   return (
     <>

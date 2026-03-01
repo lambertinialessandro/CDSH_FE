@@ -23,9 +23,9 @@ function RaumlichkeitenSection({ title, images }) {
         {title}
       </Typography>
       {isMobile ? (
-        <Carousel items={items} gap={32} itemWidth={300} itemHeight={235} />
+        <Carousel items={items} gap={32} itemWidth={300} itemHeight={235} canFullscreen/>
       ) : (
-        <Carousel items={items} gap={32} itemWidth={700} itemHeight={470} />
+        <Carousel items={items} gap={32} itemWidth={700} itemHeight={470} canFullscreen/>
       )}
     </Box>
   );

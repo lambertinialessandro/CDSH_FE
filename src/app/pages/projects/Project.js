@@ -1,7 +1,7 @@
 import { Box, Typography, useTheme } from '@mui/material';
 import { renderers } from 'app/shared-components/htmlStyle/htmlStyle';
-import { selectUserLanguage } from 'app/store/app/mainSlice';
-import { useEffect, useState } from 'react';
+import { selectIsBannerOpen, selectUserLanguage } from 'app/store/app/mainSlice';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,6 +9,7 @@ import { useNavigate, useParams } from 'react-router';
 import { defaultNS as ns_common } from 'translations';
 import ImpressionenSection from './ImpressionenSection';
 import { selectSelectedProject, setSelectedProject } from 'app/store/app/pageSlice';
+import Ribbons from 'app/shared-components/ReactBits/Ribbons';
 
 function Project(props) {
   const dispatch = useDispatch();
@@ -19,11 +20,29 @@ function Project(props) {
   const { projectUrlId } = useParams();
   const userLanguage = useSelector(selectUserLanguage);
 
+  const isBannerOpen = useSelector(selectIsBannerOpen);
+  const containerSizeRef = useRef(null);
+
   const selectedProject = useSelector((state) => selectSelectedProject(state, userLanguage));
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  console.log('selectedProject', selectedProject);
+  const ribbon = useMemo(
+          () => (
+            <Ribbons
+              baseThickness={15}
+              colors={[theme.palette.secondary.main, '#b66eff', theme.palette.primary.main]}
+              speedMultiplier={0.3}
+              maxAge={400}
+              offsetFactorX={0.005}
+              offsetFactorY={0.1}
+              enableFade={false}
+              enableShaderEffect={false}
+            />
+          ),
+          []
+        )
+
   useEffect(() => {
     if (projectUrlId) {
       if (selectedProject) {
@@ -129,8 +148,15 @@ function Project(props) {
   return (
     <>
       <Box
+        ref={containerSizeRef}
+        className="fixed h-screen w-full flex flex-col justify-center items-center z-1 gap-[32px]"
+        sx={{ top: isBannerOpen ? '45px' : '0px' }}
+      >
+        {ribbon}
+      </Box>
+      <Box
         component="section"
-        className="header relative flex items-center max-h-860-px"
+        className="header relative flex items-center max-h-860-px z-10 "
         sx={{ height: { sx: '100%', md: `100vh` }, flexDirection: { xs: 'column-reverse', md: 'row' } }}
       >
         <Box
@@ -249,7 +275,7 @@ function Project(props) {
 
       <Box
         component="section"
-        className="px-[48px] flex justify-center items-start"
+        className="px-[48px] flex justify-center items-start z-10"
         sx={{
           background: theme.palette.secondary.main,
           flexDirection: { xs: 'column', md: 'row' },
@@ -257,10 +283,10 @@ function Project(props) {
           py: { xs: '55px', md: '110px' },
         }}
       >
-        <Box className="flex-1" sx={{ width: { xs: '100%', md: '50%' } }}>
+        <Box className="flex-1 block z-10" sx={{ width: { xs: '100%', md: '50%' } }}>
           <ReactMarkdown components={renderers} children={selectedProject.descriptionLeft} />
         </Box>
-        <Box className="flex-1" sx={{ width: { xs: '100%', md: '50%' } }}>
+        <Box className="flex-1 block z-10" sx={{ width: { xs: '100%', md: '50%' } }}>
           <ReactMarkdown components={renderers} children={selectedProject.descriptionRight} />
         </Box>
       </Box>

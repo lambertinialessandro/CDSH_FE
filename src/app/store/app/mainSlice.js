@@ -17,7 +17,6 @@ const cdshSlice = createSlice({
   initialState,
   reducers: {
     setThemeSettings: (state, { payload }) => {
-      console.log('newTheme', payload);
       state.currTheme = payload;
       localStorage.setItem('theme', payload);
     },

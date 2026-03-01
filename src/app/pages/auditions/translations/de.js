@@ -29,6 +29,7 @@ const dictionary = {
       ort_required: 'Ort ist erforderlich.',
       email_required: 'E-Mail-Adresse ist erforderlich.',
       email_format: 'Falsches E-Mail-Format.',
+      email_mismatch: 'E-Mail-Adressen stimmen nicht überein',
       telefon_required: 'Telefonnummer ist erforderlich.',
       telefon_format: 'Falsches Telefonnummern-Format.',
 
@@ -75,6 +76,7 @@ const dictionary = {
       postalCode: 'PLZ',
       city: 'Ort',
       email: 'E-Mail',
+      confirm_email: 'E-Mail bestätigen',
       phone: 'Telefon',
 
       // Bisherige Ausbildung

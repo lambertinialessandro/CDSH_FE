@@ -18,8 +18,6 @@ export function generateThemeOptions(props) {
   const warning = "#ffffff"
   const error = "#ffffff"
 
-  console.log("generateThemeOptions")
-
   return {
     default: {
     palette: {

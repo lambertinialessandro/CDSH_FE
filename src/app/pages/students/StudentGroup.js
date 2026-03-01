@@ -25,7 +25,6 @@ function StudentGroup() {
   const selectedStudent = useSelector((state) => selectSelectedStudent(state, userLanguage));
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  console.log('selectedStudent', selectedStudent);
 
   useEffect(() => {
     if (selectedStudent) {
@@ -291,7 +290,6 @@ function StudentGroup() {
       >
         {selectedStudent.relatedProjects?.map((project, idx) => {
           const isOdd = idx % 2 === 1;
-          console.log('project', project.id);
           return (
             <SplitSection
               key={idx}

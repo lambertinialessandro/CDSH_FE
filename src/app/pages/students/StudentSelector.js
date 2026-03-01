@@ -9,7 +9,6 @@ import SplitSection from './SplitSection';
 function StudentSelector({ classes = [] }) {
   const { t } = useTranslation([ns_common]);
   const { message } = t(ns_common);
-  console.log('classes', classes);
 
   const today = new Date();
   const month = today.getMonth() + 1;
@@ -22,8 +21,6 @@ function StudentSelector({ classes = [] }) {
     tabSelected === 0
       ? classes?.filter(({ year }) => year.end > currentYear)
       : classes?.filter(({ year }) => year.end <= currentYear);
-
-  console.log('filteredStudents', filteredStudents);
 
   if (__.isEmpty(classes)) {
     return <Typography>Empty</Typography>;

@@ -9,7 +9,6 @@ const SCROLL_LIMIT = 5000; // px
 
 function InteractiveSubjects(props) {
   const { subjects_balls } = props;
-  console.log('subjects_balls', subjects_balls);
 
   const subjects = [
     {

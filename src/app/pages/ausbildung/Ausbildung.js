@@ -664,7 +664,6 @@ function Ausbildung() {
         clearTimeout(timeout);
       });
   }, [userLanguage]);
-  console.log('ausbuildungData:', ausbuildungData);
 
   if (loading) return <LoadingPage />;
   if (error || !ausbuildungData) return <ErrorPage />;
@@ -783,13 +782,14 @@ function Ausbildung() {
 
       <InteractiveSubjects subjects_balls={ausbuildungData.subjects_balls} />
 
-      <SubjectSelector subjects={ausbuildungData.subjects} categories={ausbuildungData.filterCategories} />
-
       <Box
         component="section"
         className="px-[45px] flex flex-col justify-center items-center text-center"
         sx={{ py: { xs: '60px', md: '120px' }, gap: { xs: '16px', md: '32px' } }}
       >
+        <div>
+          <SubjectSelector subjects={ausbuildungData.subjects} categories={ausbuildungData.filterCategories} />
+        </div>
         <Typography
           sx={{
             color: '#000000',

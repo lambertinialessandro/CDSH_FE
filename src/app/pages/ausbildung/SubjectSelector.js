@@ -11,8 +11,6 @@ function SubjectSelector(props) {
   const { message } = t(ns_common);
   const MotionBox = motion(Box);
 
-  console.log('subjects:', subjects);
-
   const [tabSelected, setTabSelected] = useState(0);
 
   const tabOptions = useMemo(() => {
@@ -124,7 +122,7 @@ function SubjectSelector(props) {
                       className="mt-[10px]"
                       sx={{ fontSize: { xs: '12px', md: '15px' }, fontWeight: '400', lineHeight: 'normal' }}
                     >
-                      Dozent*innen {subject.teacher}
+                      {message.lecturers} {subject.teacher}
                     </Typography>
                   </Box>
                 </Box>

@@ -52,6 +52,7 @@ function Auditions() {
       plz: '',
       ort: '',
       email: '',
+      confirm_email: '',
       telefon: '',
       //
       schulabschluss: '',
@@ -100,6 +101,11 @@ function Auditions() {
         plz: yup.string().required(error_t.plz_required),
         ort: yup.string().trim().required(error_t.ort_required),
         email: yup.string().required(error_t.email_required).matches(emailRegex, { message: error_t.email_format }),
+        confirm_email: yup
+          .string()
+          .required(error_t.email_required)
+          .matches(emailRegex, { message: error_t.email_format })
+          .oneOf([yup.ref('email')], error_t.email_mismatch),
         telefon: yup
           .string()
           .required(error_t.telefon_required)
@@ -281,6 +287,14 @@ function Auditions() {
       {
         id: 'email',
         placeholder: message.email,
+        Component: CustomTextField,
+        size: 'small',
+        required: true,
+        colSpan: 'col-span-12 md:col-span-6',
+      },
+      {
+        id: 'confirm_email',
+        placeholder: message.confirm_email,
         Component: CustomTextField,
         size: 'small',
         required: true,

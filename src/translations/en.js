@@ -41,6 +41,9 @@ const dictionary = {
       aktuelleKlassen: "Current Classes",
       ehemaligeKlassen: "Former Classes",
 
+      // Subjects
+      lecturers: "Lecturers:",
+
       // footer
       fullNameSchool: 'CDSH - Contemporary',
       schoolDescription: 'Dance School Hamburg GmbH',

@@ -19,7 +19,7 @@ function Team() {
   const theme = useTheme();
   const userLanguage = useSelector(selectUserLanguage);
 
-  const [hasContent, setContent] =useState(false)
+  const [hasContent, setContent] = useState(false);
   const teamData = useSelector((state) => selectTeamData(state, userLanguage));
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -64,8 +64,8 @@ function Team() {
                 name: 'Theory Subjects',
               },
               {
-                id: 'workshops',
-                name: 'Workshops',
+                id: 'guest_choreographer',
+                name: 'Guest choreographer',
               },
             ],
             intro: {
@@ -199,8 +199,8 @@ function Team() {
                 name: 'Theorief\u00e4cher',
               },
               {
-                id: 'workshops',
-                name: 'Workshops',
+                id: 'guest_choreographer',
+                name: 'Gastchoreograf',
               },
             ],
             intro: {
@@ -330,8 +330,6 @@ function Team() {
         clearTimeout(timeout);
       });
   }, [userLanguage]);
-
-  console.log('teamdata', teamData);
 
   if (!hasContent && loading) return <LoadingPage />;
   if (error || !teamData) return <ErrorPage />;
@@ -530,9 +528,10 @@ function Team() {
         </div>
       </Box>
 
-      <TeamSelector members={teamData.docentsMembers} educationCategories={teamData.educationCategories} />
-
       <Box component="section" className="py-[120px] px-[25px] flex flex-col justify-center items-center text-center">
+        <div>
+          <TeamSelector members={teamData.docentsMembers} educationCategories={teamData.educationCategories} />
+        </div>
         <Typography
           sx={{
             color: '#000000',

@@ -19,8 +19,6 @@ function Students() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  console.log('studentsData:', studentsData);
-
   useEffect(() => {
     if (studentsData) {
       setLoading(false);

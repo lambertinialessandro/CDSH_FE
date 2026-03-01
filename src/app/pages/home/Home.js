@@ -57,7 +57,6 @@ function Home() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  console.log('homeData:', homeData);
 
   useEffect(() => {
     if (homeData) {
@@ -132,7 +131,7 @@ function Home() {
             aboutUs: {
               headline: 'About Us',
               text: 'The **CDSH** - Contemporary Dance School is a state-accredited vocational school for contemporary stage dance. The three-year program focuses on contemporary and modern classical ballet.',
-              image: 'http://localhost/plainkit-main/media/pages/home/c9ecbae653-1765953561/team_trio.png',
+              image: `${process.env.PUBLIC_URL}/assets/images/cdsh-willkommen-1.jpg`,
             },
             audition_banner: {
               text: 'THE AUDITION DATES 2026 ARE NOW ONLINE',
@@ -195,7 +194,7 @@ function Home() {
             aboutUs: {
               headline: '\u00dcber uns',
               text: 'Die *CDSH* \u2013 Contemporary Dance School ist eine staatlich anerkannte Berufsschule f\u00fcr zeitgen\u00f6ssischen B\u00fchnentanz. Das dreij\u00e4hrige Programm konzentriert sich auf zeitgen\u00f6ssisches und modernes klassisches Ballett.',
-              image: 'http://localhost/plainkit-main/media/pages/home/c9ecbae653-1765953561/team_trio.png',
+              image: `${process.env.PUBLIC_URL}/assets/images/cdsh-willkommen-1.jpg`,
             },
             audition_banner: {
               text: 'DIE AUDITION-TERMINE 2026 SIND JETZT ONLINE',

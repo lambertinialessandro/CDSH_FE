@@ -234,7 +234,6 @@ function AboutUs() {
         clearTimeout(timeout);
       });
   }, [userLanguage]);
-  console.log('aboutUs:', aboutUsData);
 
   if (loading) return <LoadingPage />;
   if (error || !aboutUsData) return <ErrorPage />;
