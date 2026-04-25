@@ -62,8 +62,6 @@ function AboutUs() {
               {
                 title: 'Talent, Technique & Dance Language',
                 text: 'We foster the development of **individual artistic personality**. This is based on a solid foundation in established dance styles.',
-                reverse: false,
-                bottom: false,
                 img: {
                   src: `${process.env.PUBLIC_URL}/assets/images/aboutUs/Bildschirmfoto 2025-02-18 um 17.05.47.png`,
                   alt: 'Talent, Technique & Dance Language',
@@ -72,8 +70,6 @@ function AboutUs() {
               {
                 title: 'Support & Cooperation',
                 text: 'We also help you **find jobs** after graduation and provide rehearsal spaces free of charge. Furthermore, you will benefit from our network of international mentors during your training.',
-                reverse: true,
-                bottom: false,
                 img: {
                   src: `${process.env.PUBLIC_URL}/assets/images/aboutUs/Bildschirmfoto 2025-02-18 um 17.06.05.png`,
                   alt: 'Support & Cooperation',
@@ -82,8 +78,6 @@ function AboutUs() {
               {
                 title: 'Choreography & Practice',
                 text: 'We develop targeted **choreographies** and gain extensive experience on local stages and at events during our training.',
-                reverse: false,
-                bottom: true,
                 img: {
                   src: `${process.env.PUBLIC_URL}/assets/images/aboutUs/Bildschirmfoto 2025-02-18 um 17.06.12.png`,
                   alt: 'Choreography & Practice',
@@ -93,13 +87,48 @@ function AboutUs() {
             cooperations: {
               title: 'Cooperations',
               items: [
-                'Logo placeholder',
-                'Logo placeholder',
-                'Logo placeholder',
-                'Logo placeholder',
-                'Logo placeholder',
-                'Logo placeholder',
-                'Logo placeholder',
+                {
+                  name: 'Logo placeholder',
+                  link: 'https://www.cdsh.de/',
+                  logo: null,
+                  logo_alt: 'Logo placeholder',
+                },
+                {
+                  name: 'Logo placeholder',
+                  link: 'https://www.cdsh.de/',
+                  logo: `${process.env.PUBLIC_URL}/assets/images/aboutUs/logo.png`,
+                  logo_alt: null,
+                },
+                {
+                  name: 'Logo placeholder',
+                  link: '',
+                  logo: `${process.env.PUBLIC_URL}/assets/images/aboutUs/logo.png`,
+                  logo_alt: null,
+                },
+                {
+                  name: 'Logo placeholder',
+                  link: '',
+                  logo: `${process.env.PUBLIC_URL}/assets/images/aboutUs/logo.png`,
+                  logo_alt: null,
+                },
+                {
+                  name: 'Logo placeholder',
+                  link: 'https://www.cdsh.de/',
+                  logo: null,
+                  logo_alt: 'Logo placeholder',
+                },
+                {
+                  name: 'Logo placeholder',
+                  link: 'https://www.cdsh.de/',
+                  logo: null,
+                  logo_alt: 'Logo placeholder',
+                },
+                {
+                  name: 'Logo placeholder',
+                  link: '',
+                  logo: `${process.env.PUBLIC_URL}/assets/images/aboutUs/logo.png`,
+                  logo_alt: null,
+                },
               ],
             },
             banner2: 'OPENNESS, RESPECT, TOLERANCE, CREATIVITY',
@@ -182,13 +211,48 @@ function AboutUs() {
             cooperations: {
               title: 'Kooperationen',
               items: [
-                'Logo Platzhalter',
-                'Logo Platzhalter',
-                'Logo Platzhalter',
-                'Logo Platzhalter',
-                'Logo Platzhalter',
-                'Logo Platzhalter',
-                'Logo Platzhalter',
+                {
+                  name: 'Logo placeholder',
+                  link: 'https://www.cdsh.de/',
+                  logo: null,
+                  logo_alt: 'Logo placeholder',
+                },
+                {
+                  name: 'Logo placeholder',
+                  link: 'https://www.cdsh.de/',
+                  logo: 'http://localhost/plainkit-main/media/pages/aboutus/08c10fd8e2-1776617272/logo.png',
+                  logo_alt: null,
+                },
+                {
+                  name: 'Logo placeholder',
+                  link: '',
+                  logo: 'http://localhost/plainkit-main/media/pages/aboutus/f8e55f181b-1776006392/aereo.png',
+                  logo_alt: null,
+                },
+                {
+                  name: 'Logo placeholder',
+                  link: '',
+                  logo: 'http://localhost/plainkit-main/media/pages/aboutus/08c10fd8e2-1776617272/logo.png',
+                  logo_alt: null,
+                },
+                {
+                  name: 'Logo placeholder',
+                  link: 'https://www.cdsh.de/',
+                  logo: null,
+                  logo_alt: 'Logo placeholder',
+                },
+                {
+                  name: 'Logo placeholder',
+                  link: 'https://www.cdsh.de/',
+                  logo: null,
+                  logo_alt: 'Logo placeholder',
+                },
+                {
+                  name: 'Logo placeholder',
+                  link: '',
+                  logo: 'http://localhost/plainkit-main/media/pages/aboutus/08c10fd8e2-1776617272/logo.png',
+                  logo_alt: null,
+                },
               ],
             },
             banner2: 'OPENNESS, RESPECT, TOLERANCE, CREATIVITY',
@@ -354,14 +418,14 @@ function AboutUs() {
 
       <Box component="section" className="px-[45px] flex flex-col justify-center items-start">
         {aboutUsData.splitSections.map((section, idx) => (
-          <SplitSection
-            key={idx}
-            title={section.title}
-            text={section.text}
-            img={section.img}
-            reverse={section.reverse}
-            bottom={section.bottom}
-          />
+            <SplitSection
+              key={idx}
+              title={section.title}
+              text={section.text}
+              img={section.img}
+              reverse={(idx + 1) % 2 == 0}
+              bottom={aboutUsData.splitSections.length - 1 == idx}
+            />
         ))}
       </Box>
 

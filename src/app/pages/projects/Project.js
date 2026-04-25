@@ -46,9 +46,9 @@ function Project(props) {
   useEffect(() => {
     if (projectUrlId) {
       if (selectedProject) {
-        setLoading(false);
-        setError(null);
-        return;
+        //setLoading(false);
+        //setError(null);
+        //return;
       }
 
       setLoading(true);

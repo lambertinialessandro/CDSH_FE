@@ -28,9 +28,9 @@ function StudentGroup() {
 
   useEffect(() => {
     if (selectedStudent) {
-      setLoading(false);
-      setError(null);
-      return;
+      //setLoading(false);
+      //setError(null);
+      //return;
     }
 
     setLoading(true);
@@ -91,9 +91,9 @@ function StudentGroup() {
             id: 'ho\u2019omau',
             name: 'Ho\u2019omau',
             descriptionLeft:
-              'Ho\u2019omau steht für Widerstandskraft und Durchhaltevermögen. Als Klasse schätzen und vertrauen wir dem Prozess des Wachsens – in all den unterschiedlichen Formen, die er annehmen kann. Indem wir verstehen, dass unsere Wege als Künstler*innen nicht immer linear verlaufen oder zwangsläufig',
+              'Ho\u2019omau steht für Widerstandskraft und Durchhaltevermögen. Als Klasse schätzen und vertrauen wir dem Prozess des Wachsens - in all den unterschiedlichen Formen, die er annehmen kann. Indem wir verstehen, dass unsere Wege als Künstler*innen nicht immer linear verlaufen oder zwangsläufig',
             descriptionRight:
-              'reibungslos sind, können wir uns gegenseitig stabilisieren und gemeinsam weitermachen. Wir sind eine Gruppe, die sich unabhängig von Hindernissen weiterentwickelt und dabei lernt, füreinander zu sorgen – als Tänzer*innen und vor allem als Menschen.',
+              'reibungslos sind, können wir uns gegenseitig stabilisieren und gemeinsam weitermachen. Wir sind eine Gruppe, die sich unabhängig von Hindernissen weiterentwickelt und dabei lernt, füreinander zu sorgen - als Tänzer*innen und vor allem als Menschen.',
             studentsHeader: 'Die Studierenden',
             students:
               'Agnese Fornara Erbetta, Alanna Reimpell Bravo, Alessia Marra, Cristina Vaino, Daria Barbone, Daria Barbone, Denise Landini, Ellen Burgess, Emir García Pineda, Gina Kudzai Marange, Haeyeon Kang, Kyte Brüggmann, Luisa Fernanda Rivas Castillo, Nathalia Gómez Reséndiz, Oladé Roland Rodolpho Sagbo, Tatjana Walter, Wendy Yeh López, Clara Bähr, Edwin E. Sánchez, Katherine Aileen Osalde Lezama, Madeleine Julie Reichert',

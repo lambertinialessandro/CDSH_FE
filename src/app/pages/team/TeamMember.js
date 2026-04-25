@@ -26,9 +26,9 @@ function TeamMember() {
 
   useEffect(() => {
     if (selectedMember) {
-      setLoading(false);
-      setError(null);
-      return;
+      //setLoading(false);
+      //setError(null);
+      //return;
     }
 
     setLoading(true);
