@@ -94,7 +94,7 @@ function Auditions() {
         fremdsprachen: yup.string().required(error_t.fremdsprachen_required),
         pronomen: yup.string().required(error_t.pronomen_required),
         //
-        durchsuchen: yup.string().required(error_t.durchsuchen_required),
+        durchsuchen: yup.mixed().required(error_t.durchsuchen_required),
         //
         strasse: yup.string().trim().required(error_t.strasse_required),
         hausnummer: yup.string().required(error_t.hausnummer_required),
@@ -480,6 +480,8 @@ function Auditions() {
 
       // Simple fields
       Object.entries(data).forEach(([key, value]) => {
+        if (key === 'durchsuchen') return;
+
         if (Array.isArray(value)) {
           console.log(`${key}[]`, value);
           value.forEach((v) => formData.append(`${key}[]`, v));
@@ -491,9 +493,12 @@ function Auditions() {
 
       // File (UploadButton should give you a File object)
       if (data.durchsuchen instanceof File) {
-        formData.append('picture', data.durchsuchen);
+        formData.append('durchsuchen', data.durchsuchen);
       }
       console.log('formData', formData);
+      for (let [key, value] of formData.entries()) {
+        console.log(key, value);
+      }
 
       const response = await fetch('http://localhost/plainkit-main/form/audition', {
         method: 'POST',
