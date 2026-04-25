@@ -60,14 +60,14 @@ function TeamSelector(props) {
 
   return (
     <>
-      <Box component="section" className="py-[60px] px-[48px] flex flex-col justify-center items-start text-center">
+      <Box component="section" className="py-[60px] flex flex-col justify-center items-start text-center">
         <Tabs
           value={tabSelected}
           onChange={(event, value) => setTabSelected(value)}
           textColor="inherit"
           indicatorColor="none"
           variant="standard"
-          className="min-w-fit min-h-fit"
+          className="min-w-fit min-h-fit pb-[60px]"
           sx={{
             '& .MuiTabs-flexContainer': {
               flexWrap: 'wrap',
@@ -97,66 +97,70 @@ function TeamSelector(props) {
             />
           ))}
         </Tabs>
-      </Box>
 
-      <Box className="w-full flex flex-wrap justify-center items-start gap-[24px]">
-        <AnimatePresence mode="popLayout" initial={false}>
-          {filteredMembers?.map((member, idx) => (
-            <MotionBox
-              key={member.id}
-              layout
-              className="flex flex-col justify-center items-start"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.3 } }}
-              transition={{ duration: 0.3 }}
-            >
-              <Box className="relative mb-[12px]">
-                <Box
-                  component="img"
-                  src={member.src}
-                  className="flex-1 border border-black"
-                  sx={{ objectFit: 'cover', width: { xs: '145px', md: '290px' }, height: { xs: '200px', md: '400px' } }}
-                />
-                <Box
-                  component={Link}
-                  to={`/team/${member.id}`}
-                  className="absolute border border-black rounded-full bottom-0 right-0"
-                  sx={{
-                    background: '#ffffff',
-                    fontSize: { xs: '12px', md: '15px' },
-                    px: { xs: '8px', md: '16px' },
-                    py: { xs: '2px', md: '2px' },
-                    margin: { xs: '8px', md: '16px' },
-                  }}
-                >
-                  {button.vita}
+        <Box className="w-full flex flex-wrap justify-center items-start gap-[24px]">
+          <AnimatePresence mode="popLayout" initial={false}>
+            {filteredMembers?.map((member, idx) => (
+              <MotionBox
+                key={member.id}
+                layout
+                className="flex flex-col justify-center items-start"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.3 } }}
+                transition={{ duration: 0.3 }}
+              >
+                <Box className="relative mb-[12px]">
+                  <Box
+                    component="img"
+                    src={member.src}
+                    className="flex-1 border border-black"
+                    sx={{
+                      objectFit: 'cover',
+                      width: { xs: '145px', md: '290px' },
+                      height: { xs: '200px', md: '400px' },
+                    }}
+                  />
+                  <Box
+                    component={Link}
+                    to={`/team/${member.id}`}
+                    className="absolute border border-black rounded-full bottom-0 right-0"
+                    sx={{
+                      background: '#ffffff',
+                      fontSize: { xs: '12px', md: '15px' },
+                      px: { xs: '8px', md: '16px' },
+                      py: { xs: '2px', md: '2px' },
+                      margin: { xs: '8px', md: '16px' },
+                    }}
+                  >
+                    {button.vita}
+                  </Box>
                 </Box>
-              </Box>
 
-              <Box className="w-min min-w-full">
-                <Typography
-                  className="uppercase"
-                  sx={{
-                    fontSize: { xs: '12px', md: '15px' },
-                    fontWeight: '400',
-                    lineHeight: 'normal',
-                  }}
-                >
-                  {member.name}
-                </Typography>
-                <Typography
-                  sx={{
-                    fontSize: { xs: '11px', md: '13px' },
-                    color: 'gray',
-                  }}
-                >
-                  {member.subjects?.join(', ')}
-                </Typography>
-              </Box>
-            </MotionBox>
-          ))}
-        </AnimatePresence>
+                <Box className="w-min min-w-full">
+                  <Typography
+                    className="uppercase"
+                    sx={{
+                      fontSize: { xs: '12px', md: '15px' },
+                      fontWeight: '400',
+                      lineHeight: 'normal',
+                    }}
+                  >
+                    {member.name}
+                  </Typography>
+                  <Typography
+                    sx={{
+                      fontSize: { xs: '11px', md: '13px' },
+                      color: 'gray',
+                    }}
+                  >
+                    {member.subjects?.join(', ')}
+                  </Typography>
+                </Box>
+              </MotionBox>
+            ))}
+          </AnimatePresence>
+        </Box>
       </Box>
     </>
   );

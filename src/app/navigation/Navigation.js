@@ -15,7 +15,10 @@ import Team from 'app/pages/team/Team';
 import TeamMember from 'app/pages/team/TeamMember';
 import TicketShop from 'app/pages/ticketShop/TicketShop';
 import LandingLayout from 'app/shared-components/layout/LandingLayout';
+import { selectUserLanguage } from 'app/store/app/mainSlice';
+import { selectAuditionsData } from 'app/store/app/pageSlice';
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router';
 import { Route, Routes } from 'react-router-dom';
 
@@ -47,6 +50,9 @@ function App() {
 
 function Navigation() {
   const { pathname } = useLocation();
+
+  const userLanguage = useSelector(selectUserLanguage);
+  const auditionsData = useSelector((state) => selectAuditionsData(state, userLanguage));
 
   // Automatically scrolls to top whenever pathname changes
   useEffect(() => {

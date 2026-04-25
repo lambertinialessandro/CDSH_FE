@@ -15,7 +15,7 @@ function VideoLooper(props) {
           position: 'relative',
           zIndex: 2,
           px: { xs: 4, sm: 6, md: 12 }, // responsive horizontal padding
-          pb: { xs: 4, sm: 6, md: 8 }, // responsive bottom padding
+          pb: { xs: 8, sm: 6, md: 8 }, // responsive bottom padding
           width: '100%',
         }}
       >

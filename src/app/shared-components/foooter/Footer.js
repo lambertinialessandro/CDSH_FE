@@ -20,6 +20,8 @@ function Footer() {
         flexDirection: 'column',
         alignItems: 'center',
         gap: { xs: '74px', md: '24px' },
+        position: 'relative',
+        zIndex: 10,
       }}
     >
       {/* Top section: address + nav links */}

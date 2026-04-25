@@ -1,8 +1,7 @@
-import { Box, Typography, useMediaQuery } from '@mui/material';
+import { Box, Link, Typography, useMediaQuery } from '@mui/material';
 
 function KooperationenLogos({ title, list }) {
-  const isMobile = useMediaQuery('(max-width:900px)');
-  const displayList = isMobile ? list.slice(0, 5) : list;
+  const displayList = list;
 
   return (
     <Box
@@ -23,22 +22,42 @@ function KooperationenLogos({ title, list }) {
       </Typography>
 
       <Box className="flex flex-wrap justify-center gap-[24px] w-full max-w-[1200px]" sx={{}}>
-        {displayList.map((text, idx) => (
+        {displayList.map(({ name, link, logo, logo_alt }, idx) => (
           <Box
             key={idx}
-            className="rounded-full px-[24px] py-[12px]"
-            sx={{ background: '#000', transition: 'background 0.3s ease' }}
+            component={link ? Link : Box}
+            href={link}
+            {...(link && {
+              target: '_blank',
+              rel: 'noopener noreferrer',
+            })}
+            className="rounded-full px-[24px] py-[12px] flex justify-center items-center no-underline"
+            sx={{ background: '#000', transition: 'background 0.3s ease', minWidth: '280px' }}
           >
-            <Typography
-              sx={{
-                color: '#fff',
-                fontSize: { xs: '15px', md: '30px' },
-                fontWeight: 400,
-                whiteSpace: 'nowrap',
-              }}
-            >
-              {text}
-            </Typography>
+            {logo ? (
+              <Box
+                component="img"
+                src={logo}
+                alt={logo_alt || name}
+                sx={{
+                  height: { xs: '20px', md: '35px' },
+                  width: 'auto',
+                  objectFit: 'contain',
+                  filter: 'brightness(0) invert(1)',
+                }}
+              />
+            ) : (
+              <Typography
+                sx={{
+                  color: '#fff',
+                  fontSize: { xs: '15px', md: '30px' },
+                  fontWeight: 400,
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                {name}
+              </Typography>
+            )}
           </Box>
         ))}
       </Box>
