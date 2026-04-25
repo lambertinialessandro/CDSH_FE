@@ -6,7 +6,7 @@ import { renderers } from 'app/shared-components/htmlStyle/htmlStyle';
 import AnchorLink from 'app/shared-components/link/AnchorLink';
 import BigLink from 'app/shared-components/link/BigLink';
 import { selectUserLanguage } from 'app/store/app/mainSlice';
-import { selectHomeData, setHomeData } from 'app/store/app/pageSlice';
+import { selectBannerData, selectHomeData, setHomeData } from 'app/store/app/pageSlice';
 import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -53,10 +53,10 @@ function Home() {
   const theme = useTheme();
   const userLanguage = useSelector(selectUserLanguage);
 
+  const bannerData = useSelector((state) => selectBannerData(state, userLanguage));
   const homeData = useSelector((state) => selectHomeData(state, userLanguage));
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
 
   useEffect(() => {
     if (homeData) {
@@ -280,47 +280,49 @@ function Home() {
       </Box>
 
       {/* Banner Section */}
-      <Box
-        component="section"
-        className="flex justify-start items-center w-full overflow-hidden border-y border-black"
-        sx={{
-          height: { xs: '80px', md: '127px' },
-          background: theme.palette.primary.main,
-        }}
-      >
-        <LoopBanner stoppable>
-          <Typography
-            className="min-w-max flex items-center"
-            sx={{
-              fontSize: { xs: '28px', md: '80px' },
-              fontWeight: 400,
-              color: '#000000',
-              whiteSpace: 'nowrap',
-              display: 'inline-block',
-              marginRight: { xs: '16px', md: '45px' },
-            }}
-          >
-            {homeData.audition_banner.text}
-            <BigLink
-              extraSx={{
-                display: 'flex',
-                height: 'min-content',
-                marginLeft: { xs: '12px', md: '24px' },
-                color: '#ffffff',
+      {(bannerData?.active ?? false) && (
+        <Box
+          component="section"
+          className="flex justify-start items-center w-full overflow-hidden border-y border-black"
+          sx={{
+            height: { xs: '80px', md: '127px' },
+            background: theme.palette.primary.main,
+          }}
+        >
+          <LoopBanner stoppable>
+            <Typography
+              className="min-w-max flex items-center"
+              sx={{
                 fontSize: { xs: '28px', md: '80px' },
                 fontWeight: 400,
+                color: '#000000',
                 whiteSpace: 'nowrap',
+                display: 'inline-block',
+                marginRight: { xs: '16px', md: '45px' },
               }}
-              fontSize="inherit"
-              lineHeight={{ xs: '1px', md: '5px' }}
-              color="#000000"
-              href={'/auditions'}
             >
-              {homeData.audition_banner.link_text} <ArrowForward fontSize="inherit" />
-            </BigLink>
-          </Typography>
-        </LoopBanner>
-      </Box>
+              {homeData.audition_banner.text}
+              <BigLink
+                extraSx={{
+                  display: 'flex',
+                  height: 'min-content',
+                  marginLeft: { xs: '12px', md: '24px' },
+                  color: '#ffffff',
+                  fontSize: { xs: '28px', md: '80px' },
+                  fontWeight: 400,
+                  whiteSpace: 'nowrap',
+                }}
+                fontSize="inherit"
+                lineHeight={{ xs: '1px', md: '5px' }}
+                color="#000000"
+                href={'/auditions'}
+              >
+                {homeData.audition_banner.link_text} <ArrowForward fontSize="inherit" />
+              </BigLink>
+            </Typography>
+          </LoopBanner>
+        </Box>
+      )}
 
       {/* Kennenlernen Section */}
       <Box

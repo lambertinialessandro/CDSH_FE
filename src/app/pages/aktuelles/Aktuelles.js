@@ -5,7 +5,7 @@ import BigLink from 'app/shared-components/link/BigLink';
 import { selectUserLanguage } from 'app/store/app/mainSlice';
 import ReactMarkdown from 'react-markdown';
 import { renderers } from 'app/shared-components/htmlStyle/htmlStyle';
-import { selectAktuelleData, setAktuelleData } from 'app/store/app/pageSlice';
+import { selectAktuelleData, selectBannerData, setAktuelleData } from 'app/store/app/pageSlice';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ErrorPage from '../general/ErrorPage';
@@ -17,6 +17,7 @@ function Aktuelles() {
   const theme = useTheme();
   const userLanguage = useSelector(selectUserLanguage);
 
+  const bannerData = useSelector((state) => selectBannerData(state, userLanguage));
   const aktuelleData = useSelector((state) => selectAktuelleData(state, userLanguage));
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -226,6 +227,7 @@ function Aktuelles() {
       </Box>
 
       {/* Banner Section */}
+      {(bannerData?.active ?? false) && (
       <Box
         component="section"
         className="flex justify-start items-center w-full overflow-hidden border-y border-black"
@@ -267,6 +269,7 @@ function Aktuelles() {
           </Typography>
         </LoopBanner>
       </Box>
+      )}
 
       <AktuellesSection items={aktuelleData.newsItems} title={aktuelleData.header.title} />
 

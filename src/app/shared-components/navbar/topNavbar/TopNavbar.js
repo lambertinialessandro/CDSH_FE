@@ -259,7 +259,7 @@ function TopNavbar({ fixed, active }) {
             {message.ausbildung}
           </AnchorLink>
 
-          <Box className="flex items-center gap-[6px]">
+          {areAuditionOpen && (<Box className="flex items-center gap-[6px]">
             <AnchorLink
               href="/auditions"
               onClick={() => setIsMenuOpen(false)}
@@ -273,7 +273,7 @@ function TopNavbar({ fixed, active }) {
               {message.auditions}
             </AnchorLink>
 
-            {areAuditionOpen && (
+            
               <Box
                 className="h-fit border border-black rounded-full flex justify-between items-center"
                 sx={{
@@ -301,8 +301,8 @@ function TopNavbar({ fixed, active }) {
                   }}
                 />
               </Box>
-            )}
-          </Box>
+            
+          </Box>)}
 
           <AnchorLink
             href={`/aktuelles`}

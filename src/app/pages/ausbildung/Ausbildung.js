@@ -4,7 +4,7 @@ import LoopBanner from 'app/shared-components/banner/LoopBanner';
 import { renderers } from 'app/shared-components/htmlStyle/htmlStyle';
 import BigLink from 'app/shared-components/link/BigLink';
 import { selectUserLanguage } from 'app/store/app/mainSlice';
-import { selectAusbuildungData, setAusbuildungData } from 'app/store/app/pageSlice';
+import { selectAusbuildungData, selectBannerData, setAusbuildungData } from 'app/store/app/pageSlice';
 import { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,6 +19,7 @@ function Ausbildung() {
   const theme = useTheme();
   const userLanguage = useSelector(selectUserLanguage);
 
+  const bannerData = useSelector((state) => selectBannerData(state, userLanguage));
   const ausbuildungData = useSelector((state) => selectAusbuildungData(state, userLanguage));
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -737,48 +738,50 @@ function Ausbildung() {
         </div>
       </Box>
 
-      <Box
-        component="section"
-        className="flex justify-start items-center w-full overflow-hidden border-y border-black"
-        sx={{
-          background: theme.palette.primary.main,
-          my: { xs: '55px', md: '110px' },
-          height: { xs: '80px', md: '127px' },
-        }}
-      >
-        <LoopBanner stoppable>
-          <Typography
-            className="min-w-max flex items-center"
-            sx={{
-              color: '#000000',
-              fontSize: { xs: '28px', md: '80px' },
-              fontWeight: '400',
-              whiteSpace: 'nowrap',
-              display: 'inline-block',
-              marginRight: { xs: '16px', md: '45px' },
-            }}
-          >
-            {ausbuildungData.audition_banner.text}
-            <BigLink
-              extraSx={{
-                display: 'flex',
-                height: 'min-content',
-                marginLeft: { xs: '12px', md: '24px' },
-                color: 'white',
+      {(bannerData?.active ?? false) && (
+        <Box
+          component="section"
+          className="flex justify-start items-center w-full overflow-hidden border-y border-black"
+          sx={{
+            background: theme.palette.primary.main,
+            my: { xs: '55px', md: '110px' },
+            height: { xs: '80px', md: '127px' },
+          }}
+        >
+          <LoopBanner stoppable>
+            <Typography
+              className="min-w-max flex items-center"
+              sx={{
+                color: '#000000',
                 fontSize: { xs: '28px', md: '80px' },
                 fontWeight: '400',
                 whiteSpace: 'nowrap',
+                display: 'inline-block',
+                marginRight: { xs: '16px', md: '45px' },
               }}
-              fontSize="inherit"
-              lineHeight={{ xs: '1px', md: '5px' }}
-              color="#000000"
             >
-              {ausbuildungData.audition_banner.link_text}
-              <ArrowForward fontSize="inherit" />
-            </BigLink>
-          </Typography>
-        </LoopBanner>
-      </Box>
+              {ausbuildungData.audition_banner.text}
+              <BigLink
+                extraSx={{
+                  display: 'flex',
+                  height: 'min-content',
+                  marginLeft: { xs: '12px', md: '24px' },
+                  color: 'white',
+                  fontSize: { xs: '28px', md: '80px' },
+                  fontWeight: '400',
+                  whiteSpace: 'nowrap',
+                }}
+                fontSize="inherit"
+                lineHeight={{ xs: '1px', md: '5px' }}
+                color="#000000"
+              >
+                {ausbuildungData.audition_banner.link_text}
+                <ArrowForward fontSize="inherit" />
+              </BigLink>
+            </Typography>
+          </LoopBanner>
+        </Box>
+      )}
 
       <InteractiveSubjects subjects_balls={ausbuildungData.subjects_balls} />
 
